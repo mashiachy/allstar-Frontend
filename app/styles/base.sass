@@ -1,0 +1,1842 @@
+@import "mixins"
+
+@font-face
+  font-family: 'Roboto'
+  src: url('fonts/Roboto-Regular.ttf')
+  font-weight: 400
+  font-style: normal
+  font-stretch: normal
+  font-display: swap
+
+@font-face
+  font-family: 'Roboto'
+  src: url('fonts/Roboto-Medium.ttf')
+  font-weight: 500
+  font-style: normal
+  font-stretch: normal
+  font-display: swap
+
+@font-face
+  font-family: 'Roboto'
+  src: url('fonts/Roboto-Bold.ttf')
+  font-weight: 800
+  font-style: normal
+  font-stretch: normal
+  font-display: swap
+
+@font-face
+  font-family: 'Roboto'
+  src: url('fonts/Roboto-Black.ttf')
+  font-weight: 900
+  font-style: normal
+  font-stretch: normal
+  font-display: swap
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+  margin: 0
+  padding: 0
+  border: 0
+  font-size: 100%
+  vertical-align: baseline
+  outline: none
+
+body
+  overflow-x: hidden
+  overflow-y: auto
+  font-family: 'Roboto', sans-serif
+  font-weight: 400
+  font-size: 15px
+  line-height: 18px
+  color: $blue
+  background: white
+
+ul
+  list-style-type: none
+
+a
+  text-decoration: none
+
+picture
+  overflow: hidden
+  & > *
+    width: inherit
+    border-radius: inherit
+
+.content
+  @include centerMargin
+  max-width: 300px
+  width: 95%
+  @include adaptive(320px)
+    max-width: 728px
+    width: 93.75%
+  @include adaptive(768px)
+    width: 94.79%
+    max-width: 1090px
+  @include adaptive(1280px)
+    max-width: unset
+    width: 1090px
+  .inner, &.inner
+    box-sizing: border-box
+    padding-left: 6.67%
+    padding-right: 6.67%
+    @include adaptive(321px)
+      padding-left: 3.71%
+      padding-right: 3.71%
+    @include adaptive(769px)
+      padding-left: 3.20%
+      padding-right: 3.20%
+    @include adaptive(1280px)
+      padding-left: 35px
+      padding-right: 35px
+
+.lang
+  display: block
+  position: relative
+  &.active
+    display: block
+  box-sizing: border-box
+  border-radius: 5px
+  background-color: #F0F0F0
+  cursor: pointer
+  padding-top: 11px
+  text-align: center
+  line-height: 11px
+  font-size: 9px
+  font-weight: 800
+  width: 32px
+  height: 32px
+  &_shadow
+    @include smShadow
+  @include adaptive(1280px)
+    padding-top: 15px
+    width: 39px
+    height: 39px
+    border-radius: 6px
+  &__button
+    position: absolute
+    display: none
+    top: 32px
+    left: 0
+    width: 32px
+    height: 32px
+    border-bottom-left-radius: 6px
+    border-bottom-right-radius: 6px
+    background-color: inherit
+    color: inherit
+    text-decoration: none
+    padding-top: 11px
+    box-sizing: border-box
+    @include adaptive(1280px)
+      top: 39px
+      width: 39px
+      height: 39px
+      border-bottom-left-radius: 6px
+      border-bottom-right-radius: 6px
+      padding-top: 15px
+  &.shared
+    border-bottom-right-radius: 0
+    border-bottom-left-radius: 0
+    border-bottom: 1px solid $lightgray
+  &.shared &__button
+    display: block
+
+.top
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 10000
+  @include adaptive(1280px)
+    position: absolute
+  &__wrapper
+    background-color: white
+    box-shadow: 0px 2px 23px rgba(0, 0, 0, 0.126912)
+    max-height: 100vh
+    @include maxAdaptive(1279px)
+      overflow-y: auto
+    @include maxAdaptive(767px)
+      width: 100%
+    @include adaptive(768px)
+      box-shadow: unset
+    @include adaptive(1280px)
+      background-color: transparent
+  @include adaptive(1280px)
+    &_inline &__wrapper
+      @include flex(row, nowrap)
+      @include flex-setting(space-between, flex-end)
+  @include adaptive(1280px)
+    &_inline &__wrapper &__top
+      padding-left: unset
+      padding-right: unset
+  &__top
+    padding-left: 19px
+    padding-right: 10px
+    padding-bottom: 9px
+    box-sizing: border-box
+    height: 50px
+    @include flex(row, nowrap)
+    @include flex-setting(space-between)
+    @include adaptive(768px)
+      height: 60px
+      padding-left: 41.13px
+      padding-right: 20px
+      padding-bottom: 12px
+    @include adaptive(1280px)
+      display: block
+      padding-top: 23px
+      padding-bottom: unset
+      height: unset
+  &__logotip
+    height: 26px
+    @include adaptive(768px)
+      height: 36px
+    @include adaptive(1280px)
+      height: 48px
+    &.disactive
+      display: none
+  &__logo
+    margin-top: 15px
+    @include adaptive(768px)
+      margin-top: 14px
+  &__controls
+    @include flex(row, nowrap)
+    margin-top: 9px
+    @include adaptive(768px)
+      margin-top: 16px
+    .contact
+      width: 168px
+      height: 33px
+      display: none
+      margin-right: 22px
+      margin-top: -1px
+      @include adaptive(480px)
+        &.active
+          display: block
+      @include adaptive(1280px)
+        &_dark
+          color: $blue
+      position: relative
+      & > *
+        position: absolute
+        color: inherit
+      &__phone
+        left: 0
+        top: 3px
+        display: block
+        width: 15px
+        height: 15px
+        background-image: url("../img/phone.svg")
+      &__phone-number
+        right: 0
+        top: 0
+        font-weight: 900
+        font-size: 16px
+        line-height: 19px
+      &__email
+        right: 0
+        bottom: 0
+        opacity: 59.5%
+        font-size: 12px
+        line-height: 14px
+    .lang
+      display: none
+      &.active
+        display: block
+      margin-right: 20px
+  &__menu
+    min-height: calc(100vh - 50px)
+    overflow-y: auto
+    padding-top: 9px
+    display: none
+    @include adaptive(768px)
+      height: auto
+      min-height: calc(100vh - 60px)
+    @include adaptive(1280px)
+      height: auto
+      min-height: unset
+    &.active
+      display: block
+      @include adaptive(1280px)
+        overflow: visible
+        width: 89.37%
+        //padding-left: 5.78%
+        margin-left: auto
+        margin-right: auto
+        @include flex(row, nowrap)
+        @include flex-setting(space-between, align-center)
+    .main-nav
+      @include maxAdaptive(1279px)
+        padding-bottom: 45px
+      @include adaptive(1280px)
+        width: 65.86%
+        & > .main-nav__item
+          &:nth-child(2)
+            margin-left: 20px
+          &:nth-child(3)
+            margin-left: 20px
+          &:nth-child(4)
+            margin-left: 20px
+    .menu-info
+      width: 256px
+      @include flex(row, nowrap)
+      @include flex-setting(space-between)
+      .contact
+        position: relative
+        width: 177.5px
+        height: 34px
+        color: white
+        &_dark
+          color: $blue
+        & > *
+          position: absolute
+          text-decoration: none
+          color: inherit
+        &__phone
+          top: 2px
+          left: 0
+          height: 12px
+          width: 12px
+        &__phone-number
+          top: 0
+          right: 0
+          font-size: 16px
+          line-height: 19px
+          font-weight: 900
+        &__email
+          bottom: 0
+          right: 0
+          font-size: 12px
+          line-height: 14px
+          font-weight: 800
+      .lang
+        background-color: white
+
+.main-nav
+  padding-left: 3.125%
+  padding-right: 3.125%
+  @include adaptive(768px)
+    padding-left: 4.6875%
+    padding-right: 4.6875%
+  @include flex(column)
+  @include adaptive(1280px)
+    position: relative
+    @include flex(row, nowrap)
+    @include flex-setting(space-between, align-center)
+  & > &__item &__sub-nav
+    display: none
+  & > &__item.active &__sub-nav
+    display: block
+  & > &__item
+    display: block
+    position: relative
+    &:before
+      content: ''
+      position: absolute
+      width: 100%
+      height: 1px
+      background-color: #979797
+      opacity: 0.11
+      left: 0
+      bottom: 0
+      @include adaptive(1280px)
+        content: unset
+    &:nth-child(6):before
+      content: unset
+    &.active
+      color: $orange
+    &_parent
+      &:after
+        content: ''
+        position: absolute
+        width: 5px
+        height: 5px
+        right: 13px
+        top: 27px
+        background-image: url("../img/triangle.svg")
+        background-size: contain
+        @include adaptive(1280px)
+          right: 0
+          top: 16px
+          width: 4px
+          height: 4px
+      &.active:after
+        background-image: url("../img/active-triangle.svg")
+  & > &__item > &__link
+    margin-top: 21px
+    margin-left: 22px
+    margin-bottom: 19px
+    @include adaptive(1280px)
+      padding-right: 21px
+      margin-top: 11px
+      margin-bottom: 15px
+      margin-left: unset
+      font-size: 14px
+      line-height: 16px
+  &__link
+    display: block
+    color: inherit
+    font-weight: 800
+    text-decoration: none
+    &:active
+      color: $orange
+  &__big-image
+    @include centerMargin
+    border-radius: 9px
+    margin-top: 16px
+    width: 100%
+    height: 315px
+    overflow: hidden
+    background-color: #cbb792
+    background-size: cover
+    background-position: left 0 bottom 0
+    &.loaded
+      background-image: url("../img/menu-tab.jpg")
+  &__sub-nav > &__item
+    padding: 10px 0
+    color: $blue
+  &__sub-nav > &__item &__link
+    padding: 10px 0px 10px 23px
+    font-size: 14px
+    line-height: 16px
+  &__sub-nav > &__item.active &__link
+    background-color: rgba(233,106,0,0.06)
+  &__sub-nav > &__item &__link:active
+    background-color: rgba(233,106,0,0.1)
+  @include adaptive(1280px)
+    &__sub-nav
+      position: absolute
+      top: 42px
+      left: -64px
+      display: block
+      background: white
+      box-shadow: $stShadow
+      border-radius: 20px
+      width: 625px
+      height: 524px
+      box-sizing: border-box
+      padding-top: 26.5px
+      padding-left: 52px
+      &:after, &:before
+        content: ''
+        bottom: 100%
+        left: 71px
+        border: 30px solid transparent
+        height: 0
+        width: 0
+        position: absolute
+        pointer-events: none
+      &:after
+        border-color: rgba(255,255,255,0)
+        border-bottom-color: white
+        border-bottom-width: 9px
+        margin-left: -9px
+      &:before
+        border-color: rgba(255,255,255, 0)
+        border-bottom-color: white
+        border-bottom-width: 9px
+        margin-left: -9px
+    &__image-li
+      position: absolute
+      top: 25px
+      right: 25px
+    &__image
+      border-radius: 9px
+      width: 293px
+      height: 474px
+      background-color: #EFEFEF
+    &__sub-nav > &__item
+      min-height: 45px
+      max-width: 226px
+      padding: 4.5px 0
+      position: relative
+      box-sizing: border-box
+      &:after
+        content: ''
+        position: absolute
+        width: 100%
+        height: 1px
+        background-color: #979797
+        opacity: 0.11
+        left: 0
+        bottom: 0
+      &:nth-last-child:after
+        content: unset
+    &__sub-nav > &__item &__link
+      padding: 10px 0 10px 12px
+      font-size: 14px
+      line-height: 16px
+    &__sub-nav > &__item:hover &__link
+      background-color: rgba(233,106,0,0.06)
+    &__sub-nav > &__item &__link:active
+      background-color: rgba(233,106,0,0.1)
+
+.burger
+  width: 32px
+  height: 32px
+  background-color: $orange
+  border-radius: 5px
+  position: relative
+  cursor: pointer
+  &__element
+    position: absolute
+    width: 5px
+    height: 5px
+    border-radius: 1px
+    background-color: white
+    will-change: top, left, transform
+    transform: rotate(0)
+    transition: top .25s ease-in-out, left .25s ease-in-out, transform .25s ease-in-out
+    &_1
+      top: 10px
+      left: 10px
+    &_2
+      top: 10px
+      left: 17px
+    &_3
+      top: 17px
+      left: 10px
+    &_4
+      top: 17px
+      left: 17px
+  &.active &__element
+    width: 6.5px
+    &_1
+      top: 10.75px
+      left: 10.75px
+    &_2
+      top: 10.75px
+      left: 15.25px
+    &_3
+      top: 15.25px
+      left: 10.75px
+    &_4
+      top: 15.25px
+      left: 15.25px
+    &_1, &_4
+      transform: rotate(45deg)
+    &_2, &_3
+      transform: rotate(-45deg)
+
+.route
+  @include flex
+  @include flex-setting(flex-start, center)
+  &__button
+    display: block
+    width: 35px
+    min-width: 35px
+    height: 36px
+    border-radius: 7px
+    background-color: rgba(216,216,216,0.16)
+    background-image: url("../img/triangle-left.svg")
+    background-repeat: no-repeat
+    background-size: 5px 5px
+    background-position: left 15px top 16px
+    cursor: pointer
+    margin-right: 12px
+  &__line
+    opacity: 0.41
+    font-size: 12px
+    line-height: 16px
+    & > *
+      color: inherit
+      white-space: nowrap
+
+.footer
+  background-color: $blue
+  color: white
+  padding: 68px 6.25% 61px
+  box-sizing: border-box
+  width: 100%
+  max-width: 1920px
+  &_extended
+    margin-top: -130px
+    padding: 198px 6.25% 61px
+  @include centerMargin
+  @include adaptive(768px)
+    padding: 71px 9.7527% 41px
+    &_extended
+      margin-top: -178px
+      padding: 249px 9.7527% 41px
+  @include adaptive(1280px)
+    padding: 35px calc(50% - 550px) 93px
+    &_extended
+      margin-top: 76px
+  @include adaptive(1920px)
+    padding-top: 75px
+    padding-bottom: 64px
+
+.footer-nav
+  width: 100%
+  @include flex(row, wrap)
+  @include flex-setting(space-between)
+  > .nav-item
+    margin-bottom: 28px
+    min-width: 130px
+    @include adaptive(768px)
+      min-width: 210px
+    @include adaptive(1280px)
+      min-width: 150px
+  @include adaptive(1280px)
+    margin-bottom: 50px
+  @include adaptive(1920px)
+    margin-bottom: 26px
+
+.nav-item
+  &__title
+    display: block
+    text-decoration: none
+    font-size: 16px
+    line-height: 19px
+    font-weight: 800
+    margin-bottom: 16px
+  &__link
+    text-decoration: none
+    color: inherit
+    font-size: 14px
+    line-height: 23px
+    display: block
+    margin-bottom: 4px
+
+.global-info
+  margin-top: 22px
+  @include flex(column)
+  @include flex-setting(flex-start, center)
+  @include adaptive(768px)
+    @include flex(row)
+    @include flex-setting(space-between, center)
+  &__socials
+    width: 188px
+    max-width: 188px
+    height: 28px
+    @include flex(row)
+    @include flex-setting(space-between)
+    margin-bottom: 30px
+    @include adaptive(768px)
+      order: 3
+      margin-bottom: unset
+  &__social-link
+    display: block
+    width: 28px
+    height: 28px
+    border-radius: 7px
+    background-color: white
+    position: relative
+  &__image
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    max-width: 12px
+    max-height: 12px
+  &__logo
+    margin-bottom: 29px
+    @include adaptive(768px)
+      order: 1
+      margin-bottom: unset
+  &__info
+    font-size: 12px
+    line-height: 20px
+    opacity: 0.2926
+    text-align: center
+    max-width: 255px
+    @include adaptive(768px)
+      order: 2
+      //max-width: unset
+      min-width: 266px
+      max-width: 34.6354%
+      text-align: left
+      font-size: 14px
+      line-height: 27px
+    @include adaptive(1280px)
+      width: unset
+
+.vs
+  &__dropdown-toggle
+    background-color: rgba(216, 216, 216, 0.16)
+    border-radius: 7px
+    width: 100%
+    height: 100%
+    position: relative
+    &:after
+      content: ''
+      position: absolute
+      width: 5px
+      height: 5px
+      background-image: url("../img/triangle.svg")
+      background-size: contain
+      top: 17px
+      right: 11px
+  &__selected-options
+    box-sizing: border-box
+    padding-top: 10px
+    padding-left: 19px
+    position: relative
+  &__selected
+    font-size: 14px
+    line-height: 16px
+  &__search
+    position: absolute
+    left: 0
+    top: 0
+    width: 0
+    opacity: 0
+  &__actions
+    display: none
+  &__dropdown-menu
+    position: absolute
+    z-index: 100
+    width: 100%
+    left: 0
+    top: 41px
+    background-color: white
+    border-radius: 7px
+    box-sizing: border-box
+    padding: 6.5px 13px 10.5px
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
+  &__dropdown-option
+    box-sizing: border-box
+    margin-bottom: 4px
+    height: 31px
+    padding-top: 6px
+    padding-left: 6px
+    position: relative
+    font-size: 14px
+    line-height: 16px
+    &--selected
+      background-color: rgba(233,106,0,0.06)
+    &:after
+      content: ''
+      position: absolute
+      width: 100%
+      height: 1px
+      background-color: #979797
+      opacity: 0.11
+      left: 0
+      bottom: -2.5px
+    &:last-child:after
+      content: unset
+
+.checkbox
+  display: block
+  position: relative
+  padding-left: 26px
+  height: 16px
+  cursor: pointer
+  font-size: 14px
+  line-height: 16px
+  user-select: none
+  &__input
+    position: absolute
+    opacity: 0
+    cursor: pointer
+    z-index: -1
+  &__mark
+    position: absolute
+    top: 0
+    left: 0
+    height: 16px
+    width: 16px
+    background-color: #F8F8F8
+    border-radius: 3px
+    &:after
+      content: ''
+      position: absolute
+      display: none
+  &:hover &__input + &__mark
+    background-color: #F0F0F0
+  & &__input:checked + &__mark
+    background-color: $orange
+    &:after
+      display: block
+      width: 6.13px
+      height: 4px
+      top: 6px
+      left: 4px
+      background-image: url("../img/ok.svg")
+      background-size: contain
+
+.info-card
+  display: block
+  border-radius: 15px
+  @include flex(row, wrap)
+  @include flex-setting(space-evenly, flex-start)
+  box-sizing: border-box
+  padding: 25px 0
+  @include adaptive(768px)
+    padding: 35px 0
+  &_white
+    background-color: white
+    @include shadow
+  &_orange
+    background-color: $orange
+  &_blue
+    background-color: $blue
+  &_orange &__title, &_orange &__description, &_blue &__title, &_blue &__description
+    color: white
+  &_blue &__description
+    opacity: 1
+  &__icon
+    width: 26px
+    height: 26px
+  &__content
+    width: 66.67%
+    min-width: 170px
+  &__title
+    font-size: 21px
+    line-height: 25px
+    font-weight: 800
+    margin-bottom: 8px
+  &__description
+    font-size: 15px
+    line-height: 18px
+    opacity: 75.23%
+
+.slider
+  position: relative
+  &__title
+    font-size: 13px
+    line-height: 15px
+    font-weight: 800
+    box-sizing: border-box
+    padding-top: 13px
+    margin-bottom: 28px
+    @include adaptive(768px)
+      font-size: 18px
+      line-height: 21px
+  &__controls
+    position: absolute
+    top: 0
+    right: 0
+    width: 85px
+    height: 33px
+    @include flex
+    @include flex-setting(space-between)
+  &__control-item
+    display: block
+    width: 33px
+    height: 33px
+    border-radius: 6px
+    background-color: $orange
+    cursor: pointer
+    background-size: 6px 6px
+    background-position: top 14px left 14px
+    background-repeat: no-repeat
+    &_left
+      background-image: url("../img/left-white-triangle.svg")
+    &_right
+      background-image: url("../img/right-white-triangle.svg")
+
+.item-card
+  display: block
+  background-color: white
+  border-radius: 12px
+  box-sizing: border-box
+  padding: 10px 10px 20px
+  will-change: transition
+  transform: translateY(0)
+  transition: transform .15s ease-out
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05)
+  @include adaptive(1280px)
+    padding: 12px 12px 20px
+    &:hover
+      transform: translateY(-13px)
+      @include smShadow
+  .link
+    text-decoration: none
+    color: inherit
+  &__image
+    display: block
+    width: 100%
+    border-radius: 7px
+    margin-bottom: 7px
+  &__title
+    font-size: 15px
+    line-height: 18px
+    font-weight: 800
+    margin-top: 0
+    margin-bottom: 4px
+    padding-left: 6px
+  &__description
+    position: relative
+    box-sizing: border-box
+    width: 100%
+    padding-left: 6px
+    font-size: 14px
+    line-height: 16px
+    margin-bottom: 8px
+  &__option
+    position: absolute
+    right: 0
+    opacity: 0.4095
+  &__footer
+    width: 100%
+    text-align: right
+    color: $orange
+    font-weight: 800
+
+.testimonial
+  background-color: white
+  border-radius: 20px
+  box-sizing: border-box
+  padding: 29px 19px 52px 22px
+  font-size: 14px
+  line-height: 28px
+  @include adaptive(768px)
+    padding: 44px 41px 52px 45px
+  @include adaptive(1280px)
+    padding: 44px 50px 75px 45px
+    box-shadow: $otStShadow
+  &__header
+    @include flex
+    height: 44px
+    width: 100%
+    margin-bottom: 13px
+  &__image
+    width: 44px
+    height: 44px
+    border-radius: 7px
+    margin-right: 18px
+  &__info
+    height: 100%
+  &__name
+    font-size: 15px
+    line-height: 20px
+    font-weight: 800
+  &__whois
+    margin-top: -1px
+
+@keyframes scaleBack1
+  0%
+    background-size: 688px 516px
+  50%
+    background-size: 756.8px 567.6px
+  100%
+    background-size: 688px 516px
+
+@keyframes scaleBack2
+  0%
+    background-size: 781px 586px
+  50%
+    background-size: 859.1px 644.6px
+  100%
+    background-size: 781px 586px
+
+@keyframes scaleBack
+  0%
+    background-position: left 0 top 0
+    background-size: 100% 100%
+  50%
+    background-position: left 0 top -73px
+    background-size: 111.11% 111.11%
+  100%
+    background-position: left 0 top 0
+    background-size: 100% 100%
+
+@keyframes loaderCenterPos
+  0%
+    transform: translate(-50%, -50%) rotate(0deg)
+  100%
+    transform: translate(-50%, -50%) rotate(360deg)
+
+.full-item-card
+  display: block
+  padding: 12px 12px 7px 12px
+  box-sizing: border-box
+  background-color: white
+  will-change: box-shadow, width
+  transition: box-shadow .25s ease-out, width .25s ease-out
+  box-shadow: none
+  z-index: 7
+  @include adaptive(768px)
+    @include flex(row, nowrap)
+    @include flex-setting(flex-start, center)
+    padding: 20px 0
+    height: 228px
+  @include adaptive(1280px)
+    height: 166px
+    padding: 15px 15px 15px 9px
+    background-color: transparent
+  &.active
+    z-index: 11
+    border-radius: 12px
+    @include otShadow
+    @include adaptive(768px)
+      box-shadow: none
+    @include adaptive(1280px)
+      @include otShadow
+      background-color: white
+      border-bottom: 0 !important
+      margin-top: -1px
+      margin-bottom: 2px
+  &__content-block
+    @include adaptive(768px)
+      width: calc(100% - 305px)
+    @include adaptive(1280px)
+      width: 296px
+  &__image-wrapper
+    width: 100%
+    min-height: 179px
+    overflow: hidden
+    position: relative
+    margin-bottom: 10px
+    float: unset !important
+    @include adaptive(768px)
+      width: 282px
+      margin-right: 23px
+      margin-bottom: unset
+    @include adaptive(1280px)
+      min-height: unset
+      width: 204px
+      margin-right: 17px
+  &__control
+    opacity: 0
+    transition: opacity .25s ease-out
+    will-change: opacity
+    position: absolute
+    width: 21px
+    height: 21px
+    border-radius: 50%
+    background-color: white
+    bottom: 12px
+    cursor: pointer
+    background-position: center
+    background-size: 4px 3px
+    background-repeat: no-repeat
+    @include smShadow
+    z-index: 100
+    &.active
+      opacity: 100
+    &_left
+      left: 10px
+      background-image: url("../img/left-orange-triangle.svg")
+    &_right
+      right: 10px
+      background-image: url("../img/right-orange-triangle.svg")
+    &_center
+      height: 3px
+      width: unset
+      bottom: 21px
+      left: 50%
+      transform: translateX(-50%)
+      @include flex
+      background-color: transparent
+      .item
+        width: 3px
+        height: 3px
+        border-radius: 50%
+        background-color: white
+        margin-right: 3px
+        &.active
+          background-color: $orange
+  &__siema, &__image
+    width: 100%
+    height: 100%
+  &__siema
+    border-radius: 4px
+  &__image
+    background-size: cover
+  &__title
+    font-size: 15px
+    line-height: 18px
+    font-weight: 800
+    @include adaptive(768px)
+      margin-bottom: 4px
+      font-size: 18px
+      line-height: 21px
+    @include adaptive(1280px)
+      margin-bottom: 0
+  &__text
+    font-size: 12px
+    line-height: 14px
+    margin-top: 3px
+    margin-bottom: 4px
+    @include adaptive(768px)
+      font-size: 14px
+      line-height: 16px
+      margin-bottom: 13px
+      margin-top: unset
+    @include adaptive(1280px)
+      margin-bottom: 3px
+  &__subtext
+    opacity: 0.41
+    font-size: 10px
+    line-height: 12px
+    @include adaptive(768px)
+      font-size: 14px
+      line-height: 16px
+      margin-bottom: 17px
+    @include adaptive(1280px)
+      margin-bottom: 9px
+  &__title, &__text, &__subtext
+    margin-left: 8px
+    display: block
+    color: inherit
+    @include adaptive(768px)
+      margin-left: unset
+  &__tags
+    display: none
+    width: 65.4%
+    @include adaptive(768px)
+      @include flex(row, wrap)
+      @include flex-setting(flex-start, flex-start)
+    @include adaptive(1280px)
+      width: 85%
+  &__tag
+    box-sizing: border-box
+    padding-left: 19px
+    margin-right: 12px
+    font-size: 12px
+    line-height: 21px
+    position: relative
+    &:after
+      content: ''
+      position: absolute
+      top: 2px
+      left: 0
+      width: 10px
+      height: 12px
+      background-image: url("../img/ok-icon.svg")
+  &__footer
+    @include flex
+    @include flex-setting(flex-end, center)
+    @include adaptive(1280px)
+      margin-top: -9px
+  &__per-sqm
+    font-size: 13px
+    line-height: 15px
+    color: #909BA6
+    margin-right: 14px
+  &__price
+    font-size: 16px
+    line-height: 19px
+    font-weight: 800
+    color: $orange
+    position: relative
+    &.per-month:after
+      position: absolute
+      content: 'Month/'
+      top: -14px
+      right: 0
+      font-size: 10px
+      line-height: 12px
+      font-weight: 400
+      color: $blue
+      opacity: 0.41
+
+.message
+  display: block
+  box-sizing: border-box
+  text-align: center
+  padding: 12px
+  & > *
+    display: inline-block
+    vertical-align: middle
+  &__icon
+    background-size: contain
+    background-repeat: no-repeat
+    background-position: center
+    margin-right: 11px
+  &__text
+    font-size: 10px
+    line-height: 12px
+    font-weight: 500
+  &_warning
+    background-color: $lightorange
+    color: $orange
+  &_warning &__icon
+    background-image: url("../img/warning.svg")
+    width: 19px
+    height: 19px
+
+.we-can
+  box-sizing: border-box
+  padding-top: 35px
+  position: relative
+  &__background
+    position: absolute
+    z-index: -1
+    width: 41.4063%
+    height: 79.6007%
+    left: 0
+    top: 12.5%
+    border-radius: 0 26px 26px 0
+    background-color: #ccaf95
+    background-position: top -35px left -264px
+    &.loaded
+      background-image: url("../img/back-2.jpg")
+    @include adaptive(1280px)
+      width: 48.2813%
+      top: 10%
+      height: 958px
+      left: unset
+      right: 51.7187%
+      max-width: 918px
+      background-position: unset
+      background-size: cover
+  &_row &__content
+    @include flex(row, wrap)
+    @include flex-setting(space-between)
+  &__title
+    width: 100%
+    box-sizing: border-box
+    margin-bottom: 40px
+    font-size: 18px
+    line-height: 21px
+    @include adaptive(768px)
+      margin-bottom: unset
+  .service-card
+    margin-bottom: 14px
+    z-index: 10
+    padding: 30px 15px 19px 22px
+    will-change: box-shadow
+    box-shadow: none
+    transition: box-shadow .25s ease-out
+    border-radius: 20px
+    &_high
+      background-color: white
+      @include otShadow
+    &_high .service-card__button
+      background-color: $orange
+      box-shadow: unset !important
+      &:hover
+        transform: translate(0, 0) !important
+    &:nth-last-child
+      margin-bottom: 0
+    box-sizing: border-box
+    background-color: transparent
+    @include adaptive(768px)
+      width: 59.6154%
+      margin-left: 39.1484%
+      padding: 54px 36px 43px 44px
+    @include adaptive(1280px)
+      width: 53.6698%
+      margin-left: 46.2385%
+      padding: 65px 28px 28px 87px
+      will-change: transform, margin-left
+      transform: translateY(0)
+      transition: transform .25s ease-out, margin-left .25s ease-out
+      &_high
+        margin-left: 43.3945%
+        transform: translateY(-25px)
+    &__title
+      font-size: 15px
+      line-height: 20px
+      font-weight: 800
+      margin-bottom: 17px
+    &__text
+      font-size: 14px
+      line-height: 28px
+      margin-bottom: 12px
+      @include adaptive(1280px)
+        width: 82.6494%
+    &__button
+      display: block
+      text-decoration: none
+      background-color: $blue
+      color: white
+      border-radius: 13px
+      box-sizing: border-box
+      padding-top: 20px
+      text-align: center
+      width: 153px
+      height: 56px
+      font-size: 14px
+      line-height: 16px
+      font-weight: 800
+      margin-left: calc(100% - 153px)
+      will-change: transform, background-color, box-shadow
+      transform: translate(0, 0)
+      box-shadow: none
+      transition: transform .25s ease-out, background-color .25s ease-out, box-shadow .25s ease-out
+      &:hover
+        transform: translate(-2px, -3px)
+        @include smShadow
+  &_row
+    @include adaptive(1280px)
+      .service-card
+        margin-left: unset
+        margin-top: 226px
+        background-color: white
+        padding: 49px 32px 45px 48px
+        width: 326px
+        min-height: 449px
+        @include flex(column)
+        @include flex-setting(space-between)
+        &_high
+          margin-left: unset
+          transform: unset
+          @include shadow
+        &:nth-child(2)
+          margin-left: 30px
+        &:nth-child(4)
+          margin-right: 30px
+        &__text
+          width: 216px
+  &_row &__background
+    @include adaptive(1280px)
+      max-width: unset
+      width: 1090px
+      height: 452px
+      right: unset
+      left: calc(50% - 545px)
+      border-radius: 26px
+      background-size: 110%
+      background-position: bottom center
+      top: 87px
+
+.search
+  position: relative
+  width: 100%
+  height: 41px
+  &_textarea
+    height: auto
+    min-height: 81px
+  &_big
+    min-height: 131px
+  &_textarea &__search-input
+    padding-top: 13px
+    min-height: 81px
+  &_big &__search-input
+    min-height: 131px
+  &__search-input
+    width: 100%
+    height: 100%
+    border-radius: 7px
+    border: 0
+    outline: none
+    padding-left: 21px
+    box-sizing: border-box
+    box-shadow: $newShadow
+    -webkit-appearance: none
+    resize: none
+    font-family: inherit
+  &_gray &__search-input
+    background-color: rgba(216,216,216,0.16)
+    box-shadow: none
+  &__search-button
+    position: absolute
+    top: 10px
+    right: 10px
+    width: 21px
+    height: 22px
+    background-image: url("../img/search.svg")
+    background-size: contain
+.number-range
+  height: 36px
+  width: 100%
+  box-sizing: border-box
+  padding-left: 20px
+  position: relative
+  font-size: 14px
+  line-height: 16px
+  @include flex
+  @include flex-setting(space-between)
+  & > *
+    vertical-align: top
+  &__label
+    opacity: 0.2475
+    box-sizing: border-box
+    padding-top: 3px
+    width: 33%
+  &__number
+    width: 29.15%
+    height: 100%
+    padding: 10px 0 0 12px
+    box-sizing: border-box
+    background-color: rgba(216, 216, 216, 0.16)
+    border-radius: 7px
+    display: inline
+    white-space: nowrap
+    &_transparent
+      background-color: transparent
+    &-input
+      margin: 0 0 0 2px
+      -moz-appearance: textfield
+      border: 0
+      background: transparent
+      display: inline
+      width: calc(100% - 15px)
+      &:focus
+        outline: none
+      &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+        -webkit-appearance: none
+        margin: 0
+  &.size &__number-input
+    margin: 0
+.type
+  width: 100%
+  height: 36px
+  position: relative
+  box-sizing: border-box
+.show
+  display: block
+  font-family: inherit
+  background-color: $orange
+  color: white
+  font-weight: 800
+  width: 100%
+  height: 48px
+  box-sizing: border-box
+  padding-top: 16px
+  text-align: center
+  border-radius: 13px
+  cursor: pointer
+  will-change: transform, box-shadow
+  transform: translate(0, 0)
+  transition: transform .25s ease-out, box-shadow .25s ease-out
+  text-decoration: none
+  &:hover
+    transform: translate(-2px, -3px)
+    @include smShadow
+.more
+  cursor: pointer
+  color: $orange
+  width: 100%
+  text-align: right
+  font-weight: 500
+  &.hidden
+    color: #B1B1B1
+
+.inline-filter
+  position: relative
+  &.opened
+    background-color: white
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.0438156)
+    z-index: 1000
+  &.opened &__main
+    box-shadow: none !important
+  &__main-wrapper
+    @include maxAdaptive(1279px)
+      width: 100%
+  &__main
+    height: 36px
+    padding-left: 19px
+    padding-right: 9px
+    @include flex
+    @include flex-setting(space-between, center)
+    @include adaptive(768px)
+      padding: 11px 20px 13px 1.5%
+    @include adaptive(1280px)
+      height: 62px
+      padding: 0 10px 0 0
+      background-color: white
+      border-radius: 8px
+      @include smShadow
+      z-index: 110
+  &__buttons
+    width: calc(100% - 41px)
+    @include flex
+    @include flex-setting(flex-start, center)
+    @include adaptive(660px)
+      width: calc(100% - 203px)
+    @include adaptive(768px)
+      width: calc(100% - 250px)
+      @include flex-setting(space-between, center)
+    @include adaptive(1280px)
+      width: calc(100% - 439px)
+  &__button
+    display: block
+    color: inherit
+    font-size: 14px
+    line-height: 16px
+    box-sizing: border-box
+    padding: 10px 25px 10px 10px
+    margin-right: 10px
+    background-color: white
+    border-radius: 6px
+    box-shadow: $thisShadow
+    position: relative
+    @include adaptive(768px)
+      padding: 12px 25px 10px 18px
+      background-color: transparent
+      box-shadow: none
+      border-radius: 0
+      &:not(:first-child)
+        border-left: 1px solid rgba(151,151,151,0.14)
+    @include adaptive(1280px)
+      padding-left: 27px
+    &:after
+      position: absolute
+      content: ''
+      top: 17px
+      right: 16px
+      width: 3px
+      height: 3px
+      background-image: url("../img/triangle-down.svg")
+      background-size: 3px 3px
+    &:nth-child(4)
+      display: none
+      @include adaptive(410px)
+        display: block
+    &:nth-child(5)
+      display: none
+      margin-right: 0
+      @include adaptive(485px)
+        display: block
+  &__options
+    @include maxAdaptive(1279px)
+      display: block
+      width: 33px
+      height: 36px
+      border-radius: 6px
+      box-shadow: $thisShadow
+      background-color: white
+      background-size: 12px 14px
+      background-repeat: no-repeat
+      background-position: center
+      background-image: url("../img/more-dark.svg")
+      &_dark
+        background-color: $blue
+        background-image: url("../img/more-light.svg")
+    @include adaptive(1280px)
+      font-size: 10px
+      line-height: 12px
+      width: 68px
+      color: $orange
+      font-weight: 500
+  &__main-wrapper .search
+    display: none
+    @include adaptive(660px)
+      display: block
+      width: 159px
+      height: 100%
+    &__search-input
+      box-shadow: none
+    &__search-button
+      @include adaptive(1280px)
+        top: 21px
+  &__main-wrapper .show
+    width: 95px
+    height: 43px
+    padding-top: 14px
+    font-size: 14px
+    line-height: 16px
+    border-radius: 7px
+  &__dropdown-wrapper
+    position: absolute
+    top: -10px
+    left: 0
+    height: calc(100vh - 50px)
+    overflow-y: auto
+    z-index: 100
+    @include maxAdaptive(1279px)
+      width: 100%
+    @include adaptive(1280px)
+      top: 62px
+      left: 0
+      height: 473px
+      width: 100%
+      box-shadow: $thisShadow
+      background-color: white
+      mix-blend-mode: darken
+  &__dropdown
+    margin-top: 147px
+    width: 100%
+    box-sizing: border-box
+    background-color: white
+    border-top-left-radius: 12px
+    border-top-right-radius: 12px
+    box-shadow: 0px 2px 88px rgba(0, 0, 0, 0.202497)
+    padding-top: 35px
+    padding-bottom: 31px
+    max-width: unset
+    @include adaptive(768px)
+      @include flex(column, wrap)
+      @include flex-setting(space-between, flex-start)
+      padding-top: 36px
+      padding-bottom: 29px
+      height: 796px
+    @include adaptive(1280px)
+      max-width: 1090px
+      margin-top: unset
+      border-radius: 0 0 12px 12px
+      box-shadow: none
+      padding-top: 47px
+      padding-bottom: 50px
+      height: 100%
+      display: grid
+      grid-template-columns: 2fr 2fr 1fr 1fr
+      grid-template-rows: 1fr 48px
+      grid-gap: 25px
+      grid-template-areas: "block-1 block-2 block-4 block-3" "block-1 block-2 block-5 block-5"
+  &__block-1
+    margin-bottom: 32px
+    & > *:not(:last-child)
+      margin-bottom: 22.6667px
+    @include adaptive(768px)
+      order: 1
+    @include adaptive(1280px)
+      grid-area: block-1
+      & > *:not(:last-child)
+        margin-bottom: 21px
+  &__block-2
+    margin-top: 63.6667px
+    & > *:not(:last-child)
+      margin-bottom: 22.6667px
+    @include adaptive(768px)
+      order: 3
+    @include adaptive(1280px)
+      grid-area: block-2
+      & > *:not(:last-child)
+        margin-bottom: 21px
+  &__block-3
+    margin-bottom: 27px
+    & > *:not(:last-child)
+      margin-bottom: 20.6667px
+    @include adaptive(768px)
+      order: 2
+    @include adaptive(1280px)
+      grid-area: block-3
+  &__block-4
+    & > *:not(:last-child)
+      margin-bottom: 20.6667px
+    @include adaptive(768px)
+      order: 4
+      margin-top: 32px
+      margin-bottom: auto
+    @include adaptive(1280px)
+      grid-area: block-4
+  &__block-5
+    @include adaptive(768px)
+      order: 5
+      max-width: 264px
+      align-self: flex-end
+    @include adaptive(1280px)
+      grid-area: block-5
+      margin-left: auto
+  &__block-1, &__block-2, &__block-3, &__block-4, &__block-5
+    @include flex(column)
+    @include flex-setting(space-between)
+    @include adaptive(1280px)
+      width: 100% !important
+      margin-top: unset !important
+      margin-right: unset !important
+  &__block-1
+    @include adaptive(768px)
+      width: 46.875%
+  &__block-2, &__block-3, &__block-5
+    @include adaptive(768px)
+      width: 46.875%
+      margin-bottom: unset
+  @include adaptive(768px)
+    &__block-1, &__block-3
+      margin-right: 6.25%
+  .more
+    font-size: 14px
+    line-height: 16px
+    padding-top: 10px
+
+.listing
+  position: relative
+  z-index: 10
+  &_1
+    margin-bottom: 16px
+    @include adaptive(768px)
+      margin-bottom: 25px
+    @include adaptive(1280px)
+      margin-bottom: 42px
+  &__title
+    margin-bottom: unset
+  &__siema-wrapper
+    width: 103.125%
+    overflow: hidden
+    @include adaptive(768px)
+      width: 102.605%
+    @include adaptive(1024px)
+      width: 100%
+    @include adaptive(1280px)
+      width: calc(100% + 30px)
+      margin-left: -15px
+      overflow: visible
+  &__siema
+    width: 438px
+    min-height: 209px
+    max-height: 267px
+    overflow: hidden
+    padding-top: 22px
+    padding-bottom: 10px
+    @include adaptive(446px)
+      width: 700px
+    @include adaptive(741px)
+      width: 737px
+    @include adaptive(768px)
+      width: 976px
+    @include adaptive(996px)
+      width: calc(100% + 28px)
+    @include adaptive(1280px)
+      width: 100%
+    .item-card
+      display: none
+      width: 91.6318%
+      @include adaptive(768px)
+        width: 88.8446%
+      @include adaptive(1024px)
+        width: 88.9286%
+      @include adaptive(1280px)
+        width: 250px
+        margin-left: 15px
+        margin-right: 15px
+    &.active .item-card
+      display: block
+
+.gray-line
+  width: 100%
+  height: 0
+  position: relative
+  &:after
+    content: ''
+    position: absolute
+    height: 300px
+    width: 100%
+    top: -119px
+    left: 0
+    background-color: $lightgray
+    z-index: 9
+    @include adaptive(768px)
+      height: 327px
+      top: -135px
+    @include adaptive(1280px)
+      height: 380px
+      top: -151px
+
+.map-control
+  background-color: white
+  width: 34px
+  height: 34px
+  border-radius: 50%
+  cursor: pointer
+  background-position: center
+  background-repeat: no-repeat
+  background-size: 15.04px 16.34px
+  &_minus
+    background-image: url("../img/magnifier-minus.svg")
+  &_plus
+    background-image: url("../img/magnifier-plus.svg")
+.map-control__wrapper
+  @include flex
+  @include flex-setting(space-between)
+  width: 79px
+  height: 34px
+  margin-top: 14px
+  margin-right: 20px
+
+.text-input
+  width: 100%
+  border-radius: 7px
+  border: 0
+  outline: none
+  box-sizing: border-box
+
+.textarea-input
+  width: 100%
+  border-radius: 7px
+  border: 0
+  outline: none
+  box-sizing: border-box
+  font-family: inherit
+
+.modal
+  position: absolute
+  left: 0
+  right: 0
+  z-index: 10000
+  background-color: rgba(0,0,0,0.65)
+  &__control
+    width: 30px
+    height: 30px
+    position: absolute
+    top: 0
+    right: 0
+    background-size: 15px 15px
+    background-image: url("../img/close-white.svg")
+    background-position: center
+    background-repeat: no-repeat
+    cursor: pointer
+  &__image
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    max-width: 90%
+    @include adaptive(768px)
+      max-width: 80%
+    @include adaptive(1280px)
+      max-width: 1090px
+
+.loading:after
+  content: ''
+  position: absolute
+  z-index: 5
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 48px
+  height: 48px
+  border-radius: 50%
+  border-width: 6px
+  border-style: solid
+  border-color: $orange transparent $orange transparent
+  animation: loaderCenterPos 1.2s linear infinite
+
+.contact-card
+  border-radius: 12px
+  box-sizing: border-box
+  box-shadow: $thisShadow
+  padding: 20px 16px 15px 14px
+  @include flex(row, nowrap)
+  @include flex-setting(flex-start, flex-start)
+  &__avatar
+    width: 92px
+    height: 93px
+    margin-right: 13px
+    @include adaptive(768px)
+      width: 115px
+      height: 115px
+      margin-right: 15px
+  &__image-wrapper
+    display: block
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    border-radius: 50%
+    border: 6.5px solid white
+    @include smShadow
+  &__image
+    width: 100%
+    display: block
+    & > *
+      display: block
+  &__personal-info > *
+    display: block
+    color: inherit
+  &__name
+    font-size: 15px
+    line-height: 18px
+    font-weight: 800
+    margin-bottom: 7px
+  &__job, &__lngs, &__email
+    font-size: 10px
+    line-height: 12px
+    margin-bottom: 7px
+  &__lngs
+    opacity: 0.46
+  &__phone
+    font-size: 14px
+    line-height: 16px
+    font-weight: 900
+    padding-left: 18px
+    margin-bottom: 9px
+    &_icon
+      position: relative
+      margin-bottom: 4px
+      &:after
+        content: ''
+        position: absolute
+        top: 2px
+        left: 0
+        width: 12px
+        height: 12px
+        background-image: url("../img/phone.svg")
+        background-size: contain
+  &__email
+    margin-bottom: 0

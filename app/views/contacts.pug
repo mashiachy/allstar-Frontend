@@ -1,0 +1,73 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | contacts
+    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/contacts.css" as="style")
+    link(rel="preload" href="js/contacts.js" as="script")
+    link(href="css/contacts.css" rel="stylesheet")
+    script.
+      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));
+  body
+    +top-menu('_inline', '_dark', '_shadow')
+    +b.MAIN.main#main
+      +b.SECTION.route.content
+        +e.SPAN.button
+        +e.P.line
+          a(href='#') Home
+          =' / '
+          a(href='#') Apartments for Sale in Kiev
+          =' / '
+          a(href='#') Gonchara Street 26
+      +b.SECTION.information.content
+        +e.block-contacts
+          +e.text_header Contacts
+          +e.text_icon._place._tall 13-15 Bolsunovskaya str., 8th floor, IQ business center, Kiev
+          +e.text-wrapper
+            +e.A(href='#').text_icon._phone._tall +38 044 22-33-177
+            +e.A(href='#').text_icon._tall +38 044 22-33-177
+          +e.A(href='#').text_icon._email._dim._tall info@allstar.com.ua
+          +e.text_big._bold To arrange an appointment in the office please call us in advance
+        +e.block-cards
+          each i in [1, 2, 3, 4]
+            +b.contact-card
+              +e.avatar
+                +e.FIFURE.image-wrapper
+                  +picture('img/woman.webp', 'img/woman.jpg', 'Avatar', 'contact-card__image')
+              +e.personal-info
+                +e.name Name Surname
+                +e.job Manager
+                +e.lngs Speaks: Russian, Ukrainian, English
+                +e.A(href='#').phone_icon +38 044 22-33-177
+                +e.A(href='#').phone +38 044 22-33-177
+                +e.A(href='#').email mail@mail.com
+        +e.block-form
+          +e.text_big._bold Write to us
+          +e.block
+            +b.search_gray
+              +e.INPUT(type='text' placeholder='Name' v-model='form.name').search-input
+            +b.search_gray
+              +e.INPUT(type='text' placeholder='Surname' v-model='form.surname').search-input
+            +b.search_gray.input-line
+              +b.V-SELECT(class='type' :options='prefixList' v-model='form.prefix')
+              +e.INPUT(type='text' placeholder='Phone' v-model='form.phone').search-input
+            +b.search_gray
+              +e.INPUT(type='text' placeholder='E-mail' v-model='form.email').search-input
+          +e.block
+            +b.search_gray._textarea._big
+              +e.TEXTAREA(wrap='soft' placeholder='Message' v-model='form.message').search-input
+            +e.BUTTON.submit.show Submit
+
+      +listings
+    +footer
+
+    script(src="js/contacts.js")

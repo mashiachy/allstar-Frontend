@@ -1,0 +1,304 @@
+include ../../node_modules/bemto.pug/bemto
+
+mixin picture(webp, jpg, alt, cls)
+  picture(class=cls)
+    source(srcset=webp type='image/webp')
+    source(srcset=jpg type='image/jpeg')
+    img(src=jpg alt=alt)
+
+mixin info-card(icon, title, description, modifier)
+  - modifier = modifier || 'white'
+  +b.DIV(class=`info-card_${modifier}`)
+    +e.IMG(src=icon alt='Icon').icon
+    +e.content
+      +e.H4.title= title
+      +e.P.description= description
+
+mixin item-card(image, title, description, option, footer)
+  +b.item-card
+    +picture(image+'.webp', image+'.jpg', 'Photo', 'item-card__image')
+    +e.A(href='#').title.link= title
+    +e.P.description= description
+      +e.SPAN.option= option
+    +e.P.footer= footer
+
+mixin testimonial(photo, name, whois, speech)
+  +b.testimonial
+    +e.header
+      +picture(photo+'.webp', photo+'.jpg', 'Photo', 'testimonial__image')
+      +e.info
+        +e.P.name= name
+        +e.P.whois= whois
+    +e.content= speech
+
+mixin lang(modifier='', cls='')
+  +b.SPAN(class='lang'+modifier :class=cls @click='clickLang' @mouseenter='changeLang' @mouseleave='changeLang') Eng
+    +e.A(href='#').button Ukr
+
+mixin top-menu(modifier='', contact='', shadow='')
+  +b.HEADER(id="header" class='top'+modifier)
+    +e(class='wrapper' :class='{\'content\': isDesktop}')
+      +e(class="top" :class='{ \'active\' : activeMenu}')
+        +e.A(href="#").logo
+          +e.IMG(src="img/Logo.svg" alt="logo" class='logotip' :class='{\'disactive\': activeMenu}')
+        +e(v-if='!isDesktop').controls
+          +b(class='contact' :class='{\'active\': !activeMenu}')
+            +e.A(href="#").phone
+            +e.A(href="#").phone-number +38 044 22-33-177
+            +e.A(href="#").email info@allstar.ua
+          +lang('', '{\'active\': activeMenu}')
+          +b.A(class='burger' :class='{\'active\': activeMenu}' @click='activeMenu = !activeMenu')
+            each i in [1, 2, 3, 4]
+              +e(class=`element_${i}`)
+      +e(class='menu' :class='{\'active\': isDesktop || activeMenu}')
+        +b.UL.main-nav
+          +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
+            +e.A(href="#" @click="clickParentMenu($event)").link Buy
+            +e.UL.sub-nav
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Apartment for Sale" data-image-src="img/room").link Apartments for Sale in Kiev
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Houses for Sale" data-image-src="img/room1").link Houses for Sale in Kiev
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Offices for Sale" data-image-src="img/room").link Offices for Sale in Kiev
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Lands for Sale" data-image-src="img/room1").link Lands for Sale in Kiev
+              +e.LI(v-if='isDesktop').image-li
+                +picture('img/room.webp', 'img/room.jpg', 'Apartment for Sale', 'main-nav__image')
+          +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
+            +e.A(href="#" @click="clickParentMenu($event)").link Rent
+            +e.UL.sub-nav
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Apartment for Rent" data-image-src="img/room1").link Apartments for Rent in Kiev
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Houses for Rent" data-image-src="img/room").link Houses for Rent in Kiev
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Offices for Rent" data-image-src="img/room1").link Offices for Rent in Kiev
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Lands for Rent" data-image-src="img/room").link Lands for Rent in Kiev
+              +e.LI(v-if='isDesktop').image-li
+                +picture('img/room1.webp', 'img/room1.jpg', 'Apartment for Rent', 'main-nav__image')
+          +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
+            +e.A(href="#" @click="clickParentMenu($event)").link Services
+            +e.UL.sub-nav
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Service" data-image-src="img/room").link Service 1
+              +e.LI(@mouseenter="changeSubMenuImage").item
+                +e.A(href="#" data-alt="Service" data-image-src="img/room1").link Service 2
+              +e.LI(v-if='isDesktop').image-li
+                +picture('img/room.webp', 'img/room.jpg', 'Service', 'main-nav__image')
+          +e.LI.item
+            +e.A(href="#").link Useful Information
+          +e.LI.item
+            +e.A(href="#").link About
+          +e.LI.item
+            +e.A(href="#").link Contact
+          +e.LI(class='big-image' v-if='isTab && !isDesktop' data-lazy)
+        +b(v-if='isDesktop').menu-info
+          +b(class='contact'+contact)
+            +e.A(href="#").phone
+              img(src="/img/phone.svg" alt="phone")
+            +e.A(href="#").phone-number +38 044 22-33-177
+            +e.A(href="#").email info@allstar.ua
+          +lang(shadow)
+
+mixin we-can(modifier='')
+  +b.SECTION(class='we-can'+modifier)
+    +e.DIV(class='background' v-if='isTab' data-lazy)
+    +e.content.content
+      +e.DIV(class='title inner' v-if='isTab')
+        +e.H2(class='header') How we can help
+      +b(class='service-card' @click='clickService' @mouseenter='changeService' @mouseleave='changeService')
+        +e.H3.title Find a Property
+        +e.P.text Need help in property search? Let us do this work for you and save your precious time. We will make hundreds of phone calls, weed out all fake and irrelevant listings, and you will get the perfect selection of verified apartments, houses or offices. Let us know what real estate you need!
+        +e.A(class='button' href='#') Send request
+      +b(class='service-card' @click='clickService' @mouseenter='changeService' @mouseleave='changeService')
+        +e.H3.title For Landlords
+        +e.P.text The best tenants in Kiev are here - embassies, top managers of international corporations and reputable businessmen. We sign long-term rental contracts, with a guarantee of the safety of property and stable payments. List your apartment or house!
+        +e.A(class='button' href='#') List a Rental
+      +b(class='service-card' @click='clickService' @mouseenter='changeService' @mouseleave='changeService')
+        +e.H3.title For Sellers
+        +e.P.text We are actively looking for investment-attractive objects in the center of Kiev for our foreign investors - apartments, houses, offices, land plots and detached buildings. Send information about your property and we will find a buyer.
+        +e.A(class='button' href='#') List a Property
+
+mixin footer(modifier='')
+  +b.FOOTER(class='footer'+modifier)
+    +b.NAV.footer-nav
+      +b.nav-item
+        +e.A.title Buy
+        +e.UL.links
+          each link in ['Apartments for Sale', 'Houses for Sale', 'Offices for Sale', 'Land for Sale']
+            +e.LI.link-li
+              +e.A(href='#').link= link
+      +b.nav-item
+        +e.A.title Rent
+        +e.UL.links
+          each link in ['Apartments for Rent', 'Houses for Rent', 'Offices for Rent']
+            +e.LI.link-li
+              +e.A(href='#').link= link
+      +b.nav-item
+        +e.A.title Service
+        +e.UL.links
+          each link in ['Find a Property', 'Find a Buyer/Tenant', 'Property Management', 'Real Estate Investment']
+            +e.LI.link-li
+              +e.A(href='#').link= link
+      +b.nav-item
+        +e.A.title About us
+        +e.UL.links
+          each link in ['All Star Kiev Realty', 'Contacts', 'Make an Inquiry']
+            +e.LI.link-li
+              +e.A(href='#').link= link
+      +b.nav-item
+        +e.A.title Useful Information
+        +e.UL.links
+          each link in ['Buying Property in Kiev', 'How to Rent an Apartment in Kiev', 'International Schools in Kiev', 'FAQ']
+            +e.LI.link-li
+              +e.A(href='#').link= link
+    +b.global-info
+      +e.socials
+        each val in ['inst', 'youtube', 'twitter', 'telegram', 'facebook']
+          +e.A(href='#').social-link
+            +e.IMG(src=`img/${val}.svg` alt=val).image
+      +e.A(href='#').logo
+        +e.IMG(src='img/Logo-white.svg' alt='Logotip').logo
+      +e.info Specialized agency for the selection of real estate to foreign client
+
+mixin inline-filter
+  +b.DIV(class='inline-filter' :class='{\'opened\': options && isDesktop}').inline-filter
+    +e.DIV(class='dropdown-wrapper' v-show='options' @click.self='options = !options')
+      +e.DIV(class='dropdown content')
+        +e.block-1
+          +b.DIV(class='search' v-if='!isDesktop')
+            +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
+            +e.A(href="").search-button
+          +b.V-SELECT(class='type' v-model='apartment' :options='[\'Apartment 1\', \'Apartment 2\', \'Apartment 3\']')
+          +b.number-range.price
+            +e.label
+              | Price
+              br
+              | per month, $
+            +e.SPAN.number $
+              +e.INPUT(type='number' v-model.number='pricePerMonth.start').number-input
+            +e.SPAN.number $
+              +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
+          +b.V-SELECT(class='type' v-model='bedroom' :options='[\'1 Bedroom\', \'2 Bedroom\', \'3 Bedroom\']')
+          +b.number-range.size
+            +e.label
+              | Size,
+              br
+              | sqm
+            +e.SPAN.number
+              +e.INPUT(type='number' v-model.number='size.start').number-input
+            +e.SPAN.number
+              +e.INPUT(type='number' v-model.number='size.end').number-input
+          +b.V-SELECT(class='type' v-model='district' :options='[\'1 District\', \'2 District\', \'3 District\']')
+          +b.number-range.price-sqm
+            +e.label
+              | Price
+              br
+              | per sqm, $
+            +e.SPAN.number $
+              +e.INPUT(type='number' v-model.number='pricePerSqm.start').number-input
+            +e.SPAN.number $
+              +e.INPUT(type='number' v-model.number='pricePerSqm.end').number-input
+          +b.number-range.floor
+            +e.label
+              | Floor
+            +e.SPAN.number
+              +e.INPUT(type='number' v-model.number='floor.start').number-input
+            +e.SPAN.number
+              +e.INPUT(type='number' v-model.number='floor.end').number-input
+        +e(v-if='isTab').block-2
+          +b.V-SELECT(class='type' v-model='district1' :options='[\'1 District\', \'2 District\', \'3 District\']')
+          +b.number-range.price-sqm
+            +e.label
+              | Price
+              br
+              | per sqm, $
+            +e.SPAN.number $
+              +e.INPUT(type='number' v-model.number='pricePerSqm1.start').number-input
+            +e.SPAN.number $
+              +e.INPUT(type='number' v-model.number='pricePerSqm1.end').number-input
+          +b.number-range.floor
+            +e.label
+              | Floor
+            +e.SPAN.number
+              +e.INPUT(type='number' v-model.number='floor1.start').number-input
+            +e.SPAN.number_transparent
+        +e.block-3
+          +b.LABEL.checkbox Only with elevator
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[0]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Terrace
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[1]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Open balcony
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[2]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Sauna
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[3]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Penthouse
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[4]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Swimming pool
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[5]')
+            +e.SPAN.mark
+          +b.SPAN(@click='options = !options' class='more hidden') hide options -
+        +e(v-if='isTab').block-4
+          +b.LABEL.checkbox Only with elevator
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[0]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Terrace
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[1]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Open balcony
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[2]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Sauna
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[3]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Penthouse
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[4]')
+            +e.SPAN.mark
+          +b.LABEL.checkbox Swimming pool
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[5]')
+            +e.SPAN.mark
+        +e.block-5
+          +b.A(href='#').show Show
+    +e(class='main-wrapper' :class='{\'content\': isDesktop}')
+      +e.DIV(class='main' :class='{\'opened\': isDesktop && options}')
+        +e.buttons
+          +e.A(href='#').button Sale
+          +e.A(href='#').button Apartment
+          +e.A(href='#').button Price
+          +e.A(href='#').button Rooms
+          +e.A(href='#').button Area
+        +b.DIV(class='search')
+          +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
+          +e.A(href="").search-button
+        +e.A(class='options' :class='{\'inline-filter__options_dark\': options}' @click.prevent='options = !options' :href='isDesktop ? \'#\' : \'\'' v-text='isDesktop ? "More options +" : \'\'')
+        +b.A(class='show' href='#' v-if='isDesktop') Show
+
+mixin listings
+  +b.SECTION.listing_1.slider.content
+    +e.title.slider__title.inner
+      +e.H2.header Hot Listings for Rent
+    +e.controls.slider__controls
+      +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaRent.prev()')
+      +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaRent.next()')
+    +e.siema-wrapper
+      +e.SIEMA(class='siema' ref='siemaRent' :options='siemaCatalog' @init='initFoo("rent")')
+        each val in [1, 2, 3, 4, 5, 6, 7, 8]
+          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', 'Month/', '$ 5 000')
+  +b.SECTION.gray-line
+  +b.SECTION.listing_2.slider.content
+    +e.title.slider__title.inner
+      +e.H2.header Hot Listings for Sale
+    +e.controls.slider__controls
+      +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaSale.prev()')
+      +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaSale.next()')
+    +e.siema-wrapper
+      +e.SIEMA(class='siema' ref='siemaSale' :options='siemaCatalog' @init='initFoo("sale")')
+        each val in [5, 6, 7, 8, 1, 2, 3, 4,]
+          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', '', '$ 157 000')

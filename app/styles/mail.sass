@@ -1,0 +1,66 @@
+@import "mixins"
+
+.mail
+  width: 100%
+  @include centerMargin
+  margin-top: 100px
+  max-width: 1000px
+  min-height: 725px
+  box-sizing: border-box
+  background-color: white
+  padding: 37px 30px 39px
+  @include shadow
+  position: relative
+
+.top-logo
+  width: 100%
+  box-shadow: 0 17px 74px rgba(0, 0, 0, 0.0832605)
+  height: 86px
+  box-sizing: border-box
+  padding-top: 23px
+  padding-left: 37px
+  border-radius: 8px
+  margin-bottom: 58px
+  &__image
+    height: 39px
+
+.bottom-footer
+  position: absolute
+  left: 30px
+  right: 30px
+  bottom: 39px
+  height: 118px
+  border-radius: 8px
+  background-color: $blue
+  color: white
+  padding: 38px 38px 40px
+  box-sizing: border-box
+  @include flex(row, nowrap)
+  @include flex-setting(space-between)
+  & > *
+    width: 29%
+    color: inherit
+    font-size: 14px
+    line-height: 20px
+    font-weight: 800
+    display: block
+  & > * > *
+    display: block
+    color: inherit
+
+.text-page
+  margin-bottom: 140px
+  &__text-block
+    padding-left: 38px
+    padding-right: 100px
+    font-size: 14px
+    line-height: 21px
+    box-sizing: border-box
+    width: 100%
+    &:not(:last-child)
+      margin-bottom: 20px
+  &__text-block + &__text-block:not(.signature)
+    padding-top: 24px
+    border-top: 1px solid rgba(151,151,151,0.1)
+  .signature
+    margin-top: 54px

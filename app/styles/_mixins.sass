@@ -1,0 +1,62 @@
+$orange: #F77100
+$lightorange: #FFF5EC
+$blue: #0D253E
+$lightgray: #F9F9F9
+$gray: #F2F2F2
+
+$stShadow: 8px 13px 30px rgba(0, 0, 0, 0.13)
+$mdShadow: 8px 13px 20px rgba(0, 0, 0, 0.13)
+$mnShadow: 8px 13px 13px rgba(0, 0, 0, 0.13)
+
+$smStShadow: 0px 8px 16px rgba(0,0,0,0.08)
+$smMdShadow: 0px 6px 11px rgba(0,0,0,0.08)
+$smMnShadow: 0px 4px 6px rgba(0,0,0,0.08)
+
+$otStShadow: 8px 9px 11px rgba(0,0,0,0.08)
+$otMdShadow: 6px 7px 9px rgba(0,0,0,0.08)
+$otMnShadow: 4px 5px 7px rgba(0,0,0,0.08)
+
+$newShadow: 0 0 20px rgba(113, 113, 113, 0.12)
+$thisShadow: 5px 7px 16px rgba(0, 0, 0, 0.0438156)
+
+@mixin flex($direction: row, $wrap: nowrap)
+  display: flex
+  flex-direction: $direction
+  flex-wrap: $wrap
+
+@mixin flex-setting($justify: flex-start, $align: flex-start)
+  justify-content: $justify
+  align-items: $align
+
+@mixin centerMargin
+  margin-left: auto
+  margin-right: auto
+
+@mixin maxAdaptive($width)
+  @media only screen and (max-width: $width)
+    @content
+
+@mixin adaptive($width)
+  @media only screen and (min-width: $width)
+    @content
+
+@mixin shadow
+  box-shadow: $mnShadow
+  @include adaptive(768px)
+    box-shadow: $mdShadow
+  @include adaptive(1280px)
+    box-shadow: $stShadow
+
+@mixin smShadow
+  box-shadow: $smMnShadow
+  @include adaptive(768px)
+    box-shadow: $smMdShadow
+  @include adaptive(1280px)
+    box-shadow: $smStShadow
+
+@mixin otShadow
+  box-shadow: $otMnShadow
+  @include adaptive(768px)
+    box-shadow: $otMdShadow
+  @include adaptive(1280px)
+    box-shadow: $otStShadow

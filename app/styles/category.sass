@@ -1,0 +1,471 @@
+@import "mixins"
+
+.inline-filter-section
+  margin-top: 60px
+  @include adaptive(1280px)
+    margin-top: 86px
+
+.main
+  margin-top: 10px
+  @include adaptive(1280px)
+    margin-top: 15px
+
+.map-section
+  position: relative
+  margin-bottom: 36px
+  @include adaptive(768px)
+    margin-bottom: 28px
+    &.mapped
+      margin-bottom: 45px
+  @include adaptive(1280px)
+    margin-bottom: 18px
+    @include flex(row, wrap)
+    @include flex-setting(flex-start, flex-start)
+  &__before
+    padding: 12px 0 1px 24px
+    font-size: 14px
+    line-height: 16px
+    color: #8E99A4
+    @include adaptive(768px)
+      margin-bottom: 31px
+  &__control
+    display: block
+    position: absolute
+    top: 0
+    right: 9px
+    width: 33px
+    height: 36px
+    background-color: white
+    border-radius: 6px
+    box-shadow: 5px 7px 16px rgba(0,0,0,0.0438156)
+    cursor: pointer
+    background-position: center
+    background-size: 16px 16px
+    background-repeat: no-repeat
+    z-index: 10
+    @include adaptive(768px)
+      right: 20px
+    &[data-icon='map']
+      background-image: url("../img/map.svg")
+      background-size: 16px 16px
+    &[data-icon='tab']
+      background-image: url("../img/tab.svg")
+      background-size: 19px 17px
+      @include maxAdaptive(767px)
+        top: 8px
+  .info
+    font-size: 14px
+    line-height: 16px
+    width: 100%
+    margin-bottom: 14px
+    @include flex(row, wrap)
+    &__route
+      box-sizing: border-box
+      margin-bottom: 17px
+      opacity: 0.41
+      a
+        color: inherit
+    &__header
+      font-size: 16px
+      line-height: 19px
+      font-weight: 800
+      margin-bottom: 13px
+    &__buttons
+      @include flex
+      box-sizing: border-box
+      padding-right: 19px
+    &__button
+      display: block
+      color: inherit
+      background-color: white
+      @include otShadow
+      box-sizing: border-box
+      padding: 10px 35px 10px 14px
+      border-radius: 6px
+      position: relative
+      cursor: pointer
+      &_left
+        margin-right: auto
+      &_right
+        margin-right: 14px
+      &:after
+        content: ''
+        position: absolute
+        top: 15px
+        right: 13px
+        background-size: 8px 8px
+        width: 8px
+        height: 8px
+      &[data-direction='bottom']:after
+        background-image: url("../img/d-bottom.svg")
+      &[data-direction='top']:after
+        background-image: url("../img/d-top.svg")
+    &__text
+      max-width: 458px
+    &__route, &__buttons
+      width: calc(100% - 458px)
+    &__header, &__text
+      width: 458px
+  .tab
+    &_list
+      z-index: 10
+      padding-top: 12px
+      @include flex(row, wrap)
+      @include flex-setting(space-around)
+      @include adaptive(768px)
+        padding-top: unset
+      @include adaptive(1280px)
+        width: calc(100% - 458px)
+      .full-item-card
+        margin-bottom: 31px
+        width: 302px
+        @include adaptive(768px)
+          margin-bottom: 0
+          width: 100%
+          &:not(:last-child)
+            border-bottom: 1px dashed rgba(151, 151, 151, 0.21)
+        @include adaptive(1280px)
+          width: 537px
+          border-bottom: 2px dashed rgba(151, 151, 151, 0.21)
+          &.active
+            width: 577px
+      margin-bottom: 2px
+      @include adaptive(768px)
+        margin-bottom: 50px
+        display: block
+      @include adaptive(1280px)
+        margin-bottom: 17px
+    &_map
+      z-index: 8
+      height: calc(100vh - 104px)
+      background-color: #EEEEEE
+      position: relative
+      @include adaptive(768px)
+        height: 100vh
+      @include adaptive(1280px)
+        height: 986px
+        width: 458px
+        border-radius: 10px
+        overflow: hidden
+      .map
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 3
+        width: 100%
+        height: 100%
+      &.loading > .map
+        opacity: 0
+      .button
+        display: none
+        @include adaptive(1280px)
+          display: block
+          position: absolute
+          z-index: 5
+          width: fit-content
+          border-radius: 17px
+          height: 34px
+          box-sizing: border-box
+          padding: 8px 20px
+          font-size: 15px
+          line-height: 18px
+          font-weight: 800
+          &_1
+            background-color: $orange
+            color: white
+            top: 14px
+            left: 25px
+          &_2
+            background-color: white
+            color: $blue
+            top: 14px
+            left: 142px
+    &__siema-wrapper
+      display: none
+      @include maxAdaptive(767px)
+        display: block
+        position: absolute
+        left: 0
+        box-sizing: border-box
+        padding-left: 9px
+        width: 100%
+        height: 103px
+        overflow: hidden
+        bottom: 12px
+        z-index: 10
+      .map-siema
+        height: 100%
+        @include flex
+        .map-card-wrapper
+          width: 291px
+  .message
+    margin-bottom: 37px
+    width: 100%
+  .navigate
+    width: 100%
+    max-width: 400px
+    @include centerMargin
+    @include flex
+    @include flex-setting(space-around, center)
+    @include adaptive(768px)
+      width: 94.79%
+      max-width: 1090px
+    & > *
+      color: inherit
+      @include adaptive(768px)
+      margin-right: 12px
+    &__post
+      width: 24px
+      height: 24px
+      border-radius: 50%
+      background-color: $gray
+      background-position: center
+      background-repeat: no-repeat
+      background-size: 6px 6px
+      &_left
+        background-image: url("../img/post-left.svg")
+        margin-left: 20px
+        @include adaptive(768px)
+          margin-right: auto
+        @include adaptive(1280px)
+          margin-right: 12px
+          margin-left: auto
+      &_right
+        background-image: url("../img/post-right.svg")
+        margin-right: 20px
+        @include adaptive(768px)
+          margin-left: auto
+        @include adaptive(1280px)
+          margin-right: auto
+          margin-left: unset
+    &__left, &__right
+      width: 4px
+      height: 4px
+      background-position: center
+      background-repeat: no-repeat
+      background-size: 4px 4px
+    &__left
+      background-image: url("../img/triangle-left.svg")
+    &__right
+      background-image: url("../img/triangle-right.svg")
+    &__number
+      font-size: 12px
+      line-height: 16px
+      &.current
+        font-weight: 800
+        color: $orange
+
+.we-can
+  padding-top: unset !important
+  @include adaptive(768px)
+    margin-bottom: 50px
+
+.info-window
+  width: 249px
+  height: 269px
+  position: relative
+  &_multiple
+    width: 268px
+    height: 290px
+  &__controls
+    display: none
+    position: absolute
+    top: 0
+    left: 155px
+    height: 33px
+    width: 72px
+    z-index: 15
+  &__control
+    display: block
+    width: 33px
+    height: 33px
+    border-radius: 6px
+    background-color: white
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.102382)
+    cursor: pointer
+    position: relative
+    &:after
+      position: absolute
+      content: ''
+      width: 100%
+      height: 100%
+      top: 0
+      left: 0
+      background-size: 6px 6px
+      background-repeat: no-repeat
+      background-position: center
+    &_left:after
+      background-image: url("../img/triangle-left.svg")
+    &_right:after
+      background-image: url("../img/triangle-right.svg")
+    &_close
+      position: absolute
+      top: -9px
+      right: -9px
+      z-index: 15
+      &:after
+        background-image: url("../img/close.svg")
+  &_multiple &__controls
+    @include flex
+    @include flex-setting(space-between)
+  &_multiple &__control_close
+    top: 0
+    right: 2px
+  &__cards-wrapper
+    width: 100%
+    height: 100%
+  &_multiple &__cards-wrapper
+    position: absolute
+    left: 0
+    top: 9px
+    width: 100%
+    height: 281px
+.map-card
+  box-sizing: border-box
+  background-color: white
+  padding: 12px 12px 15px 12px
+  border-radius: 12px
+  width: 281px
+  height: 103px
+  @include otShadow
+  @include flex(column, wrap)
+  @include adaptive(768px)
+    width: 249px
+    height: 269px
+    @include flex(column)
+    @include flex-setting(space-between)
+  &__image-wrapper
+    width: 65px
+    height: 75px
+    overflow: hidden
+    border-radius: 4px
+    margin: 0
+    & > *
+      border-radius: 4px
+    @include adaptive(768px)
+      width: 224px
+      height: 137.32px
+  &__image
+    display: block
+    height: 75px
+    width: 134%
+    @include adaptive(768px)
+      height: 137.32px
+      width: 100%
+  &__title
+    font-size: 15px
+    line-height: 18px
+    font-weight: 800
+    color: inherit
+  &__subtitle, &__text
+    font-size: 14px
+    line-height: 16px
+  &__text
+    opacity: .46
+  &__title, &__subtitle, &__text
+    @include adaptive(768px)
+      padding-left: 9px
+  &__footer
+    align-self: flex-end
+    padding-top: 4px
+    @include flex
+    @include flex-setting(flex-end, center)
+    @include adaptive(768px)
+      padding-top: 11px
+      padding-right: 5px
+      @include flex-setting(flex-end, flex-start)
+  &__sqm
+    font-size: 13px
+    line-height: 15px
+    color: #909BA6
+    margin-right: 11px
+  &__price
+    font-size: 18px
+    line-height: 21px
+    font-weight: 800
+    color: $orange
+    &_month
+      position: relative
+    &:after
+      @include adaptive(768px)
+        position: absolute
+        content: 'Month/'
+        top: -12px
+        right: 0
+        font-size: 10px
+        line-height: 12px
+        opacity: .41
+        color: $blue
+.info-window
+  &_multiple .map-card
+    position: absolute
+    will-change: left, top, opacity
+    transition: left .25s ease-out, top .25s ease-out, opacity.25s ease-out
+    &:nth-child(1)
+      top: 0
+      left: 0
+      z-index: 10
+      opacity: 1
+    &:nth-child(2)
+      top: 5px
+      left: 5px
+      z-index: 9
+      opacity: 0.8
+    &:nth-child(3)
+      top: 10px
+      left: 10px
+      z-index: 8
+      opacity: 0.8
+    &:nth-child(4+n)
+      opacity: 0
+      z-index: 8
+
+.marker
+  display: block
+  height: 24px
+  font-weight: 800
+  border-top-left-radius: 12px
+  border-bottom-left-radius: 12px
+  position: relative
+  box-sizing: border-box
+  padding: 0 .5px 0 20px
+  width: fit-content
+  mix-blend-mode: hard-light
+  background-color: transparent
+  border-width: 8.5px
+  border-style: solid
+  cursor: pointer
+  &__inner
+    color: inherit
+    font-size: 14px
+    line-height: 24px
+    font-weight: 800
+    padding-left: 4px
+    margin-left: -8.5px
+    margin-top: -8.5px
+  &_once
+    border-color: white
+    color: $blue
+    &:before
+      border-color: white
+  &_once &__inner
+    background-color: white
+  &_multiple
+    border-color: $orange
+    color: white
+    &:before
+      border-color: $orange
+  &_multiple &__inner
+    background-color: $orange
+  &:before
+    content: ''
+    position: absolute
+    top: -8.5px
+    left: -8.5px
+    width: 24px
+    height: 24px
+    border-radius: 12px
+    border-width: 8.5px
+    background-color: transparent
+    border-style: solid
+    box-sizing: border-box

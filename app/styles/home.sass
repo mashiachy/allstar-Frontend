@@ -1,0 +1,405 @@
+@import "mixins"
+
+.orange-text
+  color: $orange
+
+.background
+  position: absolute
+  top: 0
+  right: 0
+  width: 96.875%
+  height: 522px
+  //max-width: 431px
+  border-bottom-left-radius: 26px
+  z-index: 1
+  background-color: #ccaf95
+  background-position: bottom 0 left -51px
+  background-repeat: no-repeat
+  overflow: hidden
+  color: white
+  will-change: background-position, background-size
+  &.animation
+      animation: 2s 1 scaleBack1
+  &.loaded
+    background-image: url("../img/back-mobile.jpg")
+  //@include adaptive(480px)
+    //width: unset
+    //max-width: unset
+    //left: 80px
+  @include adaptive(640px)
+    background-position: bottom 0 left 0
+  @include adaptive(700px)
+    &.loaded
+      background-image: url("../img/back-tab.jpg")
+    &.animation
+      animation: 2s 1 scaleBack2
+  @include adaptive(768px)
+    width: unset
+    max-width: unset
+    left: calc(2.6% + 334px)
+    height: 594px
+    background-position: bottom 0 left -57px
+  @include adaptive(1120px)
+    background-position: bottom 0 left 0
+  @include adaptive(1149px)
+    left: unset
+    width: 65.20%
+  @include adaptive(1197px)
+    width: 780.44px
+  @include adaptive(1280px)
+    background-size: 100% 100%
+    background-position: left 0 top 0
+    height: 657px
+    left: calc(50% - 160px)
+    width: unset
+    &.loaded
+      background-image: url("../img/back-desktop.jpg")
+    &.animation
+      animation: 2s 1 scaleBack
+  @include adaptive(1920px)
+    background-position: left 0 top 0
+    background-size: 100% 100%
+    width: 1134px
+    right: unset
+
+  &__shadow
+    position: absolute
+    width: 171.34%
+    height: 93.49%
+    left: -24.82%
+    top: 30.12%
+    background-color: black
+    mix-blend-mode: normal
+    opacity: 0.47
+    box-shadow: 0px 2px 43px rgba(0, 0, 0, 0.5)
+    filter: blur(135.914px)
+    z-index: 2
+    @include adaptive(768px)
+      width: 251.82%
+      height: 82.15%
+      top: 44.61%
+      left: -35.11%
+  &__title
+    position: absolute
+    bottom: 226px
+    left: 27px
+    width: 259px
+    font-weight: 900
+    font-size: 36px
+    line-height: 40px
+    z-index: 3
+    @include adaptive(480px)
+      width: 62%
+    @include adaptive(768px)
+      bottom: 160px
+      left: 48px
+      width: 70.46%
+      font-size: 41px
+      line-height: 45px
+    @include adaptive(1280px)
+      font-size: 56px
+      line-height: 53px
+      left: 62px
+      bottom: 216px
+      width: 456px
+    @include adaptive(1920px)
+      bottom: unset
+      top: 269px
+      left: 63px
+  &__text
+    position: absolute
+    top: 320px
+    left: 27px
+    width: 239px
+    font-size: 16px
+    line-height: 25px
+    font-weight: 500
+    z-index: 3
+    @include adaptive(480px)
+      width: 55.8%
+    @include adaptive(768px)
+      top: 457px
+      left: 48px
+      font-size: 14px
+      line-height: 23px
+      width: 72.40%
+    @include adaptive(1280px)
+      font-size: 16px
+      line-height: 25px
+      left: 62px
+      top: 507px
+      width: 526px
+    @include adaptive(1920px)
+      left: 63px
+      top: 507px
+
+.filter
+  position: absolute
+  width: 93.75%
+  min-height: 477px
+  box-sizing: border-box
+  left: 3.125%
+  top: 550px
+  background-color: white
+  border-radius: 16px
+  padding: 29px 20px 22px
+  @include shadow
+  &.extended
+    height: 906px
+    @include adaptive(768px)
+      height: 500px
+      width: 609px
+  @include flex(column, wrap)
+  @include flex-setting(space-between)
+  @include adaptive(445px)
+    left: calc(100% - 431px)
+    width: unset
+    right: calc(100% - 431px)
+  @include adaptive(480px)
+    left: 80px
+    width: calc(100% - 160px)
+  @include adaptive(768px)
+    height: 500px
+    min-height: unset
+    top: 98px
+    left: 2.6%
+    right: unset
+    width: 315px
+    min-width: 315px
+    z-index: 10
+  @include adaptive(1149px)
+    left: calc(34.8% - 334px)
+  @include adaptive(1197px)
+    left: calc(100% - 1114.44px)
+  @include adaptive(1280px)
+    left: calc(50% - 511px)
+    top: 159px
+  @include adaptive(768px)
+    & > *
+      max-width: 275px
+  .option
+    width: 100%
+    height: 36px
+    border-radius: 7px
+    background-color: rgba(216, 216, 216, 0.16)
+    position: relative
+    &__marker
+      position: absolute
+      width: 50%
+      height: 100%
+      border-radius: 7px
+      background-color: $blue
+      z-index: 4
+      top: 0
+      will-change: transform
+      transform: translate3d(0)
+      transition: transform .25s ease-in-out
+      -webkit-appearance: none
+      left: 0
+      &:after
+        content: ''
+        position: absolute
+        top: 15px
+        left: 11px
+        width: 6px
+        height: 6px
+        border-radius: 3px
+        background-color: white
+        z-index: 5
+      &[data-pos='1']
+        transform: translate3d(100%, 0, 0)
+    &__choice
+      position: absolute
+      width: 50%
+      height: 100%
+      top: 0
+      z-index: 6
+      background-color: transparent
+      font-size: 14px
+      line-height: 16px
+      opacity: 0.27
+      display: block
+      text-align: center
+      padding-top: 11px
+      cursor: pointer
+      will-change: color
+      transition: color .25s ease-in-out
+      -webkit-appearance: none
+      &_rent
+        left: 0
+      &_sale
+        right: 0
+      &.active
+        font-weight: 800
+        opacity: 1
+        color: white
+  .more
+    &.hidden
+      @include adaptive(768px)
+        visibility: hidden
+  .other-options
+    height: 390px
+    width: 100%
+    @include flex(column)
+    @include flex-setting(space-between)
+    @include adaptive(768px)
+      & > *
+        max-width: 275px
+      order: 1
+      width: 315px
+      max-width: unset
+      height: 100%
+      padding: 0 20px
+    .hide
+      width: 100%
+      height: 36px
+      position: relative
+      &__inner
+        display: block
+        height: 100%
+        width: 35px
+        border-radius: 7px
+        background-color: rgba(216,216,216,0.16)
+        position: absolute
+        top: 0
+        right: 0
+        cursor: pointer
+        &:after
+          content: ''
+          position: absolute
+          top: 16px
+          left: 15px
+          width: 5px
+          height: 5px
+          background-image: url("../img/triangle-left.svg")
+          background-size: contain
+          cursor: pointer
+
+.main-content
+  @include flex(column)
+  & > .clients
+    order: 1
+  & > .listing_1
+    order: 2
+  & > .gray-line
+    order: 3
+  & > .listing_2
+    order: 4
+  & > .we-can
+    order: 5
+    @include adaptive(1280px)
+      order: 6
+  & > .testimonials
+    order: 6
+    @include adaptive(1280px)
+      order: 5
+
+.clients
+  margin-bottom: 20px
+  @include adaptive(768px)
+    margin-bottom: 24px
+  @include adaptive(1280px)
+    margin-bottom: 46px
+  &__siema-client
+    max-height: 156px
+    min-height: 107px
+    background-color: white
+    border-radius: 15px
+    overflow: hidden
+    padding: 17px
+    @include shadow
+    @include adaptive(768px)
+      padding: 35px
+    .client
+      display: none
+      max-width: 75px
+      @include adaptive(768px)
+        max-width: 90px
+      &__image
+        margin-bottom: 5.5px
+        max-height: 35px
+        width: 100%
+      &__text
+        font-size: 14px
+        line-height: 18px
+        @include adaptive(768px)
+          font-size: 15px
+    &.active .client
+      display: block
+  &__siema-company
+    padding-top: 25px
+    background-color: transparent
+    margin-bottom: 22px
+    overflow: hidden
+    max-height: 99px
+    min-height: 45px
+    @include adaptive(768px)
+      padding-top: 35px
+      margin-bottom: 45px
+    @include adaptive(1280px)
+      padding-top: 45px
+      margin-bottom: 54px
+    .company
+      display: none
+      @include centerMargin
+      max-width: 70px
+      @include adaptive(768px)
+        max-width: 100px
+      @include adaptive(1280px)
+        max-width: 115px
+      &__image
+        width: 100%
+        vertical-align: center
+    &.active .company
+      display: block
+  &__about
+    @include flex(column)
+    & > .info-card
+      margin-bottom: 17px
+      &:last-child
+        margin-bottom: unset
+    @include adaptive(768px)
+      @include flex(row)
+      @include flex-setting(space-between)
+      & > .info-card
+        margin-bottom: unset
+        width: 31.5%
+        padding: 35px
+        @include flex-setting(space-between)
+      .info-card
+        &__icon
+          margin-bottom: 18px
+    @include adaptive(1090px)
+      & > .info-card
+        @include flex-setting(space-evenly)
+        padding: 35px 0
+
+.testimonials
+  margin-top: 48px
+  .slider__title
+    margin-bottom: 13px
+  @include adaptive(1280px)
+    margin-top: 41px
+  .testimonial
+    display: none
+    width: 99%
+    @include centerMargin
+    @include adaptive(768px)
+      width: 95%
+    @include adaptive(1280px)
+      margin-top: 15px
+      margin-bottom: 20px
+  &__siema-wrapper
+    overflow: visible
+    @include adaptive(1280px)
+    width: calc(100% + 30px)
+    margin-left: -15px
+  &__siema
+    &.active .testimonial
+      display: block
+    @include adaptive(1280px)
+      width: 100%
+      .testimonial
+        width: 530px
+        margin-left: 15px
+        margin-right: 15px

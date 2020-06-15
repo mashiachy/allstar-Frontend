@@ -1,0 +1,36 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | mail
+    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/mail.css" as="style")
+    link(href="css/mail.css" rel="stylesheet")
+  body
+    +b.mail
+      +b.top-logo
+        +e.IMG(src='img/Logo.svg' alt='Logo').image
+      +b.text-page
+        +e.text-block Hello!
+          br
+          | Thank you for contacting All Star Kiev Realty!
+          br
+          | We have received your message and will contact you within 24 hours.
+        +e.text-block Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+        +e.text-block.signature All Star Kiev Realty
+          br
+          | Real Estate Agency
+      +b.bottom-footer
+        +e.address 13-15 Bolsunovska Street, 8th floor, IQ Business Center, Kyiv
+        +e.numbers
+          +e.A(href='#').number +38 067 656 20 23
+          +e.A(href='#').number +38 044 22 33 177
+        +e.A(href='#').link allstarkievrealty.com

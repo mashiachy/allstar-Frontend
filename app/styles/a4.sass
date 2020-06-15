@@ -1,0 +1,120 @@
+@import "mixins"
+
+body
+  position: relative
+  width: 100%
+  height: 100%
+
+.page
+  padding: 24px 18px 23px 21px
+  box-sizing: border-box
+  width: 595px
+  height: 842px
+  @include shadow
+  @include centerMargin
+  margin-top: 40px
+  position: relative
+
+.header
+  height: 33px
+  width: 100%
+  @include flex
+  @include flex-setting(space-between, stretch)
+  margin-bottom: 18px
+  &__logo
+    height: 33px
+  &__card
+    @include flex(row, nowrap)
+    @include flex-setting(flex-start, center)
+  &__avatar
+    height: 33px
+    width: 33px
+    display: block
+    border-radius: 50%
+    overflow: hidden
+    margin-right: 9px
+  &__image
+    display: block
+    width: 100%
+    & > *
+      display: block
+  &__information
+    width: fit-content
+  &__name
+    font-size: 8px
+    line-height: 9px
+    font-weight: bold
+  &__speaks
+    font-size: 8px
+    line-height: 13px
+    opacity: 0.46
+  &__phones
+    font-size: 8px
+    line-height: 9px
+    font-weight: 900
+
+.main
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-gap: 20px
+  grid-auto-flow: row
+  &__image-wrapper
+    display: block
+    border-radius: 4px
+    overflow: hidden
+  &__image
+    display: block
+    width: 100%
+    & > *
+      display: block
+
+.text-block
+  width: 100%
+  height: fit-content
+  box-sizing: border-box
+  padding: 5px 0 0 14px
+  font-size: 8px
+  line-height: 9px
+  & > &__text
+    margin-bottom: 2px
+  &__text
+    &_bold
+      font-weight: 800
+    &_last
+      margin-bottom: 4px
+    &_tall
+      line-height: 14px
+    &_c2
+      @include flex(row, nowrap)
+      margin-bottom: 2px
+  &__text-block
+    & > *
+      width: 100%
+    &_1
+      width: 80px
+    &_2
+      width: 66px
+    &_3
+      width: 80px
+
+.postscriptum
+  position: absolute
+  left: 21px
+  bottom: 23px
+  right: 18px
+  height: 86px
+  font-size: 8px
+  line-height: 16px
+  & > *
+    width: fit-content
+    display: block
+    position: absolute
+  &__contact
+    left: 0
+    bottom: 38px
+  &__link
+    bottom: 0
+    left: 0
+  &__page
+    bottom: 0
+    right: 0

@@ -1,0 +1,130 @@
+@import "mixins"
+
+.inline-filter-section
+  margin-top: 86px
+
+.main
+  margin-top: 81px
+  @include adaptive(1280px)
+    margin-top: 15px
+
+.route
+  margin-bottom: 16px
+
+.form-section
+  display: block
+  background-color: white
+  box-sizing: border-box
+  padding-top: 18px
+  margin-bottom: 42px
+  @include adaptive(768px)
+    @include shadow
+    border-radius: 8px
+    padding-top: 58px
+    padding-bottom: 47px
+    margin-bottom: 63px
+    &__form-body
+      max-width: 368px
+      @include centerMargin
+  @include adaptive(1280px)
+    padding-bottom: 57px
+    margin-bottom: 76px
+  &__form-title
+    font-size: 15px
+    line-height: 18px
+    font-weight: 800
+    padding-left: 21px
+  &__submit
+    border: 0
+    padding: 0
+    font-size: 14px
+    line-height: 16px
+    font-weight: 800
+    height: 50px
+    max-width: 290px
+    margin-left: auto
+    @include adaptive(768px)
+      margin-right: auto
+      width: 229px
+  &__form-title + &__form-block
+    margin-top: 27px
+  &__form-block + &__form-title
+    margin-top: 35px
+  &__form-title + &__form-file
+    margin-top: 14px
+  &__form-file + &__submit
+    margin-top: 29px
+  .search
+    &:not(:last-child)
+      margin-bottom: 18px
+  .input-line
+    @include flex
+    .type
+      width: 117px
+      margin-right: 18px
+      height: 100%
+    .search-input
+      width: calc(100% - 135px)
+  &__form-file
+    border-radius: 7px
+    box-sizing: border-box
+    border: 1px dashed rgba(151,151,151,0.37)
+    min-height: 187px
+    cursor: pointer
+    position: relative
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-auto-flow: row
+    grid-gap: 9px
+    padding: 9px 0
+  &__file-input
+    position: absolute
+    opacity: 0
+    width: 0
+    height: 0
+  &__file-item
+    box-sizing: border-box
+    padding-top: 43px
+    position: relative
+    font-size: 8px
+    line-height: 10px
+    text-align: center
+    &:after
+      content: ''
+      position: absolute
+      left: 50%
+      top: 0
+      transform: translateX(-50%)
+      width: 45px
+      height: 33px
+      background-size: 45px 33px
+      background-image: url("../img/image-icon.svg")
+  &__form-file &__text
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    box-sizing: border-box
+    padding-top: 48px
+    text-align: center
+    width: 134px
+    font-size: 14px
+    line-height: 16px
+    &:after
+      content: ''
+      position: absolute
+      left: 50%
+      top: 0
+      transform: translateX(-50%)
+      width: 45px
+      height: 33px
+      background-size: 45px 33px
+      background-image: url("../img/image-icon.svg")
+
+
+.listing_2
+  margin-bottom: 15px
+  @include adaptive(768px)
+    margin-bottom: 40px
+  @include adaptive(1280px)
+    margin-bottom: 60px

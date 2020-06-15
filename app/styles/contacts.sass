@@ -1,0 +1,161 @@
+@import "mixins"
+
+.main
+  margin-top: 81px
+  @include adaptive(1280px)
+    margin-top: 134px
+
+.route
+  margin-bottom: 16px
+
+.listing_2
+  margin-bottom: 15px
+  @include adaptive(768px)
+    margin-bottom: 40px
+  @include adaptive(1280px)
+    margin-bottom: 60px
+
+.information
+  margin-bottom: 41px
+  @include adaptive(768px)
+    margin-bottom: 48px
+  @include adaptive(1280px)
+    margin-bottom: 53px
+    display: grid
+    grid-template-columns: 1fr 345px
+    grid-template-rows: 191px 1fr
+    grid-template-areas: "block-contacts block-form" "block-cards block-form"
+    grid-gap: 22px
+  @include maxAdaptive(767px)
+    & > *:not(:last-child)
+      margin-bottom: 18px
+  &__block-contacts
+    background-color: white
+    border-radius: 12px
+    padding: 19px 20px
+    box-shadow: $thisShadow
+    @include adaptive(768px)
+      margin-bottom: 29px
+      @include flex(row, wrap)
+      @include flex-setting(space-between, flex-start)
+    @include adaptive(1280px)
+      margin-bottom: unset
+      grid-area: block-contacts
+  @include adaptive(768px)
+    &__block-contacts > &__text_header
+      width: 100%
+    &__block-contacts > &__text_place
+      width: 215px
+    &__block-contacts > &__text-wrapper
+      width: 130px
+    &__block-contacts > &__text_email
+      width: 250px
+    &__block-contacts > &__text_big
+      width: 100%
+  &__text
+    font-size: 12px
+    line-height: 14px
+    color: inherit
+    display: block
+    &_header
+      font-size: 18px
+      line-height: 21px
+      font-weight: 800
+    &_dim
+      color: rgba(13, 37, 62, 0.63)
+    &_big
+      font-size: 15px
+      line-height: 18px
+    &_bold
+      font-weight: 800
+    &_tall
+      line-height: 200%
+    &_icon
+      padding-left: 25px
+      box-sizing: border-box
+      position: relative
+      &:after
+        position: absolute
+        content: ''
+        left: 0
+        top: 0
+        height: 100%
+        background-size: contain
+        background-repeat: no-repeat
+        background-position: left 0 top 5px
+    &_place:after
+      background-image: url("../img/place-orange.svg")
+      width: 15px
+    &_phone:after
+      background-image: url("../img/phone.svg")
+      width: 14px
+    &_email:after
+      background-image: url("../img/email-icon.svg")
+      width: 18px
+  &__block-contacts > &__text_header
+    margin-bottom: 15px
+  &__block-contacts > &__text_place
+    margin-bottom: 20px
+  &__block-contacts > &__text-wrapper
+    margin-bottom: 20px
+  &__block-contacts > &__text_email
+    margin-bottom: 27px
+  &__block-cards
+    display: grid
+    grid-template-columns: 1fr
+    grid-auto-flow: row
+    grid-gap: 18px
+    @include adaptive(768px)
+      grid-template-columns: repeat(2, 1fr)
+      grid-gap: 20px
+      margin-bottom: 41px
+    @include adaptive(1280px)
+      margin-bottom: unset
+      grid-area: block-cards
+  &__block-form &__text_big
+    margin-bottom: 23px
+  &__block-form
+    padding-top: 21px
+    @include flex(column)
+    @include adaptive(768px)
+      padding: 24px 39px 44px 35px
+      box-sizing: border-box
+      @include flex(row, wrap)
+      @include flex-setting(space-between, stretch)
+      height: 309px
+      box-shadow: $thisShadow
+      border-radius: 12px
+      & > *
+        width: calc(50% - 12.5px)
+    @include adaptive(1280px)
+      margin-bottom: unset
+      grid-area: block-form
+      @include flex(column, nowrap)
+      @include flex-setting(space-between, flex-start)
+      height: 543px
+      & > *
+        width: 100%
+  &__block-form &__text_big
+    width: 100%
+  .search
+    &:not(:last-child)
+      margin-bottom: 11px
+  &__block
+    &:not(:last-child)
+      margin-bottom: 11px
+  .input-line
+    @include flex
+    .type
+      width: 117px
+      margin-right: 18px
+      height: 100%
+    .search-input
+      width: calc(100% - 135px)
+  &__submit
+    height: 50px
+    padding: 0
+    border: 0
+    font-size: 14px
+    line-height: 16px
+    max-width: 275px
+    margin-left: auto

@@ -1,0 +1,178 @@
+include mixins
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | Home
+    link(rel='preload' href='css/fonts/Roboto-Regular.ttf' as='font' crossorigin='anonymous')
+    link(rel='preload' href='css/fonts/Roboto-Medium.ttf' as='font' crossorigin='anonymous')
+    link(rel='preload' href='css/fonts/Roboto-Bold.ttf' as='font' crossorigin='anonymous')
+    link(rel='preload' href='css/fonts/Roboto-Black.ttf' as='font' crossorigin='anonymous')
+    link(rel='preload' href="css/home.css" as="style")
+    link(rel='preload' href='js/home.js' as='script')
+    link(href="css/home.css" rel="stylesheet")
+    script.
+      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));
+  body(id='app')
+    +top-menu
+    +b.SECTION(data-lazy).background
+      +e.image
+      +e.shadow
+      +e.title
+        ='A '
+        span.orange-text Premier
+        =' Real Estate Agency for Foreign Nationals in Kiev'
+      +e.text We are a full service real estate agency that rents properties to embassies, diplomatic organizations, international companies and other foreign clients in Kiev.
+    +b.SECTION(id="filter" class='filter' :class='{\'extended\': options}')
+      +b.option
+        +e.DIV(:data-pos='activeOption').marker
+        +e.SPAN(:class='{\'active\': activeOption === 0}' @click='activeOption = 0').choice_rent For Rent
+        +e.SPAN(:class='{\'active\': activeOption === 1}' @click='activeOption = 1').choice_sale For Sale
+      +b.V-SELECT(class='type' v-model='curType' :options='[\'Apartment1\', \'Apartment2\', \'Apartment3\']')
+      +b.number-range.price
+        +e.label
+          | Price
+          br
+          | per month, $
+        +e.SPAN.number $
+          +e.INPUT(type='number' v-model.number='pricePerMonth.start').number-input
+        +e.SPAN.number $
+          +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
+      +b.V-SELECT(class='type' v-model='curBdrooms' :options='[\'1 Bedroom\', \'2 Bedroom\', \'3 Bedroom\']')
+      +b.number-range.size
+        +e.label
+          | Size,
+          br
+          | sqm
+        +e.SPAN.number
+          +e.INPUT(type='number' v-model.number='size.start').number-input
+        +e.SPAN.number
+          +e.INPUT(type='number' v-model.number='size.end').number-input
+      +b.search
+        +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
+        +e.A(href="").search-button
+      +b(v-show='options').other-options
+        +b.DIV(class='hide' v-if='isTab')
+          +e.SPAN(class='inner' @click='options = !options')
+        +b.V-SELECT(class='type' v-model='curDistrict' :options='[\'1 District\', \'2 District\', \'3 District\']')
+        +b.number-range.price-sqm
+          +e.label
+            | Price
+            br
+            | per sqm, $
+          +e.SPAN.number $
+            +e.INPUT(type='number' v-model.number='pricePerSqm.start').number-input
+          +e.SPAN.number $
+            +e.INPUT(type='number' v-model.number='pricePerSqm.end').number-input
+        +b.number-range.floor
+          +e.label
+            | Floor
+          +e.SPAN.number
+            +e.INPUT(type='number' v-model.number='floor.start').number-input
+          +e.SPAN.number
+            +e.INPUT(type='number' v-model.number='floor.end').number-input
+        +b.checkbox-list
+          +b.LABEL.checkbox Only with elevator
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList.elevator')
+            +e.SPAN.mark
+        +b.checkbox-list
+          +b.LABEL.checkbox Terrace
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList.terrace')
+            +e.SPAN.mark
+        +b.checkbox-list
+          +b.LABEL.checkbox Open balcony
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList.balcony')
+            +e.SPAN.mark
+        +b.checkbox-list
+          +b.LABEL.checkbox Sauna
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList.sauna')
+            +e.SPAN.mark
+        +b.checkbox-list
+          +b.LABEL.checkbox Penthouse
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList.penthouse')
+            +e.SPAN.mark
+        +b.checkbox-list
+          +b.LABEL.checkbox Swimming pool
+            +e.INPUT(type='checkbox' class='input' v-model='checkboxList.pool')
+            +e.SPAN.mark
+      +b.SPAN(@click='options = !options' class='more' :class='{ \'hidden\': options }') {{ !options ? 'More options +' : 'hide options -' }}
+      +b.A(href='#').show Show
+    main(id='main').main-content
+      +b.SECTION.clients.slider.content
+        +e.title.slider__title.inner
+          +e.H2.header Our Clients
+        +e.controls.slider__controls
+          +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaClients.prev()')
+          +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaClients.next()')
+        +e.SIEMA(class='siema-client' ref='siemaClients' :options='siemaOptions' @init='initFoo("clients")')
+          +b.client
+            +picture('img/uae.webp', 'img/uae.jpg', 'UAE', 'client__image')
+            +e.text Embassy of the UAE
+          +b.client
+            +picture('img/turkey.webp', 'img/turkey.jpg', 'Turkey', 'client__image')
+            +e.text Embassy of Turkey
+          +b.client
+            +picture('img/usa.webp', 'img/usa.jpg', 'USA', 'client__image')
+            +e.text Embassy of The USA
+          +b.client
+            +picture('img/germany.webp', 'img/germany.jpg', 'Germany', 'client__image')
+            +e.text Embassy of Germany
+          +b.client
+            +picture('img/france.webp', 'img/france.jpg', 'France', 'client__image')
+            +e.text Embassy of France
+          +b.client
+            +picture('img/italy.webp', 'img/italy.jpg', 'Italy', 'client__image')
+            +e.text Embassy of Italy
+          +b.client
+            +picture('img/canada.webp', 'img/canada.jpg', 'Canada', 'client__image')
+            +e.text Embassy of Canada
+          +b.client
+            +picture('img/austria.webp', 'img/austria.jpg', 'Austria', 'client__image')
+            +e.text Embassy of Austria
+          +b.client
+            +picture('img/france.webp', 'img/france.jpg', 'France', 'client__image')
+            +e.text Embassy of France
+        +e.SIEMA(class='siema-company' ref='siemaCompany' :options='siemaOptionsAutoplay' auto-play @init='initFoo("company")')
+          +b.company
+            +picture('img/klm.webp', 'img/klm.jpg', 'Klm', 'company__image')
+          +b.company
+            +picture('img/usaid.webp', 'img/usaid.jpg', 'Usaid', 'company__image')
+          +b.company
+            +picture('img/mgk.webp', 'img/mgk.jpg', 'Mgk', 'company__image')
+          +b.company
+            +picture('img/otp.webp', 'img/otp.jpg', 'Otp', 'company__image')
+          +b.company
+            +picture('img/samsung.webp', 'img/samsung.jpg', 'Samsung', 'company__image')
+          +b.company
+            +picture('img/osce.webp', 'img/osce.jpg', 'Osce', 'company__image')
+          +b.company
+            +picture('img/scania.webp', 'img/scania.jpg', 'Scania', 'company__image')
+          +b.company
+            +picture('img/philips.webp', 'img/philips.jpg', 'Philips', 'company__image')
+          +b.company
+            +picture('img/otp.webp', 'img/otp.jpg', 'Otp', 'company__image')
+        +e.about
+          +info-card('img/flag.svg', '60 countries', 'Real estate sold and leased to clients from  28 countries')
+          +info-card('img/money-bag.svg', '$3 800 000 USD', 'Average annual turnover on lease agreements 2.4 million dollars', 'orange')
+          +info-card('img/money.svg', '$3 800 000 USD', 'Attracted foreign investment to buy real estate 3.8 million', 'blue')
+      +listings
+      +we-can
+      +b.SECTION.testimonials.slider.content
+        +e.title.slider__title.inner
+          +e.H2.header Testimonials
+        +e.controls.slider__controls
+          +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaTestimonals.prev()')
+          +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaTestimonals.next()')
+        +e.siema-wrapper
+          +e.SIEMA(class='siema' ref='siemaTestimonials' :options='siemaTestimonials' @init='initFoo("testimonial")')
+            +testimonial('img/man', 'Name Surname', 'Businessman', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing')
+            +testimonial('img/woman', 'Name Surname', 'Director of Samsung', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing')
+            +testimonial('img/man', 'Name Surname', 'Businessman', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing')
+            +testimonial('img/woman', 'Name Surname', 'Director of Samsung', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing')
+    +footer('_extended')
+
+    script(src="js/home.js")

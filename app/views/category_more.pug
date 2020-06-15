@@ -1,0 +1,122 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | category_more
+    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/category_more.css" as="style")
+    link(rel="preload" href="js/category_more.js" as="script")
+    link(href="css/category_more.css" rel="stylesheet")
+    script.
+      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));
+  body
+    +top-menu('_inline', '_dark', '_shadow')
+    +b.MAIN(id='main').main
+      +b.SECTION(class='section content' :class='{\'inner\': isDesktop}')
+        +b.block-top
+          +b.route
+            +e.SPAN.button
+            +e.P.line
+              a(href='#') Home
+              =' / '
+              a(href='#') Apartments for Sale in Kiev
+              =' / '
+              a(href='#') Gonchara Street 26
+          +e.A(href='#' v-show='isDesktop').print
+          +e.search-wrapper
+            +b.DIV(class='search')
+              +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
+              +e.A(href="").search-button
+        +b.H3.title 2 bedroom Apartment for Sale in Kiev, Dilova Street 2B - ID 3435
+        +b.block-images
+          +e.siema-wrapper
+            +e.DIV(@click='$refs.siemaImages.prev()').siema-control_button._left
+            +e.DIV(@click='$refs.siemaImages.next()').siema-control_button._right
+            +e.siema-control_center
+              div(v-for='i in [0, 1, 2, 3, 4, 5, 6, 7]' :key=i :class='{\'active\': curImage === i}').item
+            +e.SIEMA(class='siema' ref='siemaImages' :current.sync='curImage' :options='siemaImagesOptions' @init='initOpenModal')
+              each i in ['1', '2', '3', '4', '5', '6', '7', '8']
+                +picture('img/room-photo-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'block-images__siema-image')
+          +e.DIV(class='all-images' ref='allImages')
+            each i in [1, 2, 3, 4, 5, 6, 7, 8]
+              +e.DIV(class='image-wrapper' @click=`$refs.siemaImages.goTo(${i-1})`)
+                +picture('img/room-photo-'+i+'.webp', 'img/room-photo-'+i+'.jpg', 'Room', 'block-images__image'+(i === 1 ? ' current' : ''))
+        +b.block-text
+          +e.top
+            +e.text_big._bold Delovaya (Dimitrova) Street, 2б
+            +e.text Tetris Hall
+            +e.text_small._dim for example Shevchenko
+            +e.text_small ID 1525755
+          +e.middle
+            +e.price-info
+              +e.text_dim Sale
+              +e.text_big._bold._orange $ 157 000
+              +e.text_dim ($45/sqm)
+            +e.price-info_tabulate
+              +e.text_dim Rent
+              +e.text_big._bold $ 5 000
+              +e.text_dim ($45/sqm)
+          +e.footer
+            +e.block_info
+              +e.block-info
+                each t in ['Bedrooms', 'Bathrooms', 'Size', 'Floor', 'Elevator', 'Building type']
+                  +e.text_tall= t
+              +e.block-info
+                each t in ['2', '2', '121sqm', '1', 'yes', 'modern']
+                  +e.text_tall._bold= t
+            +e.block_tags
+              each t in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace', 'Outdoor sauna']
+                +e.text_tall._tag= t
+          +e.content
+            +e.text_big._bold Description
+            +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
+            +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
+            +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
+            +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
+        +b.block-map
+          +e.DIV(@click='showMap' v-show='!mapVisible').button
+            +e.SPAN.link Show location on map
+          +e(v-show='mapVisible').map-wrapper.loading
+            +e(ref='map').map#map
+        +b.block-contact
+          +e.person
+            +e.FIGURE.avatar
+              +picture('img/woman.webp', 'img/woman.jpg', 'Avatar', 'block-contact__image')
+            +e.info
+              +e.title Name Surname
+              +e.subtitle Speaks: Russian, Ukrainian, English
+              +e.A(href='#').phone_icon +38 044 22-33-177
+              +e.A(href='#').phone +38 044 22-33-177
+          +e.title_main Send message
+          +e.FORM.form
+            +e.input-line
+              +b.INPUT(type='text' placeholder='First name' v-model='form.name').text-input
+            +e.input-line
+              +b.INPUT(type='text' placeholder='Last name' v-model='form.surname').text-input
+            +e.input-line_full
+              +b.V-SELECT(class='type' v-model='form.prefix' :options='prefixList')
+              +b.INPUT(type='text' placeholder='Phone' v-model='form.surname').text-input
+            +e.input-line
+              +b.INPUT(type='text' placeholder='e-mail' v-model='form.email').text-input
+            +e.input-block
+              +b.TEXTAREA(placeholder='Message' wrap='soft' v-model='form.message').textarea-input
+            +e.BUTTON.submit.show Submit
+      +listings
+      +we-can('_row')
+
+    +footer
+
+    +b.DIV(ref='modal' v-show='visible' @click.self='hide').modal#modal
+      +e.DIV(@click='hide').control
+      +e.IMG(src='img/room-1.jpg' alt='Room' ref='image').image
+
+
+    script(src="js/category_more.js")

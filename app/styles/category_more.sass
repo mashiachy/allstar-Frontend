@@ -1,0 +1,403 @@
+@import "mixins"
+
+.main
+  margin-top: 61px
+  @include adaptive(768px)
+    margin-top: 80px
+  @include adaptive(1280px)
+    margin-top: 96px
+
+.section
+  margin-bottom: 33px
+  @include adaptive(768px)
+    @include flex(row, wrap)
+    @include flex-setting(flex-start, flex-start)
+  @include adaptive(1280px)
+    @include flex-setting(space-between, flex-start)
+  & > *:not(:last-child)
+    margin-bottom: 18px
+    @include adaptive(768px)
+      margin-bottom: 32px
+    @include adaptive(1280px)
+      margin-bottom: 0
+  .block-top
+    @include flex(row, wrap)
+    @include adaptive(768px)
+      width: 100%
+      order: 1
+    .route
+      order: 2
+      @include adaptive(1280px)
+        order: 1
+        width: fit-content
+        margin-right: auto
+    &__print
+      display: block
+      width: 35px
+      height: 36px
+      border-radius: 4px
+      background-color: rgba(216, 216, 216, 0.16)
+      background-image: url("../img/print-water.svg")
+      background-size: 16px 16px
+      background-position: center
+      background-repeat: no-repeat
+      @include adaptive(1280px)
+        order: 2
+        margin-right: 32px
+    &__search-wrapper
+      order: 1
+      margin-bottom: 15px
+      width: 100%
+      @include adaptive(1280px)
+        order: 3
+        width: calc(33.33% - 15px)
+  .title
+    font-size: 16px
+    line-height: 20px
+    font-weight: 800
+    margin-bottom: 11px
+    @include adaptive(768px)
+      margin-bottom: 15px
+      width: 100%
+      order: 2
+    @include adaptive(1280px)
+      margin-bottom: 18px
+  .block-images
+    @include adaptive(768px)
+      width: 100%
+      order: 3
+    @include adaptive(1280px)
+      width: calc(33.33% - 15px)
+    &__siema-wrapper
+      width: 100%
+      position: relative
+      margin-bottom: 7px
+      @include adaptive(768px)
+        margin-bottom: 17px
+    &__siema-control
+      position: absolute
+      display: block
+      z-index: 5
+      &_button
+        width: 33px
+        height: 33px
+        border-radius: 50%
+        background-color: white
+        box-shadow: $thisShadow
+        cursor: pointer
+        background-repeat: no-repeat
+        background-position: center
+        background-size: 6px 6px
+        @include adaptive(768px)
+          width: 81px
+          height: 81px
+          background-size: 15px 15px
+        @include adaptive(1280px)
+          width: 18px
+          height: 18px
+          background-size: 3px 3px
+          bottom: 9px
+          top: unset
+      &_left
+        background-image: url("../img/left-orange-triangle.svg")
+        top: 50%
+        transform: translateY(-50%)
+        left: 9px
+        @include adaptive(768px)
+          left: 22px
+        @include adaptive(1280px)
+          transform: none
+          right: 36px
+          left: unset
+          top: unset
+      &_right
+        background-image: url("../img/right-orange-triangle.svg")
+        top: 50%
+        transform: translateY(-50%)
+        right: 9px
+        @include adaptive(768px)
+          right: 22px
+        @include adaptive(1280px)
+          transform: none
+          right: 12px
+          left: unset
+          top: unset
+      &_center
+        height: 3px
+        width: unset
+        bottom: 16px
+        left: 50%
+        transform: translateX(-50%)
+        @include flex
+        background-color: transparent
+        @include adaptive(768px)
+          bottom: 40px
+        @include adaptive(1280px)
+          bottom: 13px
+          left: 14px
+          transform: none
+        .item
+          width: 3px
+          height: 3px
+          border-radius: 50%
+          background-color: white
+          margin-right: 2px
+          @include adaptive(768px)
+            width: 7px
+            height: 7px
+            margin-right: 5px
+          @include adaptive(1280px)
+            width: 3px
+            height: 3px
+            margin-right: 2px
+          &.active
+            background-color: $orange
+    &__siema
+      width: 100%
+    &__siema-image
+      width: 100%
+      border-radius: 4px
+      @include centerMargin
+      display: block
+      & > img
+        display: block
+    &__all-images
+      display: grid
+      grid-template-columns: repeat(4, 1fr)
+      grid-auto-flow: row
+      grid-gap: 10px
+      @include adaptive(768px)
+        grid-gap: 10px
+    &__image
+      width: 100%
+      border-radius: 4px
+      display: block
+      & > img
+        display: block
+      &.current
+        box-sizing: border-box
+        padding: 1.25%
+        border: 2px solid $orange
+  .block-text
+    @include adaptive(768px)
+      order: 4
+      width: calc(100% - 370px)
+      margin-right: auto
+    @include adaptive(1280px)
+      margin-right: unset
+      width: calc(33.33% - 15px)
+    &__top
+      margin-bottom: 9px
+    &__top > .block-text__text:not(:last-child)
+      margin-bottom: 6px
+    &__text
+      font-size: 14px
+      line-height: 16px
+      &_big
+        font-size: 15px
+        line-height: 18px
+      &_bold
+        font-weight: 800
+      &_small
+        font-size: 12px
+        line-height: 14px
+      &_dim
+        opacity: .57
+      &_orange
+        color: $orange
+      &_tall
+        line-height: 24px
+      &_tag
+        padding-left: 13px
+        box-sizing: border-box
+        position: relative
+        &:after
+          content: ''
+          position: absolute
+          left: 0
+          top: 8px
+          height: 6px
+          width: 8px
+          background-repeat: no-repeat
+          background-size: 8px 6px
+          background-image: url("../img/ok-icon.svg")
+    &__middle
+      max-width: 343.33px
+      margin-bottom: 18px
+      @include flex
+      & > .block-text__price-info
+        width: 50%
+        &:first-child
+          border-right: 1px solid rgba(151,151,151,0.09)
+          box-sizing: border-box
+    &__price-info
+      &_tabulate
+        padding-left: 20px
+        box-sizing: border-box
+      & > .block-text__text:not(:last-child)
+        margin-bottom: 3px
+    &__footer
+      max-width: 343.33px
+      margin-bottom: 18px
+      @include flex
+      & > .block-text__block
+        width: 50%
+    &__block
+      &_info
+        width: 50%
+        @include flex
+      &_tags
+        width: 50%
+        box-sizing: border-box
+        padding-left: 20px
+    &__block-info
+      @include flex(column)
+      &:not(:first-child)
+        margin-left: 10px
+    &__content > .block-text__text
+      &:first-child
+        margin-bottom: 18px
+      &:nth-child(n+2):not(:last-child)
+        margin-bottom: 30px
+  .block-map
+    @include adaptive(768px)
+      order: 6
+      width: 100%
+    @include adaptive(1280px)
+      margin-top: 30px
+    &__button
+      height: 50px
+      width: 100%
+      border-radius: 13px
+      box-sizing: border-box
+      border: 1px solid rgba(151,151,151,0.09)
+      cursor: pointer
+    &__link
+      line-height: 50px
+      @include centerMargin
+      font-size: 14px
+      font-weight: 800
+      box-sizing: border-box
+      padding-left: 34px
+      position: relative
+      width: fit-content
+      display: block
+      &:after
+        content: ''
+        position: absolute
+        top: 13px
+        left: 0
+        width: 18px
+        height: 24.21px
+        background-image: url("../img/place-icon.svg")
+        background-repeat: no-repeat
+        background-size: 18px 24.21px
+    &__map-wrapper
+      border-radius: 10px
+      background-color: #EEEEEE
+      width: 100%
+      position: relative
+    &__map
+      width: 100%
+      height: 100%
+      border-radius: inherit
+    &__map-wrapper.loading > .block-map__map
+      opacity: 0
+  .block-contact
+    width: 100%
+    box-sizing: border-box
+    padding: 23px 15px 19px 16px
+    background-color: white
+    border-radius: 12px
+    @include shadow
+    @include adaptive(768px)
+      order: 5
+      width: 340px
+    @include adaptive(1280px)
+      width: calc(33.33% - 15px)
+    &__person
+      width: 100%
+      margin-bottom: 18px
+      & > *
+        display: inline-block
+        vertical-align: top
+    &__avatar
+      width: 79px
+      height: 79px
+      border-radius: 50%
+      overflow: hidden
+      margin-right: 15px
+    &__image
+      width: 100%
+    &__info
+      width: fit-content
+      padding-top: 3px
+    &__title
+      font-size: 15px
+      line-height: 18px
+      font-weight: 800
+      margin-bottom: 2px
+      &_main
+        margin-bottom: 8px
+        margin-left: 6px
+    &__subtitle
+      font-size: 10px
+      line-height: 13px
+      opacity: .46
+      margin-bottom: 8px
+    &__phone
+      font-size: 14px
+      line-height: 16px
+      font-weight: 900
+      box-sizing: border-box
+      padding-left: 18px
+      color: inherit
+      display: block
+      &_icon
+        position: relative
+        &:after
+          content: ''
+          position: absolute
+          width: 12px
+          height: 12px
+          top: 2px
+          left: 0
+          background-size: 12px 12px
+          background-image: url("../img/phone.svg")
+    &__form
+      width: 100%
+      margin-bottom: 15px
+    .text-input, .type, .textarea-input
+      background-color: rgba(216,216,216,0.16)
+    .text-input
+      padding-left: 22px
+      height: 41px
+      width: 100%
+    .type
+      padding-left: 3px
+      height: 41px
+    .textarea-input
+      padding: 13px 13px 13px 22px
+      min-height: 107px
+      width: 100%
+      resize: none
+    &__input-line
+      margin-bottom: 10px
+      &_full
+        @include flex(row, nowrap)
+        @include flex-setting(space-between, stretch)
+        .type
+          width: 85px
+        & > *:not(.type)
+          width: calc(100% - 97px)
+    &__input-block
+      margin-bottom: 15px
+    &__submit
+      border: 0
+      padding: 0
+      font-size: 14px
+      line-height: 41px
+      font-weight: bold
+      font-family: inherit
+      max-width: 330px
+      margin-left: auto

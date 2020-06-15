@@ -1,0 +1,240 @@
+@import "mixins"
+
+.main
+  @include centerMargin
+  width: 87.5%
+  box-sizing: border-box
+  height: 100vh
+  padding-top: 15px
+  position: relative
+  z-index: 10
+  &__logo-link
+    height: 26px
+    display: block
+  &__logo
+    height: 100%
+  &__description, &__button
+    position: absolute
+    left: 8.125%
+  &__description
+    top: 117px
+    max-width: 75.9375%
+    font-size: 39px
+    line-height: 46px
+    font-weight: 800
+  &__button
+    display: block
+    top: 296px
+    text-align: center
+    height: 43px
+    width: 141px
+    border-radius: 7px
+    background-color: $orange
+    box-sizing: border-box
+    padding-top: 14px
+    font-size: 14px
+    line-height: 16px
+    font-weight: 800
+    color: white
+  @include adaptive(768px)
+    width: 78.125%
+    padding-top: 28px
+    &__logo-link
+      height: 48px
+    &__description, &__button
+      left: unset
+    &__description
+      width: 100%
+      max-width: unset
+      font-size: 64px
+      line-height: 75px
+      top: 183px
+    &__button
+      top: 345px
+  @include adaptive(1280px)
+    width: 1110px
+  @include adaptive(1680px)
+    width: 1080px
+  @include adaptive(1920px)
+    width: 1200px
+
+.image-404
+  position: absolute
+  bottom: 72px
+  width: 100%
+  min-width: 320px
+  right: 0
+  height: 294px
+  & > *
+    position: absolute
+    background-size: cover
+    background-repeat: no-repeat
+  &__number
+    background-image: url("../img/404-number.svg")
+    width: 320px
+    height: 294px
+    z-index: 4
+    bottom: 0
+    right: 0
+  &__sun
+    background-image: url("../img/404-sun.svg")
+    height: 52px
+    width: 52.5px
+    top: 0
+    right: 5.675%
+    z-index: 6
+  &__back
+    background-image: url("../img/404-back.svg")
+    bottom: 4.3503%
+    height: 254px
+    width: 234.79px
+    right: 0
+    z-index: 2
+  &__oval
+    background-image: url("../img/404-oval.svg")
+    bottom: 17.0068%
+    right: 0
+    height: 24px
+    left: calc(100% - 31.06px)
+    z-index: 5
+  &__subbottom
+    background-image: url("../img/404-subbottom.svg")
+    bottom: 4.7619%
+    right: 0.625%
+    width: 107.96px
+    height: 49px
+    z-index: 3
+  &__bottom
+    background-image: url("../img/404-bottom.svg")
+    bottom: 0
+    right: 0
+    width: 100%
+    max-width: 444.32px
+    height: 99px
+    background-position: bottom 0 right 0
+    z-index: 1
+  @include adaptive(640px)
+    height: 441px
+    &__number
+      width: 480px
+      height: 441px
+    &__sun
+      width: 79px
+      height: 78px
+    &__oval
+      left: calc(100% - 46.59px)
+      height: 36px
+    &__back
+      height: 352.185px
+      width: 381px
+    &__bottom
+      max-width: 666.48px
+      height: 148.5px
+    &__subbottom
+      width: 161.94px
+      height: 73.5px
+  @include adaptive(768px)
+    height: 493.63px
+    &__sun
+      width: 95px
+      height: 93px
+      right: 7.4219%
+      z-index: 1
+    &__number
+      width: 559px
+      right: 20.9635%
+      bottom: 14%
+    &__oval
+      width: 61px
+      height: 46.54px
+      right: 20.9635%
+      bottom: 17.6590%
+      left: unset
+    &__back
+      height: 447.46px
+      width: 578px
+      bottom: 4.7222%
+    &__bottom
+      height: 174.33px
+      width: 78.7760%
+      max-width: 782px
+      right: 20.9635%
+    &__subbottom
+      width: 190px
+      height: 87.04px
+      bottom: 4.8235%
+      right: 20.9635%
+  @include adaptive(1280px)
+    height: 604.54px
+    bottom: 84.38px
+    &__sun
+      width: 115px
+      height: 113px
+      right: 6.7969%
+    &__number
+      width: 626px
+      right: 21.9635%
+      bottom: 26%
+    &__oval
+      width: 87px
+      height: 67.05px
+    &__back
+      height: 549px
+      width: 726px
+      bottom: 28.6px
+    &__bottom
+      width: 960px
+      max-width: unset
+      height: 213.89px
+      right: 16.875%
+      background-position: left 0 bottom 0
+    &__subbottom
+      width: 233px
+      height: 106.79px
+      bottom: 29.21px
+      right: 1.75%
+  @include adaptive(1680px)
+    height: 662px
+    bottom: 90px
+    &__sun
+      width: 126px
+      height: 124px
+      right: 20.2619%
+    &__number
+      width: 771px
+      height: 590px
+      right: 27.9635%
+      bottom: 18%
+    &__oval
+      width: 77px
+      height: 59.95px
+      right: 27.6190%
+      bottom: 127.76px
+    &__back
+      height: 598px
+      width: 864.43px
+      bottom: 34px
+      right: 10.4268%
+    &__bottom
+      width: 1050.45px
+      height: 234px
+      right: 28.6637%
+    &__subbottom
+      width: 254.95px
+      height: 117px
+      right: 29.1851%
+      bottom: 32px
+  @include adaptive(1920px)
+    &__sun
+      right: 27.15623%
+    &__number
+      right: 34.3943%
+    &__oval
+      right: 33.6458%
+    &__back
+      right: 18.5505%
+    &__bottom
+      right: 34.5052%
+    &__subbottom
+      right: 34.9641%
+

@@ -1,0 +1,58 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | useful_information
+    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/useful_information.css" as="style")
+    link(rel="preload" href="js/useful_information.js" as="script")
+    link(href="css/useful_information.css" rel="stylesheet")
+    script.
+      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));
+  body
+    +top-menu('_inline', '_dark', '_shadow')
+    +b.SECTION(class='inline-filter-section' id='filter' v-if='isDesktop')
+      +inline-filter
+    +b.MAIN.main#main
+      +b.SECTION.route.content.inner
+        +e.SPAN.button
+        +e.P.line
+          a(href='#') Home
+          =' / '
+          a(href='#') Apartments for Sale in Kiev
+          =' / '
+          a(href='#') Gonchara Street 26
+      +b.SECTION.information.content
+        +e.navigation
+          +e.A(href='#').link Kiev Rental Guide
+          +e.A(href='#').link Understanding Kiev Apartment Pricing
+          +e.A(href='#').link.current Kiev Neighborhoods
+          +e.A(href='#').link 10 Tips for Renting Long-term Apartments in Kiev
+          +e.A(href='#').link Temporary Residence Permit in Ukraine
+          +e.A(href='#').link Kiev Apartment Rental Scams - How to Recognize and Avoid Them
+          +e.A(href='#').link How to Find a Reputable Real Estate Agent in Kiev
+          +e.A(href='#').link FAQ: Renting an apartment in Kiev
+          +e.A(href='#').link FAQ: Renting an apartment in Kiev
+          +e.A(href='#').link FAQ: How to Buy an Apartment in Kiev, Foreign Property Ownership in Ukraine
+          +e.A(href='#').link Daily Apartment Rentals
+        +e.block-text
+          +e.H2.header Useful Information
+          +e.H3.title Renting Long-term Apartments (Flats) in Kiev
+          +e.text Renting an apartment long-term in Kiev without knowledge can be a time consuming and expensive process. Within the sphere of apartment rentals, there are always expensive and less expensive options. To assist you in making the right decision, we’ve put together this article to help you navigate through the market and find what is best for you and your budget.
+          +e.H3.title Don’t Get Misled
+          +e.text Searching online with terms such as “apartments for rent in Kiev” will often misguide you towards websites that deal only with daily and weekly rental rates (short-term durations). This may suffice for visitors staying in Kiev for a few days or a couple of weeks and serves as a great alternative to paying for highly expensive hotels. However, if you intend to remain in Kiev for a minimum of 6 months or longer, then All Star Kiev Realty specializes in providing long-term apartment housing solutions for expatriates, foreign diplomats, as well as comprehensive corporate solutions to house multiple staff members.
+          +e.H3.title Real Estate Agencies in Kiev
+          +e.text Searching online with terms such as “apartments for rent in Kiev” will often misguide you towards websites that deal only with daily and weekly rental rates (short-term durations). This may suffice for visitors staying in Kiev for a few days or a couple of weeks and serves as a great alternative to paying for highly expensive hotels. However, if you intend to remain in Kiev for a minimum of 6 months or longer, then All Star Kiev Realty specializes in providing long-term apartment housing solutions for expatriates, foreign diplomats, as well as comprehensive corporate solutions to house multiple staff members.
+      +listings
+      +b.DIV(v-if='!isDesktop').we-can-wrapper
+        +we-can
+    +footer
+    script(src="js/useful_information.js")

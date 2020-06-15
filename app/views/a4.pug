@@ -1,0 +1,70 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | a4
+    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")
+    link(rel="preload" href="css/a4.css" as="style")
+    link(href="css/a4.css" rel="stylesheet")
+  body
+    +b.MAIN.page
+      +b.SECTION.header
+        +e.IMG(src='img/Logo.svg' alt='Logo').logo
+        +e.card
+          +e.FIGURE.avatar
+            +picture('img/woman.webp', 'img/woman.jpg', 'Avatar', 'header__image')
+          +e.information
+            +e.name Name Surname
+            +e.speaks Speaks: Russian, Ukrainian, English
+            +e.phones +38 044 22-33-177  +38 044 22-33-177
+      +b.SECTION.main
+        +e.FIGURE.image-wrapper
+          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+        +b.text-block
+          +e.text_bold Delovaya (Dimitrova) Street, 2б
+          +e.text Tetris hall
+          +e.text for example Shevchenko
+          +e.text_last ID 1525755
+          +e.text_last._c2
+            +e.text-block_1
+              +e.text_tall Sale
+              +e.text_tall._bold $ 157 000
+              +e.text_tall ($45/sqm)
+            +e.text-block_2
+              +e.text_tall Rent per month/
+              +e.text_tall._bold $ 5 000
+              +e.text_tall ($45/sqm)
+          +e.text_last._c2
+            +e.text-block_1
+              each i in ['Bedrooms', 'Bathrooms', 'Size', 'Floor', 'Elevator', 'Building type',]
+                +e.text_tall= i
+            +e.text-block_2
+              each i in ['2', '2', '121sqm', '1', 'yes', 'modern',]
+                +e.text_tall._bold= i
+            +e.text-block_3
+              each i in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace',]
+                +e.text_tall= i
+        +e.FIGURE.image-wrapper
+          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+        +e.FIGURE.image-wrapper
+          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+        +e.FIGURE.image-wrapper
+          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+        +e.FIGURE.image-wrapper
+          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+      +b.SECTION.postscriptum
+        +e.contact All Star Kiev Realty
+          br
+          | +380-44-22-33-177 • contactus@allstar.com.ua
+          br
+          | 13-15 Bolsunovska Street, 8th floor, IQ Business Center, Kyiv
+        +e.link http://www.allstarkievrealty.com/report_center.php?im_id=7342&lang_id=2&lang_code=en&file_type=print&t_im=rent
+        +e.page Страница 1 из 1

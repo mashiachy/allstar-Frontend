@@ -1,0 +1,80 @@
+@import "mixins"
+
+.inline-filter-section
+  margin-top: 86px
+
+.main
+  margin-top: 81px
+  @include adaptive(1280px)
+    margin-top: 15px
+
+.route
+  margin-bottom: 13px
+  @include adaptive(768px)
+    margin-bottom: 32px
+  //@include adaptive(1280px)
+  &__button
+    @include adaptive(1280px)
+      display: none
+
+.listing_2
+  margin-bottom: 15px
+  @include adaptive(768px)
+    margin-bottom: 40px
+  @include adaptive(1280px)
+    margin-bottom: 60px
+
+.we-can-wrapper
+  width: 100%
+  margin-bottom: 20px
+  @include adaptive(768px)
+    margin-bottom: 30px
+
+.information
+  margin-bottom: 27px
+  @include flex(column)
+  @include flex-setting(flex-start, stretch)
+  @include adaptive(768px)
+    @include flex(row, nowrap)
+    @include flex-setting(space-between, flex-start)
+  &__navigation
+    background-color: white
+    border-radius: 8px
+    box-shadow: $thisShadow
+    box-sizing: border-box
+    padding: 27px 15px 32px 24px
+    font-size: 12px
+    line-height: 16px
+    margin-bottom: 38px
+    @include adaptive(768px)
+      margin-bottom: unset
+      max-width: 236px
+  &__navigation > &__link:not(:last-child)
+    margin-bottom: 14px
+  &__link
+    color: inherit
+    display: block
+    &.current
+      color: $orange
+      text-decoration: underline
+  &__block-text
+    @include adaptive(768px)
+      width: calc(100% - 275px)
+  &__block-text > &__header:not(:last-child)
+    margin-bottom: 16px
+  &__block-text > &__title:not(:last-child)
+    margin-bottom: 13px
+  &__block-text > &__text:not(:last-child)
+    margin-bottom: 17px
+  &__header
+    font-size: 24px
+    line-height: 28px
+    font-weight: 800
+  &__title
+    font-size: 15px
+    line-height: 18px
+    font-weight: 800
+  &__text
+    font-size: 14px
+    line-height: 27px
+    font-weight: 400

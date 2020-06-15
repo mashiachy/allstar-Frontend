@@ -1,0 +1,75 @@
+@import "mixins"
+
+.inline-filter-section
+  margin-top: 86px
+
+.main
+  margin-top: 10px
+  @include adaptive(1280px)
+    margin-top: 15px
+
+.route
+  &__button
+    @include adaptive(1280px)
+      display: none
+  &__line
+    max-width: 80%
+
+.image
+  height: 291px
+  border-radius: 8px
+  background-color: #cbb792
+  background-position: left -72px top -13px
+  margin-bottom: 27px
+  &.loaded
+    background-image: url("../img/back-text-mobile.jpg")
+  @include adaptive(500px)
+    background-position: top -13px right 0
+  @include adaptive(575px)
+    background-position: left -72px top -346px
+    &.loaded
+      background-image: url("../img/back-text.jpg")
+  @include adaptive(768px)
+    height: 267px
+    margin-bottom: 36px
+  @include adaptive(1120px)
+    background-position: left 0 top -346px
+  @include adaptive(1280px)
+    margin-bottom: 48px
+
+.text
+  @include flex(row, wrap)
+  @include flex-setting(space-between, flex-start)
+  & > &__header
+    width: 100%
+  &__header
+    font-size: 24px
+    line-height: 28px
+    font-weight: 800
+    &_1, &_3
+      margin-bottom: 11px
+    &_2
+      margin-bottom: 29px
+  .article
+    width: 100%
+    &_1
+      margin-bottom: 20px
+      @include adaptive(768px)
+        margin-bottom: 36px
+    &_2, &_3
+      margin-bottom: 29px
+      @include adaptive(768px)
+        width: 45%
+        margin-bottom: 36px
+    &_4
+      margin-bottom: 26px
+      @include adaptive(768px)
+        margin-bottom: 64px
+    &__subheader
+      font-size: 15px
+      line-height: 18px
+      font-weight: 800
+      margin-bottom: 11px
+    &__text
+      font-size: 14px
+      line-height: 27px
