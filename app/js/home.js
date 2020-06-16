@@ -5,6 +5,13 @@ import {promiseModInit, adaptiveMixin, menuMixin, listingsMixin, weCanMixin, myW
 
 const promiseMod = promiseModInit();
 new myWOW({class: 'animated'}).init();
+document.getElementsByClassName('gotop__link')[0].addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}, {passive: true});
+
 
 function addAnimationToBackground() {
   const topImage = document.querySelector('.background');
@@ -78,7 +85,7 @@ const filter = new Vue({
   watch: {
     options: function (val) {
       if (!this.isTab) {
-        document.body.style.paddingTop = `${val ? 1479 : 1052}px`;
+        document.body.style.paddingTop = `${val ? 1445 : 1065}px`;
       }
     },
   },
@@ -130,7 +137,7 @@ const main = new Vue({
         duration: 200,
         easing: 'ease-out',
         perPage: {
-          320: 4,
+          320: 3,
           640: 5,
           768: 6,
           1040: 7,

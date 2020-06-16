@@ -32,6 +32,7 @@ class myWOW {
 
 const adaptiveMixin = {
   computed: {
+    isSmTab: () => document.documentElement.clientWidth >= 667,
     isTab: () => document.documentElement.clientWidth >= 768,
     isDesktop: () => document.documentElement.clientWidth >= 1280,
   },
@@ -142,7 +143,11 @@ const weCanMixin = {
         let parent = ev.target;
         if (!parent.classList.contains('service-card'))
           parent = parent.parentElement;
-        parent.classList.toggle('service-card_high');
+        const wrap = parent.parentElement;
+        wrap.childNodes.forEach(el => {
+          if (el !== parent) el.classList.remove('service-card_high');
+          else el.classList.toggle('service-card_high');
+        });
       }
     },
     changeService (ev) {

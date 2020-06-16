@@ -91,12 +91,14 @@
       width: 70.46%
       font-size: 41px
       line-height: 45px
-    @include adaptive(1280px)
+    @include adaptive(1140px)
       font-size: 56px
       line-height: 53px
       left: 62px
-      bottom: 216px
+      bottom: 200px
       width: 456px
+    @include adaptive(1280px)
+      bottom: 216px
     @include adaptive(1920px)
       bottom: unset
       top: 269px
@@ -118,12 +120,14 @@
       font-size: 14px
       line-height: 23px
       width: 72.40%
-    @include adaptive(1280px)
+    @include adaptive(1140px)
       font-size: 16px
       line-height: 25px
       left: 62px
-      top: 507px
+      top: 446px
       width: 526px
+    @include adaptive(1280px)
+      top: 507px
     @include adaptive(1920px)
       left: 63px
       top: 507px
@@ -140,12 +144,12 @@
   padding: 29px 20px 22px
   @include shadow
   &.extended
-    height: 906px
+    //height: 906px
     @include adaptive(768px)
-      height: 500px
+      //height: 500px
       width: 609px
   @include flex(column, wrap)
-  @include flex-setting(space-between)
+  //@include flex-setting(space-between)
   @include adaptive(445px)
     left: calc(100% - 431px)
     width: unset
@@ -172,6 +176,8 @@
   @include adaptive(768px)
     & > *
       max-width: 275px
+  & > *:not(:last-child)
+    margin-bottom: 20px
   .option
     width: 100%
     height: 36px
@@ -205,6 +211,7 @@
         transform: translate3d(100%, 0, 0)
     &__choice
       position: absolute
+      box-sizing: border-box
       width: 50%
       height: 100%
       top: 0
@@ -229,14 +236,19 @@
         opacity: 1
         color: white
   .more
+    display: block
     &.hidden
       @include adaptive(768px)
         visibility: hidden
   .other-options
-    height: 390px
+    //height: 390px
     width: 100%
-    @include flex(column)
-    @include flex-setting(space-between)
+    //@include flex(column)
+    //@include flex-setting(space-between)
+    & > *:not(.checkbox-list)
+      margin-bottom: 20px
+    & > .checkbox-list:not(:last-child)
+      margin-bottom: 18px
     @include adaptive(768px)
       & > *
         max-width: 275px
@@ -301,17 +313,24 @@
     margin-bottom: 24px
   @include adaptive(1280px)
     margin-bottom: 46px
-  &__siema-client
+  &__siema-wrapper
     max-height: 156px
     min-height: 107px
+    width: 100%
     background-color: white
     border-radius: 15px
     overflow: hidden
-    padding: 17px
+    padding-top: 17px
     @include shadow
+    box-sizing: border-box
     @include adaptive(768px)
-      padding: 35px
+      padding-top: 35px
+      padding-bottom: 17px
+  &__siema-client
+    width: calc(100% + 30px)
+    margin-left: -15px
     .client
+      @include centerMargin
       display: none
       max-width: 75px
       @include adaptive(768px)
@@ -343,9 +362,7 @@
     .company
       display: none
       @include centerMargin
-      max-width: 70px
-      @include adaptive(768px)
-        max-width: 100px
+      max-width: 100px
       @include adaptive(1280px)
         max-width: 115px
       &__image
@@ -356,6 +373,10 @@
   &__about
     @include flex(column)
     & > .info-card
+      will-change: transform
+      transition: transform .25s ease-out
+      &:hover
+        transform: translateY(-13px)
       margin-bottom: 17px
       &:last-child
         margin-bottom: unset

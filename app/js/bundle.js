@@ -291,8 +291,87 @@
 
 	var Siema = unwrapExports(vue2Siema_umd);
 
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	function _defineProperties(target, props) {
+	  for (var i = 0; i < props.length; i++) {
+	    var descriptor = props[i];
+	    descriptor.enumerable = descriptor.enumerable || false;
+	    descriptor.configurable = true;
+	    if ("value" in descriptor) descriptor.writable = true;
+	    Object.defineProperty(target, descriptor.key, descriptor);
+	  }
+	}
+
+	function _createClass(Constructor, protoProps, staticProps) {
+	  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+	  if (staticProps) _defineProperties(Constructor, staticProps);
+	  return Constructor;
+	}
+
+	var myWOW = /*#__PURE__*/function () {
+	  function myWOW(args) {
+	    _classCallCheck(this, myWOW);
+
+	    this.baseClass = args["class"];
+	    this.refs = [];
+	  }
+
+	  _createClass(myWOW, [{
+	    key: "init",
+	    value: function init() {
+	      var ref;
+
+	      if ((ref = document.readyState) === "interactive" || ref === "complete") {
+	        this.start();
+	      } else {
+	        document.addEventListener('DOMContentLoaded', this.start.bind(this), {
+	          passive: true
+	        });
+	      }
+	    }
+	  }, {
+	    key: "scrollHandler",
+	    value: function scrollHandler() {
+	      var h = window.innerHeight;
+	      this.refs.forEach(function (ref) {
+	        if (!ref.classList.contains('appearance')) {
+	          var rect = ref.getBoundingClientRect();
+
+	          if (rect.top >= 0 && rect.bottom <= h * 0.6667) {
+	            ref.classList.add('appearance');
+	          }
+	        }
+	      });
+	    }
+	  }, {
+	    key: "start",
+	    value: function start() {
+	      var _this = this;
+
+	      this.refs = [];
+	      document.querySelectorAll(".".concat(this.baseClass)).forEach(function (el) {
+	        return _this.refs.push(el);
+	      });
+	      this.scrollHandler();
+	      window.addEventListener('scroll', this.scrollHandler.bind(this), {
+	        passive: true
+	      });
+	    }
+	  }]);
+
+	  return myWOW;
+	}();
+
 	var adaptiveMixin = {
 	  computed: {
+	    isSmTab: function isSmTab() {
+	      return document.documentElement.clientWidth >= 667;
+	    },
 	    isTab: function isTab() {
 	      return document.documentElement.clientWidth >= 768;
 	    },
@@ -406,22 +485,77 @@
 	    }
 	  }
 	};
-	var filterMixin = {
+	var weCanMixin = {
+	  methods: {
+	    clickService: function clickService(ev) {
+	      if (!this.isDesktop) {
+	        var parent = ev.target;
+	        if (!parent.classList.contains('service-card')) parent = parent.parentElement;
+	        var wrap = parent.parentElement;
+	        wrap.childNodes.forEach(function (el) {
+	          if (el !== parent) el.classList.remove('service-card_high');else el.classList.toggle('service-card_high');
+	        });
+	      }
+	    },
+	    changeService: function changeService(ev) {
+	      if (this.isDesktop) {
+	        ev.target.classList.toggle('service-card_high');
+	      }
+	    }
+	  }
+	};
+
+	var promiseMod = promiseModInit();
+	new myWOW({
+	  "class": 'animated'
+	}).init();
+	document.getElementsByClassName('gotop__link')[0].addEventListener('click', function () {
+	  window.scrollTo({
+	    top: 0,
+	    behavior: 'smooth'
+	  });
+	}, {
+	  passive: true
+	});
+
+	function addAnimationToBackground() {
+	  var topImage = document.querySelector('.background');
+
+	  if (window.pageYOffset === 0 && !topImage.classList.contains('animation')) {
+	    topImage.classList.add('animation');
+	    setTimeout(function () {
+	      topImage.classList.remove('animation');
+	    }, 2000);
+	  }
+	}
+
+	window.addEventListener('scroll', addAnimationToBackground, {
+	  passive: true
+	});
+	window.addEventListener('load', addAnimationToBackground, {
+	  passive: true
+	});
+	Vue.component('v-select', vSelect);
+	Vue.use(Siema);
+	var filter = new Vue({
+	  el: '#filter',
+	  mixins: [adaptiveMixin],
 	  data: function data() {
 	    return {
-	      options: false,
-	      searchCode: '',
-	      apartment: 'Apartment 1',
+	      activeOption: 0,
+	      curType: 'Apartment1',
 	      pricePerMonth: {
 	        start: 5000,
 	        end: 15000
 	      },
-	      bedroom: '1 Bedroom',
+	      curBdrooms: [1],
 	      size: {
 	        start: 150,
 	        end: 200
 	      },
-	      district: '1 District',
+	      searchCode: '',
+	      options: false,
+	      curDistrict: '1 District',
 	      pricePerSqm: {
 	        start: 500,
 	        end: 1500
@@ -430,68 +564,118 @@
 	        start: 2,
 	        end: 3
 	      },
-	      checkboxList1: [true, false, true, false, true, false],
-	      district1: '1 District',
-	      pricePerSqm1: {
-	        start: 500,
-	        end: 1500
-	      },
-	      floor1: {
-	        start: 2
-	      },
-	      checkboxList2: [true, false, true, false, true, false]
-	    };
-	  },
-	  watch: {
-	    options: function options(val) {
-	      if (!this.isDesktop) {
-	        document.documentElement.style.overflowY = val ? 'hidden' : 'auto';
-	        document.body.style.overflowY = val ? 'hidden' : 'auto';
-	      }
-	    }
-	  }
-	};
-
-	var promiseMod = promiseModInit();
-	Vue.component('v-select', vSelect);
-	Vue.use(Siema);
-	var menu = new Vue({
-	  el: '#header',
-	  mixins: [adaptiveMixin, menuMixin]
-	});
-	var filter = new Vue({
-	  el: '#filter',
-	  mixins: [adaptiveMixin, filterMixin]
-	});
-	var main = new Vue({
-	  el: '#main',
-	  mixins: [adaptiveMixin, listingsMixin],
-	  data: function data() {
-	    return {
-	      form: {
-	        want: '',
-	        prop: '',
-	        address: '',
-	        description: '',
-	        price: '',
-	        name: '',
-	        surname: '',
-	        email: '',
-	        prefix: '123',
-	        phone: '',
-	        files: []
+	      checkboxList: {
+	        elevator: true,
+	        terrace: false,
+	        balcony: true,
+	        sauna: false,
+	        penthouse: true,
+	        pool: false
 	      }
 	    };
 	  },
 	  computed: {
-	    prefixList: function prefixList() {
-	      return ['123', '058', '059', '060', '061', '062', '063', '064', '065', '066', '067'];
+	    bedrooms: function bedrooms() {
+	      return [{
+	        v: 1,
+	        s: '1 Bedrooms'
+	      }, {
+	        v: 2,
+	        s: '2 Bedrooms'
+	      }, {
+	        v: 3,
+	        s: '3 Bedrooms'
+	      }, {
+	        v: 4,
+	        s: '4+ Bedrooms'
+	      }];
 	    }
 	  },
-	  methods: {
-	    changeFileInput: function changeFileInput(event) {
-	      this.form.files = event.target.files;
+	  watch: {
+	    options: function options(val) {
+	      if (!this.isTab) {
+	        document.body.style.paddingTop = "".concat(val ? 1445 : 1065, "px");
+	      }
 	    }
+	  },
+	  mounted: function mounted() {
+	    var value = 1052;
+
+	    if (this.isDesktop) {
+	      value = 686;
+	    } else if (this.isTab) {
+	      value = 626;
+	    }
+
+	    document.body.style.paddingTop = "".concat(value, "px");
+	  },
+	  methods: {
+	    clickOption: function clickOption(ev) {
+	      console.log(ev);
+	    }
+	  }
+	});
+	var menu = new Vue({
+	  el: '#header',
+	  mixins: [adaptiveMixin, menuMixin]
+	});
+	var main = new Vue({
+	  el: '#main',
+	  mixins: [adaptiveMixin, listingsMixin, weCanMixin],
+	  data: function data() {
+	    return {
+	      siemaOptions: {
+	        duration: 200,
+	        easing: 'ease-out',
+	        perPage: {
+	          320: 3,
+	          480: 4,
+	          640: 5,
+	          991: 6,
+	          1280: 8
+	        },
+	        startIndex: 0,
+	        loop: true,
+	        draggable: true,
+	        multipleDrag: true,
+	        threshold: 20,
+	        playing: true,
+	        autoplaytime: 5000
+	      },
+	      siemaOptionsAutoplay: {
+	        duration: 200,
+	        easing: 'ease-out',
+	        perPage: {
+	          320: 3,
+	          640: 5,
+	          768: 6,
+	          1040: 7,
+	          1280: 8
+	        },
+	        startIndex: 0,
+	        loop: true,
+	        playing: true,
+	        autoplaytime: 500,
+	        draggable: true,
+	        multipleDrag: true,
+	        threshold: 20
+	      },
+	      siemaTestimonials: {
+	        duration: 200,
+	        easing: 'ease-out',
+	        perPage: {
+	          320: 1,
+	          768: 2
+	        },
+	        startIndex: 0,
+	        loop: true,
+	        draggable: true,
+	        multipleDrag: true,
+	        threshold: 20,
+	        playing: true,
+	        autoplaytime: 5000
+	      }
+	    };
 	  }
 	});
 

@@ -38,7 +38,7 @@ mixin lang(modifier='', cls='')
 mixin top-menu(modifier='', contact='', shadow='')
   +b.HEADER(id="header" class='top'+modifier)
     +e(class='wrapper' :class='{\'content\': isDesktop}')
-      +e(class="top" :class='{ \'active\' : activeMenu}')
+      +e(class="top content" :class='{ \'active\' : activeMenu}')
         +e.A(href="#").logo
           +e.IMG(src="img/Logo.svg" alt="logo" class='logotip' :class='{\'disactive\': activeMenu}')
         +e(v-if='!isDesktop').controls
@@ -50,7 +50,7 @@ mixin top-menu(modifier='', contact='', shadow='')
           +b.A(class='burger' :class='{\'active\': activeMenu}' @click='activeMenu = !activeMenu')
             each i in [1, 2, 3, 4]
               +e(class=`element_${i}`)
-      +e(class='menu' :class='{\'active\': isDesktop || activeMenu}')
+      +e(class='menu content' :class='{\'active\': isDesktop || activeMenu}')
         +b.UL.main-nav
           +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
             +e.A(href="#" @click="clickParentMenu($event)").link Buy
@@ -93,7 +93,7 @@ mixin top-menu(modifier='', contact='', shadow='')
             +e.A(href="#").link About
           +e.LI.item
             +e.A(href="#").link Contact
-          +e.LI(class='big-image' v-if='isTab && !isDesktop' data-lazy)
+          +e.LI(class='big-image' v-if='isSmTab && !isDesktop' data-lazy)
         +b(v-if='isDesktop').menu-info
           +b(class='contact'+contact)
             +e.A(href="#").phone
@@ -265,7 +265,7 @@ mixin inline-filter
             +e.INPUT(type='checkbox' class='input' v-model='checkboxList2[5]')
             +e.SPAN.mark
         +e.block-5
-          +b.A(href='#').show Show
+          +b.A(href='#').show_animate Show
     +e(class='main-wrapper' :class='{\'content\': isDesktop}')
       +e.DIV(class='main' :class='{\'opened\': isDesktop && options}')
         +e.buttons
@@ -278,15 +278,15 @@ mixin inline-filter
           +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
           +e.A(href="").search-button
         +e.A(class='options' :class='{\'inline-filter__options_dark\': options}' @click.prevent='options = !options' :href='isDesktop ? \'#\' : \'\'' v-text='isDesktop ? "More options +" : \'\'')
-        +b.A(class='show' href='#' v-if='isDesktop') Show
+        +b.A(class='show_animate' href='#' v-if='isDesktop') Show
 
 mixin listings
   +b.SECTION.listing_1.slider.content
     +e.title.slider__title.inner
       +e.P.header.animated Hot Listings for Rent
     +e.controls.slider__controls
-      +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaRent.prev()')
-      +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaRent.next()')
+      +e.SPAN(class='slider__control-item slider__control-item_left show-animate' @click='$refs.siemaRent.prev()')
+      +e.SPAN(class='slider__control-item slider__control-item_right show-animate' @click='$refs.siemaRent.next()')
     +e.siema-wrapper
       +e.SIEMA(class='siema' ref='siemaRent' :options='siemaCatalog' @init='initFoo("rent")')
         each val in [1, 2, 3, 4, 5, 6, 7, 8]
@@ -296,8 +296,8 @@ mixin listings
     +e.title.slider__title.inner
       +e.P.header.animated Hot Listings for Sale
     +e.controls.slider__controls
-      +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaSale.prev()')
-      +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaSale.next()')
+      +e.SPAN(class='slider__control-item slider__control-item_left show-animate' @click='$refs.siemaSale.prev()')
+      +e.SPAN(class='slider__control-item slider__control-item_right show-animate' @click='$refs.siemaSale.next()')
     +e.siema-wrapper
       +e.SIEMA(class='siema' ref='siemaSale' :options='siemaCatalog' @init='initFoo("sale")')
         each val in [5, 6, 7, 8, 1, 2, 3, 4,]
