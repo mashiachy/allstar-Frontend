@@ -1,5 +1,7 @@
 @import "mixins"
 
+// TODO: del all h1-h6's from all pug files
+
 @font-face
   font-family: 'Roboto'
   src: url('fonts/Roboto-Regular.ttf')
@@ -88,6 +90,21 @@ picture
     @include adaptive(1280px)
       padding-left: 35px
       padding-right: 35px
+
+@keyframes appearanceToTop
+  0%
+    transform: translateY(30px)
+    opacity: 0
+  100%
+    transform: translateY(0)
+    opacity: 1
+
+.animated
+  opacity: 0
+  &.appearance
+    opacity: 1
+    animation: appearanceToTop .25s ease-out 1
+
 
 .lang
   display: block
@@ -178,7 +195,7 @@ picture
     @include flex-setting(space-between)
     @include adaptive(768px)
       height: 60px
-      padding-left: 41.13px
+      padding-left: 3.125%
       padding-right: 20px
       padding-bottom: 12px
     @include adaptive(1280px)
@@ -258,9 +275,8 @@ picture
       display: block
       @include adaptive(1280px)
         overflow: visible
-        width: 89.37%
-        //padding-left: 5.78%
-        margin-left: auto
+        width: 92.37%
+        margin-left: 5%
         margin-right: auto
         @include flex(row, nowrap)
         @include flex-setting(space-between, align-center)
@@ -315,7 +331,7 @@ picture
   padding-left: 3.125%
   padding-right: 3.125%
   @include adaptive(768px)
-    padding-left: 4.6875%
+    padding-left: 3.6875%
     padding-right: 4.6875%
   @include flex(column)
   @include adaptive(1280px)
@@ -533,6 +549,11 @@ picture
     background-position: left 15px top 16px
     cursor: pointer
     margin-right: 12px
+    will-change: background-color
+    transition: background-color .25s ease-out
+    &:hover
+      background-color: $blue
+      background-image: url("../img/left-white-triangle.svg")
   &__line
     opacity: 0.41
     font-size: 12px
@@ -567,19 +588,16 @@ picture
 
 .footer-nav
   width: 100%
-  @include flex(row, wrap)
-  @include flex-setting(space-between)
-  > .nav-item
-    margin-bottom: 28px
-    min-width: 130px
-    @include adaptive(768px)
-      min-width: 210px
-    @include adaptive(1280px)
-      min-width: 150px
-  @include adaptive(1280px)
-    margin-bottom: 50px
-  @include adaptive(1920px)
-    margin-bottom: 26px
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-auto-flow: row
+  grid-gap: 15px
+  @include adaptive(700px)
+    grid-template-columns: repeat(3, 1fr)
+  @include adaptive(1040px)
+    grid-template-columns: repeat(4, 1fr)
+  @include adaptive(1200px)
+    grid-template-columns: repeat(5, 1fr)
 
 .nav-item
   &__title
@@ -604,6 +622,8 @@ picture
   @include adaptive(768px)
     @include flex(row)
     @include flex-setting(space-between, center)
+  @include adaptive(1280px)
+    @include flex-setting
   &__socials
     width: 188px
     max-width: 188px
@@ -614,6 +634,8 @@ picture
     @include adaptive(768px)
       order: 3
       margin-bottom: unset
+    @include adaptive(1280px)
+      width: 208px
   &__social-link
     display: block
     width: 28px
@@ -621,6 +643,10 @@ picture
     border-radius: 7px
     background-color: white
     position: relative
+    will-change: background-color
+    transition: background-color .25s ease-out
+    &:hover
+      background-color: $orange
   &__image
     position: absolute
     top: 50%
@@ -633,6 +659,8 @@ picture
     @include adaptive(768px)
       order: 1
       margin-bottom: unset
+    @include adaptive(1280px)
+      margin-right: 113px
   &__info
     font-size: 12px
     line-height: 20px
@@ -648,7 +676,9 @@ picture
       font-size: 14px
       line-height: 27px
     @include adaptive(1280px)
-      width: unset
+      max-width: unset
+      width: 654px
+      margin-right: 15px
 
 .vs
   &__dropdown-toggle
@@ -708,13 +738,35 @@ picture
       content: ''
       position: absolute
       width: 100%
-      height: 1px
+      height: 1.5px
       background-color: #979797
       opacity: 0.11
       left: 0
       bottom: -2.5px
     &:last-child:after
       content: unset
+
+.type_multiple
+  .vs
+    &__dropdown-option
+      &:before
+        content: ''
+        position: absolute
+        width: 15px
+        height: 15px
+        z-index: 5
+        top: 7.5px
+        right: 3px
+        border-radius: 3px
+        background-color: #f8f8f8
+      &--selected
+        background-color: unset
+        &:before
+          background-color: $orange
+          background-size: 8.13px 5px
+          background-position: center
+          background-repeat: no-repeat
+          background-image: url("../img/ok.svg")
 
 .checkbox
   display: block
@@ -748,12 +800,12 @@ picture
     background-color: $orange
     &:after
       display: block
-      width: 6.13px
-      height: 4px
+      width: 8.13px
+      height: 5px
       top: 6px
       left: 4px
       background-image: url("../img/ok.svg")
-      background-size: contain
+      background-size: 8.13px 5px
 
 .info-card
   display: block
@@ -841,6 +893,8 @@ picture
     &:hover
       transform: translateY(-13px)
       @include smShadow
+  & > *
+    display: block
   .link
     text-decoration: none
     color: inherit
@@ -1182,6 +1236,7 @@ picture
     margin-bottom: 40px
     font-size: 18px
     line-height: 21px
+    font-weight: 800
     @include adaptive(768px)
       margin-bottom: unset
   .service-card
@@ -1196,10 +1251,10 @@ picture
       background-color: white
       @include otShadow
     &_high .service-card__button
-      background-color: $orange
       box-shadow: unset !important
       &:hover
         transform: translate(0, 0) !important
+        background-color: $orange
     &:nth-last-child
       margin-bottom: 0
     box-sizing: border-box
@@ -1213,11 +1268,11 @@ picture
       margin-left: 46.2385%
       padding: 65px 28px 28px 87px
       will-change: transform, margin-left
-      transform: translateY(0)
-      transition: transform .25s ease-out, margin-left .25s ease-out
+      transform: translate(0)
+      transition: transform .25s ease-out //, margin-left .25s ease-out
       &_high
-        margin-left: 43.3945%
-        transform: translateY(-25px)
+        //margin-left: 43.3945%
+        transform: translate(-30px,-25px)
     &__title
       font-size: 15px
       line-height: 20px
@@ -1310,6 +1365,11 @@ picture
     -webkit-appearance: none
     resize: none
     font-family: inherit
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-moz-placeholder,
+    &:-ms-input-placeholder
+      color: #C3C9CF
   &_gray &__search-input
     background-color: rgba(216,216,216,0.16)
     box-shadow: none
@@ -1375,9 +1435,9 @@ picture
   color: white
   font-weight: 800
   width: 100%
-  height: 48px
+  height: 56px
   box-sizing: border-box
-  padding-top: 16px
+  padding-top: 20px
   text-align: center
   border-radius: 13px
   cursor: pointer
@@ -1458,12 +1518,12 @@ picture
     &:after
       position: absolute
       content: ''
-      top: 17px
+      top: 18px
       right: 16px
-      width: 3px
-      height: 3px
+      width: 4.5px
+      height: 4.5px
       background-image: url("../img/triangle-down.svg")
-      background-size: 3px 3px
+      background-size: 4.5px 4.5px
     &:nth-child(4)
       display: none
       @include adaptive(410px)
@@ -1489,9 +1549,9 @@ picture
         background-color: $blue
         background-image: url("../img/more-light.svg")
     @include adaptive(1280px)
-      font-size: 10px
-      line-height: 12px
-      width: 68px
+      font-size: 11.5px
+      line-height: 13px
+      width: fit-content
       color: $orange
       font-weight: 500
   &__main-wrapper .search
@@ -1499,12 +1559,12 @@ picture
     @include adaptive(660px)
       display: block
       width: 159px
-      height: 100%
+      height: 41px
+    @include adaptive(1280px)
+      @include smShadow
+      border-radius: 5px
     &__search-input
       box-shadow: none
-    &__search-button
-      @include adaptive(1280px)
-        top: 21px
   &__main-wrapper .show
     width: 95px
     height: 43px

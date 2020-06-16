@@ -22,7 +22,7 @@ html(lang="en")
     +b.SECTION(data-lazy).background
       +e.image
       +e.shadow
-      +e.title
+      +e.H1.title.animated
         ='A '
         span.orange-text Premier
         =' Real Estate Agency for Foreign Nationals in Kiev'
@@ -42,7 +42,10 @@ html(lang="en")
           +e.INPUT(type='number' v-model.number='pricePerMonth.start').number-input
         +e.SPAN.number $
           +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
-      +b.V-SELECT(class='type' v-model='curBdrooms' :options='[\'1 Bedroom\', \'2 Bedroom\', \'3 Bedroom\']')
+      +b.V-SELECT(class='type_multiple' ref='' multiple label='s' :reduce='e=>e.v' v-model='curBdrooms' :options='bedrooms')
+        //template(#selected-option-container="{option}") {{ }}
+        //template(#option="{s}")
+          //div(@click='console.log') {{ s }}
       +b.number-range.size
         +e.label
           | Size,
@@ -104,7 +107,7 @@ html(lang="en")
     main(id='main').main-content
       +b.SECTION.clients.slider.content
         +e.title.slider__title.inner
-          +e.H2.header Our Clients
+          +e.header.animated Our Clients
         +e.controls.slider__controls
           +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaClients.prev()')
           +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaClients.next()')
@@ -163,10 +166,10 @@ html(lang="en")
       +we-can
       +b.SECTION.testimonials.slider.content
         +e.title.slider__title.inner
-          +e.H2.header Testimonials
+          +e.header.animated Testimonials
         +e.controls.slider__controls
-          +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaTestimonals.prev()')
-          +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaTestimonals.next()')
+          +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaTestimonials.prev()')
+          +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaTestimonials.next()')
         +e.siema-wrapper
           +e.SIEMA(class='siema' ref='siemaTestimonials' :options='siemaTestimonials' @init='initFoo("testimonial")')
             +testimonial('img/man', 'Name Surname', 'Businessman', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing')

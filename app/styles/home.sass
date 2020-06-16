@@ -9,7 +9,6 @@
   right: 0
   width: 96.875%
   height: 522px
-  //max-width: 431px
   border-bottom-left-radius: 26px
   z-index: 1
   background-color: #ccaf95
@@ -22,10 +21,6 @@
       animation: 2s 1 scaleBack1
   &.loaded
     background-image: url("../img/back-mobile.jpg")
-  //@include adaptive(480px)
-    //width: unset
-    //max-width: unset
-    //left: 80px
   @include adaptive(640px)
     background-position: bottom 0 left 0
   @include adaptive(700px)
@@ -61,7 +56,6 @@
     background-size: 100% 100%
     width: 1134px
     right: unset
-
   &__shadow
     position: absolute
     width: 171.34%
@@ -80,6 +74,7 @@
       top: 44.61%
       left: -35.11%
   &__title
+    margin: 0
     position: absolute
     bottom: 226px
     left: 27px
@@ -264,6 +259,8 @@
         top: 0
         right: 0
         cursor: pointer
+        will-change: background-color
+        transition: background-color .25s ease-out
         &:after
           content: ''
           position: absolute
@@ -274,6 +271,10 @@
           background-image: url("../img/triangle-left.svg")
           background-size: contain
           cursor: pointer
+        &:hover
+          background-color: $blue
+          &:after
+            background-image: url("../img/left-white-triangle.svg")
 
 .main-content
   @include flex(column)

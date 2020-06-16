@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import vSelect from 'vue-select';
 import Siema from 'vue2-siema';
-import {promiseModInit, adaptiveMixin, menuMixin, listingsMixin, weCanMixin} from "./base";
+import {promiseModInit, adaptiveMixin, menuMixin, listingsMixin, weCanMixin, myWOW} from "./base";
 
 const promiseMod = promiseModInit();
+new myWOW({class: 'animated'}).init();
 
 function addAnimationToBackground() {
   const topImage = document.querySelector('.background');
@@ -30,7 +31,7 @@ const filter = new Vue({
         start: 5000,
         end: 15000,
       },
-      curBdrooms: '1 Bedroom',
+      curBdrooms: [1],
       size: {
         start: 150,
         end: 200,
@@ -56,6 +57,24 @@ const filter = new Vue({
       },
     };
   },
+  computed: {
+    bedrooms: function () {
+      return [{
+          v: 1,
+          s: '1 Bedrooms'
+        }, {
+          v: 2,
+          s: '2 Bedrooms'
+        }, {
+          v: 3,
+          s: '3 Bedrooms'
+        }, {
+          v: 4,
+          s: '4+ Bedrooms'
+        }
+      ];
+    },
+  },
   watch: {
     options: function (val) {
       if (!this.isTab) {
@@ -70,7 +89,12 @@ const filter = new Vue({
     } else if (this.isTab) {
       value = 626;
     }
-    document.body.style.paddingTop = `${value}px`
+    document.body.style.paddingTop = `${value}px`;
+  },
+  methods: {
+    clickOption (ev) {
+      console.log(ev);
+    }
   },
 });
 
@@ -99,6 +123,8 @@ const main = new Vue({
         draggable: true,
         multipleDrag: true,
         threshold: 20,
+        playing: true,
+        autoplaytime: 5000,
       },
       siemaOptionsAutoplay: {
         duration: 200,
@@ -130,6 +156,8 @@ const main = new Vue({
         draggable: true,
         multipleDrag: true,
         threshold: 20,
+        playing: true,
+        autoplaytime: 5000,
       },
     };
   },

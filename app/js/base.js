@@ -1,4 +1,34 @@
-
+class myWOW {
+  constructor(args) {
+    this.baseClass = args.class;
+    this.refs = [];
+  }
+  init () {
+    let ref;
+    if ((ref = document.readyState) === "interactive" || ref === "complete") {
+      this.start();
+    } else {
+      document.addEventListener('DOMContentLoaded', this.start.bind(this), {passive: true});
+    }
+  }
+  scrollHandler () {
+    const h = window.innerHeight;
+    this.refs.forEach(ref => {
+      if (!ref.classList.contains('appearance')) {
+        const rect = ref.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= h * 0.6667) {
+          ref.classList.add('appearance');
+        }
+      }
+    });
+  }
+  start () {
+    this.refs = [];
+    document.querySelectorAll(`.${this.baseClass}`).forEach(el=>this.refs.push(el));
+    this.scrollHandler();
+    window.addEventListener('scroll', this.scrollHandler.bind(this), {passive: true})
+  }
+}
 
 const adaptiveMixin = {
   computed: {
@@ -192,4 +222,5 @@ export {
   listingsMixin,
   loadMap,
   weCanMixin,
+  myWOW
 };

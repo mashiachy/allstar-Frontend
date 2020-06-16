@@ -33,7 +33,7 @@ mixin testimonial(photo, name, whois, speech)
 
 mixin lang(modifier='', cls='')
   +b.SPAN(class='lang'+modifier :class=cls @click='clickLang' @mouseenter='changeLang' @mouseleave='changeLang') Eng
-    +e.A(href='#').button Ukr
+    +e.A(href='#').button Rus
 
 mixin top-menu(modifier='', contact='', shadow='')
   +b.HEADER(id="header" class='top'+modifier)
@@ -107,17 +107,17 @@ mixin we-can(modifier='')
     +e.DIV(class='background' v-if='isTab' data-lazy)
     +e.content.content
       +e.DIV(class='title inner' v-if='isTab')
-        +e.H2(class='header') How we can help
+        +e.P(class='header').animated How we can help
       +b(class='service-card' @click='clickService' @mouseenter='changeService' @mouseleave='changeService')
-        +e.H3.title Find a Property
+        +e.P.title Find a Property
         +e.P.text Need help in property search? Let us do this work for you and save your precious time. We will make hundreds of phone calls, weed out all fake and irrelevant listings, and you will get the perfect selection of verified apartments, houses or offices. Let us know what real estate you need!
         +e.A(class='button' href='#') Send request
       +b(class='service-card' @click='clickService' @mouseenter='changeService' @mouseleave='changeService')
-        +e.H3.title For Landlords
+        +e.P.title For Landlords
         +e.P.text The best tenants in Kiev are here - embassies, top managers of international corporations and reputable businessmen. We sign long-term rental contracts, with a guarantee of the safety of property and stable payments. List your apartment or house!
         +e.A(class='button' href='#') List a Rental
       +b(class='service-card' @click='clickService' @mouseenter='changeService' @mouseleave='changeService')
-        +e.H3.title For Sellers
+        +e.P.title For Sellers
         +e.P.text We are actively looking for investment-attractive objects in the center of Kiev for our foreign investors - apartments, houses, offices, land plots and detached buildings. Send information about your property and we will find a buyer.
         +e.A(class='button' href='#') List a Property
 
@@ -160,7 +160,7 @@ mixin footer(modifier='')
           +e.A(href='#').social-link
             +e.IMG(src=`img/${val}.svg` alt=val).image
       +e.A(href='#').logo
-        +e.IMG(src='img/Logo-white.svg' alt='Logotip').logo
+        +e.IMG(src='img/Logo-white.svg' alt='Logotip').logotip
       +e.info Specialized agency for the selection of real estate to foreign client
 
 mixin inline-filter
@@ -283,7 +283,7 @@ mixin inline-filter
 mixin listings
   +b.SECTION.listing_1.slider.content
     +e.title.slider__title.inner
-      +e.H2.header Hot Listings for Rent
+      +e.P.header.animated Hot Listings for Rent
     +e.controls.slider__controls
       +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaRent.prev()')
       +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaRent.next()')
@@ -294,7 +294,7 @@ mixin listings
   +b.SECTION.gray-line
   +b.SECTION.listing_2.slider.content
     +e.title.slider__title.inner
-      +e.H2.header Hot Listings for Sale
+      +e.P.header.animated Hot Listings for Sale
     +e.controls.slider__controls
       +e.SPAN(class='slider__control-item slider__control-item_left' @click='$refs.siemaSale.prev()')
       +e.SPAN(class='slider__control-item slider__control-item_right' @click='$refs.siemaSale.next()')

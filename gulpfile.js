@@ -38,16 +38,16 @@ gulp.task('js-watch', gulp.series('js', done => {
 const sassGlob = require('gulp-sass-glob');
 
 const whitelistPtrs = {
-  'home': [/vs/, /service-card/, /lang/, /scaleBack/],
-  '404': [],
+  'home': [/appearance/, /vs/, /service-card/, /lang/, /scaleBack/],
+  '404': [/appearance/, ],
   'mail': [],
   'a4': [],
-  'text_page': [/vs/, /service-card/, /lang/, /filter/],
-  'useful_information': [/vs/, /service-card/, /lang/, /filter/],
-  'category': [/vs/, /service-card/, /lang/, /we-can/, /marker/, /info-window/, /map-control/, /map-card/],
-  'category_more': [/vs/, /service-card/, /lang/,],
-  'application': [/vs/, /service-card/, /lang/,],
-  'contacts': [/vs/, /service-card/, /lang/,],
+  'text_page': [/appearance/, /vs/, /service-card/, /lang/, /filter/],
+  'useful_information': [/appearance/, /vs/, /service-card/, /lang/, /filter/],
+  'category': [/appearance/, /vs/, /service-card/, /lang/, /we-can/, /marker/, /info-window/, /map-control/, /map-card/],
+  'category_more': [/appearance/, /vs/, /service-card/, /lang/,],
+  'application': [/appearance/, /vs/, /service-card/, /lang/,],
+  'contacts': [/appearance/, /vs/, /service-card/, /lang/,],
 };
 
 gulp.task('sass',  () => {
