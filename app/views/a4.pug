@@ -22,35 +22,39 @@ html(lang="us")
             +e.name Name Surname
             +e.speaks Speaks: Russian, Ukrainian, English
             +e.phones +38 044 22-33-177  +38 044 22-33-177
+      +b.H1.title Delovaya (Dimitrova) Street, 2б
       +b.SECTION.main
         +e.FIGURE.image-wrapper
           +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
-        +b.text-block
-          +e.text_bold Delovaya (Dimitrova) Street, 2б
-          +e.text Tetris hall
-          +e.text for example Shevchenko
-          +e.text_last ID 1525755
-          +e.text_last._c2
-            +e.text-block_1
-              +e.text_tall Sale
-              +e.text_tall._bold $ 157 000
-              +e.text_tall ($45/sqm)
-            +e.text-block_2
-              +e.text_tall Rent per month/
-              +e.text_tall._bold $ 5 000
-              +e.text_tall ($45/sqm)
-          +e.text_last._c2
-            +e.text-block_1
-              each i in ['Bedrooms', 'Bathrooms', 'Size', 'Floor', 'Elevator', 'Building type',]
-                +e.text_tall= i
-            +e.text-block_2
-              each i in ['2', '2', '121sqm', '1', 'yes', 'modern',]
-                +e.text_tall._bold= i
-            +e.text-block_3
-              each i in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace',]
-                +e.text_tall= i
-        +e.FIGURE.image-wrapper
-          +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+        +b.block-text
+          +e.top
+            +e.text Tetris Hall
+            +e.text_small._dim for example Shevchenko
+            +e.text_small ID 1525755
+          +e.middle
+            +e.price-info
+              +e.text_dim._small Sale
+              +e.text_big._bold._orange $ 157 000
+              +e.text_dim._small ($45/sqm)
+            +e.price-info_tabulate
+              +e.text_dim._small Rent per month/
+              +e.text_big._bold $ 5 000
+              +e.text_dim._small ($45/sqm)
+          +e.footer
+            +e.block_info
+              +e.block-info
+                each t in ['Bedrooms', 'Bathrooms', 'Size', 'Floor', 'Elevator', 'Building type']
+                  +e.text_dim._tall= t
+              +e.block-info
+                each t in ['2', '2', '121sqm', '1', 'yes', 'modern']
+                  +e.text_tall._bold= t
+            +e.block_tags
+              each t in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace', 'Outdoor sauna']
+                +e.text_tall._tag= t
+          +e.content
+            +e.text_big._bold Description
+            +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
+            +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
         +e.FIGURE.image-wrapper
           +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
         +e.FIGURE.image-wrapper
