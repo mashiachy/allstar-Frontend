@@ -6,6 +6,12 @@ mixin picture(webp, jpg, alt, cls)
     source(data-l-srcset=jpg type='image/jpeg')
     img(data-l-src=jpg alt=alt)
 
+mixin picture-not-lazy(webp, jpg, alt, cls)
+  picture(class=cls )
+    source(srcset=webp type='image/webp')
+    source(srcset=jpg type='image/jpeg')
+    img(src=jpg alt=alt)
+
 mixin info-card(icon, title, description, modifier)
   - modifier = modifier || 'white'
   +b.DIV(class=`info-card_${modifier}`)

@@ -8,10 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title AllStars | a4
-    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
-    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
-    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
-    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet")
     link(rel="preload" href="css/a4.css" as="style")
     link(href="css/a4.css" rel="stylesheet")
   body
@@ -20,14 +17,14 @@ html(lang="us")
         +e.IMG(src='img/Logo.svg' alt='Logo').logo
         +e.card
           +e.FIGURE.avatar
-            +picture('img/woman.webp', 'img/woman.jpg', 'Avatar', 'header__image')
+            +picture-not-lazy('img/woman.webp', 'img/woman.jpg', 'Avatar', 'header__image')
           +e.information
             +e.name Name Surname
             +e.speaks Speaks: Russian, Ukrainian, English
             +e.phones +38 044 22-33-177  +38 044 22-33-177
       +b.SECTION.main
         +e.FIGURE.image-wrapper
-          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+          +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
         +b.text-block
           +e.text_bold Delovaya (Dimitrova) Street, 2б
           +e.text Tetris hall
@@ -53,13 +50,13 @@ html(lang="us")
               each i in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace',]
                 +e.text_tall= i
         +e.FIGURE.image-wrapper
-          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+          +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
         +e.FIGURE.image-wrapper
-          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+          +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
         +e.FIGURE.image-wrapper
-          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+          +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
         +e.FIGURE.image-wrapper
-          +picture('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
+          +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
       +b.SECTION.postscriptum
         +e.contact All Star Kiev Realty
           br
