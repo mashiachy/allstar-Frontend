@@ -1,26 +1,37 @@
 @import "mixins"
 
-.inline-filter-section
-  margin-top: 60px
-  @include adaptive(1280px)
-    margin-top: 86px
+body
+  box-sizing: border-box
+  padding-top: 65px
+  @include adaptive(768px)
+    padding-top: 60px
+  @include adaptive(1024px)
+    padding-top: 86px
 
 .main
   margin-top: 10px
   @include adaptive(1280px)
-    margin-top: 15px
+    margin-top: 24px
 
 .map-section
   position: relative
   margin-bottom: 36px
-  @include adaptive(768px)
+  padding-top: 15px
+  @include adaptive(667px)
     margin-bottom: 28px
     &.mapped
       margin-bottom: 45px
-  @include adaptive(1280px)
+  @include adaptive(1024px)
+    padding-top: unset
     margin-bottom: 18px
     @include flex(row, wrap)
     @include flex-setting(flex-start, flex-start)
+    @include centerMargin
+    width: 94.79%
+    max-width: 1090px
+  @include adaptive(1280px)
+    max-width: unset
+    width: 1090px
   &__before
     padding: 12px 0 1px 24px
     font-size: 14px
@@ -28,11 +39,20 @@
     color: #8E99A4
     @include adaptive(768px)
       margin-bottom: 31px
+  &__control-wrapper
+    display: none
+    @include maxAdaptive(1023px)
+      display: block
+      position: absolute
+      left: 50%
+      transform: translateX(-50%)
+      top: 0
+      height: 36px
+      pointer-events: none
   &__control
     display: block
-    position: absolute
-    top: 0
-    right: 9px
+    pointer-events: all
+    margin-left: auto
     width: 33px
     height: 36px
     background-color: white
@@ -43,37 +63,60 @@
     background-size: 16px 16px
     background-repeat: no-repeat
     z-index: 10
-    @include adaptive(768px)
-      right: 20px
     &[data-icon='map']
       background-image: url("../img/map.svg")
       background-size: 16px 16px
     &[data-icon='tab']
-      background-image: url("../img/tab.svg")
-      background-size: 19px 17px
-      @include maxAdaptive(767px)
-        top: 8px
+      background-image: url("../img/close.svg")
+      background-size: 16px 16px
+
   .info
     font-size: 14px
     line-height: 16px
-    width: 100%
     margin-bottom: 14px
-    @include flex(row, wrap)
+    @include centerMargin
+    max-width: 300px
+    width: 95%
+    @include adaptive(320px)
+      max-width: 728px
+      width: 93.75%
+    @include adaptive(768px)
+      width: 94.79%
+      max-width: 1090px
+    @include adaptive(1024px)
+      @include flex(row, wrap)
+      margin-left: unset
+      margin-right: unset
+      max-width: unset
+      width: 100%
     &__route
       box-sizing: border-box
       margin-bottom: 17px
       opacity: 0.41
+      width: fit-content
       a
         color: inherit
     &__header
-      font-size: 16px
-      line-height: 19px
-      font-weight: 800
-      margin-bottom: 13px
+      display: none
+      @include adaptive(1024px)
+        display: inline
+        font-size: 16px
+        line-height: 19px
+        font-weight: 800
+        margin-bottom: 13px
     &__buttons
       @include flex
       box-sizing: border-box
-      padding-right: 19px
+      @include adaptive(1024px)
+        padding-right: 19px
+    &__before
+      font-size: 14px
+      line-height: 16px
+      color: #8E99A4
+      margin-right: auto
+      align-self: center
+    &__text
+      display: none
     &__button
       display: block
       color: inherit
@@ -88,6 +131,9 @@
         margin-right: auto
       &_right
         margin-right: 14px
+        @include maxAdaptive(1023px)
+          &:last-child
+            margin-right: unset
       &:after
         content: ''
         position: absolute
@@ -96,55 +142,76 @@
         background-size: 8px 8px
         width: 8px
         height: 8px
-      &[data-direction='bottom']:after
         background-image: url("../img/d-bottom.svg")
+        will-change: transform
+        transition: transform .25s ease-out
+        transform: rotateZ(0)
       &[data-direction='top']:after
-        background-image: url("../img/d-top.svg")
-    &__text
-      max-width: 458px
-    &__route, &__buttons
-      width: calc(100% - 458px)
-    &__header, &__text
-      width: 458px
+        transform: rotateZ(-180deg)
+    @include adaptive(1024px)
+      &__text
+        display: block
+        max-width: calc(100% - 565px)
+      &__route, &__buttons
+        width: 565px
+      &__header, &__text
+        width: calc(100% - 565px)
   .tab
     &_list
+      @include centerMargin
+      max-width: 300px
+      width: 95%
+      @include adaptive(320px)
+        max-width: 728px
+        width: 93.75%
+      @include adaptive(768px)
+        width: 94.79%
+        max-width: 1090px
       z-index: 10
       padding-top: 12px
       @include flex(row, wrap)
       @include flex-setting(space-around)
-      @include adaptive(768px)
+      @include adaptive(667px)
         padding-top: unset
-      @include adaptive(1280px)
-        width: calc(100% - 458px)
+      @include adaptive(1024px)
+        width: 565px
+        max-width: unset
+        margin-left: unset
+        margin-right: unset
       .full-item-card
         margin-bottom: 31px
         width: 302px
-        @include adaptive(768px)
+        @include adaptive(520px)
+          width: 48%
+        @include adaptive(667px)
           margin-bottom: 0
           width: 100%
+          min-width: unset
+          max-width: unset
           &:not(:last-child)
             border-bottom: 1px dashed rgba(151, 151, 151, 0.21)
-        @include adaptive(1280px)
-          width: 537px
+        @include adaptive(1024px)
+          width: 550px
           border-bottom: 2px dashed rgba(151, 151, 151, 0.21)
-          &.active
-            width: 577px
+          //&.active
+          &:hover
+            width: 585px
       margin-bottom: 2px
-      @include adaptive(768px)
+      @include adaptive(667px)
         margin-bottom: 50px
         display: block
-      @include adaptive(1280px)
+      @include adaptive(1024px)
         margin-bottom: 17px
     &_map
       z-index: 8
       height: calc(100vh - 104px)
       background-color: #EEEEEE
       position: relative
-      @include adaptive(768px)
+      @include adaptive(667px)
         height: 100vh
-      @include adaptive(1280px)
+      @include adaptive(1024px)
         height: 986px
-        width: 458px
+        width: calc(100% - 565px)
         border-radius: 10px
         overflow: hidden
       .map
@@ -158,7 +225,7 @@
         opacity: 0
       .button
         display: none
-        @include adaptive(1280px)
+        @include adaptive(1024px)
           display: block
           position: absolute
           z-index: 5
@@ -182,7 +249,7 @@
             left: 142px
     &__siema-wrapper
       display: none
-      @include maxAdaptive(767px)
+      @include maxAdaptive(666px)
         display: block
         position: absolute
         left: 0
@@ -193,11 +260,11 @@
         overflow: hidden
         bottom: 12px
         z-index: 10
-      .map-siema
-        height: 100%
-        @include flex
-        .map-card-wrapper
-          width: 291px
+        .map-siema
+          height: 100%
+          @include flex
+          .map-card-wrapper
+            width: 291px
   .message
     margin-bottom: 37px
     width: 100%
@@ -222,20 +289,30 @@
       background-position: center
       background-repeat: no-repeat
       background-size: 6px 6px
+      will-change: baclground-color
+      transition: background-color .25s ease-out
+      &:hover
+        background-color: $blue
       &_left
         background-image: url("../img/post-left.svg")
         margin-left: 20px
+        &:hover
+          background-image: url("../img/post-left-white.svg")
         @include adaptive(768px)
           margin-right: auto
-        @include adaptive(1280px)
+          margin-left: 0
+        @include adaptive(1024px)
           margin-right: 12px
           margin-left: auto
       &_right
         background-image: url("../img/post-right.svg")
         margin-right: 20px
+        &:hover
+          background-image: url("../img/post-right-white.svg")
         @include adaptive(768px)
           margin-left: auto
-        @include adaptive(1280px)
+          margin-right: 0
+        @include adaptive(1024px)
           margin-right: auto
           margin-left: unset
     &__left, &__right
@@ -329,7 +406,7 @@
   height: 103px
   @include otShadow
   @include flex(column, wrap)
-  @include adaptive(768px)
+  @include adaptive(667px)
     width: 249px
     height: 269px
     @include flex(column)
@@ -342,14 +419,14 @@
     margin: 0
     & > *
       border-radius: 4px
-    @include adaptive(768px)
+    @include adaptive(667px)
       width: 224px
       height: 137.32px
   &__image
     display: block
     height: 75px
     width: 134%
-    @include adaptive(768px)
+    @include adaptive(667px)
       height: 137.32px
       width: 100%
   &__title
@@ -363,14 +440,14 @@
   &__text
     opacity: .46
   &__title, &__subtitle, &__text
-    @include adaptive(768px)
+    @include adaptive(667px)
       padding-left: 9px
   &__footer
     align-self: flex-end
     padding-top: 4px
     @include flex
     @include flex-setting(flex-end, center)
-    @include adaptive(768px)
+    @include adaptive(667px)
       padding-top: 11px
       padding-right: 5px
       @include flex-setting(flex-end, flex-start)
@@ -387,7 +464,7 @@
     &_month
       position: relative
     &:after
-      @include adaptive(768px)
+      @include adaptive(667px)
         position: absolute
         content: 'Month/'
         top: -12px
@@ -430,7 +507,6 @@
   box-sizing: border-box
   padding: 0 .5px 0 20px
   width: fit-content
-  mix-blend-mode: hard-light
   background-color: transparent
   border-width: 8.5px
   border-style: solid

@@ -8,6 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title AllStars | application
+    link(rel='shortcut icon' href='img/favicon.png' type='image/png')
     link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
     link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
     link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
@@ -15,53 +16,56 @@ html(lang="us")
     link(rel="preload" href="css/application.css" as="style")
     link(rel="preload" href="js/application.js" as="script")
     link(href="css/application.css" rel="stylesheet")
-    script.
-      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));
+    script(defer src="js/application.js")
   body
-    +top-menu('_inline', '_dark', '_shadow')
-    +b.SECTION(class='inline-filter-section' id='filter' v-if='isDesktop')
-      +inline-filter
-    +b.MAIN.main#main
-      +b.SECTION.route.content
-        +e.SPAN.button
-        +e.P.line
-          a(href='#') Home
-          =' / '
-          a(href='#') Apartments for Sale in Kiev
-          =' / '
-          a(href='#') Gonchara Street 26
-      +b.SECTION.form-section.content
-        +e.FORM.form-body
-          +e.form-title Application for selection of real estate
-          +e.form-block
-            +b.search_gray
-              +e.INPUT(type='text' placeholder='I want to' v-model='form.want').search-input
-            +b.search_gray
-              +e.INPUT(type='text' placeholder='Property type' v-model='form.prop').search-input
-            +b.search_gray._textarea
-              +e.TEXTAREA(wrap='soft' placeholder='Address' v-model='form.address').search-input
-            +b.search_gray._textarea
-              +e.TEXTAREA(wrap='soft' placeholder='Description' v-model='form.description').search-input
-            +b.search_gray
-              +e.INPUT(type='text' placeholder='Price' v-model='form.price').search-input
-          +e.form-title Contacts
-          +e.form-block
-            +b.search_gray
-              +e.INPUT(type='text' placeholder='Name*' v-model='form.name').search-input
-            +b.search_gray
-              +e.INPUT(type='text' placeholder='Surname*' v-model='form.surname').search-input
-            +b.search_gray
-              +e.INPUT(type='text' placeholder='E-mail*' v-model='form.email').search-input
-            +b.search_gray.input-line
-              +b.V-SELECT(class='type' :options='prefixList' v-model='form.prefix')
-              +e.INPUT(type='text' placeholder='Phone*' v-model='form.phone').search-input
-          +e.form-title Photo (attach)
-          +e.DIV(@click='$refs.fileInput.click()').form-file
-            +e.INPUT(class='file-input' ref='fileInput' type='file' accept="image/*" multiple @change='changeFileInput')
-            +e.DIV(v-show='form.files.length === 0').text Select or drag a photo here
-            +e.DIV(v-for='file in form.files' :key='file.name').file-item {{ file.name }}
-          +e.BUTTON(type='submit').submit.show Submit
-      +listings
+    +b.gotop
+      +e.A().link
+    div#app
+      +top-menu('_inline', '_dark', '_shadow')
+      +b.SECTION(class='inline-filter-section' id='filter')
+        +inline-filter
+      +b.MAIN.main#main
+        +b.SECTION.route.content
+          +e.SPAN.button
+          +e.P.line
+            a(href='#') Home
+            =' / '
+            a(href='#') Apartments for Sale in Kiev
+            =' / '
+            a(href='#') Gonchara Street 26
+        +b.SECTION.form-section.content
+          +e.FORM.form-body
+            +e.H1.form-title.animated Application for selection of real estate
+            +e.form-block
+              +b.search_gray.input-line
+                +b.label I want to
+                +b.V-SELECT(class='type' :options='[\'Sale\', \'Rent\']' v-model='form.want').search-input
+              +b.search_gray.input-line
+                +b.label Property type
+                +b.V-SELECT(class='type' :options='[\'Property\', \'Another property\']' v-model='form.prop').search-input
+              +b.search_gray._textarea
+                +e.TEXTAREA(wrap='soft' placeholder='Address' v-model='form.address').search-input
+              +b.search_gray._textarea
+                +e.TEXTAREA(wrap='soft' placeholder='Description' v-model='form.description').search-input
+              +b.search_gray
+                +e.INPUT(type='text' placeholder='Price' v-model='form.price').search-input
+            +e.H2.form-title.animated Contacts
+            +e.form-block
+              +b.search_gray
+                +e.INPUT(type='text' placeholder='Name*' v-model='form.name').search-input
+              +b.search_gray
+                +e.INPUT(type='text' placeholder='Surname*' v-model='form.surname').search-input
+              +b.search_gray
+                +e.INPUT(type='text' placeholder='E-mail*' v-model='form.email').search-input
+              +b.search_gray.input-line
+                +b.V-SELECT(class='type' :options='prefixList' v-model='form.prefix')
+                +e.INPUT(type='text' placeholder='Phone*' v-model='form.phone').search-input
+            +e.H3.form-title.animated Photo (attach)
+            +e.DIV(@click.self='$refs.fileInput.click()' ref='inputFileBox').form-file
+              +e.INPUT(class='file-input' ref='fileInput' type='file' accept="image/*" multiple @change='changeFileInput($event.target.files)')
+              +e.DIV(v-show='form.files.length === 0' @click.self='$refs.fileInput.click()').text Select or drag a photo here
+              +e.DIV(v-for='file in form.files' :key='file.name').file-item {{ file.name | filterLength(15) }}
+                +e.A(@click.prevent='deleteFile(file)').delete-file
+            +e.BUTTON(type='submit').submit.show Submit
+        +listings
     +footer
-
-    script(src="js/application.js")

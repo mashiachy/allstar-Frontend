@@ -8,6 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title AllStars | 404
+    link(rel='shortcut icon' href='img/favicon.png' type='image/png')
     link(rel="preload" href="css/404.css" as="style")
     link(rel="preload" href="img/404-number.svg" as="image")
     link(rel="preload" href="img/404-sun.svg" as="image")
@@ -16,12 +17,12 @@ html(lang="us")
     link(rel="preload" href="img/404-bottom.svg" as="image")
     link(rel="preload" href="img/404-subbottom.svg" as="image")
     link(href="css/404.css" rel="stylesheet")
+    script(defer src="js/404.js")
   body
-    +b.SECTION.main
-      +e.A(href='#').logo-link
-        +e.IMG(src='img/Logo.svg' alt='Logo').logo
-      +e.description Page not found....
-      +e.A(href='#').button Home
+    +top-menu('_inline', '_dark', '_shadow')
+    +b.SECTION.main.content
+      +e.description.animated Page not found....
+      +e.A(href='#').button.show-animate Home
     +b.image-404
       +e.number
       +e.sun
@@ -30,4 +31,4 @@ html(lang="us")
       +e.bottom
       +e.subbottom
 
-    script(src="js/404.js")
+    +footer

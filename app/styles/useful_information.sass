@@ -1,17 +1,20 @@
 @import "mixins"
 
-.inline-filter-section
-  margin-top: 86px
+body
+  box-sizing: border-box
+  padding-top: 65px
+  @include adaptive(768px)
+    padding-top: 60px
+  @include adaptive(1024px)
+    padding-top: 86px
 
 .main
-  margin-top: 81px
+  margin-top: 10px
   @include adaptive(1280px)
-    margin-top: 21px
+    margin-top: 15px
 
 .route
   margin-bottom: 15px
-  @include adaptive(768px)
-    margin-bottom: 20px
 
 .listing_2
   margin-bottom: 15px
@@ -20,8 +23,7 @@
   @include adaptive(1280px)
     margin-bottom: 60px
 
-.we-can-wrapper
-  width: 100%
+.we-can
   margin-bottom: 20px
   @include adaptive(768px)
     margin-bottom: 30px
@@ -63,12 +65,12 @@
   &__block-text > &__text:not(:last-child)
     margin-bottom: 17px
   &__header
-    font-size: 24px
-    line-height: 28px
+    font-size: 30px
+    line-height: 38px
     font-weight: 800
   &__title
-    font-size: 15px
-    line-height: 18px
+    font-size: 24px
+    line-height: 28px
     font-weight: 800
   &__text
     font-size: 14px

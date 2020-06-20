@@ -1,12 +1,20 @@
 @import "mixins"
 
+body
+  box-sizing: border-box
+  padding-top: 65px
+  @include adaptive(768px)
+    padding-top: 60px
+  @include adaptive(1024px)
+    padding-top: 86px
+
 .main
-  margin-top: 81px
+  margin-top: 10px
   @include adaptive(1280px)
-    margin-top: 134px
+    margin-top: 15px
 
 .route
-  margin-bottom: 16px
+  margin-bottom: 15px
 
 .listing_2
   margin-bottom: 15px
@@ -152,10 +160,10 @@
     .search-input
       width: calc(100% - 135px)
   &__submit
-    height: 50px
+    height: 41px
     padding: 0
     border: 0
     font-size: 14px
     line-height: 16px
-    max-width: 275px
-    margin-left: auto
+    //max-width: 275px
+    //margin-left: auto

@@ -1,37 +1,59 @@
-import Vue from 'vue';
+import Vue from "vue";
 import vSelect from 'vue-select';
 import Siema from 'vue2-siema';
-import {promiseModInit, adaptiveMixin, menuMixin, listingsMixin, weCanMixin, myWOW} from "./base";
 
-const promiseMod = promiseModInit();
-new myWOW({class: 'animated'}).init();
-document.getElementsByClassName('gotop__link')[0].addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}, {passive: true});
+import {
+  adaptiveMixin,
+  menuMixin,
+  listingsMixin,
+  myWOW,
+  goTopInit,
+  webpInit,
+  isWebp,
+  LazyLoader,
+  screen, siemaLazyInitMixin,
+} from "./base";
 
+webpInit();
+const wow = myWOW({selector: '.animated'});
+goTopInit({
+  selector: '.gotop',
+  offset: adaptiveMixin.computed.isDesktop() ? '100vh' : '250vh',
+});
 
-function addAnimationToBackground() {
-  const topImage = document.querySelector('.background');
-  if (window.pageYOffset === 0 && !topImage.classList.contains('animation')) {
-    topImage.classList.add('animation');
-    setTimeout(function () { topImage.classList.remove('animation')}, 2000);
+const preloadBack = document.createElement('link');
+preloadBack.setAttribute('rel', 'preload');
+preloadBack.setAttribute('as', 'image');
+let backSrc = `img/back-${screen>=1024?'desktop':screen>=700?'tab':screen>568?'mobile':'small'}.${isWebp ? 'webp' : 'jpg'}`;
+preloadBack.setAttribute('href', backSrc);
+document.querySelector('.background').setAttribute('data-l-back', backSrc);
+document.head.appendChild(preloadBack);
+
+const ll = new LazyLoader({
+  selector: '[data-lazy]',
+});
+
+const handler = () => {
+  const back = document.querySelector('.background');
+  if (window.pageYOffset === 0 && !back.classList.contains('animation')) {
+    back.classList.add('animation');
+    window.removeEventListener('scroll', handler);
   }
-}
-window.addEventListener('scroll', addAnimationToBackground,{passive: true});
-window.addEventListener('load', addAnimationToBackground, {passive: true});
-
+};
+window.addEventListener('load', () => {
+  window.addEventListener('scroll', handler, {passive: true});
+  handler();
+});
 
 Vue.component('v-select', vSelect);
 Vue.use(Siema);
 
-const filter = new Vue({
-  el: '#filter',
-  mixins: [adaptiveMixin],
+const app = new Vue({
+  el: '#app',
+  mixins: [adaptiveMixin, menuMixin, listingsMixin, siemaLazyInitMixin,],
   data () {
     return {
+      // Filter
       activeOption: 0,
       curType: 'Apartment1',
       pricePerMonth: {
@@ -62,65 +84,20 @@ const filter = new Vue({
         penthouse: true,
         pool: false,
       },
-    };
-  },
-  computed: {
-    bedrooms: function () {
-      return [{
-          v: 1,
-          s: '1 Bedrooms'
-        }, {
-          v: 2,
-          s: '2 Bedrooms'
-        }, {
-          v: 3,
-          s: '3 Bedrooms'
-        }, {
-          v: 4,
-          s: '4+ Bedrooms'
-        }
-      ];
-    },
-  },
-  watch: {
-    options: function (val) {
-      if (!this.isTab) {
-        document.body.style.paddingTop = `${val ? 1445 : 1065}px`;
-      }
-    },
-  },
-  mounted () {
-    let value = 1052;
-    if (this.isDesktop) {
-      value = 686;
-    } else if (this.isTab) {
-      value = 626;
-    }
-    document.body.style.paddingTop = `${value}px`;
-  },
-  methods: {
-    clickOption (ev) {
-      console.log(ev);
-    }
-  },
-});
-
-const menu = new Vue({
-  el: '#header',
-  mixins: [adaptiveMixin, menuMixin],
-});
-
-const main = new Vue({
-  el: '#main',
-  mixins: [adaptiveMixin, listingsMixin, weCanMixin],
-  data () {
-    return {
+      bedrooms: {
+        1: true,
+        2: false,
+        3: false,
+        4: false,
+      },
+      // Main
       siemaOptions: {
         duration: 200,
         easing: 'ease-out',
         perPage: {
-          320: 3,
-          480: 4,
+          320: 2,
+          480: 3,
+          576: 4,
           640: 5,
           991: 6,
           1280: 8,
@@ -137,7 +114,9 @@ const main = new Vue({
         duration: 200,
         easing: 'ease-out',
         perPage: {
-          320: 3,
+          320: 2,
+          480: 3,
+          576: 4,
           640: 5,
           768: 6,
           1040: 7,
@@ -168,4 +147,21 @@ const main = new Vue({
       },
     };
   },
+  computed: {
+    bedroomsLabel () {
+      const numbers = Object.entries(this.bedrooms).filter(([key, value]) => value).map(([key, value]) => key).join(', ');
+      return (numbers ? numbers : '0') + ' Bedrooms';
+    },
+  },
+  watch: {
+    options: function (val) {
+      if (!this.isTab) {
+        document.body.style.paddingTop = `${val ? 1445 : 1065}px`;
+      }
+      this.$refs.moreLabel.innerHTML = `${val?'More options +':'Hide options -'}`;
+    },
+  },
+  mounted () {
+    this.ll = ll;
+  }
 });

@@ -1,40 +1,102 @@
-class myWOW {
-  constructor(args) {
-    this.baseClass = args.class;
-    this.refs = [];
+function webpSupported () {
+  const elem = document.createElement('canvas');
+  if (!!(elem.getContext && elem.getContext('2d'))) {
+    return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
   }
-  init () {
-    let ref;
-    if ((ref = document.readyState) === "interactive" || ref === "complete") {
-      this.start();
-    } else {
-      document.addEventListener('DOMContentLoaded', this.start.bind(this), {passive: true});
-    }
-  }
-  scrollHandler () {
-    const h = window.innerHeight;
-    this.refs.forEach(ref => {
-      if (!ref.classList.contains('appearance')) {
-        const rect = ref.getBoundingClientRect();
-        if (rect.top >= 0 && rect.bottom <= h * 0.6667) {
-          ref.classList.add('appearance');
-        }
+  return false;
+}
+
+let isWebp = null;
+
+function webpInit () {
+  isWebp = webpSupported();
+  const handler = () => document.body.classList.add(isWebp ? 'webp' : 'no-webp');
+  document.readyState === 'interactive' || document.readyState === 'complete' ? handler() :
+    window.addEventListener('DOMContentLoaded', handler, {passive: true});
+}
+
+const screen = window.innerWidth;
+
+function myWOW ({selector}) {
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appearance');
+        observer.unobserve(entry.target);
       }
     });
+  }, {threshold: 1});
+  const handler = () => document.querySelectorAll(selector).forEach(el => observer.observe(el));
+  document.readyState === 'complete' ? handler() : window.addEventListener('load', handler, {passive: true});
+  return observer;
+}
+
+function goTopInit ({selector, offset}) {
+  const handler = () => {
+    const ref = document.querySelector(selector);
+    ref.style.top = offset;
+    ref.children[0].addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
+  };
+  document.readyState === 'interactive' || document.readyState === 'complete' ? handler() :
+    window.addEventListener('load', handler, {passive: true});
+}
+
+class LazyLoader {
+  constructor({selector}) {
+    this.selector = selector;
+    this.start();
+    this.observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (LazyLoader.showBox(entry.target))
+            observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.1});
+    return this;
   }
   start () {
-    this.refs = [];
-    document.querySelectorAll(`.${this.baseClass}`).forEach(el=>this.refs.push(el));
-    this.scrollHandler();
-    window.addEventListener('scroll', this.scrollHandler.bind(this), {passive: true})
+    document.readyState === 'complete' ? this.watch() : window.addEventListener('load', this.watch.bind(this), {passive: false});
+  }
+  watch () {
+    console.log(document.querySelectorAll(this.selector));
+    document.querySelectorAll(this.selector).forEach(ref => this.observer.observe(ref));
+  }
+  static showBox (box) {
+    box.removeAttribute('data-lazy');
+    if (box.hasAttribute('data-l-pict')) {
+      Array.from(box.children).forEach(child => LazyLoader.showBox(child));
+      return true;
+    }
+    if (box.hasAttribute('data-l-back')) {
+      let src = box.getAttribute('data-l-back');
+      if (isWebp && src.match(/\.(png|jpg|jpeg)$/)) src = src.replace(/\.(png|jpg|jpeg)$/, '.webp');
+      box.style.backgroundImage = `url("${src}")`;
+      return true;
+    }
+    if (box.hasAttribute('data-l-src')) {
+      box.setAttribute('src', box.getAttribute('data-l-src'));
+      return true;
+    }
+    if (box.hasAttribute('data-l-srcset')) {
+      box.setAttribute('srcset', box.getAttribute('data-l-srcset'));
+      return true;
+    }
+    return false;
   }
 }
 
 const adaptiveMixin = {
   computed: {
-    isSmTab: () => document.documentElement.clientWidth >= 667,
-    isTab: () => document.documentElement.clientWidth >= 768,
-    isDesktop: () => document.documentElement.clientWidth >= 1280,
+    isSmTab: () => window.innerWidth >= 667,
+    isTab: () => window.innerWidth >= 768,
+    isSmDesktop: () => window.innerWidth >= 1024,
+    isDesktop: () => window.innerWidth >= 1280,
   },
 };
 
@@ -91,8 +153,8 @@ const menuMixin = {
   watch: {
     activeMenu: function (val) {
       if (!this.isDesktop) {
-        document.documentElement.style.overflowY = val ? 'hidden' : 'auto';
-        document.body.style.overflowY = val ? 'hidden' : 'auto';
+        document.documentElement.style.overflowY = val ? 'hidden' : 'visible';
+        document.body.style.overflowY = val ? 'hidden' : 'visible';
       }
     }
   },
@@ -119,41 +181,9 @@ const listingsMixin = {
   },
   methods: {
     initFoo (type) {
-      let s = this.$refs;
-      if (type === 'clients') {
-        s = s.siemaClients;
-      } else if (type === 'company') {
-        s = s.siemaCompany;
-      } else if (type === 'rent') {
-        s = s.siemaRent;
-      } else if (type === 'sale') {
-        s = s.siemaSale;
-      } else if (type === 'testimonial') {
-        s = s.siemaTestimonials;
-      }
-      s.$el.classList.add('active');
-    },
-  },
-};
-
-const weCanMixin = {
-  methods: {
-    clickService (ev) {
-      if (!this.isDesktop) {
-        let parent = ev.target;
-        if (!parent.classList.contains('service-card'))
-          parent = parent.parentElement;
-        const wrap = parent.parentElement;
-        wrap.childNodes.forEach(el => {
-          if (el !== parent) el.classList.remove('service-card_high');
-          else el.classList.toggle('service-card_high');
-        });
-      }
-    },
-    changeService (ev) {
-      if (this.isDesktop) {
-        ev.target.classList.toggle('service-card_high');
-      }
+      const ref = this.$refs[type==='clients'?'siemaClients':type==='company'?'siemaCompany':type==='rent'?'siemaRent':type==='sale'?'siemaSale':'siemaTestimonials'].$el;
+      ref.classList.add('active');
+      this.ll ? this.ll.watch() : 0;
     },
   },
 };
@@ -197,15 +227,36 @@ const filterMixin = {
   watch: {
     options: function (val) {
       if (!this.isDesktop) {
-        document.documentElement.style.overflowY = val ? 'hidden' : 'auto';
-        document.body.style.overflowY = val ? 'hidden' : 'auto';
+        document.documentElement.style.overflowY = val ? 'hidden' : 'visible';
+        document.body.style.overflowY = val ? 'hidden' : 'visible';
       }
     },
   },
 };
 
+const siemaLazyInitMixin = {
+  data () {
+    return {
+      observer: null,
+    };
+  },
+  mounted () {
+    document.querySelectorAll('[data-init]').forEach(ref => this.observer.observe(ref));
+  },
+  created () {
+    this.observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.$refs[entry.target.getAttribute('data-init')].init();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+  },
+};
+
 const loadMap = function (windowHandler='') {
-  const mapApiKey = 'AIzaSyBkwiSd65qwsenm1JUS7sE1Y7ua1jZ85ko';
+  const mapApiKey = 'AIzaSyC-ew6H1Lfrj5erNaNZT_Ktf6dAJsIsJf4';
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     const callback = () => {
@@ -226,6 +277,13 @@ export {
   filterMixin,
   listingsMixin,
   loadMap,
-  weCanMixin,
-  myWOW
+  myWOW,
+  goTopInit,
+  isWebp,
+  webpInit,
+  LazyLoader,
+  screen,
+  siemaLazyInitMixin,
 };
+
+// TODO: weCanMixin is never used for u bb

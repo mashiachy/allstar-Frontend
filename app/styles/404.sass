@@ -1,21 +1,16 @@
 @import "mixins"
 
+
 .main
-  @include centerMargin
-  width: 87.5%
   box-sizing: border-box
   height: 100vh
   padding-top: 15px
   position: relative
   z-index: 10
-  &__logo-link
-    height: 26px
-    display: block
-  &__logo
-    height: 100%
   &__description, &__button
     position: absolute
     left: 8.125%
+    z-index: 15
   &__description
     top: 117px
     max-width: 75.9375%
@@ -24,7 +19,7 @@
     font-weight: 800
   &__button
     display: block
-    top: 296px
+    top: 230px
     text-align: center
     height: 43px
     width: 141px
@@ -37,10 +32,6 @@
     font-weight: 800
     color: white
   @include adaptive(768px)
-    width: 78.125%
-    padding-top: 28px
-    &__logo-link
-      height: 48px
     &__description, &__button
       left: unset
     &__description
@@ -51,20 +42,17 @@
       top: 183px
     &__button
       top: 345px
-  @include adaptive(1280px)
-    width: 1110px
-  @include adaptive(1680px)
-    width: 1080px
-  @include adaptive(1920px)
-    width: 1200px
 
 .image-404
   position: absolute
-  bottom: 72px
+  top: 100vh
+  transform: translateY(-100%)
   width: 100%
   min-width: 320px
   right: 0
   height: 294px
+  z-index: 0
+  pointer-events: none
   & > *
     position: absolute
     background-size: cover
@@ -113,7 +101,7 @@
     height: 99px
     background-position: bottom 0 right 0
     z-index: 1
-  @include adaptive(640px)
+  @include adaptive(480px)
     height: 441px
     &__number
       width: 480px
@@ -133,41 +121,43 @@
     &__subbottom
       width: 161.94px
       height: 73.5px
-  @include adaptive(768px)
-    height: 493.63px
+  @include adaptive(640px)
+    height: 380px
     &__sun
       width: 95px
       height: 93px
       right: 7.4219%
       z-index: 1
+      top: -100px
     &__number
-      width: 559px
-      right: 20.9635%
-      bottom: 14%
+      width: 480px
+      right: 128px
+      bottom: 0
     &__oval
       width: 61px
       height: 46.54px
-      right: 20.9635%
+      right: 128px
       bottom: 17.6590%
       left: unset
     &__back
-      height: 447.46px
-      width: 578px
-      bottom: 4.7222%
+      height: 389.46px
+      width: 548px
+      bottom: 16%
     &__bottom
       height: 174.33px
-      width: 78.7760%
+      //width: 78.7760%
       max-width: 782px
-      right: 20.9635%
+      right: 53px
     &__subbottom
       width: 190px
       height: 87.04px
       bottom: 4.8235%
       right: 20.9635%
-  @include adaptive(1280px)
+  @include adaptive(1200px)
     height: 604.54px
     bottom: 84.38px
     &__sun
+      top: 0
       width: 115px
       height: 113px
       right: 6.7969%
@@ -193,7 +183,7 @@
       height: 106.79px
       bottom: 29.21px
       right: 1.75%
-  @include adaptive(1680px)
+  @include adaptive(1440px)
     height: 662px
     bottom: 90px
     &__sun
@@ -224,7 +214,7 @@
       height: 117px
       right: 29.1851%
       bottom: 32px
-  @include adaptive(1920px)
+  @include adaptive(1680px)
     &__sun
       right: 27.15623%
     &__number
@@ -237,4 +227,3 @@
       right: 34.5052%
     &__subbottom
       right: 34.9641%
-

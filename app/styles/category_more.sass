@@ -1,11 +1,17 @@
 @import "mixins"
 
-.main
-  margin-top: 61px
+body
+  box-sizing: border-box
+  padding-top: 65px
   @include adaptive(768px)
-    margin-top: 80px
+    padding-top: 60px
+  @include adaptive(1024px)
+    padding-top: 86px
+
+.main
+  margin-top: 10px
   @include adaptive(1280px)
-    margin-top: 96px
+    margin-top: 24px
 
 .section
   margin-bottom: 33px
@@ -22,9 +28,12 @@
       margin-bottom: 0
   .block-top
     @include flex(row, wrap)
+    @include flex-setting(flex-start, center)
     @include adaptive(768px)
       width: 100%
       order: 1
+    @include adaptive(1280px)
+      margin-bottom: 20px
     .route
       order: 2
       @include adaptive(1280px)
@@ -32,25 +41,32 @@
         width: fit-content
         margin-right: auto
     &__print
-      display: block
-      width: 35px
-      height: 36px
-      border-radius: 4px
-      background-color: rgba(216, 216, 216, 0.16)
-      background-image: url("../img/print-water.svg")
-      background-size: 16px 16px
-      background-position: center
-      background-repeat: no-repeat
+      display: none
       @include adaptive(1280px)
         order: 2
         margin-right: 32px
+        display: block
+        width: 35px
+        height: 36px
+        border-radius: 7px
+        background-color: rgba(216, 216, 216, 0.16)
+        background-image: url("../img/print.svg")
+        background-size: 16px 16px
+        background-position: center
+        background-repeat: no-repeat
+        will-change: background-color
+        transition: background-color .25s ease-out
+        &:hover
+          background-color: $blue
+          background-image: url("../img/print-white.svg")
     &__search-wrapper
       order: 1
       margin-bottom: 15px
       width: 100%
       @include adaptive(1280px)
         order: 3
-        width: calc(33.33% - 15px)
+        margin-bottom: unset
+        width: calc(30% - 15px)
   .title
     font-size: 16px
     line-height: 20px
@@ -67,7 +83,7 @@
       width: 100%
       order: 3
     @include adaptive(1280px)
-      width: calc(33.33% - 15px)
+      width: calc(35% - 15px)
     &__siema-wrapper
       width: 100%
       position: relative
@@ -89,13 +105,13 @@
         background-position: center
         background-size: 6px 6px
         @include adaptive(768px)
-          width: 81px
-          height: 81px
-          background-size: 15px 15px
+          width: 40px
+          height: 40px
+          background-size: 10px 10px
         @include adaptive(1280px)
-          width: 18px
-          height: 18px
-          background-size: 3px 3px
+          width: 25px
+          height: 25px
+          background-size: 5px 5px
           bottom: 9px
           top: unset
       &_left
@@ -107,8 +123,8 @@
           left: 22px
         @include adaptive(1280px)
           transform: none
-          right: 36px
-          left: unset
+          left: 12px
+          right: unset
           top: unset
       &_right
         background-image: url("../img/right-orange-triangle.svg")
@@ -133,23 +149,21 @@
         @include adaptive(768px)
           bottom: 40px
         @include adaptive(1280px)
-          bottom: 13px
-          left: 14px
-          transform: none
+          bottom: 18px
         .item
-          width: 3px
-          height: 3px
+          width: 4px
+          height: 4px
           border-radius: 50%
           background-color: white
-          margin-right: 2px
+          margin-right: 3px
           @include adaptive(768px)
             width: 7px
             height: 7px
             margin-right: 5px
           @include adaptive(1280px)
-            width: 3px
-            height: 3px
-            margin-right: 2px
+            width: 4px
+            height: 4px
+            margin-right: 3px
           &.active
             background-color: $orange
     &__siema
@@ -159,6 +173,12 @@
       border-radius: 4px
       @include centerMargin
       display: block
+      background-color: $lightgray
+      min-height: 184px
+      @include adaptive(568px)
+        min-height: 300px
+      @include adaptive(1280px)
+        min-height: 226px
       & > img
         display: block
     &__all-images
@@ -166,18 +186,48 @@
       grid-template-columns: repeat(4, 1fr)
       grid-auto-flow: row
       grid-gap: 10px
-      @include adaptive(768px)
-        grid-gap: 10px
+      @include adaptive(568px)
+        grid-template-columns: repeat(5, 1fr)
     &__image
       width: 100%
       border-radius: 4px
       display: block
+      background-color: $lightgray
+      min-height: 41px
+      @include adaptive(568px)
+        min-height: 60px
+      @include adaptive(768)
+        min-height: 84px
+      @include adaptive(1024px)
+        min-height: 114px
+      @include adaptive(1280px)
+        min-height: 40px
       & > img
         display: block
       &.current
-        box-sizing: border-box
-        padding: 1.25%
-        border: 2px solid $orange
+        position: relative
+        &:after
+          content: ''
+          position: absolute
+          top: 0
+          left: 0
+          box-sizing: border-box
+          width: 100%
+          height: 100%
+          border-radius: 4px
+          border: 2px solid $orange
+          z-index: 3
+        &:before
+          content: ''
+          position: absolute
+          top: 0
+          left: 0
+          box-sizing: border-box
+          width: 100%
+          height: 100%
+          border-radius: 4px
+          border: 4px solid white
+          z-index: 2
   .block-text
     @include adaptive(768px)
       order: 4
@@ -185,7 +235,7 @@
       margin-right: auto
     @include adaptive(1280px)
       margin-right: unset
-      width: calc(33.33% - 15px)
+      width: calc(35% - 15px)
     &__top
       margin-bottom: 9px
     &__top > .block-text__text:not(:last-child)
@@ -314,7 +364,8 @@
       order: 5
       width: 340px
     @include adaptive(1280px)
-      width: calc(33.33% - 15px)
+      width: calc(30% - 15px)
+      margin-top: -38px
     &__person
       width: 100%
       margin-bottom: 18px
@@ -399,5 +450,3 @@
       line-height: 41px
       font-weight: bold
       font-family: inherit
-      max-width: 330px
-      margin-left: auto

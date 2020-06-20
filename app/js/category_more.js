@@ -2,23 +2,36 @@ import Vue from 'vue';
 import vSelect from 'vue-select';
 import Siema from 'vue2-siema';
 
-import {adaptiveMixin, promiseModInit, menuMixin, listingsMixin, loadMap, weCanMixin} from "./base";
+import {
+  adaptiveMixin,
+  menuMixin,
+  listingsMixin,
+  loadMap,
+  myWOW,
+  goTopInit,
+  siemaLazyInitMixin, webpInit, LazyLoader, isWebp
+} from "./base";
 
-const promiseMod = promiseModInit();
+webpInit();
+const wow = myWOW({selector: '.animated'});
+goTopInit({
+  selector: '.gotop',
+  offset: '100vh',
+});
+
+const ll = new LazyLoader({
+  selector: '[data-lazy]',
+});
 
 Vue.component('v-select', vSelect);
 Vue.use(Siema);
 
-const menu = new Vue({
-  el: '#header',
-  mixins: [adaptiveMixin, menuMixin],
-});
-
-const main = new Vue({
-  el: '#main',
-  mixins: [adaptiveMixin, listingsMixin, weCanMixin],
+const app = new Vue({
+  el: '#app',
+  mixins: [adaptiveMixin, menuMixin, listingsMixin, siemaLazyInitMixin],
   data () {
     return {
+      modalVisible: false,
       searchCode: '',
       siemaImagesOptions: {
         duration: 200,
@@ -34,7 +47,7 @@ const main = new Vue({
       form: {
         name: '',
         surname: '',
-        prefix: '057',
+        prefix: '+057',
         phone: '',
         message: '',
       },
@@ -47,21 +60,24 @@ const main = new Vue({
     },
   },
   computed: {
-    prefixList: () => ['057', '058', '059', '060', '061', '062', '063', '064', '065', '066', '067',],
+    prefixList: () => ['+057', '+058', '+059', '+060', '+061', '+062', '+063', '+064', '+065', '+066', '+067',],
   },
   methods: {
     initOpenModal () {
-      promiseMod.then(() =>
-        Modernizr.on('webp', webp => {
-          const imgs = this.$refs.siemaImages.$el.getElementsByTagName('img');
-          for (let el of imgs) {
-            el.addEventListener('click', () => {
-              const imageSrc = el.getAttribute('src');
-              modal.show(`${imageSrc.split('.')[0]}.${webp ? 'webp' : 'jpg'}`);
-            });
-          }
-        })
-      );
+      for (let el of this.$refs.siemaImages.$el.getElementsByTagName('img')) {
+        el.addEventListener('click', () => this.showModal(el.getAttribute('src')));
+      }
+    },
+    showModal (imageSrc) {
+      document.documentElement.style.overflowY = 'hidden';
+      document.body.style.overflowY = 'hidden';
+      this.$refs.image.setAttribute('src', imageSrc);
+      this.modalVisible = true;
+    },
+    hideModal () {
+      document.documentElement.style.overflowY = 'visible';
+      document.body.style.overflowY = 'visible';
+      this.modalVisible = false;
     },
     showMap () {
       const mapWrapper = this.$refs.map.parentElement;
@@ -70,7 +86,7 @@ const main = new Vue({
       loadMap().then(() => {
         const mapWrapper = this.$refs.map.parentElement;
 
-        const lat1 = -34.407, lng1 = 150.644;
+        const lat1 = 50.4449, lng1 = 30.5087;
         const map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: lat1, lng: lng1},
           zoom: 14,
@@ -97,41 +113,17 @@ const main = new Vue({
 
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controls);
 
-        promiseMod.then(() =>
-          Modernizr.on('webp', webp =>
-            new google.maps.Marker({
-              position: new google.maps.LatLng(lat1, lng1),
-              map: map,
-              icon: `img/marker${webp ? '.webp' : '.jpg'}`,
-            })
-          )
-        );
+        new google.maps.Marker({
+          position: new google.maps.LatLng(lat1, lng1),
+          map: map,
+          icon: `img/marker${isWebp ? '.webp' : '.jpg'}`,
+        });
+
         mapWrapper.classList.remove('loading');
       });
     },
   },
-});
-
-const modal = new Vue({
-  el: '#modal',
-  data () {
-    return {
-      visible: false,
-    };
-  },
-  methods: {
-    show (imageSrc) {
-      this.$refs.modal.style.top = `${window.pageYOffset}px`;
-      this.$refs.modal.style.height = `${window.innerHeight}px`;
-      this.$refs.image.setAttribute('src', imageSrc);
-      document.documentElement.style.overflowY = 'hidden';
-      document.body.style.overflowY = 'hidden';
-      this.visible = true;
-    },
-    hide () {
-      document.documentElement.style.overflowY = 'auto';
-      document.body.style.overflowY = 'auto';
-      this.visible = false;
-    },
-  },
+  mounted () {
+    this.ll = ll;
+  }
 });

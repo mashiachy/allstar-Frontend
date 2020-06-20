@@ -45,6 +45,13 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 *
   -webkit-tap-highlight-color: transparent
 
+picture
+  display: block
+  background-color: $lightgray
+  & > *
+    display: block
+    width: 100%
+
 @media screen and (prefers-reduced-motion: no-preference)
   html,
   body
@@ -72,6 +79,12 @@ picture
   & > *
     width: inherit
     border-radius: inherit
+
+.sm-desktop
+  @include maxAdaptive(1023px)
+    display: none
+  @include adaptive(1024px)
+    display: block
 
 .content
   @include centerMargin
@@ -173,28 +186,46 @@ picture
   left: 0
   width: 100%
   z-index: 10000
-  @include adaptive(1280px)
+  @include adaptive(1024px)
     position: absolute
   &__wrapper
     background-color: white
     box-shadow: 0px 2px 23px rgba(0, 0, 0, 0.126912)
     max-height: 100vh
-    @include maxAdaptive(1279px)
-      overflow-y: auto
     @include maxAdaptive(767px)
       width: 100%
     @include adaptive(768px)
       box-shadow: unset
-    @include adaptive(1280px)
+    @include maxAdaptive(1023px)
+      overflow-y: auto
+    @include adaptive(1024px)
       background-color: transparent
       padding-left: 3.5%
-  @include adaptive(1280px)
+      @include centerMargin
+      width: 94.79%
+      max-width: 1090px
+    @include adaptive(1280px)
+      max-width: unset
+      width: 1090px
+  @include adaptive(1024px)
     &_inline &__wrapper
       @include flex(row, nowrap)
       @include flex-setting(space-between, flex-end)
       padding-left: unset
-  @include adaptive(1280px)
-    &_inline &__wrapper &__top
+  &_inline &__wrapper &__top
+    max-width: 300px
+    width: 95%
+    @include maxAdaptive(1023px)
+      @include centerMargin
+    @include adaptive(320px)
+      max-width: 728px
+      width: 93.75%
+    @include adaptive(768px)
+      width: 94.79%
+      max-width: 1090px
+    @include adaptive(1024px)
+      width: unset
+      max-width: unset
       padding-left: unset
       padding-right: unset
   &__top
@@ -206,17 +237,20 @@ picture
     @include adaptive(768px)
       height: 60px
       padding-bottom: 12px
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       display: block
       padding-top: 23px
       padding-bottom: unset
       height: unset
   &__logotip
     height: 26px
+    width: 71.5px
     @include adaptive(768px)
       height: 36px
-    @include adaptive(1280px)
+      width: 99px
+    @include adaptive(1024px)
       height: 48px
+      width: 132px
     &.disactive
       display: none
   &__logo
@@ -228,16 +262,26 @@ picture
     margin-top: 9px
     @include adaptive(768px)
       margin-top: 16px
+    @include adaptive(1024px)
+      display: none
     .contact
       width: 168px
       height: 33px
       display: none
       margin-right: 22px
       margin-top: -1px
-      @include adaptive(460px)
+      @include adaptive(320px)
         &.active
           display: block
-      @include adaptive(1280px)
+          margin-top: 7px
+          .contact__email
+            display: none
+      @include adaptive(480px)
+        &.active
+          margin-top: unset
+          .contact__email
+            display: block
+      @include adaptive(1024px)
         &_dark
           color: $blue
       position: relative
@@ -276,13 +320,21 @@ picture
     @include adaptive(768px)
       height: auto
       min-height: calc(100vh - 60px)
-    @include adaptive(1280px)
+    @include adaptive(1024px)
+      display: block
       height: auto
       min-height: unset
+      box-sizing: border-box
+      overflow: visible
+      width: 92.37%
+      margin-left: 5%
+      margin-right: auto
+      @include flex(row, nowrap)
+      @include flex-setting(space-between, align-center)
     &.active
       display: block
       box-sizing: border-box
-      @include adaptive(1280px)
+      @include adaptive(1024px)
         overflow: visible
         width: 92.37%
         margin-left: 5%
@@ -290,9 +342,9 @@ picture
         @include flex(row, nowrap)
         @include flex-setting(space-between, align-center)
     .main-nav
-      @include maxAdaptive(1279px)
+      @include maxAdaptive(1023px)
         padding-bottom: 45px
-      @include adaptive(1280px)
+      @include adaptive(1024px)
         width: 65.86%
         & > .main-nav__item
           &:nth-child(2)
@@ -302,6 +354,8 @@ picture
           &:nth-child(4)
             margin-left: 20px
     .menu-info
+      @include maxAdaptive(1023px)
+        display: none
       width: 256px
       @include flex(row, nowrap)
       @include flex-setting(space-between)
@@ -346,7 +400,7 @@ picture
 
 .main-nav
   @include flex(column)
-  @include adaptive(1280px)
+  @include adaptive(1024px)
     position: relative
     @include flex(row, nowrap)
     @include flex-setting(space-between, align-center)
@@ -367,7 +421,7 @@ picture
       opacity: 0.11
       left: 0
       bottom: 0
-      @include adaptive(1280px)
+      @include adaptive(1024px)
         content: unset
     &:nth-child(6):before
       content: unset
@@ -386,7 +440,7 @@ picture
         @include adaptive(768px)
           width: 8px
           height: 8px
-        @include adaptive(1280px)
+        @include adaptive(1024px)
           right: 0
           top: 16px
           width: 4px
@@ -397,7 +451,7 @@ picture
     margin-top: 21px
     margin-left: 22px
     margin-bottom: 19px
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       padding-right: 21px
       margin-top: 11px
       margin-bottom: 15px
@@ -418,11 +472,12 @@ picture
     width: 100%
     height: 315px
     overflow: hidden
+    display: block
     background-color: #cbb792
     background-size: cover
     background-position: left 0 bottom 0
-    &.loaded
-      background-image: url("../img/menu-tab.jpg")
+    @include adaptive(1024px)
+      display: none
   &__sub-nav > &__item
     padding: 10px 0
     color: $blue
@@ -434,7 +489,7 @@ picture
     background-color: rgba(233,106,0,0.06)
   &__sub-nav > &__item &__link:active
     background-color: rgba(233,106,0,0.1)
-  @include adaptive(1280px)
+  @include adaptive(1024px)
     &__sub-nav
       position: absolute
       top: 42px
@@ -471,6 +526,9 @@ picture
       position: absolute
       top: 25px
       right: 25px
+      display: none
+      @include adaptive(1024px)
+        display: block
     &__image
       border-radius: 9px
       width: 293px
@@ -551,13 +609,14 @@ picture
 
 .gotop
   position: absolute
-  top: 200vh
+  top: 268vh
   bottom: 0
   right: 10px
   width: 43px
   z-index: 100
+  pointer-events: none
   @include adaptive(1280px)
-    right: calc(50% - 640px)
+    right: calc(50% - 607px)
   &__link
     cursor: pointer
     position: sticky
@@ -621,8 +680,11 @@ picture
       margin-top: -178px
       padding: 249px 9.7527% 41px
   @include adaptive(1140px)
-    padding: 249px calc(50% - 550px) 46px
+    padding: 71px calc(50% - 550px) 41px
+    &_extended
+      padding: 249px calc(50% - 550px) 46px
   @include adaptive(1280px)
+    padding-top: 40px
     &_extended
       margin-top: 76px
   @include adaptive(1920px)
@@ -659,6 +721,10 @@ picture
     line-height: 23px
     display: block
     margin-bottom: 4px
+    will-change: color
+    transition: color .25s ease-out
+    &:hover
+      color: $orange
 
 .global-info
   margin-top: 22px
@@ -700,6 +766,8 @@ picture
     max-width: 12px
     max-height: 12px
   &__logo
+    width: 110px
+    height: 40px
     margin-bottom: 14px
     @include adaptive(768px)
       order: 1
@@ -948,6 +1016,7 @@ picture
     width: 100%
     border-radius: 7px
     margin-bottom: 7px
+    min-height: 139px
   &__title
     font-size: 15px
     line-height: 18px
@@ -1004,33 +1073,6 @@ picture
   &__whois
     margin-top: -1px
 
-@keyframes scaleBack1
-  0%
-    background-size: 688px 516px
-  50%
-    background-size: 756.8px 567.6px
-  100%
-    background-size: 688px 516px
-
-@keyframes scaleBack2
-  0%
-    background-size: 781px 586px
-  50%
-    background-size: 859.1px 644.6px
-  100%
-    background-size: 781px 586px
-
-@keyframes scaleBack
-  0%
-    background-position: left 0 top 0
-    background-size: 100% 100%
-  50%
-    background-position: left 0 top -73px
-    background-size: 111.11% 111.11%
-  100%
-    background-position: left 0 top 0
-    background-size: 100% 100%
-
 @keyframes loaderCenterPos
   0%
     transform: translate(-50%, -50%) rotate(0deg)
@@ -1046,44 +1088,45 @@ picture
   transition: box-shadow .25s ease-out, width .25s ease-out
   box-shadow: none
   z-index: 7
-  @include adaptive(768px)
+  @include adaptive(667px)
     @include flex(row, nowrap)
     @include flex-setting(flex-start, center)
     padding: 20px 0
     height: 228px
-  @include adaptive(1280px)
+  @include adaptive(1024px)
     height: 166px
     padding: 15px 15px 15px 9px
     background-color: transparent
-  &.active
+  //&.active
+  &:hover
     z-index: 11
     border-radius: 12px
     @include otShadow
     @include adaptive(768px)
       box-shadow: none
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       @include otShadow
       background-color: white
       border-bottom: 0 !important
       margin-top: -1px
       margin-bottom: 2px
   &__content-block
-    @include adaptive(768px)
+    @include adaptive(667px)
       width: calc(100% - 305px)
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       width: 296px
   &__image-wrapper
     width: 100%
-    min-height: 179px
     overflow: hidden
     position: relative
     margin-bottom: 10px
     float: unset !important
-    @include adaptive(768px)
+    @include adaptive(667px)
       width: 282px
+      min-height: 179px
       margin-right: 23px
       margin-bottom: unset
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       min-height: unset
       width: 204px
       margin-right: 17px
@@ -1096,13 +1139,13 @@ picture
     height: 21px
     border-radius: 50%
     background-color: white
-    bottom: 12px
+    bottom: 9px
     cursor: pointer
     background-position: center
     background-size: 4px 3px
     background-repeat: no-repeat
     @include smShadow
-    z-index: 100
+    z-index: 50
     &.active
       opacity: 100
     &_left
@@ -1112,16 +1155,16 @@ picture
       right: 10px
       background-image: url("../img/right-orange-triangle.svg")
     &_center
-      height: 3px
+      height: 4px
       width: unset
-      bottom: 21px
+      bottom: 17px
       left: 50%
       transform: translateX(-50%)
       @include flex
       background-color: transparent
       .item
-        width: 3px
-        height: 3px
+        width: 4px
+        height: 4px
         border-radius: 50%
         background-color: white
         margin-right: 3px
@@ -1138,47 +1181,47 @@ picture
     font-size: 15px
     line-height: 18px
     font-weight: 800
-    @include adaptive(768px)
+    @include adaptive(667px)
       margin-bottom: 4px
       font-size: 18px
       line-height: 21px
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       margin-bottom: 0
   &__text
     font-size: 12px
     line-height: 14px
     margin-top: 3px
     margin-bottom: 4px
-    @include adaptive(768px)
+    @include adaptive(667px)
       font-size: 14px
       line-height: 16px
       margin-bottom: 13px
       margin-top: unset
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       margin-bottom: 3px
   &__subtext
     opacity: 0.41
     font-size: 10px
     line-height: 12px
-    @include adaptive(768px)
+    @include adaptive(667px)
       font-size: 14px
       line-height: 16px
       margin-bottom: 17px
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       margin-bottom: 9px
   &__title, &__text, &__subtext
     margin-left: 8px
     display: block
     color: inherit
-    @include adaptive(768px)
+    @include adaptive(667px)
       margin-left: unset
   &__tags
     display: none
     width: 65.4%
-    @include adaptive(768px)
+    @include adaptive(667px)
       @include flex(row, wrap)
       @include flex-setting(flex-start, flex-start)
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       width: 85%
   &__tag
     box-sizing: border-box
@@ -1198,7 +1241,7 @@ picture
   &__footer
     @include flex
     @include flex-setting(flex-end, center)
-    @include adaptive(1280px)
+    @include adaptive(1024px)
       margin-top: -9px
   &__per-sqm
     font-size: 13px
@@ -1252,21 +1295,22 @@ picture
   padding-top: 35px
   position: relative
   &__background
-    position: absolute
-    z-index: -1
-    width: 41.4063%
-    height: 79.6007%
-    left: 0
-    top: 12.5%
-    border-radius: 0 26px 26px 0
-    background-color: #ccaf95
-    background-position: top -35px left -264px
-    &.loaded
-      background-image: url("../img/back-2.jpg")
+    display: none
+    @include adaptive(768px)
+      display: block
+      position: absolute
+      z-index: -1
+      width: 41.4063%
+      height: 79.6007%
+      left: 0
+      top: 12.5%
+      border-radius: 0 26px 26px 0
+      background-color: #ccaf95
+      background-position: top -35px left -264px
     @include adaptive(1280px)
       width: 48.2813%
       top: 10%
-      height: 958px
+      height: 866px
       left: unset
       right: 51.7187%
       max-width: 918px
@@ -1275,6 +1319,10 @@ picture
   &_row &__content
     @include flex(row, wrap)
     @include flex-setting(space-between)
+    @include adaptive(1280px)
+      box-sizing: border-box
+      padding-left: 35px
+      padding-right: 35px
   &__title
     width: 100%
     box-sizing: border-box
@@ -1282,8 +1330,29 @@ picture
     font-size: 18px
     line-height: 21px
     font-weight: 800
+    padding-left: 6.67%
+    padding-right: 6.67%
+    @include adaptive(321px)
+      padding-left: 3.71%
+      padding-right: 3.71%
     @include adaptive(768px)
       margin-bottom: unset
+    @include adaptive(769px)
+      padding-left: 3.20%
+      padding-right: 3.20%
+    @include adaptive(1280px)
+      padding-left: unset
+      padding-right: unset
+  &__service-wrapper
+    @include adaptive(768px)
+      width: 59.6154%
+      margin-left: 39.1484%
+    @include adaptive(1280px)
+      width: 53.6698%
+      margin-left: 46.2385%
+    @include adaptive(768px)
+      &:not(:nth-child(2))
+        margin-top: -35px
   .service-card
     margin-bottom: 14px
     z-index: 10
@@ -1292,33 +1361,17 @@ picture
     box-shadow: none
     transition: box-shadow .25s ease-out
     border-radius: 20px
-    &_high
-      background-color: white
-      @include otShadow
-    &_high .service-card__button
-      box-shadow: unset !important
-      &:hover
-        transform: translate(0, 0) !important
-        background-color: $orange
     &:nth-last-child
       margin-bottom: 0
     box-sizing: border-box
     background-color: transparent
     @include adaptive(768px)
-      width: 59.6154%
-      margin-left: 39.1484%
       padding: 54px 36px 43px 44px
     @include adaptive(1280px)
-      width: 53.6698%
-      margin-left: 46.2385%
       padding: 65px 28px 28px 87px
       will-change: transform, margin-left
       transform: translate(0)
-      transition: transform .25s ease-out //, margin-left .25s ease-out
-      &_high
-        //margin-left: 43.3945%
-        //padding: 65px 28px 28px 87px
-        transform: translate(-30px,-25px)
+      transition: transform .25s ease-out
     &__title
       font-size: 15px
       line-height: 20px
@@ -1352,7 +1405,17 @@ picture
       &:hover
         transform: translate(-2px, -3px)
         @include smShadow
-  &_row
+  &__service-wrapper:hover .service-card
+    background-color: white
+    @include otShadow
+    .service-card__button
+      box-shadow: unset !important
+      &:hover
+        transform: translate(0, 0) !important
+        background-color: $orange
+    @include adaptive(1280px)
+      transform: translate(-30px,-25px)
+  &_row &__service-wrapper
     @include adaptive(1280px)
       .service-card
         margin-left: unset
@@ -1363,16 +1426,21 @@ picture
         min-height: 449px
         @include flex(column)
         @include flex-setting(space-between)
-        &_high
-          margin-left: unset
-          transform: unset
-          @include shadow
         &:nth-child(2)
           margin-left: 30px
         &:nth-child(4)
           margin-right: 30px
         &__text
           width: 216px
+      &:hover .service-card
+        margin-left: unset
+        transform: unset
+        @include shadow
+  &_row &__service-wrapper
+    @include adaptive(1280px)
+      width: auto
+      margin-left: unset
+      margin-top: unset
   &_row &__background
     @include adaptive(1280px)
       max-width: unset
@@ -1393,12 +1461,12 @@ picture
     height: auto
     min-height: 81px
   &_big
-    min-height: 131px
+    min-height: 141px
   &_textarea &__search-input
     padding-top: 13px
     min-height: 81px
   &_big &__search-input
-    min-height: 131px
+    min-height: 141px
   &__search-input
     width: 100%
     height: 100%
@@ -1515,21 +1583,40 @@ picture
   &__main-wrapper
     @include maxAdaptive(1279px)
       width: 100%
+    @include adaptive(1280px)
+      @include centerMargin
+      max-width: unset
+      width: 1090px
   &__main
     height: 36px
-    padding-left: 19px
-    padding-right: 9px
     @include flex
     @include flex-setting(space-between, center)
+    @include centerMargin
+    max-width: 300px
+    width: 95%
+    @include adaptive(320px)
+      max-width: 728px
+      width: 93.75%
     @include adaptive(768px)
-      padding: 11px 20px 13px 1.5%
+      padding-top: 11px
+      padding-bottom: 13px
+      width: 94.79%
+      max-width: 1090px
     @include adaptive(1280px)
+      margin-left: unset
+      margin-right: unset
+      width: unset
+      max-width: unset
       height: 62px
       padding: 0 10px 0 0
       background-color: white
       border-radius: 8px
       @include smShadow
       z-index: 110
+    .show
+      display: none
+      @include adaptive(1280px)
+        display: block
   &__buttons
     width: calc(100% - 41px)
     @include flex
@@ -1620,6 +1707,7 @@ picture
     line-height: 16px
     border-radius: 7px
   &__dropdown-wrapper
+    //display: none
     position: absolute
     top: -10px
     left: 0
@@ -1636,18 +1724,33 @@ picture
       box-shadow: $thisShadow
       background-color: white
       mix-blend-mode: darken
+  &__dropdown-prewrapper
+    @include maxAdaptive(1279px)
+      margin-top: 71px
+      background-color: white
+      border-top-left-radius: 12px
+      border-top-right-radius: 12px
+      box-shadow: 0px 2px 88px rgba(0, 0, 0, 0.202497)
+      min-height: calc(100% - 71px)
+      padding-bottom: 29px
+    @include maxAdaptive(1023px)
+      padding-bottom: unset
+    @include maxAdaptive(767px)
+      margin-top: 61px
+      min-height: calc(100% - 61px)
   &__dropdown
-    margin-top: 147px
     width: 100%
     box-sizing: border-box
-    background-color: white
-    border-top-left-radius: 12px
-    border-top-right-radius: 12px
-    box-shadow: 0px 2px 88px rgba(0, 0, 0, 0.202497)
-    padding-top: 35px
-    padding-bottom: 31px
     max-width: unset
+    padding: 35px 6.67% 31px
+    @include adaptive(321px)
+      padding-left: 3.71%
+      padding-right: 3.71%
+    @include adaptive(769px)
+      padding-left: 3.20%
+      padding-right: 3.20%
     @include adaptive(768px)
+      margin-top: 71px
       @include flex(column, wrap)
       @include flex-setting(space-between, flex-start)
       padding-top: 36px
@@ -1660,6 +1763,8 @@ picture
       box-shadow: none
       padding-top: 47px
       padding-bottom: 50px
+      padding-left: unset
+      padding-right: unset
       height: 100%
       display: grid
       grid-template-columns: 2fr 2fr 1fr 1fr
@@ -1668,6 +1773,10 @@ picture
       grid-template-areas: "block-1 block-2 block-4 block-3" "block-1 block-2 block-5 block-5"
   &__block-1
     margin-bottom: 32px
+    .search
+      display: block
+      @include adaptive(1280px)
+        display: none
     & > *:not(:last-child)
       margin-bottom: 22.6667px
     @include adaptive(768px)
@@ -1725,6 +1834,9 @@ picture
     @include adaptive(768px)
       width: 46.875%
       margin-bottom: unset
+  &__block-2, &__block-4
+    @include maxAdaptive(767px)
+      display: none
   @include adaptive(768px)
     &__block-1, &__block-3
       margin-right: 6.25%
@@ -1746,6 +1858,7 @@ picture
     margin-bottom: unset
   &__siema-wrapper
     width: 103.125%
+    min-height: 209px
     overflow: hidden
     @include adaptive(768px)
       width: 102.605%
@@ -1760,7 +1873,7 @@ picture
     min-height: 209px
     max-height: 267px
     overflow: hidden
-    padding-top: 22px
+    padding-top: 33px
     padding-bottom: 10px
     @include adaptive(446px)
       width: 700px
@@ -1815,10 +1928,18 @@ picture
   background-position: center
   background-repeat: no-repeat
   background-size: 15.04px 16.34px
+  will-change: background-color
+  transition: background-color .25s ease-out
+  &:hover
+    background-color: $orange
   &_minus
     background-image: url("../img/magnifier-minus.svg")
+    &:hover
+      background-image: url("../img/magnifier-minus-white.svg")
   &_plus
     background-image: url("../img/magnifier-plus.svg")
+    &:hover
+      background-image: url("../img/magnifier-plus-white.svg")
 .map-control__wrapper
   @include flex
   @include flex-setting(space-between)
@@ -1843,9 +1964,11 @@ picture
   font-family: inherit
 
 .modal
-  position: absolute
+  position: fixed
   left: 0
   right: 0
+  top: 0
+  bottom: 0
   z-index: 10000
   background-color: rgba(0,0,0,0.65)
   &__control
@@ -1913,17 +2036,19 @@ picture
     display: block
     & > *
       display: block
-  &__personal-info > *
-    display: block
-    color: inherit
+  &__personal-info
+    padding-top: 7px
+    & > *
+      display: block
+      color: inherit
   &__name
     font-size: 15px
     line-height: 18px
     font-weight: 800
     margin-bottom: 7px
   &__job, &__lngs, &__email
-    font-size: 10px
-    line-height: 12px
+    font-size: 12px
+    line-height: 14px
     margin-bottom: 7px
   &__lngs
     opacity: 0.46
@@ -1947,3 +2072,89 @@ picture
         background-size: contain
   &__email
     margin-bottom: 0
+
+.multiple-check
+  display: block
+  height: 36px
+  width: 100%
+  font-size: 14px
+  line-height: 16px
+  position: relative
+  &__label
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    padding-left: 19px
+    padding-top: 10px
+    position: absolute
+    background-color: rgba(216, 216, 216, 0.16)
+    border-radius: 7px
+    cursor: pointer
+    &:after
+      content: ''
+      position: absolute
+      width: 5px
+      height: 5px
+      background-image: url("../img/triangle.svg")
+      background-size: contain
+      top: 17px
+      right: 11px
+  &__dropdown-menu
+    display: none
+  &.extended
+    overflow-y: visible
+  &.extended &__dropdown-menu
+    display: block
+    position: absolute
+    z-index: 100
+    width: 100%
+    left: 0
+    top: 41px
+    background-color: white
+    border-radius: 7px
+    box-sizing: border-box
+    padding: 6.5px 13px 10.5px
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
+  &.extended &__option
+    cursor: pointer
+    box-sizing: border-box
+    margin-bottom: 4px
+    height: 31px
+    padding-top: 6px
+    padding-left: 6px
+    position: relative
+    font-size: 14px
+    line-height: 16px
+    &:after
+      content: ''
+      position: absolute
+      width: 100%
+      height: 1.5px
+      background-color: #979797
+      opacity: 0.11
+      left: 0
+      bottom: -2.5px
+    &:last-child:after
+      content: unset
+    &:before
+      content: ''
+      position: absolute
+      width: 15px
+      height: 15px
+      z-index: 5
+      top: 7.5px
+      right: 3px
+      border-radius: 3px
+      background-color: #f8f8f8
+      will-change: background-color
+      transition: background-color .25s ease-out
+    &:hover:before
+      background-color: #ededed
+    &.selected
+      background-color: unset
+      &:before
+        background-color: $orange
+        background-size: 8.13px 5px
+        background-position: center
+        background-repeat: no-repeat
+        background-image: url("../img/ok.svg")

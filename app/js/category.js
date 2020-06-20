@@ -2,11 +2,38 @@ import Vue from 'vue';
 import vSelect from 'vue-select';
 import Siema from 'vue2-siema';
 
-import {adaptiveMixin, promiseModInit, menuMixin, loadMap, filterMixin, weCanMixin} from "./base";
+import {
+  adaptiveMixin,
+  menuMixin,
+  loadMap,
+  filterMixin,
+  myWOW,
+  goTopInit,
+  webpInit, LazyLoader, isWebp, siemaLazyInitMixin
+} from "./base";
 
-const promiseMod = promiseModInit();
+webpInit();
+const wow = myWOW({selector: '.animated'});
+goTopInit({
+  selector: '.gotop',
+  offset: '110vh',
+});
 
-loadMap('initMap');
+const ll = new LazyLoader({
+  selector: '[data-lazy]',
+});
+
+const mapObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log(1);
+      loadMap('initMap');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: .1});
+document.readyState === 'complete' ? mapObserver.observe(document.querySelector('#map_wrapper')) :
+  window.addEventListener('load', () => mapObserver.observe(document.querySelector('#map_wrapper')));
 
 window.initMap = function () {
   document.getElementById('map_wrapper').classList.remove('loading');
@@ -94,12 +121,12 @@ window.initMap = function () {
       this.marker = args.marker;
       this.siema = args.siema;
       args.marker.addListener('click', () => {
-        if (adaptiveMixin.computed.isTab()) this.marker.hide();
-        adaptiveMixin.computed.isTab() ? this.show() : this.toggle();
+        if (adaptiveMixin.computed.isSmTab()) this.marker.hide();
+        adaptiveMixin.computed.isSmTab() ? this.show() : this.toggle();
       });
     }
     createDiv() {
-      if (adaptiveMixin.computed.isTab()) {
+      if (adaptiveMixin.computed.isSmTab()) {
         super.createDiv();
         google.maps.event.addDomListener(this.div.getElementsByClassName(
           'info-window-close')[0],
@@ -130,12 +157,12 @@ window.initMap = function () {
       }
     }
     draw() {
-      if (adaptiveMixin.computed.isTab()) {
+      if (adaptiveMixin.computed.isSmTab()) {
         super.draw();
       }
     }
     hide() {
-      if (adaptiveMixin.computed.isTab()) {
+      if (adaptiveMixin.computed.isSmTab()) {
         super.hide();
         this.marker.show();
       } else {
@@ -143,7 +170,7 @@ window.initMap = function () {
       }
     }
     show() {
-      if (adaptiveMixin.computed.isTab()) {
+      if (adaptiveMixin.computed.isSmTab()) {
         super.show();
       } else {
         this.siema.innerHTML = '';
@@ -159,7 +186,7 @@ window.initMap = function () {
       }
     }
     toggle() {
-      if (adaptiveMixin.computed.isTab()) {
+      if (adaptiveMixin.computed.isSmTab()) {
         super.toggle();
       } else {
         this.siema.innerHTML === '' || this.marker.id !== this.siema.getAttribute('data-id') ? this.show() : this.hide();
@@ -169,7 +196,7 @@ window.initMap = function () {
 
   const generateInfoWindowHTML = (args) => {
     let result = null;
-    if (adaptiveMixin.computed.isTab())
+    if (adaptiveMixin.computed.isSmTab())
       result = `<div class="info-window ${args.cards.length > 1 ? 'info-window_multiple' : ''}">` +
         '    <div class="info-window__control info-window__control_close info-window-close"></div>' +
         '    <div class="info-window__controls">' +
@@ -191,15 +218,15 @@ window.initMap = function () {
         `<div class="map-card__price ${args.cards[i].month ? 'map-card__price_month' : ''}">${args.cards[i].price}</div>` +
         '</div>' +
         '</div>';
-      if (adaptiveMixin.computed.isTab())
+      if (adaptiveMixin.computed.isSmTab())
         result += content;
       else
         result.push(content);
     }
-    return adaptiveMixin.computed.isTab() ? result + '</div></div>' : result;
+    return adaptiveMixin.computed.isSmTab() ? result + '</div></div>' : result;
   };
 
-  const lat1 = -34.407, lng1 = 150.644;
+  const lat1 = 50.4449, lng1 = 30.5087;
 
   const map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: lat1, lng: lng1},
@@ -207,7 +234,7 @@ window.initMap = function () {
     disableDefaultUI: true,
   });
 
-  if (adaptiveMixin.computed.isDesktop()) {
+  if (adaptiveMixin.computed.isSmDesktop()) {
     const control_minus = document.createElement('div');
     control_minus.classList.add('map-control', 'map-control_minus');
     google.maps.event.addDomListener(control_minus, 'click', () => {
@@ -232,7 +259,7 @@ window.initMap = function () {
   const mapSiema = document.getElementById('map-siema');
 
   const onceMarker = new HTMLMapMarker({
-    latlng: new google.maps.LatLng(-34.412, 150.660),
+    latlng: new google.maps.LatLng(50.4449, 30.5087),
     map: map,
     id: 'o',
     html: generateMarkerHTML({
@@ -241,8 +268,18 @@ window.initMap = function () {
     }),
     visibility: 'visible',
   });
+  const multipleMarker = new HTMLMapMarker({
+    latlng: new google.maps.LatLng(50.4549, 30.5107),
+    map: map,
+    id: 'm',
+    html: generateMarkerHTML({
+      type: 'multiple',
+      label: '+5',
+    }),
+    visibility: 'visible',
+  });
   const onceInfoWindow = new myInfoWindow({
-    latlng: new google.maps.LatLng( -34.412, 150.660),
+    latlng: new google.maps.LatLng( 50.4449, 30.5087),
     siema: mapSiema,
     html: generateInfoWindowHTML({
       cards: [
@@ -261,23 +298,13 @@ window.initMap = function () {
     map: map,
     visibility: 'hidden',
   });
-  const multipleMarker = new HTMLMapMarker({
-    latlng: new google.maps.LatLng(-34.407, 150.644),
-    map: map,
-    id: 'm',
-    html: generateMarkerHTML({
-      type: 'multiple',
-      label: '+5',
-    }),
-    visibility: 'visible',
-  });
   const multipleInfoWindow = new myInfoWindow({
-    latlng: new google.maps.LatLng(-34.407, 150.644),
+    latlng: new google.maps.LatLng(50.4549, 30.5107),
     siema: mapSiema,
     html: generateInfoWindowHTML({
       cards: [
         {
-          image: 'img/room-4',
+          image: 'img/room-1',
           title: 'Gonchara Street 26 1',
           subtitle: 'Tetris Hall',
           text: '1 bt, 3 bd, 9 floor, 121 sqm',
@@ -286,7 +313,7 @@ window.initMap = function () {
           month: true,
         },
         {
-          image: 'img/room-4',
+          image: 'img/room-2',
           title: 'Gonchara Street 26 2',
           subtitle: 'Tetris Hall',
           text: '1 bt, 3 bd, 9 floor, 121 sqm',
@@ -295,7 +322,7 @@ window.initMap = function () {
           month: true,
         },
         {
-          image: 'img/room-4',
+          image: 'img/room-3',
           title: 'Gonchara Street 26 3',
           subtitle: 'Tetris Hall',
           text: '1 bt, 3 bd, 9 floor, 121 sqm',
@@ -313,7 +340,7 @@ window.initMap = function () {
           month: true,
         },
         {
-          image: 'img/room-4',
+          image: 'img/room-5',
           title: 'Gonchara Street 26 5',
           subtitle: 'Tetris Hall',
           text: '1 bt, 3 bd, 9 floor, 121 sqm',
@@ -332,19 +359,9 @@ window.initMap = function () {
 Vue.component('v-select', vSelect);
 Vue.use(Siema);
 
-const menu = new Vue({
-  el: '#header',
-  mixins: [adaptiveMixin, menuMixin],
-});
-
-const filter = new Vue({
-  el: '#filter',
-  mixins: [adaptiveMixin, filterMixin],
-});
-
-const main = new Vue({
-  el: '#main',
-  mixins: [adaptiveMixin, weCanMixin],
+const app = new Vue({
+  el: '#app',
+  mixins: [adaptiveMixin, menuMixin, filterMixin, siemaLazyInitMixin],
   data () {
     return {
       viewTab: true,
@@ -369,17 +386,21 @@ const main = new Vue({
       },
     };
   },
+  mounted () {
+    if (!this.isSmDesktop) {
+      document.querySelectorAll('.full-item-card__control').forEach(el => el.classList.add('active'));
+    }
+    this.ll = ll;
+  },
   methods: {
     initSiema (siema) {
       const w = siema.$el.clientWidth;
       siema.$el.style.height = `${w*179/278}px`;
-      promiseMod.then(() => {
-        for (let i of siema.$el.getElementsByClassName('full-item-card__image')) {
-          const imgSrc = i.getAttribute('data-src');
-          Modernizr.on('webp', webp => i.style.backgroundImage = `url("${imgSrc}.${webp ? 'webp' : 'jpg'}")`);
-          i.style.height = `${w*179/278}px`;
-        }
-      });
+      for (let i of siema.$el.getElementsByClassName('full-item-card__image')) {
+        const imgSrc = i.getAttribute('data-src');
+        i.style.backgroundImage = `url("${imgSrc}.${isWebp ? 'webp' : 'jpg'}")`;
+        i.style.height = `${w*179/278}px`;
+      }
     },
     changeActiveControlImage (el) {
       for (let i of el.getElementsByClassName('full-item-card__control')) {
@@ -391,12 +412,12 @@ const main = new Vue({
       if (el.classList.contains('full-item-card__control')) return;
       while (!el.classList.contains('full-item-card__image-wrapper'))
         el = el.parentElement;
-      if (!this.isDesktop) {
+      if (!this.isSmDesktop) {
         this.changeActiveControlImage(el);
       }
     },
     changeWrapper (ev) {
-      if (this.isDesktop) {
+      if (this.isSmDesktop) {
         this.changeActiveControlImage(ev.target);
       }
     },
@@ -404,14 +425,19 @@ const main = new Vue({
       el.classList.toggle('active');
     },
     clickCard (ev) {
-      if (!this.isTab) {
+      if (!this.isSmTab) {
         this.changeActiveCard(ev.target);
       }
     },
     changeCard (ev) {
-      if (this.isDesktop) {
+      if (this.isSmDesktop) {
         this.changeActiveCard(ev.target);
       }
+    },
+    clickMyButton (ev) {
+      const ref = ev.target;
+      const nDirection = ref.getAttribute('data-direction');
+      ref.setAttribute('data-direction', nDirection === 'top' ? 'bottom' : 'top');
     },
     initDrag () {
       this.drag.startX = 0;

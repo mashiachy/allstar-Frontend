@@ -6,7 +6,7 @@ const gulp = require('gulp'),
       autoprefixer = require('gulp-autoprefixer'),
       pug = require('gulp-pug'),
       beaty = require('gulp-html-beautify'),
-      uglify = require('gulp-uglify'),
+      uglify = require('gulp-uglify-es').default,
       sourcemap = require('gulp-sourcemaps'),
       webpcss = require('gulp-webpcss'),
       argv = require('yargs').argv,
@@ -38,15 +38,15 @@ gulp.task('js-watch', gulp.series('js', done => {
 const sassGlob = require('gulp-sass-glob');
 
 const whitelistPtrs = {
-  'home': [/appearance/, /vs/, /service-card/, /lang/, /scaleBack/],
-  '404': [/appearance/, ],
+  'home': [/appearance/, /vs/, /service-card/, /lang/, /animation/,],
+  '404': [/appearance/, /footer/, /lang/],
   'mail': [],
   'a4': [],
   'text_page': [/appearance/, /vs/, /service-card/, /lang/, /filter/],
   'useful_information': [/appearance/, /vs/, /service-card/, /lang/, /filter/],
   'category': [/appearance/, /vs/, /service-card/, /lang/, /we-can/, /marker/, /info-window/, /map-control/, /map-card/],
-  'category_more': [/appearance/, /vs/, /service-card/, /lang/,],
-  'application': [/appearance/, /vs/, /service-card/, /lang/,],
+  'category_more': [/appearance/, /vs/, /service-card/, /lang/, /map-control/,],
+  'application': [/appearance/, /vs/, /service-card/, /lang/, /highlight/,],
   'contacts': [/appearance/, /vs/, /service-card/, /lang/,],
 };
 

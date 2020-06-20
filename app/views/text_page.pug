@@ -8,6 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title AllStars | text_page
+    link(rel='shortcut icon' href='img/favicon.png' type='image/png')
     link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")
     link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")
     link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")
@@ -15,36 +16,37 @@ html(lang="us")
     link(rel="preload" href="css/text_page.css" as="style")
     link(rel="preload" href="js/text_page.js" as="script")
     link(href="css/text_page.css" rel="stylesheet")
-    script.
-      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));
+    script(defer src="js/text_page.js")
   body
-    +top-menu('_inline', '_dark', '_shadow')
-    +b.SECTION(class='inline-filter-section' id='filter' v-if='isDesktop')
-      +inline-filter
-    +b.MAIN.main.content
-      +b.SECTION.route
-        +e.SPAN.button
-        +e.P.line
-          a(href='#') Home
-          =' / '
-          a(href='#') Apartments for Sale in Kiev
-          =' / '
-          a(href='#') Gonchara Street 26
-      +b.SECTION(data-lazy).image
-      +b.SECTION.text
-        +e.H2.header_1 Big title
-        +b.article_1
-          +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-        +e.H2.header_2 How we can help
-        +b.article_2
-          +e.H3.subheader Big title
-          +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-        +b.article_3
-          +e.H3.subheader Big title
-          +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-        +e.H2.header_3 Big title
-        +b.article_4
-          +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-    +footer
+    +b.gotop
+      +e.A().link
+    div#app
+      +top-menu('_inline', '_dark', '_shadow')
+      +b.SECTION(class='inline-filter-section' id='filter')
+        +inline-filter
+      +b.MAIN.main.content
+        +b.SECTION.route
+          +e.SPAN.button
+          +e.P.line
+            a(href='#') Home
+            =' / '
+            a(href='#') Apartments for Sale in Kiev
+            =' / '
+            a(href='#') Gonchara Street 26
+        +b.SECTION(data-lazy).image
+        +b.SECTION.text
+          +e.H1.header_1._great.animated Big title
+          +b.article_1
+            +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+          +e.H2.header_2.animated How we can help
+          +b.article_2
+            +e.H3.subheader.animated Big title
+            +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+          +b.article_3
+            +e.H3.subheader.animated Big title
+            +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+          +e.H2.header_3.animated Big title
+          +b.article_4
+            +e.P.text "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
 
-    script(src="js/text_page.js")
+    +footer

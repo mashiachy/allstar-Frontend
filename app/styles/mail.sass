@@ -25,20 +25,23 @@
     height: 39px
 
 .bottom-footer
-  position: absolute
-  left: 30px
-  right: 30px
-  bottom: 39px
-  height: 118px
+  min-height: 118px
   border-radius: 8px
   background-color: $blue
   color: white
   padding: 38px 38px 40px
   box-sizing: border-box
-  @include flex(row, nowrap)
+  @include flex(row, wrap)
   @include flex-setting(space-between)
   & > *
-    width: 29%
+    width: 100%
+    &:not(:last-child)
+      margin-bottom: 18px
+    @include adaptive(440px)
+      width: 46%
+    @include adaptive(600px)
+      width: 29%
+      margin-bottom: unset
     color: inherit
     font-size: 14px
     line-height: 20px

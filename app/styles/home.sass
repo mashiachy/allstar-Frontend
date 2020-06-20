@@ -1,5 +1,12 @@
 @import "mixins"
 
+body
+  padding-top: 1052px
+  @include adaptive(768px)
+    padding-top: 626px
+  @include adaptive(1024px)
+    padding-top: 686px
+
 .orange-text
   color: $orange
 
@@ -12,67 +19,51 @@
   border-bottom-left-radius: 26px
   z-index: 1
   background-color: #ccaf95
-  background-position: bottom 0 left -51px
+  background-position: bottom 0 left 0
   background-repeat: no-repeat
   overflow: hidden
   color: white
   will-change: background-position, background-size
   &.animation
-      animation: 2s 1 scaleBack1
-  &.loaded
-    background-image: url("../img/back-mobile.jpg")
+    animation: scaleBack5 1s 1 linear
+  @include adaptive(568px)
+    background-position: bottom 0 left -51px
+    &.animation
+      animation: scaleBack1 1s 1 linear
   @include adaptive(640px)
     background-position: bottom 0 left 0
-  @include adaptive(700px)
-    &.loaded
-      background-image: url("../img/back-tab.jpg")
     &.animation
-      animation: 2s 1 scaleBack2
+      animation: scaleBack4 1s 1 linear
+  @include adaptive(700px)
+    &.animation
+      animation: scaleBack2 1s 1 linear
   @include adaptive(768px)
     width: unset
     max-width: unset
     left: calc(2.6% + 334px)
     height: 594px
     background-position: bottom 0 left -57px
-  @include adaptive(1120px)
-    background-position: bottom 0 left 0
-  @include adaptive(1149px)
-    left: unset
-    width: 65.20%
-  @include adaptive(1197px)
-    width: 780.44px
-  @include adaptive(1280px)
-    background-size: 100% 100%
-    background-position: left 0 top 0
+    &.animation
+      animation: scaleBack3 1s 1 linear
+  @include adaptive(1024px)
+    background-size: 1183px 730px
+    background-position: left 0 bottom 0
     height: 657px
     left: calc(50% - 160px)
     width: unset
-    &.loaded
-      background-image: url("../img/back-desktop.jpg")
     &.animation
-      animation: 2s 1 scaleBack
+      animation: scaleBack 1s 1 linear
   @include adaptive(1920px)
-    background-position: left 0 top 0
-    background-size: 100% 100%
     width: 1134px
     right: unset
   &__shadow
     position: absolute
-    width: 171.34%
-    height: 93.49%
-    left: -24.82%
-    top: 30.12%
+    width: 100%
+    height: 100%
     background-color: black
     mix-blend-mode: normal
-    opacity: 0.47
-    box-shadow: 0px 2px 43px rgba(0, 0, 0, 0.5)
-    filter: blur(135.914px)
+    opacity: 0.50
     z-index: 2
-    @include adaptive(768px)
-      width: 251.82%
-      height: 82.15%
-      top: 44.61%
-      left: -35.11%
   &__title
     margin: 0
     position: absolute
@@ -91,13 +82,11 @@
       width: 70.46%
       font-size: 41px
       line-height: 45px
-    @include adaptive(1140px)
+    @include adaptive(1024px)
       font-size: 56px
       line-height: 53px
       left: 62px
-      bottom: 200px
       width: 456px
-    @include adaptive(1280px)
       bottom: 216px
     @include adaptive(1920px)
       bottom: unset
@@ -120,17 +109,63 @@
       font-size: 14px
       line-height: 23px
       width: 72.40%
-    @include adaptive(1140px)
+    @include adaptive(1024px)
       font-size: 16px
       line-height: 25px
       left: 62px
-      top: 446px
       width: 526px
-    @include adaptive(1280px)
       top: 507px
     @include adaptive(1920px)
       left: 63px
       top: 507px
+
+@keyframes scaleBack1
+  0%
+    background-position: bottom 0 left -100px
+    background-size: 756.8px 567.6px
+  100%
+    background-position: bottom 0 left -51px
+    background-size: 688px 516px
+
+@keyframes scaleBack4
+  0%
+    background-position: bottom 0 left -50px
+    background-size: 756.8px 567.6px
+  100%
+    background-position: bottom 0 left 0
+    background-size: 688px 516px
+
+@keyframes scaleBack5
+  0%
+    background-position: bottom 0 left -50px
+    background-size: 606.1px 567.6px
+  100%
+    background-position: bottom 0 left 0
+    background-size: 551px 516px
+
+@keyframes scaleBack2
+  0%
+    background-position: bottom 0 left -50px
+    background-size: 859.1px 644.6px
+  100%
+    background-position: bottom 0 left 0
+    background-size: 781px 586px
+
+@keyframes scaleBack3
+  0%
+    background-position: bottom 0 left -110px
+    background-size: 859.1px 644.6px
+  100%
+    background-position: bottom 0 left -57px
+    background-size: 781px 586px
+
+@keyframes scaleBack
+  0%
+    background-size: 1301.1px 803px
+    background-position: left -50px bottom 0
+  100%
+    background-size: 1183px 730px
+    background-position: left 0 bottom 0
 
 .filter
   position: absolute
@@ -144,12 +179,9 @@
   padding: 29px 20px 22px
   @include shadow
   &.extended
-    //height: 906px
     @include adaptive(768px)
-      //height: 500px
       width: 609px
   @include flex(column, wrap)
-  //@include flex-setting(space-between)
   @include adaptive(445px)
     left: calc(100% - 431px)
     width: unset
@@ -166,13 +198,14 @@
     width: 315px
     min-width: 315px
     z-index: 10
+  @include adaptive(1024px)
+    top: 159px
   @include adaptive(1149px)
     left: calc(34.8% - 334px)
   @include adaptive(1197px)
     left: calc(100% - 1114.44px)
   @include adaptive(1280px)
     left: calc(50% - 511px)
-    top: 159px
   @include adaptive(768px)
     & > *
       max-width: 275px
@@ -241,10 +274,10 @@
       @include adaptive(768px)
         visibility: hidden
   .other-options
-    //height: 390px
+    display: none
     width: 100%
-    //@include flex(column)
-    //@include flex-setting(space-between)
+    &.active
+      display: block
     & > *:not(.checkbox-list)
       margin-bottom: 20px
     & > .checkbox-list:not(:last-child)
@@ -313,7 +346,7 @@
     margin-bottom: 24px
   @include adaptive(1280px)
     margin-bottom: 46px
-  &__siema-wrapper
+  &__siema-wrapper_client
     max-height: 156px
     min-height: 107px
     width: 100%
@@ -326,6 +359,17 @@
     @include adaptive(768px)
       padding-top: 35px
       padding-bottom: 17px
+  &__siema-wrapper_company
+    width: 100%
+    margin-bottom: 22px
+    overflow: hidden
+    max-height: 99px
+    min-height: 45px
+    box-sizing: border-box
+    @include adaptive(768px)
+      margin-bottom: 45px
+    @include adaptive(1280px)
+      margin-bottom: 54px
   &__siema-client
     width: calc(100% + 30px)
     margin-left: -15px
@@ -333,12 +377,15 @@
       @include centerMargin
       display: none
       max-width: 75px
-      @include adaptive(768px)
-        max-width: 90px
       &__image
         margin-bottom: 5.5px
-        max-height: 35px
+        max-height: 45px
+        min-height: 38px
         width: 100%
+      @include adaptive(768px)
+        max-width: 90px
+        &__image
+          min-height: 45px
       &__text
         font-size: 14px
         line-height: 18px
@@ -349,16 +396,13 @@
   &__siema-company
     padding-top: 25px
     background-color: transparent
-    margin-bottom: 22px
     overflow: hidden
     max-height: 99px
     min-height: 45px
     @include adaptive(768px)
       padding-top: 35px
-      margin-bottom: 45px
     @include adaptive(1280px)
       padding-top: 45px
-      margin-bottom: 54px
     .company
       display: none
       @include centerMargin
@@ -368,6 +412,9 @@
       &__image
         width: 100%
         vertical-align: center
+        min-height: 42.5px
+        @include adaptive(1280px)
+          min-height: 50px
     &.active .company
       display: block
   &__about
@@ -413,6 +460,7 @@
       margin-bottom: 20px
   &__siema-wrapper
     overflow: visible
+    min-height: 260px
     @include adaptive(1280px)
     width: calc(100% + 30px)
     margin-left: -15px

@@ -1,7 +1,12 @@
 @import "mixins"
 
-.inline-filter-section
-  margin-top: 86px
+body
+  box-sizing: border-box
+  padding-top: 65px
+  @include adaptive(768px)
+    padding-top: 60px
+  @include adaptive(1024px)
+    padding-top: 86px
 
 .main
   margin-top: 10px
@@ -17,14 +22,10 @@
   background-color: #cbb792
   background-position: left -72px top -13px
   margin-bottom: 27px
-  &.loaded
-    background-image: url("../img/back-text-mobile.jpg")
   @include adaptive(500px)
     background-position: top -13px right 0
   @include adaptive(575px)
     background-position: left -72px top -346px
-    &.loaded
-      background-image: url("../img/back-text.jpg")
   @include adaptive(768px)
     height: 267px
     margin-bottom: 36px
@@ -42,6 +43,9 @@
     font-size: 24px
     line-height: 28px
     font-weight: 800
+    &_great
+      font-size: 30px
+      line-height: 36px
     &_1, &_3
       margin-bottom: 11px
     &_2
