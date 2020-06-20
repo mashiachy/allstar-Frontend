@@ -1,0 +1,57 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title AllStars | about_us
+    link(rel='shortcut icon' href='img/favicon.png' type='image/png')
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet")
+    link(rel="preload" href="css/about_us.css" as="style")
+    link(href="css/about_us.css" rel="stylesheet")
+    script(defer src="js/about_us.js")
+  body
+    +b.gotop
+      +e.A().link
+    div#app
+      +top-menu('_inline', '_dark', '_shadow')
+      +b.SECTION(class='inline-filter-section' id='filter')
+        +inline-filter
+      +b.MAIN.main#main
+        +b.SECTION.route.content
+          +e.SPAN.button
+          +e.P.line
+            a(href='#') Home
+            =' / '
+            a(href='#') Apartments for Sale in Kiev
+            =' / '
+            a(href='#') Gonchara Street 26
+        +b.SECTION.about-us.content
+          +e.block_1
+            +e.H1.title We are happy to welcome You to All Star Kiev Realty!
+            +e.text Real estate Agency All Star Kiev Realty is a team of professionals that specializes in the selection of real estate for rent (apartments, houses and offices) for embassies, diplomatic missions, international companies and other foreign clients in Kiev.
+            +e.tags
+              each tag in ['Посольство США', 'USAID', 'Посольство Польши', 'OTP Bank', 'Wizzair', 'Kyivstar']
+                +b.tag= tag
+            +e.tags
+              each tag in ['Platinum Bank', 'LG Electronics Ukraine', 'Hyundai Motors', 'Ukraine', 'Ericsson Ukraine', 'Media Group Ukraine']
+                +b.tag= tag
+          +e.block_2
+            +e.FIGURE.avatar-wrapper
+              +picture('img/director.webp', 'img/director.png', 'Avatar', 'about-us__image')
+            +e.title Laura Kim
+            +e.text.small Director
+          +e.block_3
+            +e.text Another advantage of All Star Kiev Realty is dynamics and flexibility in relationships: we offer individual terms of cooperation to each client.Owners of apartments in the center of Kiev or areas close to the center, the Agency All Star Kiev Realty guarantees a quick selection of a respectable and solvent tenant. Leave a request and we will rent Your apartment for a long-term lease.
+            +e.text We are waiting for You in our office at the address:
+            +e.text_icon._place.bold 13-15 Bolsunovskaya str., 8th floor, BC IQ, Kiev
+            +e.text We will be happy to answer all your questions by phone:
+            +e.text_icon._phone.bold (044) 22-33-177, (067) 656-2023
+            +e.text Our email address:
+            +e.text_icon._email.orange contactus@allstar.com.ua
+
+      +listings
+    +footer

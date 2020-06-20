@@ -48,6 +48,7 @@ const whitelistPtrs = {
   'category_more': [/appearance/, /vs/, /service-card/, /lang/, /map-control/,],
   'application': [/appearance/, /vs/, /service-card/, /lang/, /highlight/,],
   'contacts': [/appearance/, /vs/, /service-card/, /lang/,],
+  'about_us': [/appearance/, /vs/, /service-card/, /lang/,]
 };
 
 gulp.task('sass',  () => {
@@ -136,17 +137,11 @@ gulp.task('new-page', (done) => {
     '    meta(name="viewport" content="width=device-width, initial-scale=1")\n' +
     '    meta(name="robots" content="noindex, nofollow")\n' +
     `    title AllStars | ${name}\n` +
-    '    link(rel="preload" href="css/fonts/Roboto-Regular.ttf" as="font" crossorigin="anonymous")\n' +
-    '    link(rel="preload" href="css/fonts/Roboto-Medium.ttf" as="font" crossorigin="anonymous")\n' +
-    '    link(rel="preload" href="css/fonts/Roboto-Bold.ttf" as="font" crossorigin="anonymous")\n' +
-    '    link(rel="preload" href="css/fonts/Roboto-Black.ttf" as="font" crossorigin="anonymous")\n' +
+    '    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet")' +
     `    link(rel="preload" href="css/${name}.css" as="style")\n` +
-    `    link(rel="preload" href="js/${name}.js" as="script")\n` +
     `    link(href="css/${name}.css" rel="stylesheet")\n` +
-    '    script.\n' +
-    '      window.addEventListener("load",()=>document.querySelectorAll("[data-lazy]").forEach(d=>d.classList.add("loaded")));\n' +
-    '  body\n\n\n' +
-    `    script(src="js/${name}.js")`,
+    `    script(defer src="js/${name}.js")`+
+    '  body\n\n\n',
     console.log);
   createFile(`app/styles/${name}.sass`,
     '@import "mixins"',
@@ -155,9 +150,7 @@ gulp.task('new-page', (done) => {
     'import Vue from \'vue\';\n' +
     'import vSelect from \'vue-select\';\n' +
     'import Siema from \'vue2-siema\';\n' +
-    'import {adaptiveMixin, promiseModInit} from "./base";\n' +
-    '\n' +
-    'const promiseMod = promiseModInit();',
+    'import {adaptiveMixin} from "./base";\n' +
     console.log);
   done();
 });

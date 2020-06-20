@@ -1,0 +1,145 @@
+@import "mixins"
+
+body
+  box-sizing: border-box
+  padding-top: 65px
+  @include adaptive(768px)
+    padding-top: 60px
+  @include adaptive(1024px)
+    padding-top: 86px
+
+.main
+  margin-top: 10px
+  @include adaptive(1280px)
+    margin-top: 24px
+
+.route
+  margin-bottom: 16px
+
+.about-us
+  margin-bottom: 20px
+  @include adaptive(768px)
+    margin-bottom: 66px
+    @include flex(row, wrap)
+    @include flex-setting(space-between, stretch)
+  @include adaptive(1024px)
+    margin-bottom: 51px
+  &__block
+    width: 100%
+    &_1
+      margin-bottom: 20px
+      & > *:not(:last-child)
+        margin-bottom: 8px
+        @include maxAdaptive(479px)
+          width: 100%
+      @include adaptive(480px)
+        @include flex(row, wrap)
+      @include adaptive(768px)
+        width: calc(64.5117% - 26px)
+      @include adaptive(1024px)
+        padding-top: 30px
+        padding-left: 47px
+        box-sizing: border-box
+        width: calc(100% - 349px)
+    &_2
+      padding-top: 23px
+      padding-bottom: 26px
+      background-color: white
+      border-radius: 12px
+      box-shadow: $thisShadow
+      margin-bottom: 41px
+      & > *
+        @include centerMargin
+        width: fit-content
+      @include adaptive(768px)
+        width: 35.4883%
+        padding-bottom: 35px
+      @include adaptive(1024px)
+        width: 320px
+        padding-top: 30px
+    &_3
+      @include adaptive(768px)
+        padding: 40px 60px 45px 47px
+        border-radius: 12px
+        background-image: white
+        box-sizing: border-box
+        box-shadow: $thisShadow
+  &__tags
+    @include adaptive(480px)
+      margin-bottom: unset
+      width: 50%
+  .tag
+    font-weight: 700
+  &__avatar-wrapper
+    box-sizing: border-box
+    padding: 8px
+    border-radius: 50%
+    border: 1px solid $orange
+    width: 186px
+    height: 186px
+    display: block
+    overflow: hidden
+  &__block_1 &__text
+    margin-bottom: 15px
+  &__text
+    font-size: 12px
+    line-height: 24px
+    &.orange
+      color: $orange
+    &.bold
+      font-weight: 700
+    &.small
+      font-size: 10px
+      line-height: 12px
+    &_icon
+      padding-left: 21px
+      box-sizing: border-box
+      position: relative
+      &:after
+        position: absolute
+        content: ''
+        left: 0
+        top: 2px
+        height: 100%
+        background-size: contain
+        background-repeat: no-repeat
+        background-position: left 0 top 5px
+    &_place:after
+      background-image: url("../img/place-blue.svg")
+      width: 7px
+    &_phone:after
+      background-image: url("../img/phone-blue.svg")
+      width: 10px
+    &_email:after
+      width: 14px
+      background-image: url("../img/email-icon-orange.svg")
+  &__title
+    font-size: 15px
+    line-height: 18px
+    font-weight: 700
+  &__block_2 &__avatar-wrapper
+    margin-bottom: 15px
+  &__block_2 &__title
+    margin-bottom: 5px
+
+.listing_2
+  margin-bottom: 15px
+  @include adaptive(768px)
+    margin-bottom: 40px
+  @include adaptive(1280px)
+    margin-bottom: 60px
+
+.tag
+  box-sizing: border-box
+  padding-left: 19px
+  font-size: 12px
+  line-height: 23px
+  position: relative
+  &:after
+    content: ''
+    position: absolute
+    top: 2px
+    left: 0
+    width: 10px
+    height: 12px
+    background-image: url("../img/ok-icon.svg")
