@@ -18,8 +18,6 @@ html(lang="us")
       +e.A().link
     div#app
       +top-menu('_inline', '_dark', '_shadow')
-      +b.SECTION(class='inline-filter-section' id='filter')
-        +inline-filter
       +b.MAIN.main#main
         +b.SECTION.route.content
           +e.SPAN.button
@@ -63,5 +61,5 @@ html(lang="us")
               +e.DIV(v-for='file in form.files' :key='file.name').file-item {{ file.name | filterLength(15) }}
                 +e.A(@click.prevent='deleteFile(file)').delete-file
             +e.BUTTON(type='submit').submit.show Submit
-        +listings
+        +we-can('_row')
     +footer

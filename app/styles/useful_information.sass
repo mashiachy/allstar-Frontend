@@ -33,7 +33,7 @@ body
   @include flex(column)
   @include flex-setting(flex-start, stretch)
   @include adaptive(768px)
-    @include flex(row, nowrap)
+    @include flex(row, wrap)
     @include flex-setting(space-between, flex-start)
   &__navigation
     background-color: white
@@ -46,18 +46,20 @@ body
     margin-bottom: 38px
     @include adaptive(768px)
       margin-bottom: unset
-      max-width: 236px
+      max-width: 311px
   &__navigation > &__link:not(:last-child)
     margin-bottom: 14px
   &__link
     color: inherit
     display: block
+    font-size: 14px
+    line-height: 27px
     &.current
       color: $orange
       text-decoration: underline
   &__block-text
     @include adaptive(768px)
-      width: calc(100% - 275px)
+      width: calc(100% - 350px)
   &__block-text > &__header:not(:last-child)
     margin-bottom: 16px
   &__block-text > &__title:not(:last-child)
@@ -68,11 +70,20 @@ body
     font-size: 30px
     line-height: 38px
     font-weight: 700
+    &_1
+      width: 100%
+      margin-bottom: 11px
+      margin-top: 5px
+      @include adaptive(768px)
+        display: none
+    &_2
+      @include maxAdaptive(767px)
+        display: none
   &__title
     font-size: 24px
     line-height: 28px
     font-weight: 700
   &__text
-    font-size: 14px
+    font-size: 16px
     line-height: 27px
     font-weight: 400

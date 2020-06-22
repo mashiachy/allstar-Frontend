@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import vSelect from 'vue-select';
-import {adaptiveMixin, menuMixin, filterMixin, myWOW, goTopInit, webpInit, LazyLoader, screen, isWebp} from "./base";
+import {adaptiveMixin, menuMixin, myWOW, goTopInit, webpInit, LazyLoader, screen, isWebp} from "./base";
 
 webpInit();
 const wow = myWOW({selector: '.animated'});
@@ -25,5 +25,5 @@ Vue.component('v-select', vSelect);
 
 const app = new Vue({
   el: '#app',
-  mixins: [adaptiveMixin, menuMixin, filterMixin],
+  mixins: [adaptiveMixin, menuMixin,],
 });

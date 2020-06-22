@@ -25,6 +25,9 @@ picture
   body
     scroll-behavior: smooth
 
+html
+  -webkit-text-size-adjust: 100%
+
 body
   overflow-x: hidden
   overflow-y: auto
@@ -57,12 +60,12 @@ picture
 .content
   @include centerMargin
   max-width: 300px
-  width: 95%
+  width: 90%
   @include adaptive(320px)
     max-width: 728px
-    width: 93.75%
+    //width: 93.75%
   @include adaptive(768px)
-    width: 94.79%
+    //width: 94.79%
     max-width: 1090px
   @include adaptive(1280px)
     max-width: unset
@@ -147,6 +150,10 @@ picture
   &.shared &__button
     display: block
     animation: appearanceOpacity .25s linear 1
+    will-change: background-color
+    transition: background-color .25s ease-out
+    &:hover
+      background-color: #d6d6d6
 
 .top
   position: fixed
@@ -170,9 +177,10 @@ picture
       background-color: transparent
       padding-left: 3.5%
       @include centerMargin
-      width: 94.79%
+      width: 90%
       max-width: 1090px
     @include adaptive(1280px)
+      padding-left: 5%
       max-width: unset
       width: 1090px
   @include adaptive(1024px)
@@ -187,9 +195,8 @@ picture
       @include centerMargin
     @include adaptive(320px)
       max-width: 728px
-      width: 93.75%
+      width: 90%
     @include adaptive(768px)
-      width: 94.79%
       max-width: 1090px
     @include adaptive(1024px)
       width: unset
@@ -457,6 +464,8 @@ picture
     background-color: rgba(233,106,0,0.06)
   &__sub-nav > &__item &__link:active
     background-color: rgba(233,106,0,0.1)
+  &__image-li
+    display: none
   @include adaptive(1024px)
     &__sub-nav
       position: absolute
@@ -494,9 +503,7 @@ picture
       position: absolute
       top: 25px
       right: 25px
-      display: none
-      @include adaptive(1024px)
-        display: block
+      display: block
     &__image
       border-radius: 9px
       width: 293px
@@ -783,7 +790,7 @@ picture
     padding-left: 19px
     position: relative
   &__selected
-    font-size: 14px
+    font-size: 15px
     line-height: 16px
   &__search
     position: absolute
@@ -811,10 +818,13 @@ picture
     padding-top: 6px
     padding-left: 6px
     position: relative
-    font-size: 14px
+    font-size: 15px
     line-height: 16px
+    cursor: pointer
+    &:hover
+      background-color: rgba(0,0,0,0.05)
     &--selected
-      background-color: rgba(233,106,0,0.06)
+      background-color: rgba(233,106,0,0.06) !important
     &:after
       content: ''
       position: absolute
@@ -855,7 +865,7 @@ picture
   padding-left: 26px
   height: 16px
   cursor: pointer
-  font-size: 14px
+  font-size: 15px
   line-height: 16px
   user-select: none
   &__input
@@ -984,7 +994,7 @@ picture
     width: 100%
     border-radius: 7px
     margin-bottom: 7px
-    min-height: 139px
+    min-height: 111px
   &__title
     font-size: 15px
     line-height: 18px
@@ -999,16 +1009,44 @@ picture
     padding-left: 6px
     font-size: 14px
     line-height: 16px
+    margin-bottom: 4px
+  &__tags
+    height: 16px
     margin-bottom: 8px
-  &__option
-    position: absolute
-    right: 0
-    opacity: 0.4095
+  .tag
+    display: inline-block
+    box-sizing: border-box
+    padding-left: 19px
+    margin-right: 6px
+    font-size: 12px
+    line-height: 16px
+    position: relative
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      width: 10px
+      height: 12px
+      background-image: url("../img/ok-icon.svg")
+      background-size: 10px 12px
   &__footer
     width: 100%
     text-align: right
     color: $orange
     font-weight: 700
+    &[data-option]:not([data-option=''])
+      box-sizing: border-box
+      padding-top: 16px
+      position: relative
+      &:after
+        content: attr(data-option)
+        position: absolute
+        top: 0
+        right: 0
+        font-weight: 400
+        color: $blue
+        opacity: 0.4095
 
 .testimonial
   background-color: white
@@ -1040,6 +1078,8 @@ picture
     font-weight: 700
   &__whois
     margin-top: -1px
+  &__content
+    font-size: 16px
 
 @keyframes loaderCenterPos
   0%
@@ -1184,11 +1224,10 @@ picture
     @include adaptive(667px)
       margin-left: unset
   &__tags
-    display: none
-    width: 65.4%
+    @include flex(row, wrap)
+    @include flex-setting(flex-start, flex-start)
     @include adaptive(667px)
-      @include flex(row, wrap)
-      @include flex-setting(flex-start, flex-start)
+      width: 65.4%
     @include adaptive(1024px)
       width: 85%
   &__tag
@@ -1341,12 +1380,12 @@ picture
       transform: translate(0)
       transition: transform .25s ease-out
     &__title
-      font-size: 15px
+      font-size: 17px
       line-height: 20px
       font-weight: 700
       margin-bottom: 17px
     &__text
-      font-size: 14px
+      font-size: 16px
       line-height: 28px
       margin-bottom: 12px
       @include adaptive(1280px)
@@ -1391,15 +1430,16 @@ picture
         background-color: white
         padding: 49px 32px 45px 48px
         width: 326px
-        min-height: 449px
+        min-height: 479px
         @include flex(column)
-        @include flex-setting(space-between)
         &:nth-child(2)
           margin-left: 30px
         &:nth-child(4)
           margin-right: 30px
         &__text
           width: 216px
+        & > *:last-child
+          margin-top: auto
       &:hover .service-card
         margin-left: unset
         transform: unset
@@ -1450,8 +1490,9 @@ picture
     &::-webkit-input-placeholder,
     &::-moz-placeholder,
     &:-moz-placeholder,
-    &:-ms-input-placeholder
-      color: #C3C9CF
+    &:-ms-input-placeholder,
+    &::placeholder
+      color: #d0d8de
   &_gray &__search-input
     background-color: rgba(216,216,216,0.16)
     box-shadow: none
@@ -1469,7 +1510,7 @@ picture
   box-sizing: border-box
   padding-left: 20px
   position: relative
-  font-size: 14px
+  font-size: 15px
   line-height: 16px
   @include flex
   @include flex-setting(space-between)
@@ -1564,11 +1605,10 @@ picture
     width: 95%
     @include adaptive(320px)
       max-width: 728px
-      width: 93.75%
+      width: 90%
     @include adaptive(768px)
       padding-top: 11px
       padding-bottom: 13px
-      width: 94.79%
       max-width: 1090px
     @include adaptive(1280px)
       margin-left: unset
@@ -1997,6 +2037,7 @@ picture
     width: 100%
     height: 100%
     border-radius: 50%
+    overflow: hidden
     border: 6.5px solid white
     @include smShadow
   &__image
@@ -2045,28 +2086,31 @@ picture
   display: block
   height: 36px
   width: 100%
-  font-size: 14px
+  font-size: 15px
   line-height: 16px
   position: relative
+  &:after
+    content: ''
+    position: absolute
+    width: 5px
+    height: 5px
+    background-image: url("../img/triangle.svg")
+    background-size: contain
+    top: 17px
+    right: 11px
   &__label
     width: 100%
     height: 100%
     box-sizing: border-box
-    padding-left: 19px
-    padding-top: 10px
-    position: absolute
+    padding: 2px 0 0 19px
+    position: relative
     background-color: rgba(216, 216, 216, 0.16)
     border-radius: 7px
     cursor: pointer
-    &:after
-      content: ''
-      position: absolute
-      width: 5px
-      height: 5px
-      background-image: url("../img/triangle.svg")
-      background-size: contain
-      top: 17px
-      right: 11px
+    border: 0 !important
+    outline: 0 !important
+    font: inherit
+    color: inherit
   &__dropdown-menu
     display: none
   &.extended
@@ -2091,7 +2135,7 @@ picture
     padding-top: 6px
     padding-left: 6px
     position: relative
-    font-size: 14px
+    font-size: 15px
     line-height: 16px
     &:after
       content: ''

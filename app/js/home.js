@@ -96,7 +96,7 @@ const app = new Vue({
         easing: 'ease-out',
         perPage: {
           320: 2,
-          480: 3,
+          380: 3,
           576: 4,
           640: 5,
           991: 6,
@@ -115,7 +115,7 @@ const app = new Vue({
         easing: 'ease-out',
         perPage: {
           320: 2,
-          480: 3,
+          380: 3,
           576: 4,
           640: 5,
           768: 6,
@@ -158,7 +158,7 @@ const app = new Vue({
       if (!this.isTab) {
         document.body.style.paddingTop = `${val ? 1445 : 1065}px`;
       }
-      this.$refs.moreLabel.innerHTML = `${val?'More options +':'Hide options -'}`;
+      this.$refs.moreLabel.innerHTML = `${!val?'More options +':'Hide options -'}`;
     },
   },
   mounted () {

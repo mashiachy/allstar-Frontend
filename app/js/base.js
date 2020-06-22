@@ -21,7 +21,9 @@ function myWOW ({selector}) {
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('appearance');
+        if (entry.target.hasAttribute('data-a-delay'))
+          setTimeout(() => entry.target.classList.add('appearance'), parseInt(entry.target.getAttribute('data-a-delay')));
+        else entry.target.classList.add('appearance');
         observer.unobserve(entry.target);
       }
     });

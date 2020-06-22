@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import vSelect from 'vue-select';
-import Siema from 'vue2-siema';
-import {adaptiveMixin, filterMixin, listingsMixin, siemaLazyInitMixin, menuMixin, myWOW, goTopInit, webpInit, LazyLoader} from "./base";
+import {adaptiveMixin, menuMixin, myWOW, goTopInit, webpInit, LazyLoader} from "./base";
 
 webpInit();
 
@@ -17,11 +16,10 @@ const ll = new LazyLoader({
 });
 
 Vue.component('v-select', vSelect);
-Vue.use(Siema);
 
 const app = new Vue({
   el: '#app',
-  mixins: [adaptiveMixin, menuMixin, filterMixin, listingsMixin, siemaLazyInitMixin,],
+  mixins: [adaptiveMixin, menuMixin,],
   data () {
     return {
       form: {

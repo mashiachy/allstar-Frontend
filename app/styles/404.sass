@@ -44,7 +44,7 @@
 
 .image-404
   position: absolute
-  top: 100vh
+  top: calc(100vh - 80px)
   transform: translateY(-100%)
   width: 100%
   min-width: 320px
@@ -121,6 +121,7 @@
       width: 161.94px
       height: 73.5px
   @include adaptive(640px)
+    top: 100vh
     height: 380px
     &__sun
       width: 95px

@@ -21,7 +21,6 @@ html(lang="en")
       +top-menu
       +b.SECTION(data-lazy).background
         +e.image
-        //+e.shadow
         +e.H1.title.animated
           ='A '
           span.orange-text Premier
@@ -42,9 +41,8 @@ html(lang="en")
             +e.INPUT(type='number' v-model.number='pricePerMonth.start').number-input
           +e.SPAN.number $
             +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
-        // TODO: Сделать множественный выбор (выбор один в один, как в макете невозможен)
         +b(class='multiple-check' ref='multipleCheck')
-          +e.DIV(@click='$event.target.parentElement.classList.toggle(\'extended\')').label {{ bedroomsLabel }}
+          +e.INPUT(type='text' v-model='bedroomsLabel' readonly @click='$event.target.parentElement.classList.toggle(\'extended\')').label //{{ bedroomsLabel }}
           +e.dropdown-menu
             +e.DIV(class='option' v-for='[key, value] in Object.entries(bedrooms)' :key='key' :class='{\'selected\': value}' @click='bedrooms[key] = !value') {{ key + ' Bedrooms' }}
         +b.number-range.size
@@ -162,9 +160,9 @@ html(lang="en")
               +b.company
                 +picture('img/otp.webp', 'img/otp.jpg', 'Otp', 'company__image')
           +e.about
-            +info-card('img/flag.svg', '60 countries', 'Real estate sold and leased to clients from  28 countries')
-            +info-card('img/money-bag.svg', '$3 800 000 USD', 'Average annual turnover on lease agreements 2.4 million dollars', 'orange')
-            +info-card('img/money.svg', '$3 800 000 USD', 'Attracted foreign investment to buy real estate 3.8 million', 'blue')
+            +info-card('img/flag.svg', '60 countries', 'Real estate sold and leased to clients from  28 countries', 'white', 0)
+            +info-card('img/money-bag.svg', '$3 800 000 USD', 'Average annual turnover on lease agreements 2.4 million dollars', 'orange', 250)
+            +info-card('img/money.svg', '$3 800 000 USD', 'Attracted foreign investment to buy real estate 3.8 million', 'blue', 500)
         +listings
         +we-can
         +b.SECTION.testimonials.slider.content

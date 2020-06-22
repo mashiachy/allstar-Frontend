@@ -12,21 +12,24 @@ mixin picture-not-lazy(webp, jpg, alt, cls)
     source(srcset=jpg type='image/jpeg')
     img(src=jpg alt=alt)
 
-mixin info-card(icon, title, description, modifier)
+mixin info-card(icon, title, description, modifier, delay)
   - modifier = modifier || 'white'
-  +b.DIV(class=`info-card_${modifier}`)
+  +b.DIV(class=`info-card_${modifier} animated` data-a-delay=delay)
     +e.IMG(data-lazy data-l-src=icon alt='Icon').icon
     +e.content
       +e.H4.title= title
       +e.P.description= description
 
-mixin item-card(image, title, description, option, footer)
+mixin item-card(image, title, description, tags, option, footer)
   +b.item-card
     +picture(image+'.webp', image+'.jpg', 'Photo', 'item-card__image')
     +e.A(href='#').title.link= title
     +e.P.description= description
-      +e.SPAN.option= option
-    +e.P.footer= footer
+    +e.tags
+      if tags !== ''
+        each tag in ['Terrace', 'Outdoor-sauna']
+          +b.tag= tag
+    +e.P(data-option=option).footer= footer
 
 mixin testimonial(photo, name, whois, speech)
   +b.testimonial
@@ -300,7 +303,7 @@ mixin listings
     +e(data-init='siemaRent').siema-wrapper
       +e.SIEMA(class='siema' :ready='false' ref='siemaRent' :options='siemaCatalog' @init='initFoo(\'rent\')')
         each val in [1, 2, 3, 4, 5, 6, 7, 8]
-          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', 'Month/', '$ 5 000')
+          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', true, 'Month/', '$ 5 000')
   +b.SECTION.gray-line
   +b.SECTION.listing_2.slider.content
     +e.title.slider__title.inner
@@ -311,4 +314,4 @@ mixin listings
     +e(data-init='siemaSale').siema-wrapper
       +e.SIEMA(class='siema' :ready='false' ref='siemaSale' :options='siemaCatalog' @init='initFoo(\'sale\')')
         each val in [5, 6, 7, 8, 1, 2, 3, 4,]
-          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', '', '$ 157 000')
+          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', '', '', '$ 157 000')
