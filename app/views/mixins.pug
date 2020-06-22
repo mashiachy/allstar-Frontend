@@ -62,7 +62,7 @@ mixin top-menu(modifier='', contact='', shadow='')
       +e(class='menu content' :class='{\'active\': activeMenu}')
         +b.UL.main-nav
           +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
-            +e.A(href="#" @click="clickParentMenu($event)").link Buy
+            +e.A(href="#").link Buy
             +e.UL.sub-nav
               +e.LI(@mouseenter="changeSubMenuImage").item
                 +e.A(href="#" data-alt="Apartment for Sale" data-image-src="img/room").link Apartments for Sale in Kiev
@@ -75,7 +75,7 @@ mixin top-menu(modifier='', contact='', shadow='')
               +e.LI.image-li
                 +picture('img/room.webp', 'img/room.jpg', 'Apartment for Sale', 'main-nav__image')
           +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
-            +e.A(href="#" @click="clickParentMenu($event)").link Rent
+            +e.A(href="#").link Rent
             +e.UL.sub-nav
               +e.LI(@mouseenter="changeSubMenuImage").item
                 +e.A(href="#" data-alt="Apartment for Rent" data-image-src="img/room1").link Apartments for Rent in Kiev
@@ -88,7 +88,7 @@ mixin top-menu(modifier='', contact='', shadow='')
               +e.LI.image-li
                 +picture('img/room1.webp', 'img/room1.jpg', 'Apartment for Rent', 'main-nav__image')
           +e.LI(@mouseenter="changeParentMenu($event)" @mouseleave="changeParentMenu($event)").item_parent
-            +e.A(href="#" @click="clickParentMenu($event)").link Services
+            +e.A(href="#").link Services
             +e.UL.sub-nav
               +e.LI(@mouseenter="changeSubMenuImage").item
                 +e.A(href="#" data-alt="Service" data-image-src="img/room").link Service 1
@@ -315,3 +315,15 @@ mixin listings
       +e.SIEMA(class='siema' :ready='false' ref='siemaSale' :options='siemaCatalog' @init='initFoo(\'sale\')')
         each val in [5, 6, 7, 8, 1, 2, 3, 4,]
           +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', '', '', '$ 157 000')
+
+mixin listing
+  +b.SECTION.listing.slider.content
+    +e.title.slider__title.inner
+      +e.P.header.animated Hot Listings for Rent
+    +e.controls.slider__controls
+      +e.SPAN(class='slider__control-item slider__control-item_left show-animate' @click='$refs.siemaRent.prev()')
+      +e.SPAN(class='slider__control-item slider__control-item_right show-animate' @click='$refs.siemaRent.next()')
+    +e(data-init='siemaRent').siema-wrapper
+      +e.SIEMA(class='siema' :ready='false' ref='siemaRent' :options='siemaCatalog' @init='initFoo(\'rent\')')
+        each val in [1, 2, 3, 4, 5, 6, 7, 8]
+          +item-card(`img/room-photo-${val}`, 'Gonchara Street 26', '3 bd, 121 sqm', true, 'Month/', '$ 5 000')

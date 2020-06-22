@@ -27,7 +27,7 @@ body
     @include flex(row, wrap)
     @include flex-setting(flex-start, flex-start)
     @include centerMargin
-    width: 94.79%
+    width: 90%
     max-width: 1090px
   @include adaptive(1280px)
     max-width: unset
@@ -42,6 +42,7 @@ body
   &__control-wrapper
     display: none
     @include maxAdaptive(1023px)
+      z-index: 10
       display: block
       position: absolute
       left: 50%
@@ -49,6 +50,8 @@ body
       top: 0
       height: 36px
       pointer-events: none
+  &.mapped &__control-wrapper
+    top: 19px
   &__control
     display: block
     pointer-events: all
@@ -79,9 +82,8 @@ body
     width: 95%
     @include adaptive(320px)
       max-width: 728px
-      width: 93.75%
+      width: 90%
     @include adaptive(768px)
-      width: 94.79%
       max-width: 1090px
     @include adaptive(1024px)
       @include flex(row, wrap)
@@ -106,15 +108,21 @@ body
         margin-bottom: 13px
     &__buttons
       @include flex
+      @include flex-setting(space-between, center)
+      @include adaptive(380px)
+        @include flex-setting(flex-start, flex-start)
       box-sizing: border-box
       @include adaptive(1024px)
         padding-right: 19px
     &__before
-      font-size: 14px
-      line-height: 16px
+      font-size: 12px
+      line-height: 14px
       color: #8E99A4
       margin-right: auto
       align-self: center
+      @include adaptive(380px)
+        font-size: 14px
+        line-height: 16px
     &__text
       display: none
     &__button
@@ -130,7 +138,8 @@ body
       &_left
         margin-right: auto
       &_right
-        margin-right: 14px
+        @include adaptive(380px)
+          margin-right: 14px
         @include maxAdaptive(1023px)
           &:last-child
             margin-right: unset
@@ -163,9 +172,8 @@ body
       width: 95%
       @include adaptive(320px)
         max-width: 728px
-        width: 93.75%
+        width: 90%
       @include adaptive(768px)
-        width: 94.79%
         max-width: 1090px
       z-index: 10
       padding-top: 12px
@@ -180,7 +188,7 @@ body
         margin-right: unset
       .full-item-card
         margin-bottom: 31px
-        width: 302px
+        width: 100%
         @include adaptive(520px)
           width: 48%
         @include adaptive(667px)
@@ -193,7 +201,6 @@ body
         @include adaptive(1024px)
           width: 550px
           border-bottom: 2px dashed rgba(151, 151, 151, 0.21)
-          //&.active
           &:hover
             width: 585px
       margin-bottom: 2px
@@ -203,8 +210,10 @@ body
       @include adaptive(1024px)
         margin-bottom: 17px
     &_map
+      @include maxAdaptive(1023px)
+        margin-top: -92px
       z-index: 8
-      height: calc(100vh - 104px)
+      height: calc(100vh - 116px)
       background-color: #EEEEEE
       position: relative
       @include adaptive(667px)
@@ -275,7 +284,7 @@ body
     @include flex
     @include flex-setting(space-around, center)
     @include adaptive(768px)
-      width: 94.79%
+      width: 90%
       max-width: 1090px
     & > *
       color: inherit

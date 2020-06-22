@@ -71,7 +71,7 @@ const app = new Vue({
     showModal (imageSrc) {
       document.documentElement.style.overflowY = 'hidden';
       document.body.style.overflowY = 'hidden';
-      this.$refs.image.setAttribute('src', imageSrc);
+      // this.$refs.image.setAttribute('src', imageSrc);
       this.modalVisible = true;
     },
     hideModal () {
@@ -91,6 +91,20 @@ const app = new Vue({
           center: {lat: lat1, lng: lng1},
           zoom: 14,
           disableDefaultUI: true,
+          styles: [
+            {
+              featureType: 'poi',
+              stylers: [
+                { visibility: 'off' },
+              ],
+            },
+            {
+              featureType: 'transit.station.bus',
+              stylers: [
+                { visibility: 'off' },
+              ],
+            },
+          ],
         });
 
         const control_minus = document.createElement('div');

@@ -18,13 +18,15 @@ body
   @include adaptive(768px)
     @include flex(row, wrap)
     @include flex-setting(flex-start, flex-start)
-  @include adaptive(1280px)
+  //@include adaptive(1280px)
+  @include adaptive(1024px)
     @include flex-setting(space-between, flex-start)
   & > *:not(:last-child)
     margin-bottom: 18px
     @include adaptive(768px)
       margin-bottom: 32px
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
       margin-bottom: 0
   .block-top
     @include flex(row, wrap)
@@ -32,17 +34,20 @@ body
     @include adaptive(768px)
       width: 100%
       order: 1
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
       margin-bottom: 20px
     .route
       order: 2
-      @include adaptive(1280px)
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
         order: 1
         width: fit-content
         margin-right: auto
     &__print
       display: none
-      @include adaptive(1280px)
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
         order: 2
         margin-right: 32px
         display: block
@@ -63,10 +68,12 @@ body
       order: 1
       margin-bottom: 15px
       width: 100%
-      @include adaptive(1280px)
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
         order: 3
         margin-bottom: unset
         width: calc(30% - 15px)
+        min-width: 281px
   .title
     font-size: 16px
     line-height: 20px
@@ -76,13 +83,15 @@ body
       margin-bottom: 15px
       width: 100%
       order: 2
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
       margin-bottom: 18px
   .block-images
     @include adaptive(768px)
       width: 100%
       order: 3
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
       width: calc(35% - 15px)
     &__siema-wrapper
       width: 100%
@@ -108,7 +117,8 @@ body
           width: 40px
           height: 40px
           background-size: 10px 10px
-        @include adaptive(1280px)
+        //@include adaptive(1280px)
+        @include adaptive(1024px)
           width: 25px
           height: 25px
           background-size: 5px 5px
@@ -121,7 +131,8 @@ body
         left: 9px
         @include adaptive(768px)
           left: 22px
-        @include adaptive(1280px)
+        //@include adaptive(1280px)
+        @include adaptive(1024px)
           transform: none
           left: 12px
           right: unset
@@ -133,7 +144,8 @@ body
         right: 9px
         @include adaptive(768px)
           right: 22px
-        @include adaptive(1280px)
+        //@include adaptive(1280px)
+        @include adaptive(1024px)
           transform: none
           right: 12px
           left: unset
@@ -148,7 +160,8 @@ body
         background-color: transparent
         @include adaptive(768px)
           bottom: 40px
-        @include adaptive(1280px)
+        //@include adaptive(1280px)
+        @include adaptive(1024px)
           bottom: 18px
         .item
           width: 4px
@@ -160,7 +173,8 @@ body
             width: 7px
             height: 7px
             margin-right: 5px
-          @include adaptive(1280px)
+          //@include adaptive(1280px)
+          @include adaptive(1024px)
             width: 4px
             height: 4px
             margin-right: 3px
@@ -177,8 +191,9 @@ body
       min-height: 184px
       @include adaptive(568px)
         min-height: 300px
-      @include adaptive(1280px)
-        min-height: 226px
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
+        min-height: 181px
       & > img
         display: block
     &__all-images
@@ -188,6 +203,9 @@ body
       grid-gap: 10px
       @include adaptive(568px)
         grid-template-columns: repeat(5, 1fr)
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
+        grid-template-columns: repeat(4, 1fr)
     &__image
       width: 100%
       border-radius: 4px
@@ -200,7 +218,8 @@ body
         min-height: 84px
       @include adaptive(1024px)
         min-height: 114px
-      @include adaptive(1280px)
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
         min-height: 40px
       & > img
         display: block
@@ -233,9 +252,12 @@ body
       order: 4
       width: calc(100% - 370px)
       margin-right: auto
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
       margin-right: unset
       width: calc(35% - 15px)
+    .id
+      margin-top: 10px
     &__top
       margin-bottom: 9px
     &__top > .block-text__text:not(:last-child)
@@ -243,9 +265,12 @@ body
     &__text
       font-size: 14px
       line-height: 16px
+      &_medium
+        font-size: 16px
+        line-height: 21px
       &_big
-        font-size: 15px
-        line-height: 18px
+        font-size: 18px
+        line-height: 21px
       &_bold
         font-weight: 700
       &_small
@@ -313,7 +338,8 @@ body
     @include adaptive(768px)
       order: 6
       width: 100%
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
       margin-top: 30px
     &__button
       height: 50px
@@ -363,7 +389,9 @@ body
     @include adaptive(768px)
       order: 5
       width: 340px
-    @include adaptive(1280px)
+    //@include adaptive(1280px)
+    @include adaptive(1024px)
+      min-width: 281px
       width: calc(30% - 15px)
       margin-top: -38px
     &__person

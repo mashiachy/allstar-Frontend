@@ -96,7 +96,7 @@ picture
   opacity: 0
   &.appearance
     opacity: 1
-    animation: appearanceToTop .25s ease-out 1
+    animation: appearanceToTop .5s ease-out 1
 
 
 .lang
@@ -1105,12 +1105,10 @@ picture
     height: 166px
     padding: 15px 15px 15px 9px
     background-color: transparent
-  //&.active
   &:hover
-    z-index: 11
-    border-radius: 12px
-    @include otShadow
     @include adaptive(768px)
+      z-index: 11
+      border-radius: 12px
       box-shadow: none
     @include adaptive(1024px)
       @include otShadow
@@ -1186,15 +1184,15 @@ picture
   &__image
     background-size: cover
   &__title
-    font-size: 15px
-    line-height: 18px
+    font-size: 12px
+    line-height: 14px
     font-weight: 700
     @include adaptive(667px)
       margin-bottom: 4px
       font-size: 18px
       line-height: 21px
     @include adaptive(1024px)
-      margin-bottom: 0
+      margin-bottom: 2px
   &__text
     font-size: 12px
     line-height: 14px
@@ -1209,8 +1207,8 @@ picture
       margin-bottom: 3px
   &__subtext
     opacity: 0.41
-    font-size: 10px
-    line-height: 12px
+    font-size: 12px
+    line-height: 14px
     @include adaptive(667px)
       font-size: 14px
       line-height: 16px
@@ -1979,6 +1977,7 @@ picture
   bottom: 0
   z-index: 10000
   background-color: rgba(0,0,0,0.65)
+  pointer-events: visibleFill
   &__control
     width: 30px
     height: 30px
@@ -1990,16 +1989,125 @@ picture
     background-position: center
     background-repeat: no-repeat
     cursor: pointer
+    z-index: 10002
+  &__all-images
+    z-index: 10001
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    padding-top: 100px
+    padding-bottom: 100px
+    overflow-y: auto
+    & > *:not(:last-child)
+      margin-bottom: 20px
+  &__image-wrapper
+    max-width: 80%
+    width: fit-content
+    @include centerMargin
   &__image
+    border-radius: 4px
+    overflow: hidden
+    background-color: transparent
+    width: fit-content
+  &__siema-wrapper
     position: absolute
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    max-width: 90%
-    @include adaptive(768px)
-      max-width: 80%
-    @include adaptive(1280px)
-      max-width: 1090px
+    width: 90%
+    max-width: 1090px
+  &__siema-modal
+    width: 100%
+  &__siema-image
+    width: 100%
+    border-radius: 4px
+    @include centerMargin
+    display: block
+    background-color: $lightgray
+    min-height: 300px
+  &__siema-control
+    position: absolute
+    display: block
+    z-index: 5
+    &_button
+      width: 33px
+      height: 33px
+      border-radius: 50%
+      background-color: white
+      box-shadow: $thisShadow
+      cursor: pointer
+      background-repeat: no-repeat
+      background-position: center
+      background-size: 6px 6px
+      @include adaptive(768px)
+        width: 40px
+        height: 40px
+        background-size: 10px 10px
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
+        width: 25px
+        height: 25px
+        background-size: 5px 5px
+        bottom: 9px
+        top: unset
+    &_left
+      background-image: url("../img/left-orange-triangle.svg")
+      top: 50%
+      transform: translateY(-50%)
+      left: 9px
+      @include adaptive(768px)
+        left: 22px
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
+        transform: none
+        left: 12px
+        right: unset
+        top: unset
+    &_right
+      background-image: url("../img/right-orange-triangle.svg")
+      top: 50%
+      transform: translateY(-50%)
+      right: 9px
+      @include adaptive(768px)
+        right: 22px
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
+        transform: none
+        right: 12px
+        left: unset
+        top: unset
+    &_center
+      height: 3px
+      width: unset
+      bottom: 16px
+      left: 50%
+      transform: translateX(-50%)
+      @include flex
+      background-color: transparent
+      @include adaptive(768px)
+        bottom: 40px
+      //@include adaptive(1280px)
+      @include adaptive(1024px)
+        bottom: 18px
+      .item
+        width: 4px
+        height: 4px
+        border-radius: 50%
+        background-color: white
+        margin-right: 3px
+        @include adaptive(768px)
+          width: 7px
+          height: 7px
+          margin-right: 5px
+        //@include adaptive(1280px)
+        @include adaptive(1024px)
+          width: 4px
+          height: 4px
+          margin-right: 3px
+        &.active
+          background-color: $orange
 
 .loading:after
   content: ''

@@ -66,7 +66,6 @@ class LazyLoader {
     document.readyState === 'complete' ? this.watch() : window.addEventListener('load', this.watch.bind(this), {passive: false});
   }
   watch () {
-    console.log(document.querySelectorAll(this.selector));
     document.querySelectorAll(this.selector).forEach(ref => this.observer.observe(ref));
   }
   static showBox (box) {
@@ -126,10 +125,7 @@ const menuMixin = {
   },
   methods: {
     changeParentMenu (ev) {
-      if (this.isDesktop) ev.target.classList.toggle('active');
-    },
-    clickParentMenu (ev) {
-      if (!this.isDesktop) ev.target.parentElement.classList.toggle('active');
+      ev.target.classList.toggle('active');
     },
     changeSubMenuImage (ev) {
       if (this.isDesktop) {

@@ -53,7 +53,7 @@ html(lang="us")
               +e.text_big._bold.animated Delovaya (Dimitrova) Street, 2б
               +e.text Tetris Hall
               +e.text_small._dim for example Shevchenko
-              +e.text_small ID 1525755
+              +e.text_medium.id ID 1525755
             +e.middle
               +e.price-info
                 +e.text_dim Sale
@@ -108,11 +108,22 @@ html(lang="us")
               +e.input-block
                 +b.TEXTAREA(placeholder='Message' wrap='soft' v-model='form.message').textarea-input
               +e.BUTTON.submit.show Submit
-        +listings
+        +listing
         +we-can('_row')
 
-        +b.DIV(ref='modal' v-show='modalVisible' @click.self='hide').modal#modal
+        +b.DIV(ref='modal' v-show='modalVisible' @click.self='hideModal').modal#modal
           +e.DIV(@click='hideModal').control
-          +e.IMG(ref='image' alt='Image').image
+          +e(v-if='isSmDesktop').siema-wrapper
+            +e.DIV(@click='$refs.siemaModalImages.prev()').siema-control_button._left
+            +e.DIV(@click='$refs.siemaModalImages.next()').siema-control_button._right
+            +e.siema-control_center
+              div(v-for='i in [0, 1, 2, 3, 4, 5, 6, 7]' :key=i :class='{\'active\': curImage === i}').item
+            +e.SIEMA(class='siema-modal' data-init='siemaModalImages' :ready='false' ref='siemaModalImages' :current.sync='curImage' :options='siemaImagesOptions')
+              each i in ['1', '2', '3', '4', '5', '6', '7', '8']
+                +picture('img/room-photo-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__siema-image')
+          +e.DIV(v-else class='all-images' ref='allModalImages')
+            each i in [1, 2, 3, 4, 5, 6, 7, 8]
+              +e.DIV(class='image-wrapper' @click=`$refs.siemaModalImages.goTo(${i - 1})`)
+                +picture('img/room-photo-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__image' + (i === 1 ? ' current' : ''))
 
     +footer
