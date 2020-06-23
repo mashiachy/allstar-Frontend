@@ -184,17 +184,10 @@ mixin inline-filter
             +b.DIV(class='search')
               +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
               +e.A(href="").search-button
-            +b.V-SELECT(class='type' v-model='apartment' :options='[\'Apartment 1\', \'Apartment 2\', \'Apartment 3\']')
-            +b.number-range.price
-              +e.label
-                | Price
-                br
-                | per month, $
-              +e.SPAN.number $
-                +e.INPUT(type='number' v-model.number='pricePerMonth.start').number-input
-              +e.SPAN.number $
-                +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
-            +b.V-SELECT(class='type' v-model='bedroom' :options='[\'1 Bedroom\', \'2 Bedroom\', \'3 Bedroom\']')
+            +b(class='multiple-check' ref='multipleCheck')
+              +e.INPUT(type='text' v-model='bedroomsLabel' readonly @click='$event.target.parentElement.classList.toggle(\'extended\')').label //{{ bedroomsLabel }}
+              +e.dropdown-menu
+                +e.DIV(class='option' v-for='[key, value] in Object.entries(bedrooms)' :key='key' :class='{\'selected\': value}' @click='bedrooms[key] = !value') {{ key + ' Bedrooms' }}
             +b.number-range.size
               +e.label
                 | Size,
@@ -282,11 +275,28 @@ mixin inline-filter
     +e(class='main-wrapper')
       +e.DIV(class='main' :class='{\'opened\': isDesktop && options}')
         +e.buttons
-          +e.A(href='#').button Sale
-          +e.A(href='#').button Apartment
-          +e.A(href='#').button Price
-          +e.A(href='#').button Rooms
-          +e.A(href='#').button Area
+          +b.V-SELECT(class='type_inline inline-filter__button' v-model='typeService' :options='[\'Sale\', \'Rent\']')
+          +b.V-SELECT(class='type_inline inline-filter__button' v-model='apartment' :options='[\'Apartment\', \'Apartment 2\', \'Apartment 3\']')
+          +b.DIV(class='dropdown-inline-filter inline-filter__button' @click='changeDownVisible') Price
+            +e.dropdown-menu
+              +e.LABEL.input-label From
+                +e.SPAN.number $
+                  +e.INPUT(type='number' v-model.number='pricePerSqm1.start').number-input
+              +e.LABEL.input-label To
+                +e.SPAN.number $
+                  +e.INPUT(type='number' v-model.number='pricePerSqm1.end').number-input
+          +b(class='multiple-check_inline inline-filter__button' ref='multipleCheck')
+            +e.DIV(@click='$event.target.parentElement.classList.toggle(\'extended\')').label {{ bedroomsLabel }}
+            +e.dropdown-menu
+              +e.DIV(class='option' v-for='[key, value] in Object.entries(bedrooms)' :key='key' :class='{\'selected\': value}' @click='bedrooms[key] = !value') {{ key + ' Bedrooms' }}
+          +b.DIV(class='dropdown-inline-filter inline-filter__button' @click='changeDownVisible') Area
+            +e.dropdown-menu
+              +e.LABEL.input-label From
+                +e.SPAN.number
+                  +e.INPUT(type='number' v-model.number='size.start').number-input
+              +e.LABEL.input-label To
+                +e.SPAN.number
+                  +e.INPUT(type='number' v-model.number='size.end').number-input
         +b.DIV(class='search')
           +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
           +e.A(href="").search-button

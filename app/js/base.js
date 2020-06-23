@@ -190,13 +190,20 @@ const filterMixin = {
   data () {
     return {
       options: false,
+      typeService: 'Sale',
       searchCode: '',
-      apartment: 'Apartment 1',
+      apartment: 'Apartment',
       pricePerMonth: {
         start: 5000,
         end: 15000,
       },
-      bedroom: '1 Bedroom',
+      bedroom: '',
+      bedrooms: {
+        1: true,
+        2: false,
+        3: false,
+        4: false,
+      },
       size: {
         start: 150,
         end: 200,
@@ -222,6 +229,12 @@ const filterMixin = {
       checkboxList2: [true, false, true, false, true, false],
     };
   },
+  computed: {
+    bedroomsLabel () {
+      const numbers = Object.entries(this.bedrooms).filter(([key, value]) => value).map(([key, value]) => key).join(', ');
+      return numbers + ' Bedrooms';
+    },
+  },
   watch: {
     options: function (val) {
       if (!this.isDesktop) {
@@ -229,6 +242,11 @@ const filterMixin = {
         document.body.style.overflowY = val ? 'hidden' : 'visible';
       }
     },
+  },
+  methods: {
+    changeDownVisible (ev) {
+      ev.target.classList.toggle('active');
+    }
   },
 };
 

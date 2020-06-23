@@ -40,6 +40,14 @@ $thisShadow: 5px 7px 16px rgba(0, 0, 0, 0.0438156)
   @media only screen and (min-width: $width)
     @content
 
+@mixin maxHeightAdaptive($height)
+  @media only screen and (max-height: $height)
+    @content
+
+@mixin heightAdaptive($height)
+  @media only screen and (min-height: $height)
+    @content
+
 @mixin shadow
   box-shadow: $mnShadow
   @include adaptive(768px)

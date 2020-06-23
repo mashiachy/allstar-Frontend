@@ -173,8 +173,39 @@ html(lang="us")
             +b.A(href='#').button_1 Highlight
             +b.A(href='#').button_2 Clear
             +b(id='map').map
-            +e.DIV(class='siema-wrapper')
-              +b(id='map-siema' class='map-siema' :style='"transform: translate3d("+drag.nowX+"px,0,0)"' ref='mapSiema' @touchstart='startDrag' @touchmove.prevent='onDrag' @touchend='stopDrag')
+            +e.DIV(class='siema-wrapper-vue' ref='siemaMapWrapper')
+              //+b(id='map-siema' class='map-siema' :style='"transform: translate3d("+drag.nowX+"px,0,0)"' ref='mapSiema' @touchstart='startDrag' @touchmove.prevent='onDrag' @touchend='stopDrag')
+              +b.SIEMA(class='map-siema-vue' :ready='false' ref='mapSiema' :options='siemaMapOptions')
+                +b.map-card-wrapper
+                  +b.map-card
+                    +e.FIGURE.image-wrapper
+                      +picture-not-lazy('img/room-4.webp', 'img/room-4.jpg', 'room', 'map-card__image')
+                    +e.A(href='#').title Gonchara Street 26
+                    +e.subtitle Tetris Hall
+                    +e.text 1 bt, 3 bd, 9 floor, 121 sqm
+                    +e.footer
+                      +e.sqm ($45/sqm)
+                      +e.price_month $ 5 000
+                +b.map-card-wrapper
+                  +b.map-card
+                    +e.FIGURE.image-wrapper
+                      +picture-not-lazy('img/room-4.webp', 'img/room-4.jpg', 'room', 'map-card__image')
+                    +e.A(href='#').title Gonchara Street 26
+                    +e.subtitle Tetris Hall
+                    +e.text 1 bt, 3 bd, 9 floor, 121 sqm
+                    +e.footer
+                      +e.sqm ($45/sqm)
+                      +e.price_month $ 5 000
+                +b.map-card-wrapper
+                  +b.map-card
+                    +e.FIGURE.image-wrapper
+                      +picture-not-lazy('img/room-4.webp', 'img/room-4.jpg', 'room', 'map-card__image')
+                    +e.A(href='#').title Gonchara Street 26
+                    +e.subtitle Tetris Hall
+                    +e.text 1 bt, 3 bd, 9 floor, 121 sqm
+                    +e.footer
+                      +e.sqm ($45/sqm)
+                      +e.price_month $ 5 000
           +b(class='message_warning')
             +e.icon
             +e.text The minimum rental period is 6 months. Prices are shown in US dollars per month.

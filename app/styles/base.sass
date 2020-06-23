@@ -13,6 +13,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 *
   -webkit-tap-highlight-color: transparent
 
+input
+  font-size: inherit
+
 picture
   display: block
   background-color: $lightgray
@@ -692,8 +695,8 @@ picture
   &__link
     text-decoration: none
     color: inherit
-    font-size: 14px
-    line-height: 23px
+    font-size: 15px
+    line-height: 21px
     display: block
     margin-bottom: 4px
     will-change: color
@@ -837,6 +840,28 @@ picture
     &:last-child:after
       content: unset
 
+.type_inline
+  width: unset !important
+  .vs
+    &__dropdown-toggle
+      background-color: inherit
+      border-radius: inherit
+      width: inherit
+      &:after
+        content: unset
+    &__dropdown-menu
+      width: fit-content
+    &__selected-options
+      width: auto
+      padding-top: unset
+      padding-left: unset
+    &__dropdown-option
+      min-width: fit-content
+      width: 100%
+      box-sizing: border-box
+      padding-right: 12px
+      white-space: nowrap
+
 .type_multiple
   .vs
     &__dropdown-option
@@ -858,6 +883,52 @@ picture
           background-position: center
           background-repeat: no-repeat
           background-image: url("../img/ok.svg")
+
+
+.dropdown-inline-filter
+  position: relative
+  &__dropdown-menu
+    display: none
+    position: absolute
+    z-index: 100
+    width: 152px
+    left: 0
+    top: 41px
+    background-color: white
+    border-radius: 7px
+    box-sizing: border-box
+    padding: 6.5px 13px 10.5px
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
+  &.active &__dropdown-menu
+    display: block
+  &__dropdown-menu &__input-label:nth-child(1) &__number
+    margin-left: 8px
+    margin-bottom: 7px
+  &__dropdown-menu &__input-label:nth-child(2) &__number
+    margin-left: 24.5px
+  &__number
+    width: 84px
+    height: 36px
+    padding: 10px 0 0 12px
+    box-sizing: border-box
+    background-color: rgba(216, 216, 216, 0.16)
+    border-radius: 7px
+    display: inline-block
+    white-space: nowrap
+    &_transparent
+      background-color: transparent
+    &-input
+      margin: 0 0 0 2px
+      -moz-appearance: textfield
+      border: 0
+      background: transparent
+      display: inline-block
+      width: calc(100% - 15px)
+      &:focus
+        outline: none
+      &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+        -webkit-appearance: none
+        margin: 0
 
 .checkbox
   display: block
@@ -937,8 +1008,8 @@ picture
 .slider
   position: relative
   &__title
-    font-size: 15px
-    line-height: 18px
+    font-size: 17px
+    line-height: 21px
     font-weight: 700
     box-sizing: border-box
     padding-top: 13px
@@ -993,7 +1064,7 @@ picture
     display: block
     width: 100%
     border-radius: 7px
-    margin-bottom: 7px
+    margin-bottom: 12px
     min-height: 111px
   &__title
     font-size: 15px
@@ -1011,20 +1082,21 @@ picture
     line-height: 16px
     margin-bottom: 4px
   &__tags
+    padding-left: 6px
     height: 16px
     margin-bottom: 8px
   .tag
     display: inline-block
     box-sizing: border-box
-    padding-left: 19px
-    margin-right: 6px
+    padding-left: 14px
+    margin-right: 8px
     font-size: 12px
     line-height: 16px
     position: relative
     &:after
       content: ''
       position: absolute
-      top: 0
+      top: 1px
       left: 0
       width: 10px
       height: 12px
@@ -1035,15 +1107,18 @@ picture
     text-align: right
     color: $orange
     font-weight: 700
+    font-size: 16px
+    padding-right: 2px
     &[data-option]:not([data-option=''])
       box-sizing: border-box
-      padding-top: 16px
+      padding-top: 21px
       position: relative
       &:after
         content: attr(data-option)
         position: absolute
         top: 0
         right: 0
+        font-size: 14px
         font-weight: 400
         color: $blue
         opacity: 0.4095
@@ -1073,13 +1148,13 @@ picture
   &__info
     height: 100%
   &__name
-    font-size: 15px
+    font-size: 16px
     line-height: 20px
     font-weight: 700
   &__whois
     margin-top: -1px
   &__content
-    font-size: 16px
+    font-size: 15px
 
 @keyframes loaderCenterPos
   0%
@@ -1189,8 +1264,8 @@ picture
     font-weight: 700
     @include adaptive(667px)
       margin-bottom: 4px
-      font-size: 18px
-      line-height: 21px
+      font-size: 16px
+      line-height: 18px
     @include adaptive(1024px)
       margin-bottom: 2px
   &__text
@@ -1262,10 +1337,10 @@ picture
     &.per-month:after
       position: absolute
       content: 'Month/'
-      top: -14px
+      top: -19px
       right: 0
-      font-size: 10px
-      line-height: 12px
+      font-size: 14px
+      line-height: 16px
       font-weight: 400
       color: $blue
       opacity: 0.41
@@ -1284,8 +1359,8 @@ picture
     background-position: center
     margin-right: 11px
   &__text
-    font-size: 10px
-    line-height: 12px
+    font-size: 12px
+    line-height: 14px
     font-weight: 500
   &_warning
     background-color: $lightorange
@@ -1332,7 +1407,7 @@ picture
     width: 100%
     box-sizing: border-box
     margin-bottom: 40px
-    font-size: 18px
+    font-size: 17px
     line-height: 21px
     font-weight: 700
     padding-left: 6.67%
@@ -1378,12 +1453,12 @@ picture
       transform: translate(0)
       transition: transform .25s ease-out
     &__title
-      font-size: 17px
+      font-size: 16px
       line-height: 20px
       font-weight: 700
       margin-bottom: 17px
     &__text
-      font-size: 16px
+      font-size: 15px
       line-height: 28px
       margin-bottom: 12px
       @include adaptive(1280px)
@@ -1490,7 +1565,8 @@ picture
     &:-moz-placeholder,
     &:-ms-input-placeholder,
     &::placeholder
-      color: #d0d8de
+      color: $blue
+      opacity: 0.50
   &_gray &__search-input
     background-color: rgba(216,216,216,0.16)
     box-shadow: none
@@ -1658,20 +1734,22 @@ picture
     &:after
       position: absolute
       content: ''
-      top: 18px
+      top: 16px
       right: 16px
       width: 4.5px
       height: 4.5px
       background-image: url("../img/triangle-down.svg")
       background-size: 4.5px 4.5px
+      @include adaptive(768px)
+        top: 18px
     &:nth-child(4)
       display: none
-      @include adaptive(410px)
+      @include adaptive(468px)
         display: block
     &:nth-child(5)
       display: none
       margin-right: 0
-      @include adaptive(485px)
+      @include adaptive(549px)
         display: block
   &__options
     @include maxAdaptive(1279px)
@@ -1696,7 +1774,7 @@ picture
       font-weight: 500
   &__main-wrapper .search
     display: none
-    @include adaptive(660px)
+    @include adaptive(729px)
       display: block
       width: 159px
       height: 41px
@@ -1720,25 +1798,32 @@ picture
     height: calc(100vh - 50px)
     overflow-y: auto
     z-index: 100
+    @include adaptive(768px)
+      position: fixed
+      height: auto
+      top: 60px
+      bottom: 0
     @include maxAdaptive(1279px)
       width: 100%
     @include adaptive(1280px)
+      position: absolute
       top: 62px
       left: 0
-      height: 473px
+      height: min-content
       width: 100%
       box-shadow: $thisShadow
       background-color: white
       mix-blend-mode: darken
   &__dropdown-prewrapper
     @include maxAdaptive(1279px)
-      margin-top: 71px
+      margin-top: 0
       background-color: white
       border-top-left-radius: 12px
       border-top-right-radius: 12px
       box-shadow: 0px 2px 88px rgba(0, 0, 0, 0.202497)
-      min-height: calc(100% - 71px)
       padding-bottom: 29px
+    @media only screen and (max-width: 1279px) and (min-height: 610px)
+      margin-top: calc(100vh - 598px)
     @include maxAdaptive(1023px)
       padding-bottom: unset
     @include maxAdaptive(767px)
@@ -1761,7 +1846,7 @@ picture
       @include flex-setting(space-between, flex-start)
       padding-top: 36px
       padding-bottom: 29px
-      height: 796px
+      height: 538px
     @include adaptive(1280px)
       max-width: 1090px
       margin-top: unset
@@ -1781,7 +1866,13 @@ picture
     margin-bottom: 32px
     .search
       display: block
-      @include adaptive(1280px)
+      @include adaptive(730px)
+        display: none
+    .multiple-check
+      @include adaptive(468px)
+        display: none
+    .size
+      @include adaptive(549px)
         display: none
     & > *:not(:last-child)
       margin-bottom: 22.6667px
@@ -1792,7 +1883,6 @@ picture
       & > *:not(:last-child)
         margin-bottom: 21px
   &__block-2
-    margin-top: 63.6667px
     & > *:not(:last-child)
       margin-bottom: 22.6667px
     @include adaptive(768px)
@@ -1836,6 +1926,7 @@ picture
   &__block-1
     @include adaptive(768px)
       width: 46.875%
+      margin-bottom: auto
   &__block-2, &__block-3, &__block-5
     @include adaptive(768px)
       width: 46.875%
@@ -2197,6 +2288,10 @@ picture
   font-size: 15px
   line-height: 16px
   position: relative
+  &_inline
+    width: fit-content
+    &:after
+      content: unset
   &:after
     content: ''
     position: absolute
@@ -2219,6 +2314,14 @@ picture
     outline: 0 !important
     font: inherit
     color: inherit
+  &_inline &__label
+    width: fit-content
+    white-space: nowrap
+    height: 100%
+    background-color: transparent
+    font-size: 14px
+    line-height: 16px
+    padding: 0
   &__dropdown-menu
     display: none
   &.extended
@@ -2235,11 +2338,16 @@ picture
     box-sizing: border-box
     padding: 6.5px 13px 10.5px
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
+  &_inline.extended &__dropdown-menu
+    width: auto
   &.extended &__option
+    white-space: nowrap
     cursor: pointer
     box-sizing: border-box
     margin-bottom: 4px
     height: 31px
+    width: 100%
+    padding-right: 30px
     padding-top: 6px
     padding-left: 6px
     position: relative
@@ -2278,3 +2386,5 @@ picture
         background-position: center
         background-repeat: no-repeat
         background-image: url("../img/ok.svg")
+  &_inline.extended &__option
+    width: fit-content

@@ -26,7 +26,6 @@ const ll = new LazyLoader({
 const mapObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      console.log(1);
       loadMap('initMap');
       observer.unobserve(entry.target);
     }
@@ -38,12 +37,15 @@ document.readyState === 'complete' ? mapObserver.observe(document.querySelector(
 window.initMap = function () {
   document.getElementById('map_wrapper').classList.remove('loading');
 
+  let activeInfoWindow;
+
   class MyOverlay extends google.maps.OverlayView {
     constructor (args) {
       super();
       this.latlng = args.latlng;
       this.html = args.html;
       this.visibility = args.visibility;
+      this.map = args.map;
       this.setMap(args.map);
     }
     createDiv() {
@@ -58,7 +60,7 @@ window.initMap = function () {
     }
     appendDivToOverlay() {
       const panes = this.getPanes();
-      panes.overlayImage.appendChild(this.div);
+      panes.floatPane.appendChild(this.div);
     }
     positionDiv() {
       const point = this.getProjection().fromLatLngToDivPixel(this.latlng);
@@ -98,7 +100,7 @@ window.initMap = function () {
     }
     toggle () {
       if (this.div) {
-        if (this.div.style.visibility === 'visible')
+        if (this.div.style.visibility !== 'visible')
           this.show();
         else
           this.hide();
@@ -110,28 +112,43 @@ window.initMap = function () {
     constructor (args) {
       super(args);
       this.id = args.id;
+      this.type = args.type;
+      this.addListener('click', () => {
+        map.panTo(this.getPosition());
+      });
+    }
+    toggleActive () {
+      this.div.firstChild.classList.toggle('active');
+    }
+    disActive () {
+      this.div.firstChild.classList.remove('active');
+    }
+    active () {
+      this.div.firstChild.classList.add('active');
     }
   }
 
-  const generateMarkerHTML = (args) => `<div class="marker marker_${args.type}"><div class="marker__inner">${args.label}</div></div>`;
+  const generateMarkerHTML = (args) => `<div class="marker"><div class="marker__inner">${args.label}</div></div>`;
 
   class myInfoWindow extends MyOverlay {
     constructor (args) {
       super(args);
       this.marker = args.marker;
       this.siema = args.siema;
-      args.marker.addListener('click', () => {
-        if (adaptiveMixin.computed.isSmTab()) this.marker.hide();
-        adaptiveMixin.computed.isSmTab() ? this.show() : this.toggle();
+      this.marker.addListener('click', () => {
+        this.marker.toggleActive();
+        this.toggle();
       });
     }
     createDiv() {
       if (adaptiveMixin.computed.isSmTab()) {
         super.createDiv();
-        google.maps.event.addDomListener(this.div.getElementsByClassName(
-          'info-window-close')[0],
+        google.maps.event.addDomListener(
+          this.div.getElementsByClassName('info-window-close')[0],
           'click',
-          () => this.hide()
+          () => {
+            this.hide();
+          },
         );
         const wrapper = this.div.getElementsByClassName('info-window__cards-wrapper')[0];
         this.div.getElementsByClassName('info-window__control_right')[0].addEventListener('click', () => {
@@ -153,7 +170,7 @@ window.initMap = function () {
       const point = this.getProjection().fromLatLngToDivPixel(this.latlng);
       if (point) {
         this.div.style.left = `${point.x - 125}px`;
-        this.div.style.top = `${point.y - 280}px`;
+        this.div.style.top = `${point.y - (this.marker.type === 'once' ? 280 : 300)}px`;
       }
     }
     draw() {
@@ -162,34 +179,37 @@ window.initMap = function () {
       }
     }
     hide() {
+      if (activeInfoWindow === this) activeInfoWindow = null;
+      this.marker.disActive();
       if (adaptiveMixin.computed.isSmTab()) {
         super.hide();
-        this.marker.show();
       } else {
-        this.siema.innerHTML = '';
+        app.destroyMapSiema();
       }
     }
     show() {
+      if (activeInfoWindow) {
+        activeInfoWindow.marker.disActive();
+        activeInfoWindow.hide();
+      }
       if (adaptiveMixin.computed.isSmTab()) {
         super.show();
       } else {
-        this.siema.innerHTML = '';
-        this.siema.setAttribute('data-id', this.marker.id);
-        this.html.forEach(el => {
+        app.initMapSiema(this.html.map(el => {
           const div = document.createElement('div');
           div.className = 'map-card-wrapper';
           div.innerHTML = el;
-          this.siema.appendChild(div);
-          this.siema.style.width = `${this.html.length * 291}px`;
-          main.initDrag();
-        });
+          return div;
+        }))
       }
+      activeInfoWindow = this;
+      this.marker.active();
     }
     toggle() {
       if (adaptiveMixin.computed.isSmTab()) {
         super.toggle();
       } else {
-        this.siema.innerHTML === '' || this.marker.id !== this.siema.getAttribute('data-id') ? this.show() : this.hide();
+        app.siemaMapActive && activeInfoWindow === this ? this.hide() : this.show();
       }
     }
   }
@@ -232,6 +252,22 @@ window.initMap = function () {
     center: {lat: lat1, lng: lng1},
     zoom: 14,
     disableDefaultUI: true,
+    disableDoubleClickZoom: true,
+    clickableIcons: false,
+    styles: [
+      {
+        featureType: 'poi',
+        stylers: [
+          { visibility: 'off' },
+        ],
+      },
+      {
+        featureType: 'transit.station.bus',
+        stylers: [
+          { visibility: 'off' },
+        ],
+      },
+    ],
   });
 
   if (adaptiveMixin.computed.isSmDesktop()) {
@@ -262,8 +298,8 @@ window.initMap = function () {
     latlng: new google.maps.LatLng(50.4449, 30.5087),
     map: map,
     id: 'o',
+    type: 'once',
     html: generateMarkerHTML({
-      type: 'once',
       label: '$157K',
     }),
     visibility: 'visible',
@@ -272,8 +308,8 @@ window.initMap = function () {
     latlng: new google.maps.LatLng(50.4549, 30.5107),
     map: map,
     id: 'm',
+    type: 'multiple',
     html: generateMarkerHTML({
-      type: 'multiple',
       label: '+5',
     }),
     visibility: 'visible',
@@ -354,6 +390,9 @@ window.initMap = function () {
     map: map,
     visibility: 'hidden',
   });
+
+  // let infoWindowsArray = [onceInfoWindow, multipleInfoWindow];
+  // google.maps.event.addListener(map,'click', () => infoWindowsArray.forEach(window => window.hide()));
 };
 
 Vue.component('v-select', vSelect);
@@ -373,6 +412,18 @@ const app = new Vue({
         loop: true,
         draggable: true,
       },
+      siemaMapOptions: {
+        duration: 200,
+        easing: 'ease-out',
+        perPage: {
+          320: 2,
+          592: 3,
+        },
+        startIndex: 0,
+        loop: true,
+        draggable: true,
+      },
+      siemaMapActive: false,
       curs: [0, 0, 0, 0, 0, 0],
       drag: {
         w: 291,
@@ -396,11 +447,40 @@ const app = new Vue({
     initSiema (siema) {
       const w = siema.$el.clientWidth;
       siema.$el.style.height = `${w*179/278}px`;
+      window.addEventListener('resize', () => {
+        const w = siema.$el.clientWidth;
+        siema.$el.style.height = `${w*179/278}px`;
+      }, {passive: true});
       for (let i of siema.$el.getElementsByClassName('full-item-card__image')) {
         const imgSrc = i.getAttribute('data-src');
         i.style.backgroundImage = `url("${imgSrc}.${isWebp ? 'webp' : 'jpg'}")`;
         i.style.height = `${w*179/278}px`;
+        window.addEventListener('resize', () => {
+          const w = siema.$el.clientWidth;
+          i.style.height = `${w*179/278}px`;
+        }, {passive: true});
       }
+    },
+    initMapSiema (content) {
+      function cloneArrayOfNodes (arr) {
+        let r = [];
+        arr.forEach(el => r.push(el.cloneNode(true)));
+        return arr.push(...r);
+      }
+      if (this.siemaMapActive) this.destroyMapSiema();
+      let els = content;
+      this.$refs.mapSiema.$el.innerHTML = '';
+      while ((window.innerWidth >= 592 ? els.length <= 3 : els.length <= 2)) cloneArrayOfNodes(els);
+      els.forEach(el => document.querySelector('.map-siema-vue').appendChild(el));
+      this.$refs.siemaMapWrapper.classList.add('active');
+      this.$refs.mapSiema.init();
+      this.siemaMapActive = true;
+    },
+    destroyMapSiema () {
+      this.$refs.mapSiema.destroy(true);
+      this.$refs.mapSiema.$el.innerHTML = '';
+      this.$refs.siemaMapWrapper.classList.remove('active');
+      this.siemaMapActive = false;
     },
     changeActiveControlImage (el) {
       for (let i of el.getElementsByClassName('full-item-card__control')) {

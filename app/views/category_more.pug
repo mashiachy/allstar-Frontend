@@ -34,7 +34,7 @@ html(lang="us")
               +b.DIV(class='search')
                 +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
                 +e.A(href="").search-button
-          +b.H3.title.animated 2 bedroom Apartment for Sale in Kiev, Dilova Street 2B - ID 3435
+          +b.H1.title.animated 2 bedroom Apartment for Sale in Kiev, Dilova Street 2B - ID 3435
           +b.block-images
             +e.siema-wrapper
               +e.DIV(@click='$refs.siemaImages.prev()').siema-control_button._left
@@ -50,7 +50,7 @@ html(lang="us")
                   +picture('img/room-photo-'+i+'.webp', 'img/room-photo-'+i+'.jpg', 'Room', 'block-images__image'+(i === 1 ? ' current' : ''))
           +b.block-text
             +e.top
-              +e.text_big._bold.animated Delovaya (Dimitrova) Street, 2б
+              +e.H2.text_big._bold.animated Delovaya (Dimitrova) Street, 2б
               +e.text Tetris Hall
               +e.text_small._dim for example Shevchenko
               +e.text_medium.id ID 1525755

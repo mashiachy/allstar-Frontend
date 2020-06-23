@@ -150,7 +150,7 @@ const app = new Vue({
   computed: {
     bedroomsLabel () {
       const numbers = Object.entries(this.bedrooms).filter(([key, value]) => value).map(([key, value]) => key).join(', ');
-      return (numbers ? numbers : '0') + ' Bedrooms';
+      return numbers + ' Bedrooms';
     },
   },
   watch: {

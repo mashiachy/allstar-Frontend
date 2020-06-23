@@ -274,6 +274,25 @@ body
           @include flex
           .map-card-wrapper
             width: 291px
+    &__siema-wrapper-vue
+      display: none
+      position: absolute
+      left: 0
+      box-sizing: border-box
+      padding-left: 4px
+      width: 100%
+      height: 103px
+      overflow: hidden
+      bottom: 12px
+      z-index: 10
+      &.active
+        display: block
+      .map-siema-vue
+        width: 582px
+        @include adaptive(592px)
+          width: 873px
+      .map-card
+        @include centerMargin
   .message
     margin-bottom: 37px
     width: 100%
@@ -520,6 +539,11 @@ body
   border-width: 8.5px
   border-style: solid
   cursor: pointer
+  border-color: white
+  color: $blue
+  box-shadow: $thisShadow
+  &:before
+    border-color: white
   &__inner
     color: inherit
     font-size: 14px
@@ -528,19 +552,13 @@ body
     padding-left: 4px
     margin-left: -8.5px
     margin-top: -8.5px
-  &_once
-    border-color: white
-    color: $blue
-    &:before
-      border-color: white
-  &_once &__inner
     background-color: white
-  &_multiple
+  &.active
     border-color: $orange
     color: white
     &:before
       border-color: $orange
-  &_multiple &__inner
+  &.active &__inner
     background-color: $orange
   &:before
     content: ''
