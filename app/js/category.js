@@ -9,8 +9,10 @@ import {
   filterMixin,
   myWOW,
   goTopInit,
-  webpInit, LazyLoader, isWebp, siemaLazyInitMixin
+  webpInit, LazyLoader, isWebp, siemaLazyInitMixin, initDouglasPeucker, initialMobileScroll
 } from "./base";
+
+initialMobileScroll(667, 50);
 
 webpInit();
 const wow = myWOW({selector: '.animated'});
@@ -37,7 +39,8 @@ document.readyState === 'complete' ? mapObserver.observe(document.querySelector(
 window.initMap = function () {
   document.getElementById('map_wrapper').classList.remove('loading');
 
-  let activeInfoWindow;
+  let activeInfoWindow = null;
+  let isDrawing = false;
 
   class MyOverlay extends google.maps.OverlayView {
     constructor (args) {
@@ -136,6 +139,7 @@ window.initMap = function () {
       this.marker = args.marker;
       this.siema = args.siema;
       this.marker.addListener('click', () => {
+        if (isDrawing) return;
         this.marker.toggleActive();
         this.toggle();
       });
@@ -391,8 +395,124 @@ window.initMap = function () {
     visibility: 'hidden',
   });
 
-  // let infoWindowsArray = [onceInfoWindow, multipleInfoWindow];
-  // google.maps.event.addListener(map,'click', () => infoWindowsArray.forEach(window => window.hide()));
+
+  if (adaptiveMixin.computed.isSmDesktop()) {
+    // Drawing
+    initDouglasPeucker(map);
+    const defaultCursor = 'url("https://maps.gstatic.com/mapfiles/openhand_8_8.cur"), default';
+    const earthRadius = 6378137.0;
+    let overlay = new google.maps.OverlayView();
+    overlay.draw = function () {
+    };
+    overlay.setMap(map);
+    let polyLine = new google.maps.Polyline({
+      strokeColor: '#F77100',
+      strokeOpacity: 0.8,
+      strokeWeight: 4,
+    });
+    let polygon = new google.maps.Polygon({
+      strokeColor: '#F77100',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#F77100',
+      fillOpacity: 0.35,
+      editable: true,
+      draggable: true,
+      geodesic: false,
+    });
+    let parcelleHeig = [];
+    let mousePressed = false;
+    const processDraw = (evt) => {
+      if (!mousePressed) return;
+
+      let latLng = evt.latLng;
+      polyLine.getPath().push(latLng);
+      parcelleHeig.push(new google.maps.LatLng(latLng.lat(), latLng.lng()));
+    };
+    const startDraw = () => {
+      mousePressed = true;
+      polyLine.setPath(parcelleHeig);
+      polyLine.setMap(map);
+    };
+    const stopDraw = () => {
+      mousePressed = false;
+      polygon.setPath(parcelleHeig);
+
+      polygon.douglasPeucker(360.0 / (2.0 * Math.PI * earthRadius));
+
+      parcelleHeig = [];
+      polygon.setEditable(true);
+      polygon.setDraggable(true);
+      polygon.setMap(map);
+      polyLine.setMap(null);
+
+      drawingModeOff();
+    };
+    // Listeners for adding or removing on button click handle
+    let listenersManage = () => {
+      const config = [
+        {
+          el: document.getElementById('map'),
+          eventName: 'mousedown',
+          handle: startDraw,
+          listener: null,
+          dom: true,
+        },
+        {
+          el: document.getElementById('map'),
+          eventName: 'mouseup',
+          handle: stopDraw,
+          listener: null,
+          dom: true,
+        },
+        {
+          el: map,
+          eventName: 'mousemove',
+          handle: processDraw,
+          listener: null,
+          dom: false,
+        }
+      ];
+      config.forEach((obj) => {
+        if (obj.dom) {
+          obj.listener = obj.el[isDrawing ? 'addEventListener' : 'removeEventListener'](obj.eventName, obj.handle);
+        } else if (isDrawing) {
+          obj.listener = google.maps.event.addListener(obj.el, obj.eventName, obj.handle);
+        } else {
+          google.maps.event.removeListener(obj.listener);
+          obj.listener = null;
+        }
+      });
+    };
+
+    const drawingModeOn = () => {
+      if (activeInfoWindow) activeInfoWindow.hide();
+      isDrawing = true;
+      map.setOptions({
+        draggable: false,
+        draggableCursor: 'default',
+      });
+      listenersManage();
+      polygon.setEditable(false);
+      polygon.setDraggable(false);
+    }, drawingModeOff = () => {
+      isDrawing = false;
+      app.isDrawing = false;
+      map.setOptions({
+        draggable: true,
+        draggableCursor: defaultCursor,
+      });
+      listenersManage();
+    };
+    // Listen control drawing button click
+    document.getElementById('js__controlDrawing').addEventListener('click', () => {
+      !isDrawing ? drawingModeOn() : drawingModeOff();
+    }, {passive: true});
+    document.getElementById('js__clearDrawing').addEventListener('click', () => {
+      polyLine.setMap(null);
+      polygon.setMap(null);
+    })
+  }
 };
 
 Vue.component('v-select', vSelect);
@@ -403,6 +523,7 @@ const app = new Vue({
   mixins: [adaptiveMixin, menuMixin, filterMixin, siemaLazyInitMixin],
   data () {
     return {
+      isDrawing: false,
       viewTab: true,
       siemaOptions: {
         duration: 200,
@@ -444,6 +565,9 @@ const app = new Vue({
     this.ll = ll;
   },
   methods: {
+    clickDrawingControl () {
+      this.isDrawing = !this.isDrawing;
+    },
     initSiema (siema) {
       const w = siema.$el.clientWidth;
       siema.$el.style.height = `${w*179/278}px`;
@@ -482,76 +606,10 @@ const app = new Vue({
       this.$refs.siemaMapWrapper.classList.remove('active');
       this.siemaMapActive = false;
     },
-    changeActiveControlImage (el) {
-      for (let i of el.getElementsByClassName('full-item-card__control')) {
-        i.classList.toggle('active');
-      }
-    },
-    clickWrapper (ev) {
-      let el = ev.target;
-      if (el.classList.contains('full-item-card__control')) return;
-      while (!el.classList.contains('full-item-card__image-wrapper'))
-        el = el.parentElement;
-      if (!this.isSmDesktop) {
-        this.changeActiveControlImage(el);
-      }
-    },
-    changeWrapper (ev) {
-      if (this.isSmDesktop) {
-        this.changeActiveControlImage(ev.target);
-      }
-    },
-    changeActiveCard (el) {
-      el.classList.toggle('active');
-    },
-    clickCard (ev) {
-      if (!this.isSmTab) {
-        this.changeActiveCard(ev.target);
-      }
-    },
-    changeCard (ev) {
-      if (this.isSmDesktop) {
-        this.changeActiveCard(ev.target);
-      }
-    },
     clickMyButton (ev) {
       const ref = ev.target;
       const nDirection = ref.getAttribute('data-direction');
       ref.setAttribute('data-direction', nDirection === 'top' ? 'bottom' : 'top');
-    },
-    initDrag () {
-      this.drag.startX = 0;
-      this.drag.stopX = 0;
-      this.drag.maxX = 0;
-      this.drag.nowX = 0;
-      this.drag.n = 0;
-      this.drag.c = 0;
-    },
-    startDrag (ev) {
-      ev = ev.changedTouches ? ev.changedTouches[0] : ev;
-      this.drag.maxX = parseInt(this.$refs.mapSiema.style.width) - 1;
-      this.drag.startX = ev.pageX;
-      this.drag.bufX = this.drag.startX;
-      this.drag.n = (this.drag.maxX - this.drag.maxX % this.drag.w) / this.drag.w;
-    },
-    onDrag (ev) {
-      ev = ev.changedTouches ? ev.changedTouches[0] : ev;
-      this.drag.nowX += (ev.pageX - this.drag.bufX);
-      this.drag.bufX = ev.pageX;
-    },
-    stopDrag (ev) {
-      ev = ev.changedTouches ? ev.changedTouches[0] : ev;
-      this.drag.stopX = ev.pageX;
-      let to = -this.drag.nowX;
-      let cf = to > 0 ? 1 : to < 0 ? -1 : 0;
-      to = Math.abs(to);
-      to /= this.drag.w;
-      to = (to % 1 >= 0.5 ? 1 : 0) + Math.floor(to);
-      to *= cf;
-      to = to < 0 ? 0 : to > this.drag.n ? this.drag.n : to;
-      this.$refs.mapSiema.style.transition = 'transform .25s ease-out';
-      this.drag.nowX = -to * this.drag.w;
-      setTimeout(() => this.$refs.mapSiema.style.transition = '', 1000);
     },
   },
 });

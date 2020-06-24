@@ -50,9 +50,8 @@ html(lang="us")
                   +picture('img/room-photo-'+i+'.webp', 'img/room-photo-'+i+'.jpg', 'Room', 'block-images__image'+(i === 1 ? ' current' : ''))
           +b.block-text
             +e.top
-              +e.H2.text_big._bold.animated Delovaya (Dimitrova) Street, 2б
-              +e.text Tetris Hall
-              +e.text_small._dim for example Shevchenko
+              +e.H2.text_big._bold Delovaya (Dimitrova) Street, 2б
+              +e.text_margin Tetris Hall &bull; Shevchenkovskiy district
               +e.text_medium.id ID 1525755
             +e.middle
               +e.price-info
@@ -75,7 +74,7 @@ html(lang="us")
                 each t in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace', 'Outdoor sauna']
                   +e.text_tall._tag= t
             +e.content
-              +e.text_big._bold.animated Description
+              +e.text_big._bold Description
               +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
               +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
               +e.text 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated
@@ -90,30 +89,40 @@ html(lang="us")
               +e.FIGURE.avatar
                 +picture('img/woman.webp', 'img/woman.jpg', 'Avatar', 'block-contact__image')
               +e.info
-                +e.title.animated Name Surname
+                +e.title Name Surname
                 +e.subtitle Speaks: Russian, Ukrainian, English
                 +e.A(href='#').phone_icon +38 044 22-33-177
                 +e.A(href='#').phone +38 044 22-33-177
             +e.title_main Send message
             +e.FORM.form
               +e.input-line
-                +b.INPUT(type='text' placeholder='First name' v-model='form.name').text-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +b.INPUT(:class='{\'errored\': errors.length}' name='name' type='text' placeholder='Name' v-model='form.name').text-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +e.input-line
-                +b.INPUT(type='text' placeholder='Last name' v-model='form.surname').text-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +b.INPUT(:class='{\'errored\': errors.length}' name='surname' type='text' placeholder='Surname' v-model='form.surname').text-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +e.input-line_full
                 +b.V-SELECT(class='type' v-model='form.prefix' :options='prefixList')
-                +b.INPUT(type='text' placeholder='Phone' v-model='form.surname').text-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +b.INPUT(:class='{\'errored\': errors.length}' name='phone' type='text' placeholder='Phone' v-model='form.surname').text-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +e.input-line
-                +b.INPUT(type='text' placeholder='E-mail' v-model='form.email').text-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +b.INPUT(:class='{\'errored\': errors.length}' name='e-mail' type='text' placeholder='E-mail' v-model='form.email').text-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +e.input-block
-                +b.TEXTAREA(placeholder='Message' wrap='soft' v-model='form.message').textarea-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +b.TEXTAREA(:class='{\'errored\': errors.length}' name='message' placeholder='Message' wrap='soft' v-model='form.message').textarea-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +e.BUTTON.submit.show Submit
         +listing
         +we-can('_row')
 
-        +b.DIV(ref='modal' v-show='modalVisible' @click.self='hideModal').modal#modal
+        +b.DIV(ref='modal' v-show='modalVisible' @click.self='hideModal').modal.js__hide-before-load#modal
           +e.DIV(@click='hideModal').control
-          +e(v-if='isSmDesktop').siema-wrapper
+          +e(v-if='isSmDesktop' :data-header='curImage+1+\' / 8\'').siema-wrapper
             +e.DIV(@click='$refs.siemaModalImages.prev()').siema-control_button._left
             +e.DIV(@click='$refs.siemaModalImages.next()').siema-control_button._right
             +e.siema-control_center

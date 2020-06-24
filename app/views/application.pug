@@ -38,22 +38,36 @@ html(lang="us")
                 +b.label Property type
                 +b.V-SELECT(class='type' :options='[\'Property\', \'Another property\']' v-model='form.prop').search-input
               +b.search_gray._textarea
-                +e.TEXTAREA(wrap='soft' placeholder='Address' v-model='form.address').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.TEXTAREA(class='search-input' :class='{\'errored\': errors.length}' wrap='soft' name='address' placeholder='Address' v-model='form.address')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray._textarea
-                +e.TEXTAREA(wrap='soft' placeholder='Description' v-model='form.description').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.TEXTAREA(class='search-input' :class='{\'errored\': errors.length}' name='description' wrap='soft' placeholder='Description' v-model='form.description')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray
-                +e.INPUT(type='text' placeholder='Price' v-model='form.price').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(class='search-input' :class='{\'errored\': errors.length}' name='price' type='text' placeholder='Price' v-model='form.price')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
             +e.H2.form-title.animated Contacts
             +e.form-block
               +b.search_gray
-                +e.INPUT(type='text' placeholder='Name*' v-model='form.name').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(class='search-input' :class='{\'errored\': errors.length}' name='name' type='text' placeholder='Name' v-model='form.name')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray
-                +e.INPUT(type='text' placeholder='Surname*' v-model='form.surname').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(class='search-input' :class='{\'errored\': errors.length}' name='surname' type='text' placeholder='Surname' v-model='form.surname')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray
-                +e.INPUT(type='text' placeholder='E-mail*' v-model='form.email').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(class='search-input' :class='{\'errored\': errors.length}' name='e-mail' type='text' placeholder='E-mail' v-model='form.email')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray.input-line
                 +b.V-SELECT(class='type' :options='prefixList' v-model='form.prefix')
-                +e.INPUT(type='text' placeholder='Phone*' v-model='form.phone').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(class='search-input' :class='{\'errored\': errors.length}' name='phone' type='text' placeholder='Phone*' v-model='form.phone')
+                  p(v-show='errors.length').error-message {{ errors[0] }}
             +e.H3.form-title.animated Photo (attach)
             +e.DIV(@click.self='$refs.fileInput.click()' ref='inputFileBox').form-file
               +e.INPUT(class='file-input' ref='fileInput' type='file' accept="image/*" multiple @change='changeFileInput($event.target.files)')

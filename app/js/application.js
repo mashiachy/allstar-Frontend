@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import vSelect from 'vue-select';
+import VV from 'vee-validate';
 import {adaptiveMixin, menuMixin, myWOW, goTopInit, webpInit, LazyLoader} from "./base";
+
+const {ValidationProvider, extend} = VV;
 
 webpInit();
 
@@ -15,6 +18,18 @@ const ll = new LazyLoader({
   selector: '[data-lazy]',
 });
 
+extend('required', {
+  validate (value) {
+    return {
+      required: true,
+      valid: ['', null, undefined].indexOf(value) === -1
+    };
+  },
+  computesRequired: true,
+  message: 'The {_field_} field is required',
+});
+
+Vue.component('validationProvider', ValidationProvider);
 Vue.component('v-select', vSelect);
 
 const app = new Vue({

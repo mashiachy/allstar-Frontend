@@ -13,7 +13,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 *
   -webkit-tap-highlight-color: transparent
 
-input
+input, textarea
   font-size: inherit
 
 picture
@@ -37,7 +37,7 @@ body
   font-family: 'Roboto', sans-serif
   font-weight: 400
   font-size: 15px
-  line-height: 18px
+  line-height: 27px
   color: $blue
   background: white
   position: relative
@@ -60,6 +60,119 @@ picture
   @include adaptive(1024px)
     display: block
 
+.js__hide-before-load
+  display: none
+
+.multiple-check
+  display: block
+  height: 36px
+  width: 100%
+  font-size: 15px
+  line-height: 16px
+  position: relative
+  &:after
+    content: ''
+    position: absolute
+    width: 5px
+    height: 5px
+    background-image: url("../img/triangle.svg")
+    background-size: contain
+    top: 17px
+    right: 11px
+  &_inline
+    width: fit-content
+    &:after
+      content: unset
+  &__label
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    padding: 2px 0 0 19px
+    position: relative
+    background-color: rgba(216, 216, 216, 0.16)
+    border-radius: 7px
+    cursor: pointer
+    border: 0 !important
+    outline: 0 !important
+    font: inherit
+    color: inherit
+  &_inline &__label
+    width: fit-content
+    white-space: nowrap
+    height: 100%
+    background-color: transparent
+    font-size: 14px
+    line-height: 16px
+    padding: 0
+  &__dropdown-menu
+    display: none
+  &.extended
+    overflow-y: visible
+  &.extended &__dropdown-menu
+    display: block
+    position: absolute
+    z-index: 100
+    width: 100%
+    left: 0
+    top: 41px
+    background-color: white
+    border-radius: 7px
+    box-sizing: border-box
+    padding: 6.5px 13px 10.5px
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
+  &_inline.extended &__dropdown-menu
+    width: auto
+  &.extended &__option
+    white-space: nowrap
+    cursor: pointer
+    box-sizing: border-box
+    margin-bottom: 4px
+    height: 31px
+    width: 100%
+    padding-right: 30px
+    padding-top: 6px
+    padding-left: 6px
+    position: relative
+    font-size: 15px
+    line-height: 16px
+    &:after
+      content: ''
+      position: absolute
+      width: 100%
+      height: 1.5px
+      background-color: #979797
+      opacity: 0.11
+      left: 0
+      bottom: -2.5px
+    &:last-child:after
+      content: unset
+    &:before
+      content: ''
+      position: absolute
+      width: 15px
+      height: 15px
+      z-index: 5
+      top: 7.5px
+      right: 3px
+      border-radius: 3px
+      background-color: #f8f8f8
+      will-change: background-color
+      transition: background-color .25s ease-out
+    &:hover
+      background-color: rgba(0,0,0,0.05)
+      &:before
+        background-color: #fefefe
+    &.selected
+      background-color: unset
+      &:before
+        background-color: $orange
+        background-size: 8.13px 5px
+        background-position: center
+        background-repeat: no-repeat
+        background-image: url("../img/ok.svg")
+  &_inline.extended &__option
+    width: fit-content
+
 .content
   @include centerMargin
   max-width: 300px
@@ -75,9 +188,12 @@ picture
     width: 1090px
   .inner, &.inner
     box-sizing: border-box
-    padding-left: 6.67%
-    padding-right: 6.67%
+    //padding-left: 6.67%
+    //padding-right: 6.67%
     @include adaptive(321px)
+      //padding-left: 3.71%
+      //padding-right: 3.71%
+    @include adaptive(768px)
       padding-left: 3.71%
       padding-right: 3.71%
     @include adaptive(769px)
@@ -243,10 +359,10 @@ picture
     @include adaptive(1024px)
       display: none
     .contact
-      width: 168px
+      width: 157px
       height: 33px
       display: none
-      margin-right: 22px
+      margin-right: 10px
       margin-top: -1px
       @include adaptive(320px)
         &.active
@@ -254,6 +370,9 @@ picture
           margin-top: 7px
           .contact__email
             display: none
+      @include adaptive(400px)
+        margin-right: 22px
+        width: 168px
       @include adaptive(480px)
         &.active
           margin-top: unset
@@ -277,8 +396,10 @@ picture
         right: 0
         top: 0
         font-weight: 900
-        font-size: 16px
+        font-size: 15px
         line-height: 19px
+        @include adaptive(400px)
+          font-size: 16px
       &__email
         right: 0
         bottom: 0
@@ -430,7 +551,7 @@ picture
     margin-left: 22px
     margin-bottom: 19px
     @include adaptive(1024px)
-      padding-right: 21px
+      padding-right: 9px
       margin-top: 11px
       margin-bottom: 15px
       margin-left: unset
@@ -789,7 +910,7 @@ picture
       right: 11px
   &__selected-options
     box-sizing: border-box
-    padding-top: 10px
+    padding-top: 5px
     padding-left: 19px
     position: relative
   &__selected
@@ -909,7 +1030,7 @@ picture
   &__number
     width: 84px
     height: 36px
-    padding: 10px 0 0 12px
+    padding: 9px 0 0 12px
     box-sizing: border-box
     background-color: rgba(216, 216, 216, 0.16)
     border-radius: 7px
@@ -1002,21 +1123,18 @@ picture
     margin-bottom: 8px
   &__description
     font-size: 15px
-    line-height: 18px
+    line-height: 27px
     opacity: 75.23%
 
 .slider
   position: relative
   &__title
-    font-size: 17px
+    font-size: 18px
     line-height: 21px
     font-weight: 700
     box-sizing: border-box
     padding-top: 13px
     margin-bottom: 28px
-    @include adaptive(768px)
-      font-size: 18px
-      line-height: 21px
   &__controls
     position: absolute
     top: 0
@@ -1039,6 +1157,7 @@ picture
       background-image: url("../img/left-white-triangle.svg")
     &_right
       background-image: url("../img/right-white-triangle.svg")
+
 
 .item-card
   display: block
@@ -1096,14 +1215,14 @@ picture
     &:after
       content: ''
       position: absolute
-      top: 1px
+      top: 2px
       left: 0
       width: 10px
       height: 12px
       background-image: url("../img/ok-icon.svg")
       background-size: 10px 12px
   &__footer
-    width: 100%
+    width: calc(100% - 10px)
     text-align: right
     color: $orange
     font-weight: 700
@@ -1155,6 +1274,7 @@ picture
     margin-top: -1px
   &__content
     font-size: 15px
+    line-height: 27px
 
 @keyframes loaderCenterPos
   0%
@@ -1227,8 +1347,6 @@ picture
     background-repeat: no-repeat
     @include smShadow
     z-index: 50
-    &.active
-      opacity: 100
     &_left
       left: 10px
       background-image: url("../img/left-orange-triangle.svg")
@@ -1251,6 +1369,8 @@ picture
         margin-right: 3px
         &.active
           background-color: $orange
+  &__image-wrapper:hover &__control
+    opacity: 1
   &__siema, &__image
     width: 100%
     height: 100%
@@ -1264,7 +1384,7 @@ picture
     font-weight: 700
     @include adaptive(667px)
       margin-bottom: 4px
-      font-size: 16px
+      font-size: 15px
       line-height: 18px
     @include adaptive(1024px)
       margin-bottom: 2px
@@ -1284,29 +1404,32 @@ picture
     opacity: 0.41
     font-size: 12px
     line-height: 14px
+    margin-bottom: 10px
     @include adaptive(667px)
       font-size: 14px
       line-height: 16px
       margin-bottom: 17px
     @include adaptive(1024px)
       margin-bottom: 9px
-  &__title, &__text, &__subtext
+  &__title, &__text, &__subtext, &__tags
     margin-left: 8px
     display: block
     color: inherit
     @include adaptive(667px)
       margin-left: unset
   &__tags
+    margin-bottom: 12px
     @include flex(row, wrap)
     @include flex-setting(flex-start, flex-start)
     @include adaptive(667px)
       width: 65.4%
+      margin-bottom: unset
     @include adaptive(1024px)
       width: 85%
   &__tag
     box-sizing: border-box
-    padding-left: 19px
-    margin-right: 12px
+    padding-left: 14px
+    margin-right: 8px
     font-size: 12px
     line-height: 21px
     position: relative
@@ -1328,22 +1451,26 @@ picture
     line-height: 15px
     color: #909BA6
     margin-right: 14px
+    margin-top: auto
+    margin-bottom: 2px
   &__price
     font-size: 16px
     line-height: 19px
     font-weight: 700
     color: $orange
     position: relative
-    &.per-month:after
-      position: absolute
-      content: 'Month/'
-      top: -19px
-      right: 0
-      font-size: 14px
-      line-height: 16px
-      font-weight: 400
-      color: $blue
-      opacity: 0.41
+    &.per-month
+      padding-top: 19px
+      &:after
+        position: absolute
+        content: 'Month/'
+        top: 0
+        right: 0
+        font-size: 14px
+        line-height: 16px
+        font-weight: 400
+        color: $blue
+        opacity: 0.41
 
 .message
   display: block
@@ -1407,16 +1534,18 @@ picture
     width: 100%
     box-sizing: border-box
     margin-bottom: 40px
-    font-size: 17px
+    font-size: 18px
     line-height: 21px
     font-weight: 700
-    padding-left: 6.67%
-    padding-right: 6.67%
-    @include adaptive(321px)
-      padding-left: 3.71%
-      padding-right: 3.71%
+    //padding-left: 6.67%
+    //padding-right: 6.67%
+    //@include adaptive(321px)
+    //  padding-left: 3.71%
+    //  padding-right: 3.71%
     @include adaptive(768px)
       margin-bottom: unset
+      padding-left: 3.71%
+      padding-right: 3.71%
     @include adaptive(769px)
       padding-left: 3.20%
       padding-right: 3.20%
@@ -1436,17 +1565,21 @@ picture
   .service-card
     margin-bottom: 14px
     z-index: 10
-    padding: 30px 15px 19px 22px
-    will-change: box-shadow
-    box-shadow: none
-    transition: box-shadow .25s ease-out
-    border-radius: 20px
+    //padding: 30px 15px 19px 22px
+    //will-change: box-shadow
+    //box-shadow: none
+    //transition: box-shadow .25s ease-out
+    //border-radius: 20px
     &:nth-last-child
       margin-bottom: 0
     box-sizing: border-box
     background-color: transparent
     @include adaptive(768px)
       padding: 54px 36px 43px 44px
+      will-change: box-shadow
+      box-shadow: none
+      transition: box-shadow .25s ease-out
+      border-radius: 20px
     @include adaptive(1280px)
       padding: 65px 28px 28px 87px
       will-change: transform, margin-left
@@ -1459,7 +1592,7 @@ picture
       margin-bottom: 17px
     &__text
       font-size: 15px
-      line-height: 28px
+      line-height: 27px
       margin-bottom: 12px
       @include adaptive(1280px)
         width: 82.6494%
@@ -1486,13 +1619,14 @@ picture
         transform: translate(-2px, -3px)
         @include smShadow
   &__service-wrapper:hover .service-card
-    background-color: white
-    @include otShadow
-    .service-card__button
-      box-shadow: unset !important
-      &:hover
-        transform: translate(0, 0) !important
-        background-color: $orange
+    @include adaptive(768px)
+      background-color: white
+      @include otShadow
+      .service-card__button
+        box-shadow: unset !important
+        &:hover
+          transform: translate(0, 0) !important
+          background-color: $orange
     @include adaptive(1280px)
       transform: translate(-30px,-25px)
   &_row &__service-wrapper
@@ -1595,10 +1729,14 @@ picture
     box-sizing: border-box
     padding-top: 3px
     width: 33%
+    &_one-line
+      line-height: 36px
+    &_2
+      padding-left: 30px
   &__number
     width: 29.15%
     height: 100%
-    padding: 10px 0 0 12px
+    padding: 9px 0 0 12px
     box-sizing: border-box
     background-color: rgba(216, 216, 216, 0.16)
     border-radius: 7px
@@ -1634,7 +1772,7 @@ picture
   width: 100%
   height: 56px
   box-sizing: border-box
-  padding-top: 20px
+  line-height: 56px
   text-align: center
   border-radius: 13px
   cursor: pointer
@@ -1722,6 +1860,7 @@ picture
     border-radius: 6px
     box-shadow: $thisShadow
     position: relative
+    cursor: pointer
     @include adaptive(768px)
       padding: 12px 25px 10px 18px
       background-color: transparent
@@ -1734,14 +1873,14 @@ picture
     &:after
       position: absolute
       content: ''
-      top: 16px
-      right: 16px
+      top: 15.75px
+      right: 15.5px
       width: 4.5px
       height: 4.5px
       background-image: url("../img/triangle-down.svg")
       background-size: 4.5px 4.5px
       @include adaptive(768px)
-        top: 18px
+        top: 17.75px
     &:nth-child(4)
       display: none
       @include adaptive(468px)
@@ -1774,7 +1913,7 @@ picture
       font-weight: 500
   &__main-wrapper .search
     display: none
-    @include adaptive(729px)
+    @include adaptive(805px)
       display: block
       width: 159px
       height: 41px
@@ -1869,6 +2008,7 @@ picture
       @include adaptive(730px)
         display: none
     .multiple-check
+
       @include adaptive(468px)
         display: none
     .size
@@ -1968,7 +2108,6 @@ picture
   &__siema
     width: 438px
     min-height: 209px
-    max-height: 267px
     overflow: hidden
     padding-top: 33px
     padding-bottom: 10px
@@ -1980,6 +2119,7 @@ picture
       width: 976px
     @include adaptive(996px)
       width: calc(100% + 28px)
+      min-height: 290px
     @include adaptive(1280px)
       width: 100%
     .item-card
@@ -2109,6 +2249,15 @@ picture
     transform: translate(-50%, -50%)
     width: 90%
     max-width: 1090px
+    &[data-header]:after
+      content: attr(data-header)
+      position: absolute
+      font-size: 15px
+      line-height: 18px
+      top: -27px
+      left: 50%
+      transform: translateX(-50%)
+      color: white
   &__siema-modal
     width: 100%
   &__siema-image
@@ -2280,111 +2429,3 @@ picture
         background-size: contain
   &__email
     margin-bottom: 0
-
-.multiple-check
-  display: block
-  height: 36px
-  width: 100%
-  font-size: 15px
-  line-height: 16px
-  position: relative
-  &_inline
-    width: fit-content
-    &:after
-      content: unset
-  &:after
-    content: ''
-    position: absolute
-    width: 5px
-    height: 5px
-    background-image: url("../img/triangle.svg")
-    background-size: contain
-    top: 17px
-    right: 11px
-  &__label
-    width: 100%
-    height: 100%
-    box-sizing: border-box
-    padding: 2px 0 0 19px
-    position: relative
-    background-color: rgba(216, 216, 216, 0.16)
-    border-radius: 7px
-    cursor: pointer
-    border: 0 !important
-    outline: 0 !important
-    font: inherit
-    color: inherit
-  &_inline &__label
-    width: fit-content
-    white-space: nowrap
-    height: 100%
-    background-color: transparent
-    font-size: 14px
-    line-height: 16px
-    padding: 0
-  &__dropdown-menu
-    display: none
-  &.extended
-    overflow-y: visible
-  &.extended &__dropdown-menu
-    display: block
-    position: absolute
-    z-index: 100
-    width: 100%
-    left: 0
-    top: 41px
-    background-color: white
-    border-radius: 7px
-    box-sizing: border-box
-    padding: 6.5px 13px 10.5px
-    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
-  &_inline.extended &__dropdown-menu
-    width: auto
-  &.extended &__option
-    white-space: nowrap
-    cursor: pointer
-    box-sizing: border-box
-    margin-bottom: 4px
-    height: 31px
-    width: 100%
-    padding-right: 30px
-    padding-top: 6px
-    padding-left: 6px
-    position: relative
-    font-size: 15px
-    line-height: 16px
-    &:after
-      content: ''
-      position: absolute
-      width: 100%
-      height: 1.5px
-      background-color: #979797
-      opacity: 0.11
-      left: 0
-      bottom: -2.5px
-    &:last-child:after
-      content: unset
-    &:before
-      content: ''
-      position: absolute
-      width: 15px
-      height: 15px
-      z-index: 5
-      top: 7.5px
-      right: 3px
-      border-radius: 3px
-      background-color: #f8f8f8
-      will-change: background-color
-      transition: background-color .25s ease-out
-    &:hover:before
-      background-color: #ededed
-    &.selected
-      background-color: unset
-      &:before
-        background-color: $orange
-        background-size: 8.13px 5px
-        background-position: center
-        background-repeat: no-repeat
-        background-image: url("../img/ok.svg")
-  &_inline.extended &__option
-    width: fit-content

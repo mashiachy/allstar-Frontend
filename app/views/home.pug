@@ -31,7 +31,7 @@ html(lang="en")
           +e.DIV(:data-pos='activeOption').marker
           +e.SPAN(:class='{\'active\': activeOption === 0}' @click='activeOption = 0').choice_rent For Rent
           +e.SPAN(:class='{\'active\': activeOption === 1}' @click='activeOption = 1').choice_sale For Sale
-        +b.V-SELECT(class='type' v-model='curType' :options='[\'Apartment1\', \'Apartment2\', \'Apartment3\']')
+        +b.V-SELECT(class='type' :searchable='false' v-model='curType' :options='[\'Apartment1\', \'Apartment2\', \'Apartment3\']')
         +b.number-range.price
           +e.label
             | Price
@@ -60,7 +60,7 @@ html(lang="en")
         +b.DIV(class='other-options' :class='{\'active\': options}')
           +b.DIV(class='hide' v-if='isTab')
             +e.SPAN(class='inner' @click='options = !options')
-          +b.V-SELECT(class='type' v-model='curDistrict' :options='[\'1 District\', \'2 District\', \'3 District\']')
+          +b.V-SELECT(class='type' :searchable='false' v-model='curDistrict' :options='[\'1 District\', \'2 District\', \'3 District\']')
           +b.number-range.price-sqm
             +e.label
               | Price
@@ -71,7 +71,7 @@ html(lang="en")
             +e.SPAN.number $
               +e.INPUT(type='number' v-model.number='pricePerSqm.end').number-input
           +b.number-range.floor
-            +e.label
+            +e.label_one-line
               | Floor
             +e.SPAN.number
               +e.INPUT(type='number' v-model.number='floor.start').number-input

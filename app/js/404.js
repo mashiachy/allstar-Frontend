@@ -1,6 +1,8 @@
 import Vue from "vue";
 
-import {adaptiveMixin, menuMixin, myWOW, LazyLoader} from "./base";
+import {adaptiveMixin, menuMixin, myWOW, LazyLoader, initialMobileScroll} from "./base";
+
+initialMobileScroll(667, 50);
 
 const wow = myWOW({selector: '.animated'});
 const ll = new LazyLoader({

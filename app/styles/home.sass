@@ -1,7 +1,7 @@
 @import "mixins"
 
 body
-  padding-top: 1052px
+  padding-top: 1075px
   @include adaptive(768px)
     padding-top: 626px
   @include adaptive(1024px)
@@ -358,6 +358,11 @@ body
     padding-top: 17px
     @include shadow
     box-sizing: border-box
+      padding-left: 6.67%
+      padding-right: 6.67%
+    @include adaptive(321px)
+      padding-left: 3.71%
+      padding-right: 3.71%
     @include adaptive(768px)
       padding-top: 35px
       padding-bottom: 17px
@@ -380,7 +385,7 @@ body
     .client
       @include centerMargin
       display: none
-      max-width: 75px
+      max-width: 78px
       &__image
         margin-bottom: 5.5px
         max-height: 45px

@@ -24,7 +24,7 @@ goTopInit({
 const preloadBack = document.createElement('link');
 preloadBack.setAttribute('rel', 'preload');
 preloadBack.setAttribute('as', 'image');
-let backSrc = `img/back-${screen>=1024?'desktop':screen>=700?'tab':screen>568?'mobile':'small'}.${isWebp ? 'webp' : 'jpg'}`;
+let backSrc = `img/back-${screen>=1024?'desktop':screen>=700?'tab':screen>=568?'mobile':'small'}.${isWebp ? 'webp' : 'jpg'}`;
 preloadBack.setAttribute('href', backSrc);
 document.querySelector('.background').setAttribute('data-l-back', backSrc);
 document.head.appendChild(preloadBack);

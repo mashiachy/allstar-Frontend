@@ -113,6 +113,7 @@ body
     @include adaptive(1280px)
       margin-bottom: unset
       grid-area: block-cards
+      height: 356px
   &__block-form &__text_big
     margin-bottom: 23px
   &__block-form
@@ -123,7 +124,7 @@ body
       box-sizing: border-box
       @include flex(row, wrap)
       @include flex-setting(space-between, stretch)
-      height: 309px
+      height: fit-content
       box-shadow: $thisShadow
       border-radius: 12px
       & > *
@@ -131,32 +132,52 @@ body
     @include adaptive(1280px)
       margin-bottom: unset
       grid-area: block-form
-      @include flex(column, nowrap)
-      @include flex-setting(space-between, flex-start)
-      height: 543px
+      display: block
+      //height: 543px
       & > *
         width: 100%
   &__block-form &__text_big
     width: 100%
   .search
+    height: auto
+    .type, input, textarea
+      height: 41px
     &:not(:last-child)
-      margin-bottom: 11px
+      margin-bottom: 18px
+    &_big
+      margin-bottom: 9px
+      textarea
+        @include adaptive(768px)
+          height: 159px
+        @include adaptive(1280px)
+          height: 141px
   &__block
     &:not(:last-child)
-      margin-bottom: 11px
+      margin-bottom: 18px
   .input-line
     @include flex
+    & > span:nth-child(2)
+      width: calc(100% - 113px)
     .type
-      width: 117px
+      width: 95px
       margin-right: 18px
-      height: 100%
     .search-input
-      width: calc(100% - 135px)
+      width: 100%
+  .errored
+    border: 2px solid $orange
+    box-sizing: border-box
+  .error-message
+    font-size: 12px
+    line-height: 14px
+    color: $orange
+    font-weight: 700
+    text-align: right
   &__submit
     height: 41px
     padding: 0
     border: 0
     font-size: 14px
     line-height: 16px
-    //max-width: 275px
-    //margin-left: auto
+
+.vs__selected-options
+  padding-top: 7px

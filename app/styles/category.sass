@@ -219,7 +219,7 @@ body
       @include adaptive(667px)
         height: 100vh
       @include adaptive(1024px)
-        height: 986px
+        height: 996px
         width: calc(100% - 565px)
         border-radius: 10px
         overflow: hidden
@@ -235,10 +235,11 @@ body
       .button
         display: none
         @include adaptive(1024px)
+          cursor: pointer
           display: block
           position: absolute
           z-index: 5
-          width: fit-content
+          width: min-content
           border-radius: 17px
           height: 34px
           box-sizing: border-box
@@ -246,16 +247,17 @@ body
           font-size: 15px
           line-height: 18px
           font-weight: 700
-          &_1
-            background-color: $orange
-            color: white
-            top: 14px
-            left: 25px
+          background-color: $orange
+          color: white
+          top: 14px
+          left: 25px
+          will-change: background-color, color
+          transition: background-color .25s ease-out, color .25s ease-out
           &_2
+            left: 145px
+          &.active
             background-color: white
             color: $blue
-            top: 14px
-            left: 142px
     &__siema-wrapper
       display: none
       @include maxAdaptive(666px)
@@ -572,3 +574,10 @@ body
     background-color: transparent
     border-style: solid
     box-sizing: border-box
+
+.we-can
+  margin-bottom: 47px
+  @include adaptive(768px)
+    margin-bottom: 40px
+  @include adaptive(1280px)
+    margin-bottom: 60px

@@ -38,7 +38,7 @@ html(lang="us")
             +e.text We rent real estate to embassies, diplomatic missions, international companies and other foreign clients in Kiev
           +b(class='tab_list' v-show='isSmDesktop || viewTab')
             +b.DIV(class='full-item-card')
-              +e.DIV(@click='clickWrapper' @mouseenter='changeWrapper' @mouseleave='changeWrapper').image-wrapper
+              +e.image-wrapper
                 +e.DIV(@click='$refs.s0.prev()' class='control_left')
                 +e.DIV(@click='$refs.s0.next()' class='control_right')
                 +e.control_center
@@ -60,7 +60,7 @@ html(lang="us")
                   +e.per-sqm ($45/sqm)
                   +e.price.per-month $ 157 000
             +b.DIV(class='full-item-card')
-              +e.DIV(@click='clickWrapper' @mouseenter='changeWrapper' @mouseleave='changeWrapper').image-wrapper
+              +e.image-wrapper
                 +e.DIV(@click='$refs.s1.prev()').control_left
                 +e.DIV(@click='$refs.s1.next()').control_right
                 +e.control_center
@@ -82,7 +82,7 @@ html(lang="us")
                   +e.per-sqm ($45/sqm)
                   +e.price.per-month $ 157 000
             +b.DIV(class='full-item-card')
-              +e.DIV(@click='clickWrapper' @mouseenter='changeWrapper' @mouseleave='changeWrapper').image-wrapper
+              +e.image-wrapper
                 +e.DIV(@click='$refs.s2.prev()').control_left
                 +e.DIV(@click='$refs.s2.next()').control_right
                 +e.control_center
@@ -104,7 +104,7 @@ html(lang="us")
                   +e.per-sqm ($45/sqm)
                   +e.price.per-month $ 157 000
             +b.DIV(class='full-item-card')
-              +e.DIV(data-init='s3' @click='clickWrapper' @mouseenter='changeWrapper' @mouseleave='changeWrapper').image-wrapper
+              +e(data-init='s3').image-wrapper
                 +e.DIV(@click='$refs.s3.prev()').control_left
                 +e.DIV(@click='$refs.s3.next()').control_right
                 +e.control_center
@@ -126,7 +126,7 @@ html(lang="us")
                   +e.per-sqm ($45/sqm)
                   +e.price.per-month $ 157 000
             +b.DIV(class='full-item-card' v-show='isSmTab')
-              +e.DIV(data-init='s4' click='clickWrapper' @mouseenter='changeWrapper' @mouseleave='changeWrapper').image-wrapper
+              +e(data-init='s4').image-wrapper
                 +e.DIV(@click='$refs.s4.prev()').control_left
                 +e.DIV(@click='$refs.s4.next()').control_right
                 +e.control_center
@@ -148,7 +148,7 @@ html(lang="us")
                   +e.per-sqm ($45/sqm)
                   +e.price.per-month $ 157 000
             +b.DIV(class='full-item-card' v-show='isSmDesktop')
-              +e.DIV(@click='clickWrapper' @mouseenter='changeWrapper' @mouseleave='changeWrapper').image-wrapper
+              +e.image-wrapper
                 +e.DIV(@click='$refs.s5.prev()').control_left
                 +e.DIV(@click='$refs.s5.next()').control_right
                 +e.control_center
@@ -170,11 +170,10 @@ html(lang="us")
                   +e.per-sqm ($45/sqm)
                   +e.price.per-month $ 157 000
           +b(class='tab_map loading' id='map_wrapper' v-show='isSmDesktop || !viewTab')
-            +b.A(href='#').button_1 Highlight
-            +b.A(href='#').button_2 Clear
+            +b.A(id='js__controlDrawing' class='button' @click='clickDrawingControl' :class='{\'active\': isDrawing}') Highlight
+            +b.A.button_2.active#js__clearDrawing Clear
             +b(id='map').map
             +e.DIV(class='siema-wrapper-vue' ref='siemaMapWrapper')
-              //+b(id='map-siema' class='map-siema' :style='"transform: translate3d("+drag.nowX+"px,0,0)"' ref='mapSiema' @touchstart='startDrag' @touchmove.prevent='onDrag' @touchend='stopDrag')
               +b.SIEMA(class='map-siema-vue' :ready='false' ref='mapSiema' :options='siemaMapOptions')
                 +b.map-card-wrapper
                   +b.map-card

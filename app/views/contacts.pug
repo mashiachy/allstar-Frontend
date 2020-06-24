@@ -51,16 +51,26 @@ html(lang="us")
             +e.text_big._bold.animated Write to us
             +e.block
               +b.search_gray
-                +e.INPUT(type='text' placeholder='Name' v-model='form.name').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(:class='{\'errored\': errors.length}' name='name' type='text' placeholder='Name' v-model='form.name').search-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray
-                +e.INPUT(type='text' placeholder='Surname' v-model='form.surname').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(:class='{\'errored\': errors.length}' name='surname' type='text' placeholder='Surname' v-model='form.surname').search-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray.input-line
                 +b.V-SELECT(class='type' :options='prefixList' v-model='form.prefix')
-                +e.INPUT(type='text' placeholder='Phone' v-model='form.phone').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(:class='{\'errored\': errors.length}' name='phone' type='text' placeholder='Phone' v-model='form.phone').search-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +b.search_gray
-                +e.INPUT(type='text' placeholder='E-mail' v-model='form.email').search-input
+                validation-provider(rules='required' v-slot='{ errors }')
+                  +e.INPUT(:class='{\'errored\': errors.length}' name='e-mail' type='text' placeholder='E-mail' v-model='form.email').search-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
             +e.block
-              +b.search_gray._textarea._big
-                +e.TEXTAREA(wrap='soft' placeholder='Message' v-model='form.message').search-input
+              validation-provider(rules='required' v-slot='{ errors }')
+                +b.search_gray._textarea._big
+                  +e.TEXTAREA(:class='{\'errored\': errors.length}' name='message' wrap='soft' placeholder='Message' v-model='form.message').search-input
+                  p(v-show='errors.length').error-message {{ errors[0] }}
               +e.BUTTON.submit.show Submit
     +footer

@@ -43,7 +43,7 @@ body
     font-size: 17px
     line-height: 21px
     font-weight: 700
-    padding-left: 21px
+    //padding-left: 21px
   &__submit
     border: 0
     padding: 0
@@ -64,16 +64,29 @@ body
   &__form-file + &__submit
     margin-top: 29px
   .search
+    height: auto
     &:not(:last-child)
       margin-bottom: 18px
+  .errored
+    border: 2px solid $orange
+    box-sizing: border-box
+  .error-message
+    font-size: 12px
+    line-height: 14px
+    color: $orange
+    font-weight: 700
+    text-align: right
+  textarea
+    display: block
+  &__search-input, .type, .search__search-input
+    height: 41px
   .input-line
+    height: auto
     @include flex
-    @include flex-setting(flex-start, center)
+    @include flex-setting(flex-start, flex-start)
     & > *:first-child
       width: 117px
       margin-right: 18px
-    & > .type
-      height: 100%
     & > *:nth-child(2)
       width: calc(100% - 135px)
   &__form-file
@@ -161,7 +174,7 @@ body
       background-image: url("../img/image-icon.svg")
 
 .we-can
-  margin-bottom: 15px
+  margin-bottom: 47px
   @include adaptive(768px)
     margin-bottom: 40px
   @include adaptive(1280px)

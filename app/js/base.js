@@ -99,6 +99,9 @@ const adaptiveMixin = {
     isSmDesktop: () => window.innerWidth >= 1024,
     isDesktop: () => window.innerWidth >= 1280,
   },
+  mounted () {
+    document.querySelectorAll('.js__hide-before-load').forEach(el => el.classList.remove('js__hide-before-load'));
+  }
 };
 
 function promiseModInit () {
@@ -225,6 +228,7 @@ const filterMixin = {
       },
       floor1: {
         start: 2,
+        end: 3,
       },
       checkboxList2: [true, false, true, false, true, false],
     };
@@ -286,6 +290,66 @@ const loadMap = function (windowHandler='') {
   });
 };
 
+function initDouglasPeucker (map) {
+  google.maps.Polygon.prototype.douglasPeucker = function(tolerance) {
+    let res = null;
+    tolerance = tolerance * Math.pow(2, 20 - map.getZoom());
+    if(this.getPath() && this.getPath().getLength()) {
+      const points = this.getPath().getArray();
+
+      const Line = function( p1, p2 ) {
+        this.p1 = p1;
+        this.p2 = p2;
+
+        this.distanceToPoint = function( point ) {
+          let m = ( this.p2.lat() - this.p1.lat() ) / ( this.p2.lng() - this.p1.lng() ),
+            b = this.p1.lat() - ( m * this.p1.lng() ),
+            d = [];
+          d.push( Math.abs( point.lat() - ( m * point.lng() ) - b ) / Math.sqrt( Math.pow( m, 2 ) + 1 ) );
+          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p1.lng() ), 2 ) + Math.pow( ( point.lat() - this.p1.lat() ), 2 ) ) );
+          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p2.lng() ), 2 ) + Math.pow( ( point.lat() - this.p2.lat() ), 2 ) ) );
+          return d.sort((a, b) => a - b)[0];
+        };
+      };
+
+      const douglasPeucker = function( points, tolerance ) {
+        if ( points.length <= 2 ) {
+          return [points[0]];
+        }
+        let returnPoints = [],
+          line = new Line( points[0], points[points.length - 1] ),
+          maxDistance = 0,
+          maxDistanceIndex = 0,
+          p;
+        for(let i = 1; i <= points.length - 2; i++) {
+          const distance = line.distanceToPoint(points[i]);
+          if( distance > maxDistance ) {
+            maxDistance = distance;
+            maxDistanceIndex = i;
+          }
+        }
+        if (maxDistance >= tolerance) {
+          p = points[maxDistanceIndex];
+          line.distanceToPoint( p, true );
+          returnPoints = returnPoints.concat(douglasPeucker(points.slice( 0, maxDistanceIndex + 1), tolerance));
+          returnPoints = returnPoints.concat(douglasPeucker(points.slice( maxDistanceIndex, points.length ), tolerance));
+        } else {
+          p = points[maxDistanceIndex];
+          line.distanceToPoint( p, true );
+          returnPoints = [points[0]];
+        }
+        return returnPoints;
+      };
+      res = douglasPeucker(points, tolerance);
+      res.push(points[points.length - 1 ]);
+      this.setPath(res);
+    }
+    return this;
+  }
+}
+
+const initialMobileScroll = (w, h) => window.innerWidth < w ? window.addEventListener('load', () => setTimeout(() => window.pageYOffset < w ? window.scrollTo(0, h) : null, 0)) : null;
+
 export {
   adaptiveMixin,
   promiseModInit,
@@ -300,6 +364,8 @@ export {
   LazyLoader,
   screen,
   siemaLazyInitMixin,
+  initDouglasPeucker,
+  initialMobileScroll,
 };
 
 // TODO: weCanMixin is never used for u bb

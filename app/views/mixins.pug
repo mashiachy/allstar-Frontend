@@ -177,7 +177,7 @@ mixin footer(modifier='')
 
 mixin inline-filter
   +b.DIV(class='inline-filter' :class='{\'opened\': options && isDesktop}').inline-filter
-    +e.DIV(class='dropdown-wrapper' v-show='options' @click.self='options = !options')
+    +e.DIV(class='dropdown-wrapper js__hide-before-load' v-show='options' @click.self='options = !options')
       +e.dropdown-prewrapper
         +e.DIV(class='dropdown content')
           +e.block-1
@@ -195,9 +195,10 @@ mixin inline-filter
                 | sqm
               +e.SPAN.number
                 +e.INPUT(type='number' v-model.number='size.start').number-input
+              +e.label_2._one-line To
               +e.SPAN.number
                 +e.INPUT(type='number' v-model.number='size.end').number-input
-            +b.V-SELECT(class='type' v-model='district' :options='[\'1 District\', \'2 District\', \'3 District\']')
+            +b.V-SELECT(class='type' :searchable='false' v-model='district' :options='[\'1 District\', \'2 District\', \'3 District\']')
             +b.number-range.price-sqm
               +e.label
                 | Price
@@ -205,17 +206,19 @@ mixin inline-filter
                 | per sqm, $
               +e.SPAN.number $
                 +e.INPUT(type='number' v-model.number='pricePerSqm.start').number-input
+              +e.label_2._one-line To
               +e.SPAN.number $
                 +e.INPUT(type='number' v-model.number='pricePerSqm.end').number-input
             +b.number-range.floor
-              +e.label
+              +e.label_one-line
                 | Floor
               +e.SPAN.number
                 +e.INPUT(type='number' v-model.number='floor.start').number-input
+              +e.label_2._one-line To
               +e.SPAN.number
                 +e.INPUT(type='number' v-model.number='floor.end').number-input
           +e.block-2
-            +b.V-SELECT(class='type' v-model='district1' :options='[\'1 District\', \'2 District\', \'3 District\']')
+            +b.V-SELECT(class='type' :searchable='false' v-model='district1' :options='[\'1 District\', \'2 District\', \'3 District\']')
             +b.number-range.price-sqm
               +e.label
                 | Price
@@ -223,14 +226,18 @@ mixin inline-filter
                 | per sqm, $
               +e.SPAN.number $
                 +e.INPUT(type='number' v-model.number='pricePerSqm1.start').number-input
+              +e.label_2._one-line To
               +e.SPAN.number $
                 +e.INPUT(type='number' v-model.number='pricePerSqm1.end').number-input
             +b.number-range.floor
-              +e.label
+              +e.label_one-line
                 | Floor
               +e.SPAN.number
                 +e.INPUT(type='number' v-model.number='floor1.start').number-input
-              +e.SPAN.number_transparent
+              +e.label_2._one-line To
+              +e.SPAN.number
+                +e.INPUT(type='number' v-model.number='floor1.end').number-input
+
           +e.block-3
             +b.LABEL.checkbox Only with elevator
               +e.INPUT(type='checkbox' class='input' v-model='checkboxList1[0]')
@@ -275,8 +282,8 @@ mixin inline-filter
     +e(class='main-wrapper')
       +e.DIV(class='main' :class='{\'opened\': isDesktop && options}')
         +e.buttons
-          +b.V-SELECT(class='type_inline inline-filter__button' v-model='typeService' :options='[\'Sale\', \'Rent\']')
-          +b.V-SELECT(class='type_inline inline-filter__button' v-model='apartment' :options='[\'Apartment\', \'Apartment 2\', \'Apartment 3\']')
+          +b.V-SELECT(class='type_inline inline-filter__button' :searchable='false' v-model='typeService' :options='[\'Sale\', \'Rent\']')
+          +b.V-SELECT(class='type_inline inline-filter__button' :searchable='false' v-model='apartment' :options='[\'Apartment\', \'Apartment 2\', \'Apartment 3\']')
           +b.DIV(class='dropdown-inline-filter inline-filter__button' @click='changeDownVisible') Price
             +e.dropdown-menu
               +e.LABEL.input-label From

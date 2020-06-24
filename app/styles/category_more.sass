@@ -265,6 +265,8 @@ body
     &__text
       font-size: 15px
       line-height: 18px
+      &_margin
+        margin-bottom: 20px !important
       &_medium
         font-size: 16px
         line-height: 21px
@@ -283,19 +285,18 @@ body
       &_tall
         line-height: 24px
       &_tag
-        padding-left: 13px
+        padding-left: 15px
         box-sizing: border-box
         position: relative
         &:after
           content: ''
           position: absolute
+          top: 5px
           left: 0
-          top: 8px
-          height: 6px
-          width: 8px
-          background-repeat: no-repeat
-          background-size: 8px 6px
+          width: 10px
+          height: 12px
           background-image: url("../img/ok-icon.svg")
+          background-size: 10px 12px
     &__middle
       max-width: 343.33px
       margin-bottom: 18px
@@ -394,6 +395,15 @@ body
       min-width: 312px
       width: calc(30% - 15px)
       margin-top: -38px
+    .errored
+      border: 2px solid $orange
+      box-sizing: border-box
+    .error-message
+      font-size: 12px
+      line-height: 14px
+      color: $orange
+      font-weight: 700
+      text-align: right
     &__person
       width: 100%
       margin-bottom: 18px
@@ -478,3 +488,13 @@ body
       line-height: 41px
       font-weight: bold
       font-family: inherit
+
+.we-can
+  margin-bottom: 47px
+  @include adaptive(768px)
+    margin-bottom: 40px
+  @include adaptive(1280px)
+    margin-bottom: 60px
+
+.vs__selected-options
+  padding-top: 7px
