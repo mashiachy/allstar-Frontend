@@ -178,7 +178,7 @@ webpInit();
 const wow = myWOW({selector: '.animated'});
 goTopInit({
   selector: '.gotop',
-  offset: adaptiveMixin.computed.isDesktop() ? '100vh' : '250vh',
+  offset: '100vh',
 });
 
 const ll = new LazyLoader({
@@ -190,7 +190,4 @@ Vue.component('v-select', vSelect);
 const app = new Vue({
   el: '#app',
   mixins: [adaptiveMixin, menuMixin,],
-  mounted () {
-    this.ll = ll;
-  }
 });
