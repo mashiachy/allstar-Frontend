@@ -592,11 +592,9 @@ function initDouglasPeucker (map) {
   };
 }
 
-const initialMobileScroll = (w, h) => window.innerWidth < w ? window.addEventListener('load', () => setTimeout(() => window.pageYOffset < w ? window.scrollTo(0, h) : null, 0)) : null;
-
 // TODO: weCanMixin is never used for u bb
 
-initialMobileScroll(667, 50);
+//initialMobileScroll(667, 50);
 
 webpInit();
 const wow = myWOW({selector: '.animated'});

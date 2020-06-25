@@ -12,7 +12,7 @@ import {
   webpInit, LazyLoader, isWebp, siemaLazyInitMixin, initDouglasPeucker, initialMobileScroll
 } from "./base";
 
-initialMobileScroll(667, 50);
+//initialMobileScroll(667, 50);
 
 webpInit();
 const wow = myWOW({selector: '.animated'});
