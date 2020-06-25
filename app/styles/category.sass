@@ -504,6 +504,8 @@ body
         opacity: .41
         color: $blue
 .info-window
+  z-index: 1000
+  pointer-events: all
   &_multiple .map-card
     position: absolute
     will-change: left, top, opacity
@@ -528,6 +530,8 @@ body
       z-index: 8
 
 .marker
+  z-index: 1000
+  pointer-events: all
   display: block
   height: 24px
   font-weight: 700

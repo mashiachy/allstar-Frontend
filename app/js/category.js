@@ -58,7 +58,8 @@ window.initMap = function () {
         this.div.innerHTML = this.html;
       }
       google.maps.event.addDomListener(this.div, 'click', event => {
-        google.maps.event.trigger(this, 'click');
+        google.maps.event.trigger(this, 'click', event);
+        event.stopPropagation();
       });
     }
     appendDivToOverlay() {
@@ -138,8 +139,9 @@ window.initMap = function () {
       super(args);
       this.marker = args.marker;
       this.siema = args.siema;
-      this.marker.addListener('click', () => {
+      google.maps.event.addDomListener(this.marker, 'click', ev => {
         if (isDrawing) return;
+        //ev.stopPropagation();
         this.marker.toggleActive();
         this.toggle();
       });
@@ -155,14 +157,16 @@ window.initMap = function () {
           },
         );
         const wrapper = this.div.getElementsByClassName('info-window__cards-wrapper')[0];
-        this.div.getElementsByClassName('info-window__control_right')[0].addEventListener('click', () => {
+        this.div.getElementsByClassName('info-window__control_right')[0].addEventListener('click', ev => {
           const el = wrapper.removeChild(this.div.getElementsByClassName('map-card')[0]);
           wrapper.appendChild(el);
+          //ev.stopPropagation();
         });
-        this.div.getElementsByClassName('info-window__control_left')[0].addEventListener('click', () => {
+        this.div.getElementsByClassName('info-window__control_left')[0].addEventListener('click', ev => {
           const cards = this.div.getElementsByClassName('map-card');
           const el = wrapper.removeChild(cards[cards.length - 1]);
           wrapper.insertBefore(el, cards[0]);
+          //ev.stopPropagation();
         });
       }
     }
@@ -395,6 +399,8 @@ window.initMap = function () {
     visibility: 'hidden',
   });
 
+  //console.log(google.maps.MapPanes);
+  google.maps.event.addListener(map, 'click', () => activeInfoWindow ? activeInfoWindow.hide() : null);
 
   if (adaptiveMixin.computed.isSmDesktop()) {
     // Drawing
