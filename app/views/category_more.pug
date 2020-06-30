@@ -43,11 +43,11 @@ html(lang="us")
                 div(v-for='i in [0, 1, 2, 3, 4, 5, 6, 7]' :key=i :class='{\'active\': curImage === i}').item
               +e.SIEMA(class='siema' ref='siemaImages' :current.sync='curImage' :options='siemaImagesOptions' @init='initOpenModal')
                 each i in ['1', '2', '3', '4', '5', '6', '7', '8']
-                  +picture('img/room-photo-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'block-images__siema-image')
+                  +picture('img/cat-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'block-images__siema-image')
             +e.DIV(class='all-images' ref='allImages')
               each i in [1, 2, 3, 4, 5, 6, 7, 8]
                 +e.DIV(class='image-wrapper' @click=`$refs.siemaImages.goTo(${i-1})`)
-                  +picture('img/room-photo-'+i+'.webp', 'img/room-photo-'+i+'.jpg', 'Room', 'block-images__image'+(i === 1 ? ' current' : ''))
+                  +picture('img/cat-'+i+'.webp', 'img/room-photo-'+i+'.jpg', 'Room', 'block-images__image'+(i === 1 ? ' current' : ''))
           +b.block-text
             +e.top
               +e.H2.text_big._bold Delovaya (Dimitrova) Street, 2б
@@ -56,11 +56,11 @@ html(lang="us")
             +e.middle
               +e.price-info
                 +e.text_dim Sale
-                +e.text_big._bold._orange $ 157 000
+                +e.text_large._bold._orange $ 157 000
                 +e.text_dim ($45/sqm)
               +e.price-info_tabulate
                 +e.text_dim Rent per month/
-                +e.text_big._bold $ 5 000
+                +e.text_large._bold $ 5 000
                 +e.text_dim ($45/sqm)
             +e.footer
               +e.block_info
@@ -122,17 +122,22 @@ html(lang="us")
 
         +b.DIV(ref='modal' v-show='modalVisible' @click.self='hideModal').modal.js__hide-before-load#modal
           +e.DIV(@click='hideModal').control
-          +e(v-if='isSmDesktop' :data-header='curImage+1+\' / 8\'').siema-wrapper
-            +e.DIV(@click='$refs.siemaModalImages.prev()').siema-control_button._left
-            +e.DIV(@click='$refs.siemaModalImages.next()').siema-control_button._right
-            +e.siema-control_center
-              div(v-for='i in [0, 1, 2, 3, 4, 5, 6, 7]' :key=i :class='{\'active\': curImage === i}').item
-            +e.SIEMA(class='siema-modal' data-init='siemaModalImages' :ready='false' ref='siemaModalImages' :current.sync='curImage' :options='siemaImagesOptions')
-              each i in ['1', '2', '3', '4', '5', '6', '7', '8']
-                +picture('img/room-photo-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__siema-image')
-          +e.DIV(v-else class='all-images' ref='allModalImages')
+          +e.DIV(v-if='isSmDesktop').desktop-content
+            +e.DIV(:data-header='curImage+1+\' / 8\'').siema-wrapper
+              +e.DIV(@click='$refs.siemaModalImages.prev()').siema-control_button._left
+              +e.DIV(@click='$refs.siemaModalImages.next()').siema-control_button._right
+              +e.siema-control_center
+                div(v-for='i in [0, 1, 2, 3, 4, 5, 6, 7]' :key=i :class='{\'active\': curImage === i}').item
+              +e.SIEMA(class='siema-modal' data-init='siemaModalImages' :ready='false' ref='siemaModalImages' :current.sync='curImage' :options='siemaImagesOptions')
+                each i in ['1', '2', '3', '4', '5', '6', '7', '8']
+                  +picture('img/cat-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__siema-image')
+            +e.DIV(class='all-images-miniature' ref='allImagesMiniature')
+              each i in [1, 2, 3, 4, 5, 6, 7, 8]
+                +e.DIV(class='image-miniature-wrapper' @click=`$refs.siemaModalImages.goTo(${i - 1})`)
+                  +picture('img/cat-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__miniature' + (i === 1 ? ' current' : ''))
+          +e.DIV(v-else class='all-images' ref='allModalImages' @click.self='hideModal')
             each i in [1, 2, 3, 4, 5, 6, 7, 8]
               +e.DIV(class='image-wrapper' @click=`$refs.siemaModalImages.goTo(${i - 1})`)
-                +picture('img/room-photo-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__image' + (i === 1 ? ' current' : ''))
+                +picture('img/cat-' + i + '.webp', 'img/room-photo-' + i + '.jpg', 'Room', 'modal__image' + (i === 1 ? ' current' : ''))
 
     +footer

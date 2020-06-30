@@ -213,11 +213,14 @@ body
       @include maxAdaptive(1023px)
         margin-top: -92px
       z-index: 8
+      --calc100vh: calc(var(--vh, 1vh) * 100)
       height: calc(100vh - 116px)
+      height: calc(var(--calc100vh) - 116px)
       background-color: #EEEEEE
       position: relative
-      @include adaptive(667px)
-        height: 100vh
+      @include adaptive(768px)
+        height: calc(100vh - 136px)
+        height: calc(var(--calc100vh) - 136px)
       @include adaptive(1024px)
         height: 996px
         width: calc(100% - 565px)

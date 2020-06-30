@@ -41,8 +41,8 @@ mixin testimonial(photo, name, whois, speech)
     +e.content= speech
 
 mixin lang(modifier='', cls='')
-  +b.SPAN(class='lang'+modifier :class=cls @click='clickLang' @mouseenter='changeLang' @mouseleave='changeLang') Eng
-    +e.A(href='#').button Rus
+  +b.SPAN(class='lang'+modifier :class=cls @click='clickLang') {{nowLang}}
+    //+e.A(href='#').button Rus
 
 mixin top-menu(modifier='', contact='', shadow='')
   +b.HEADER(id="header" class='top'+modifier)

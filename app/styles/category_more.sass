@@ -264,7 +264,7 @@ body
       margin-bottom: 6px
     &__text
       font-size: 15px
-      line-height: 18px
+      line-height: 20px
       &_margin
         margin-bottom: 20px !important
       &_medium
@@ -273,11 +273,14 @@ body
       &_big
         font-size: 17px
         line-height: 21px
+      &_large
+        font-size: 18px
+        line-height: 21px
       &_bold
         font-weight: 700
       &_small
         font-size: 12px
-        line-height: 14px
+        line-height: 16px
       &_dim
         opacity: .57
       &_orange
@@ -407,8 +410,9 @@ body
     &__person
       width: 100%
       margin-bottom: 18px
+      @include flex(row, nowrap)
       & > *
-        display: inline-block
+        display: block
         vertical-align: top
     &__avatar
       width: 79px
@@ -436,7 +440,7 @@ body
       margin-bottom: 8px
     &__phone
       font-size: 14px
-      line-height: 16px
+      line-height: 18px
       font-weight: 900
       box-sizing: border-box
       padding-left: 18px

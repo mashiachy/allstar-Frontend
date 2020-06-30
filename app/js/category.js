@@ -9,10 +9,10 @@ import {
   filterMixin,
   myWOW,
   goTopInit,
-  webpInit, LazyLoader, isWebp, siemaLazyInitMixin, initDouglasPeucker, initialMobileScroll
+  webpInit, LazyLoader, isWebp, siemaLazyInitMixin, initDouglasPeucker, initTrueVhOnMobile
 } from "./base";
 
-//initialMobileScroll(667, 50);
+initTrueVhOnMobile();
 
 webpInit();
 const wow = myWOW({selector: '.animated'});

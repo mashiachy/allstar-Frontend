@@ -152,6 +152,9 @@ const app = new Vue({
       const numbers = Object.entries(this.bedrooms).filter(([key, value]) => value).map(([key, value]) => key).join(', ');
       return numbers + ' Bedrooms';
     },
+    priceLabel () {
+      return `Price${!this.activeOption?' <br>per month,':',<br>'} $`;
+    },
   },
   watch: {
     options: function (val) {

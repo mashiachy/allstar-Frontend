@@ -32,14 +32,14 @@ html(lang="en")
           +e.SPAN(:class='{\'active\': activeOption === 0}' @click='activeOption = 0').choice_rent For Rent
           +e.SPAN(:class='{\'active\': activeOption === 1}' @click='activeOption = 1').choice_sale For Sale
         +b.V-SELECT(class='type' :searchable='false' v-model='curType' :options='[\'Apartment1\', \'Apartment2\', \'Apartment3\']')
-        +b.number-range.price
-          +e.label
-            | Price
-            br
-            | per month, $
-          +e.SPAN.number $
+        +b.DIV(:class='{\'extended\': activeOption}').number-range.size
+          +e(v-html='priceLabel').label
+            //| Price
+            //br
+            //| per month, $
+          +e.SPAN.number
             +e.INPUT(type='number' v-model.number='pricePerMonth.start').number-input
-          +e.SPAN.number $
+          +e.SPAN.number
             +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
         +b(class='multiple-check' ref='multipleCheck')
           +e.INPUT(type='text' v-model='bedroomsLabel' readonly @click='$event.target.parentElement.classList.toggle(\'extended\')').label //{{ bedroomsLabel }}
@@ -61,14 +61,14 @@ html(lang="en")
           +b.DIV(class='hide' v-if='isTab')
             +e.SPAN(class='inner' @click='options = !options')
           +b.V-SELECT(class='type' :searchable='false' v-model='curDistrict' :options='[\'1 District\', \'2 District\', \'3 District\']')
-          +b.number-range.price-sqm
+          +b.number-range.size
             +e.label
               | Price
               br
               | per sqm, $
-            +e.SPAN.number $
+            +e.SPAN.number
               +e.INPUT(type='number' v-model.number='pricePerSqm.start').number-input
-            +e.SPAN.number $
+            +e.SPAN.number
               +e.INPUT(type='number' v-model.number='pricePerSqm.end').number-input
           +b.number-range.floor
             +e.label_one-line

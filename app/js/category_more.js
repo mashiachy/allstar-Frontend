@@ -72,6 +72,10 @@ const app = new Vue({
     curImage: function (toVal, fromVal) {
       this.$refs.allImages.getElementsByClassName('block-images__image')[fromVal].classList.remove('current');
       this.$refs.allImages.getElementsByClassName('block-images__image')[toVal].classList.add('current');
+      if (this.isSmDesktop) {
+        this.$refs.allImagesMiniature.getElementsByClassName('modal__miniature')[fromVal].classList.remove('current');
+        this.$refs.allImagesMiniature.getElementsByClassName('modal__miniature')[toVal].classList.add('current');
+      }
     },
   },
   computed: {

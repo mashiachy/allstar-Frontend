@@ -124,6 +124,8 @@ const menuMixin = {
   data () {
     return {
       activeMenu: false,
+      nowLang: 'Eng',
+      anotherLang: 'Rus',
     };
   },
   methods: {
@@ -136,11 +138,14 @@ const menuMixin = {
       }
     },
     clickLang (ev) {
-      if (!this.isDesktop) ev.target.classList.toggle('shared');
+      //if (!this.isDesktop) ev.target.classList.toggle('shared');
+      const tmp = this.nowLang;
+      this.nowLang = this.anotherLang;
+      this.anotherLang = tmp;
     },
-    changeLang (ev) {
-      if (this.isDesktop) ev.target.classList.toggle('shared');
-    },
+    // changeLang (ev) {
+    //   if (this.isDesktop) ev.target.classList.toggle('shared');
+    // },
     setNavPicture (item) {
       const imageSrc = item.getElementsByTagName('a')[0].getAttribute('data-image-src');
       const imageAlt = item.getElementsByTagName('a')[0].getAttribute('data-alt');
@@ -350,6 +355,12 @@ function initDouglasPeucker (map) {
 
 const initialMobileScroll = (w, h) => window.innerWidth < w ? window.addEventListener('load', () => setTimeout(() => window.pageYOffset < w ? window.scrollTo(0, h) : null, 0)) : null;
 
+const initTrueVhOnMobile = () => {
+  const handle = () => document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+  handle();
+  window.addEventListener('resize', handle, {passive: true});
+};
+
 export {
   adaptiveMixin,
   promiseModInit,
@@ -366,6 +377,7 @@ export {
   siemaLazyInitMixin,
   initDouglasPeucker,
   initialMobileScroll,
+  initTrueVhOnMobile,
 };
 
 // TODO: weCanMixin is never used for u bb
