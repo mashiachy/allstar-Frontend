@@ -28,8 +28,7 @@ html(lang="us")
           +picture-not-lazy('img/big-room.webp', 'img/big-room.png', 'Room', 'main__image')
         +b.block-text
           +e.top
-            +e.text Tetris Hall
-            +e.text_small._dim for example Shevchenko
+            +e.text Tetris Hall &bull; Shevchenkovskiy district
             +e.text_small ID 1525755
           +e.middle
             +e.price-info
@@ -44,13 +43,13 @@ html(lang="us")
             +e.block_info
               +e.block-info
                 each t in ['Bedrooms', 'Bathrooms', 'Size', 'Floor', 'Elevator', 'Building type']
-                  +e.text_dim._tall= t
+                  +e.text_dim._strange._tall= t
               +e.block-info
                 each t in ['2', '2', '121sqm', '1', 'yes', 'modern']
-                  +e.text_tall._bold= t
+                  +e.text_tall._strange._bold= t
             +e.block_tags
               each t in ['Terrace', 'Outdoor sauna', 'Penthouse', 'Pool', 'Terrace', 'Outdoor sauna']
-                +e.text_tall._tag= t
+                +e.text_tall._strange._tag= t
           +e.content
             +e.text_bold Description
             +e.text_strange 3 room apartment for rent and sale in Kiev in Goloseevskiy district, metro station Olimpiiska, Delovaya (Dimitrova) Street 2б , newly built building, 9 floor , 125 sq. m., renovated

@@ -30,9 +30,9 @@ html(lang="us")
             +e.H1.text_header.animated Contacts
             +e.text_icon._place._tall 13-15 Bolsunovskaya str., 8th floor, IQ business center, Kiev
             +e.text-wrapper
-              +e.A(href='#').text_icon._phone._tall +38 044 22-33-177
-              +e.A(href='#').text_icon._tall +38 044 22-33-177
-            +e.A(href='#').text_icon._email._dim._tall info@allstar.com.ua
+              +e.A(href='tel:+380442233177').text_icon._phone._tall +38 044 22-33-177
+              +e.A(href='tel:+380442233177').text_icon._tall +38 044 22-33-177
+            +e.A(href='mailto:info@allstar.com.ua').text_icon._email._dim._tall info@allstar.com.ua
             +e.text_big._bold To arrange an appointment in the office please call us in advance
           +e.block-cards
             each i in [1, 2, 3, 4]
@@ -44,9 +44,9 @@ html(lang="us")
                   +e.name Name Surname
                   +e.job Manager
                   +e.lngs Speaks: Russian, Ukrainian, English
-                  +e.A(href='#').phone_icon +38 044 22-33-177
-                  +e.A(href='#').phone +38 044 22-33-177
-                  +e.A(href='#').email mail@mail.com
+                  +e.A(href='tel:+380442233177').phone_icon +38 044 22-33-177
+                  +e.A(href='tel:+380442233177').phone +38 044 22-33-177
+                  +e.A(href='mailto:info@allstar.com.ua').email mail@mail.com
           +e.block-form
             +e.text_big._bold.animated Write to us
             +e.block

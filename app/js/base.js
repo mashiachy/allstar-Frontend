@@ -253,8 +253,8 @@ const filterMixin = {
     },
   },
   methods: {
-    changeDownVisible (ev) {
-      ev.target.classList.toggle('active');
+    changeDownVisible (el) {
+      el.classList.toggle('active');
     }
   },
 };

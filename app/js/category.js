@@ -118,7 +118,12 @@ window.initMap = function () {
       this.id = args.id;
       this.type = args.type;
       this.addListener('click', () => {
-        map.panTo(this.getPosition());
+        let s = document.getElementById('map').getBoundingClientRect().top;
+        let f = window.innerHeight - document.getElementById('map').getBoundingClientRect().bottom;
+        let h = document.getElementById('map').getBoundingClientRect().height;
+        s = s >= 0 ? 0 : f >= 0 ? -window.innerHeight/2+(h/2+s):s;
+        s = s <= -h/2 ? -h/2+30 : s;
+        !adaptiveMixin.computed.isSmTab()?map.panTo(this.getPosition()):map.panTo(this.getPosition()), map.panBy(0, s);//map.panToBounds(map.getBounds(), {top: -s, right: 0, bottom: s, left: 0});
       });
     }
     toggleActive () {
@@ -141,9 +146,8 @@ window.initMap = function () {
       this.siema = args.siema;
       google.maps.event.addDomListener(this.marker, 'click', ev => {
         if (isDrawing) return;
-        //ev.stopPropagation();
-        this.marker.toggleActive();
         this.toggle();
+        if (!adaptiveMixin.computed.isSmTab() && window.pageYOffset >= 200) document.getElementById('map').scrollIntoView();
       });
     }
     createDiv() {
@@ -166,7 +170,6 @@ window.initMap = function () {
           const cards = this.div.getElementsByClassName('map-card');
           const el = wrapper.removeChild(cards[cards.length - 1]);
           wrapper.insertBefore(el, cards[0]);
-          //ev.stopPropagation();
         });
       }
     }
@@ -496,7 +499,7 @@ window.initMap = function () {
       isDrawing = true;
       map.setOptions({
         draggable: false,
-        draggableCursor: 'default',
+        draggableCursor: 'url("img/pencil-cursor.png"), auto',
       });
       listenersManage();
       polygon.setEditable(false);

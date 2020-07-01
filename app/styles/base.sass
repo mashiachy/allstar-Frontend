@@ -81,6 +81,7 @@ picture
     right: 11px
   &_inline
     width: fit-content
+    //min-width: 100
     &:after
       content: unset
   &__label
@@ -122,6 +123,7 @@ picture
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
   &_inline.extended &__dropdown-menu
     width: auto
+    min-width: 100%
   &.extended &__option
     white-space: nowrap
     cursor: pointer
@@ -171,7 +173,7 @@ picture
         background-repeat: no-repeat
         background-image: url("../img/ok.svg")
   &_inline.extended &__option
-    width: fit-content
+    width: 100%
 
 .content
   @include centerMargin
@@ -236,7 +238,10 @@ picture
   height: 32px
   &:hover
     background-color: #d6d6d6
-
+  @include adaptive(1024px)
+    background-color: white
+    &:hover
+      background-color: #F0F0F0
   &_shadow
     @include smShadow
   @include adaptive(1280px)
@@ -1016,19 +1021,42 @@ picture
     display: none
     position: absolute
     z-index: 100
-    width: 152px
-    left: 0
+    width: auto
+    left: 50%
+    transform: translateX(-50%)
     top: 41px
     background-color: white
     border-radius: 7px
     box-sizing: border-box
     padding: 6.5px 13px 10.5px
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.06)
+    @include adaptive(768px)
+      left: 0
+      transform: none
   &.active &__dropdown-menu
-    display: block
+    @include flex(column, nowrap)
+    @include adaptive(640px)
+      @include flex(row, nowrap)
+    @include adaptive(768px)
+      @include flex(column, nowrap)
+  &__dropdown-menu &__input-label
+    @include flex(row, nowrap)
+    @include flex-setting(flex-start, center)
+    white-space: nowrap
+    @include maxAdaptive(767px)
+      &:nth-child(1)
+        margin-right: 18px
+    @include maxAdaptive(639px)
+      &:nth-child(1)
+        margin-right: 0
+        margin-bottom: 7px
+    @include adaptive(768px)
+      @include flex-setting(space-between, center)
+      &:nth-child(1)
+        margin-bottom: 7px
   &__dropdown-menu &__input-label:nth-child(1) &__number
     margin-left: 8px
-    margin-bottom: 7px
+    //margin-bottom: 7px
   &__dropdown-menu &__input-label:nth-child(2) &__number
     margin-left: 24.5px
   &__number
@@ -1384,35 +1412,35 @@ picture
   &__image
     background-size: cover
   &__title
-    font-size: 12px
-    line-height: 14px
+    font-size: 15px
+    line-height: 18px
     font-weight: 700
     @include adaptive(667px)
       margin-bottom: 4px
-      font-size: 15px
-      line-height: 18px
+      //font-size: 15px
+      //line-height: 18px
     @include adaptive(1024px)
       margin-bottom: 2px
   &__text
-    font-size: 12px
-    line-height: 14px
+    font-size: 14px
+    line-height: 16px
     margin-top: 3px
     margin-bottom: 4px
     @include adaptive(667px)
-      font-size: 14px
-      line-height: 16px
+      //font-size: 14px
+      //line-height: 16px
       margin-bottom: 13px
       margin-top: unset
     @include adaptive(1024px)
       margin-bottom: 3px
   &__subtext
     opacity: 0.41
-    font-size: 12px
-    line-height: 14px
+    font-size: 14px
+    line-height: 16px
     margin-bottom: 10px
     @include adaptive(667px)
-      font-size: 14px
-      line-height: 16px
+      //font-size: 14px
+      //line-height: 16px
       margin-bottom: 17px
     @include adaptive(1024px)
       margin-bottom: 9px
@@ -1854,42 +1882,50 @@ picture
       width: calc(100% - 203px)
     @include adaptive(768px)
       width: calc(100% - 250px)
-      @include flex-setting(space-between, center)
+      @include flex-setting(flex-start, center)
+      & > *
+        flex-grow: 1
     @include adaptive(1280px)
       width: calc(100% - 439px)
   &__button
     display: block
     color: inherit
-    font-size: 14px
+    font-size: 15px
     line-height: 16px
     box-sizing: border-box
-    padding: 10px 25px 10px 10px
+    padding: 10px
     margin-right: 10px
     background-color: white
     border-radius: 6px
     box-shadow: $thisShadow
     position: relative
     cursor: pointer
+    .vs__dropdown-menu
+      min-width: 100%
+      width: auto
+    //&.v-select
+      padding: unset
+      & > .vs__dropdown-toggle
+        padding: 10px
+        height: auto
     @include adaptive(768px)
       padding: 12px 25px 10px 18px
       background-color: transparent
       box-shadow: none
       border-radius: 0
+      margin-right: 0
+      //&.v-select
+        padding: unset
+        & > .vs__dropdown-toggle
+          padding: 12px 25px 10px 18px
       &:not(:first-child)
         border-left: 1px solid rgba(151,151,151,0.14)
     @include adaptive(1280px)
       padding-left: 27px
-    &:after
-      position: absolute
-      content: ''
-      top: 15.75px
-      right: 15.5px
-      width: 4.5px
-      height: 4.5px
-      background-image: url("../img/triangle-down.svg")
-      background-size: 4.5px 4.5px
-      @include adaptive(768px)
-        top: 17.75px
+      //&.v-select
+        padding-left: unset
+        & > .vs__dropdown-toggle
+          padding-left: 27px
     &:nth-child(4)
       display: none
       @include adaptive(468px)
@@ -1899,6 +1935,18 @@ picture
       margin-right: 0
       @include adaptive(549px)
         display: block
+  .bird, .vs__selected
+    white-space: nowrap
+    &:after
+      content: ''
+      display: inline-block
+      height: 9px
+      width: 4.5px
+      margin-left: 6px
+      background-image: url("../img/triangle-down.svg")
+      background-size: 4.5px 4.5px
+      background-repeat: no-repeat
+      background-position: center
   &__options
     @include maxAdaptive(1279px)
       display: block
@@ -1977,6 +2025,13 @@ picture
     @include maxAdaptive(767px)
       margin-top: 61px
       min-height: calc(100% - 61px)
+    @include adaptive(1024px)
+      max-width: 1090px
+      width: 90%
+      @include centerMargin
+    @include adaptive(1280px)
+      max-width: unset
+      width: 1090px
   &__dropdown
     width: 100%
     box-sizing: border-box

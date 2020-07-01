@@ -8,6 +8,10 @@ body
   @include adaptive(1024px)
     padding-top: 86px
 
+a
+  text-decoration: none
+  color: inherit
+
 .main
   margin-top: 10px
   @include adaptive(1280px)
@@ -74,7 +78,7 @@ body
     line-height: 21px
   &__avatar-wrapper
     box-sizing: border-box
-    padding: 8px
+    padding: 6.5px 8px 8px
     border-radius: 50%
     border: 1px solid $orange
     width: 186px
@@ -112,9 +116,11 @@ body
     &_phone:after
       background-image: url("../img/phone-blue.svg")
       width: 10px
-    &_email:after
-      width: 14px
-      background-image: url("../img/email-icon-orange.svg")
+    &_email
+      display: block
+      &:after
+        width: 14px
+        background-image: url("../img/email-icon-orange.svg")
   &__title
     font-size: 20px
     line-height: 28px
