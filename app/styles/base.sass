@@ -550,7 +550,7 @@ picture
           height: 8px
         @include adaptive(1024px)
           right: 0
-          top: 16px
+          top: 17px
           width: 4px
           height: 4px
       &.active:after
@@ -560,7 +560,7 @@ picture
     margin-left: 22px
     margin-bottom: 19px
     @include adaptive(1024px)
-      padding-right: 9px
+      padding-right: 11px
       margin-top: 11px
       margin-bottom: 15px
       margin-left: unset
@@ -1411,6 +1411,7 @@ picture
     border-radius: 4px
   &__image
     background-size: cover
+    border-radius: 4px
   &__title
     font-size: 15px
     line-height: 18px
@@ -1935,7 +1936,7 @@ picture
       margin-right: 0
       @include adaptive(549px)
         display: block
-  .bird, .vs__selected
+  .bird, &__main-wrapper .vs__selected
     white-space: nowrap
     &:after
       content: ''

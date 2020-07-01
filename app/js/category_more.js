@@ -149,9 +149,8 @@ const app = new Vue({
         new google.maps.Marker({
           position: new google.maps.LatLng(lat1, lng1),
           map: map,
-          icon: `img/marker${isWebp ? '.webp' : '.jpg'}`,
+          icon: `img/marker${isWebp ? '.webp' : '.png'}`,
         });
-
         mapWrapper.classList.remove('loading');
       });
     },
