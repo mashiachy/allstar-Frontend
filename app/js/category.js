@@ -123,7 +123,12 @@ window.initMap = function () {
         let h = document.getElementById('map').getBoundingClientRect().height;
         s = s >= 0 ? 0 : f >= 0 ? -window.innerHeight/2+(h/2+s):s;
         s = s <= -h/2 ? -h/2+30 : s;
-        !adaptiveMixin.computed.isSmTab()?map.panTo(this.getPosition()):map.panTo(this.getPosition()), map.panBy(0, s);//map.panToBounds(map.getBounds(), {top: -s, right: 0, bottom: s, left: 0});
+        if (!adaptiveMixin.computed.isSmTab()) {
+          map.panTo(this.getPosition());
+        } else {
+          map.panTo(this.getPosition());
+          map.panBy(0, s);//map.panToBounds(map.getBounds(), {top: -s, right: 0, bottom: s, left: 0});
+        }
       });
     }
     toggleActive () {
@@ -408,7 +413,8 @@ window.initMap = function () {
   if (adaptiveMixin.computed.isSmDesktop()) {
     // Drawing
     initDouglasPeucker(map);
-    const defaultCursor = 'url("https://maps.gstatic.com/mapfiles/openhand_8_8.cur"), default';
+    const defaultDraggableCursor = 'url("https://maps.gstatic.com/mapfiles/openhand_8_8.cur"), default';
+    //const defaultDraggingCursor = 'url("https://maps.gstatic.com/mapfiles/closehand_8_8.cur"), move';
     const earthRadius = 6378137.0;
     let overlay = new google.maps.OverlayView();
     overlay.draw = function () {
@@ -429,6 +435,8 @@ window.initMap = function () {
       draggable: true,
       geodesic: false,
     });
+    // google.maps.event.addListener(polygon, 'mousemove', e => !isNaN(e.edge) || !isNaN(e.vertex) ? document.getElementById('map').classList.add('drawing') : document.getElementById('map').classList.remove('drawing'));
+    // google.maps.event.addListener(polygon, 'mouseout', () => document.getElementById('map').classList.remove('drawing'));
     let parcelleHeig = [];
     let mousePressed = false;
     const processDraw = (evt) => {
@@ -439,6 +447,7 @@ window.initMap = function () {
       parcelleHeig.push(new google.maps.LatLng(latLng.lat(), latLng.lng()));
     };
     const startDraw = () => {
+      // document.getElementById('map').classList.add('drawing');
       mousePressed = true;
       polyLine.setPath(parcelleHeig);
       polyLine.setMap(map);
@@ -456,6 +465,7 @@ window.initMap = function () {
       polyLine.setMap(null);
 
       drawingModeOff();
+      // document.getElementById('map').classList.remove('drawing')
     };
     // Listeners for adding or removing on button click handle
     let listenersManage = () => {
@@ -500,6 +510,7 @@ window.initMap = function () {
       map.setOptions({
         draggable: false,
         draggableCursor: 'url("img/pencil-cursor.png"), auto',
+        // draggingCursor: 'url("img/pencil-cursor.png"), auto',
       });
       listenersManage();
       polygon.setEditable(false);
@@ -509,7 +520,8 @@ window.initMap = function () {
       app.isDrawing = false;
       map.setOptions({
         draggable: true,
-        draggableCursor: defaultCursor,
+        draggableCursor: defaultDraggableCursor,
+        // draggingCursor: defaultDraggingCursor,
       });
       listenersManage();
     };

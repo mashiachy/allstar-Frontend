@@ -53,7 +53,16 @@ const app = new Vue({
         easing: 'ease-out',
         perPage: 1,
         startIndex: 0,
-        loop: true,
+        loop: false,
+        draggable: true,
+        threshold: 20,
+      },
+      siemaImagesMiniatureOptions: {
+        duration: 200,
+        easing: 'ease-out',
+        perPage: 5,
+        startIndex: 0,
+        loop: false,
         draggable: true,
         threshold: 20,
       },
@@ -75,6 +84,8 @@ const app = new Vue({
       if (this.isSmDesktop) {
         this.$refs.allImagesMiniature.getElementsByClassName('modal__miniature')[fromVal].classList.remove('current');
         this.$refs.allImagesMiniature.getElementsByClassName('modal__miniature')[toVal].classList.add('current');
+        //if (fromVal)
+        this.$refs.siemaModalImagesMiniature.goTo(toVal);
       }
     },
   },
@@ -90,7 +101,8 @@ const app = new Vue({
     showModal (imageSrc) {
       document.documentElement.style.overflowY = 'hidden';
       document.body.style.overflowY = 'hidden';
-      // this.$refs.image.setAttribute('src', imageSrc);
+      //console.log(this.$refs.allImagesMiniature.clientWidth);
+      //this.$refs.allImagesMiniatureScroll.style.width = `${(this.$refs.allImagesMiniature.clientWidth+10)/5*this.$refs.allImagesMiniatureScroll.getAttribute('data-all')}px`;
       this.modalVisible = true;
     },
     hideModal () {

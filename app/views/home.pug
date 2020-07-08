@@ -42,7 +42,8 @@ html(lang="en")
           +e.SPAN.number
             +e.INPUT(type='number' v-model.number='pricePerMonth.end').number-input
         +b(class='multiple-check' ref='multipleCheck')
-          +e.INPUT(type='text' v-model='bedroomsLabel' readonly @click='$event.target.parentElement.classList.toggle(\'extended\')').label //{{ bedroomsLabel }}
+          +e.INPUT(type='text' readonly :value='bedroomsLabel').input
+          +e.SPAN(@click='$event.target.parentElement.classList.toggle(\'extended\')').label {{ bedroomsLabel }}
           +e.dropdown-menu
             +e.DIV(class='option' v-for='[key, value] in Object.entries(bedrooms)' :key='key' :class='{\'selected\': value}' @click='bedrooms[key] = !value') {{ key + ' Bedrooms' }}
         +b.number-range.size

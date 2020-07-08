@@ -52,7 +52,7 @@ html(lang="us")
             +e.top
               +e.H2.text_big._bold Delovaya (Dimitrova) Street, 2б
               +e.text_margin Tetris Hall &bull; Shevchenkovskiy district
-              +e.text_medium.id ID 1525755
+              +e.A(href="javascript:;").text_medium.id ID 1525755
             +e.middle
               +e.price-info
                 +e.text_dim Sale
@@ -132,10 +132,12 @@ html(lang="us")
                 each i in ['1', '2', '3', '4', '5', '6', '7', '8']
                   +picture('img/cat-' + i + '.webp', 'img/cat-' + i + '.jpg', 'Room', 'modal__siema-image')
             +e.DIV(class='all-images-miniature' ref='allImagesMiniature')
-              each i in [1, 2, 3, 4, 5, 6, 7, 8]
-                +e.DIV(class='image-miniature-wrapper' @click=`$refs.siemaModalImages.goTo(${i - 1})`)
-                  +picture('img/cat-' + i + '.webp', 'img/cat-' + i + '.jpg', 'Room', 'modal__miniature' + (i === 1 ? ' current' : ''))
+              +e.SIEMA(class='siema-modal-miniature' data-init='siemaModalImagesMiniature' :ready='false' ref='siemaModalImagesMiniature' :current.sync='curImage' :options='siemaImagesMiniatureOptions')
+                each i in [1, 2, 3, 4, 5, 6, 7, 8]
+                  +e.DIV(class='image-miniature-wrapper' @click=`$refs.siemaModalImages.goTo(${i - 1})`)
+                    +picture('img/cat-' + i + '.webp', 'img/cat-' + i + '.jpg', 'Room', 'modal__miniature' + (i === 1 ? ' current' : ''))
           +e.DIV(v-else class='all-images' ref='allModalImages' @click.self='hideModal')
+            //+e.all-images-miniature-scroll
             each i in [1, 2, 3, 4, 5, 6, 7, 8]
               +e.DIV(class='image-wrapper' @click=`$refs.siemaModalImages.goTo(${i - 1})`)
                 +picture('img/cat-' + i + '.webp', 'img/cat-' + i + '.jpg', 'Room', 'modal__image' + (i === 1 ? ' current' : ''))

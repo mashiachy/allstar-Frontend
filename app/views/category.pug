@@ -36,143 +36,188 @@ html(lang="us")
               +e.A(data-direction='top' @click='clickMyButton').button_right Area
               +e.A(data-direction='top' @click='clickMyButton').button_right Date
             +e.text We rent real estate to embassies, diplomatic missions, international companies and other foreign clients in Kiev
-          +b(class='tab_list' v-show='isSmDesktop || viewTab')
-            +b.DIV(class='full-item-card')
-              +e.image-wrapper
-                +e.DIV(@click='$refs.s0.prev()' class='control_left')
-                +e.DIV(@click='$refs.s0.next()' class='control_right')
-                +e.control_center
-                  div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[0]}')
-                +e.SIEMA(class='siema' ref='s0' :current.sync='curs[0]' :options='siemaOptions' @init='initSiema($refs.s0)')
-                  +e.DIV(data-src='img/room-1').image
-                  +e.DIV(data-src='img/room-2').image
-                  +e.DIV(data-src='img/room-3').image
-              +e.content-block
-                +e.A(href='#').title Gonchara Street 26
-                +e.text Tetris Hall
-                +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
-                +e.tags
-                  +e.tag Terrace
-                  +e.tag Outdoor balcony-sauna
-                  +e.tag Penthouse
-                  +e.tag Pool
-                +e.footer
-                  +e.per-sqm ($45/sqm)
-                  +e.price.per-month $ 157 000
-            +b.DIV(class='full-item-card')
-              +e.image-wrapper
-                +e.DIV(@click='$refs.s1.prev()').control_left
-                +e.DIV(@click='$refs.s1.next()').control_right
-                +e.control_center
-                  div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[1]}')
-                +e.SIEMA(class='siema' ref='s1' :current.sync='curs[1]' :options='siemaOptions' @init='initSiema($refs.s1)')
-                  +e.DIV(data-src='img/room-2').image
-                  +e.DIV(data-src='img/room-1').image
-                  +e.DIV(data-src='img/room-3').image
-              +e.content-block
-                +e.A(href='#').title Gonchara Street 26
-                +e.text Tetris Hall
-                +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
-                +e.tags
-                  +e.tag Terrace
-                  +e.tag Outdoor balcony-sauna
-                  +e.tag Penthouse
-                  +e.tag Pool
-                +e.footer
-                  +e.per-sqm ($45/sqm)
-                  +e.price.per-month $ 157 000
-            +b.DIV(class='full-item-card')
-              +e.image-wrapper
-                +e.DIV(@click='$refs.s2.prev()').control_left
-                +e.DIV(@click='$refs.s2.next()').control_right
-                +e.control_center
-                  div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[2]}')
-                +e.SIEMA(class='siema' ref='s2' :current.sync='curs[2]' :options='siemaOptions' @init='initSiema($refs.s2)')
-                  +e.DIV(data-src='img/room-3').image
-                  +e.DIV(data-src='img/room-1').image
-                  +e.DIV(data-src='img/room-2').image
-              +e.content-block
-                +e.A(href='#').title Gonchara Street 26
-                +e.text Tetris Hall
-                +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
-                +e.tags
-                  +e.tag Terrace
-                  +e.tag Outdoor balcony-sauna
-                  +e.tag Penthouse
-                  +e.tag Pool
-                +e.footer
-                  +e.per-sqm ($45/sqm)
-                  +e.price.per-month $ 157 000
-            +b.DIV(class='full-item-card')
-              +e(data-init='s3').image-wrapper
-                +e.DIV(@click='$refs.s3.prev()').control_left
-                +e.DIV(@click='$refs.s3.next()').control_right
-                +e.control_center
-                  div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[3]}')
-                +e.SIEMA(class='siema' :ready='false' ref='s3' :current.sync='curs[3]' :options='siemaOptions' @init='initSiema($refs.s3)')
-                  +e.DIV(data-src='img/room-2').image
-                  +e.DIV(data-src='img/room-1').image
-                  +e.DIV(data-src='img/room-3').image
-              +e.content-block
-                +e.A(href='#').title Gonchara Street 26
-                +e.text Tetris Hall
-                +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
-                +e.tags
-                  +e.tag Terrace
-                  +e.tag Outdoor balcony-sauna
-                  +e.tag Penthouse
-                  +e.tag Pool
-                +e.footer
-                  +e.per-sqm ($45/sqm)
-                  +e.price.per-month $ 157 000
-            +b.DIV(class='full-item-card' v-show='isSmTab')
-              +e(data-init='s4').image-wrapper
-                +e.DIV(@click='$refs.s4.prev()').control_left
-                +e.DIV(@click='$refs.s4.next()').control_right
-                +e.control_center
-                  div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[4]}')
-                +e.SIEMA(class='siema' :ready='false' ref='s4' :current.sync='curs[4]' :options='siemaOptions' @init='initSiema($refs.s4)')
-                  +e.DIV(data-src='img/room-3').image
-                  +e.DIV(data-src='img/room-1').image
-                  +e.DIV(data-src='img/room-2').image
-              +e.content-block
-                +e.A(href='#').title Gonchara Street 26
-                +e.text Tetris Hall
-                +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
-                +e.tags
-                  +e.tag Terrace
-                  +e.tag Outdoor balcony-sauna
-                  +e.tag Penthouse
-                  +e.tag Pool
-                +e.footer
-                  +e.per-sqm ($45/sqm)
-                  +e.price.per-month $ 157 000
-            +b.DIV(class='full-item-card' v-show='isSmDesktop')
-              +e.image-wrapper
-                +e.DIV(@click='$refs.s5.prev()').control_left
-                +e.DIV(@click='$refs.s5.next()').control_right
-                +e.control_center
-                  div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[5]}')
-                +e.SIEMA(class='siema' data-init='s5' :ready='false' ref='s5' :current.sync='curs[5]' :options='siemaOptions' @init='initSiema($refs.s5)')
-                  +e.DIV(data-src='img/room-2').image
-                  +e.DIV(data-src='img/room-1').image
-                  +e.DIV(data-src='img/room-3').image
-              +e.content-block
-                +e.A(href='#').title Gonchara Street 26
-                +e.text Tetris Hall
-                +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
-                +e.tags
-                  +e.tag Terrace
-                  +e.tag Outdoor balcony-sauna
-                  +e.tag Penthouse
-                  +e.tag Pool
-                +e.footer
-                  +e.per-sqm ($45/sqm)
-                  +e.price.per-month $ 157 000
+          +b(v-show='isSmDesktop || viewTab').tab_list._desktop-scroll
+            div
+              +b.DIV(class='full-item-card')
+                +e.image-wrapper
+                  +e.DIV(@click='$refs.s0.prev()' class='control_left')
+                  +e.DIV(@click='$refs.s0.next()' class='control_right')
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[0]}')
+                  +e.SIEMA(class='siema' ref='s0' :current.sync='curs[0]' :options='siemaOptions' @init='initSiema($refs.s0)')
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-2').image
+                    +e.DIV(data-src='img/room-3').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card')
+                +e.image-wrapper
+                  +e.DIV(@click='$refs.s1.prev()').control_left
+                  +e.DIV(@click='$refs.s1.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[1]}')
+                  +e.SIEMA(class='siema' ref='s1' :current.sync='curs[1]' :options='siemaOptions' @init='initSiema($refs.s1)')
+                    +e.DIV(data-src='img/room-2').image
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-3').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card')
+                +e.image-wrapper
+                  +e.DIV(@click='$refs.s2.prev()').control_left
+                  +e.DIV(@click='$refs.s2.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[2]}')
+                  +e.SIEMA(class='siema' ref='s2' :current.sync='curs[2]' :options='siemaOptions' @init='initSiema($refs.s2)')
+                    +e.DIV(data-src='img/room-3').image
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-2').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card')
+                +e(data-init='s3').image-wrapper
+                  +e.DIV(@click='$refs.s3.prev()').control_left
+                  +e.DIV(@click='$refs.s3.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[3]}')
+                  +e.SIEMA(class='siema' :ready='false' ref='s3' :current.sync='curs[3]' :options='siemaOptions' @init='initSiema($refs.s3)')
+                    +e.DIV(data-src='img/room-2').image
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-3').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card' v-show='isSmTab')
+                +e(data-init='s4').image-wrapper
+                  +e.DIV(@click='$refs.s4.prev()').control_left
+                  +e.DIV(@click='$refs.s4.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[4]}')
+                  +e.SIEMA(class='siema' :ready='false' ref='s4' :current.sync='curs[4]' :options='siemaOptions' @init='initSiema($refs.s4)')
+                    +e.DIV(data-src='img/room-3').image
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-2').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card' v-show='isSmDesktop')
+                +e.image-wrapper
+                  +e.DIV(@click='$refs.s5.prev()').control_left
+                  +e.DIV(@click='$refs.s5.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[5]}')
+                  +e.SIEMA(class='siema' data-init='s5' :ready='false' ref='s5' :current.sync='curs[5]' :options='siemaOptions' @init='initSiema($refs.s5)')
+                    +e.DIV(data-src='img/room-2').image
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-3').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card' v-show='isSmDesktop')
+                +e.image-wrapper
+                  +e.DIV(@click='$refs.s6.prev()').control_left
+                  +e.DIV(@click='$refs.s6.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[6]}')
+                  +e.SIEMA(class='siema' data-init='s6' :ready='false' ref='s6' :current.sync='curs[6]' :options='siemaOptions' @init='initSiema($refs.s6)')
+                    +e.DIV(data-src='img/room-1').image
+                    +e.DIV(data-src='img/room-2').image
+                    +e.DIV(data-src='img/room-3').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
+              +b.DIV(class='full-item-card' v-show='isSmDesktop')
+                +e.image-wrapper
+                  +e.DIV(@click='$refs.s7.prev()').control_left
+                  +e.DIV(@click='$refs.s7.next()').control_right
+                  +e.control_center
+                    div(class='item' v-for='i in [0, 1, 2]' :key='i' :class='{\'active\': i == curs[7]}')
+                  +e.SIEMA(class='siema' data-init='s7' :ready='false' ref='s7' :current.sync='curs[7]' :options='siemaOptions' @init='initSiema($refs.s7)')
+                    +e.DIV(data-src='img/room-3').image
+                    +e.DIV(data-src='img/room-2').image
+                    +e.DIV(data-src='img/room-1').image
+                +e.content-block
+                  +e.A(href='#').title Gonchara Street 26
+                  +e.text Tetris Hall
+                  +e.subtext 1 bt, 3 bd, 9 floor, 121 sqm
+                  +e.tags
+                    +e.tag Terrace
+                    +e.tag Outdoor balcony-sauna
+                    +e.tag Penthouse
+                    +e.tag Pool
+                  +e.footer
+                    +e.per-sqm ($45/sqm)
+                    +e.price.per-month $ 157 000
           +b(class='tab_map loading' id='map_wrapper' v-show='isSmDesktop || !viewTab')
             +b.A(id='js__controlDrawing' class='button' @click='clickDrawingControl' :class='{\'active\': isDrawing}') Highlight
             +b.A.button_2.active#js__clearDrawing Clear
-            +b(id='map').map
+            +b.DIV(id='map' :class='{\'drawing\': isDrawing}').map
             +e.DIV(class='siema-wrapper-vue' ref='siemaMapWrapper')
               +b.SIEMA(class='map-siema-vue' :ready='false' ref='mapSiema' :options='siemaMapOptions')
                 +b.map-card-wrapper

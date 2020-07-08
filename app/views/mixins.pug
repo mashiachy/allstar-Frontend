@@ -176,7 +176,7 @@ mixin footer(modifier='')
       +e.info Specialized agency for the selection of real estate to foreign client
 
 mixin inline-filter
-  +b.DIV(class='inline-filter' :class='{\'opened\': options && isDesktop}').inline-filter
+  +b.DIV(class='inline-filter' :class='{\'opened\': options && isSmDesktop}').inline-filter
     +e.DIV(class='dropdown-wrapper js__hide-before-load' v-show='options' @click.self='options = !options')
       +e.dropdown-prewrapper
         +e.DIV(class='dropdown content')
@@ -185,7 +185,8 @@ mixin inline-filter
               +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
               +e.A(href="").search-button
             +b(class='multiple-check' ref='multipleCheck')
-              +e.INPUT(type='text' v-model='bedroomsLabel' readonly @click='$event.target.parentElement.classList.toggle(\'extended\')').label //{{ bedroomsLabel }}
+              +e.INPUT(type='text' readonly :value='bedroomsLabel').input
+              +e.SPAN(@click='$event.target.parentElement.classList.toggle(\'extended\')').label {{ bedroomsLabel }}
               +e.dropdown-menu
                 +e.DIV(class='option' v-for='[key, value] in Object.entries(bedrooms)' :key='key' :class='{\'selected\': value}' @click='bedrooms[key] = !value') {{ key + ' Bedrooms' }}
             +b.number-range.size
@@ -280,7 +281,7 @@ mixin inline-filter
           +e.block-5
             +b.A(href='#').show_animate Show
     +e(class='main-wrapper')
-      +e.DIV(class='main' :class='{\'opened\': isDesktop && options}')
+      +e.DIV(class='main' :class='{\'opened\': isSmDesktop && options}')
         +e.buttons
           +b.V-SELECT(class='type_inline inline-filter__button' :searchable='false' v-model='typeService' :options='[\'Sale\', \'Rent\']')
           +b.V-SELECT(class='type_inline inline-filter__button' :searchable='false' v-model='apartment' :options='[\'Apartment\', \'Apartment 2\', \'Apartment 3\']')
@@ -309,7 +310,7 @@ mixin inline-filter
         +b.DIV(class='search')
           +e.INPUT(type="text" v-model='searchCode' placeholder='Search by code').search-input
           +e.A(href="").search-button
-        +e.A(class='options' :class='{\'inline-filter__options_dark\': options}' @click.prevent='options = !options' :href='isDesktop ? \'#\' : \'\'' v-text='isDesktop ? "More options +" : \'\'')
+        +e.A(class='options' :class='{\'inline-filter__options_dark\': options}' @click.prevent='options = !options' :href='isSmDesktop ? \'#\' : \'\'' v-text='isSmDesktop ? "More options +" : \'\'')
         +b.A(class='show_animate' href='#') Show
 
 mixin listings

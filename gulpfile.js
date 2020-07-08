@@ -44,7 +44,7 @@ const whitelistPtrs = {
   'a4': [],
   'text_page': [/appearance/, /vs/, /service-card/, /lang/, /filter/],
   'useful_information': [/appearance/, /vs/, /service-card/, /lang/, /filter/],
-  'category': [/appearance/, /vs/, /service-card/, /lang/, /we-can/, /marker/, /info-window/, /map-control/, /map-card/],
+  'category': [/appearance/, /vs/, /drawing/, /service-card/, /lang/, /we-can/, /marker/, /info-window/, /map-control/, /map-card/],
   'category_more': [/appearance/, /vs/, /service-card/, /lang/, /map-control/,],
   'application': [/appearance/, /vs/, /service-card/, /lang/, /highlight/,],
   'contacts': [/appearance/, /vs/, /service-card/, /lang/,],
