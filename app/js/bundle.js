@@ -1007,8 +1007,6 @@ window.initMap = function () {
     // Drawing
     initDouglasPeucker(map);
     const defaultDraggableCursor = 'url("https://maps.gstatic.com/mapfiles/openhand_8_8.cur"), default';
-    //const defaultDraggingCursor = 'url("https://maps.gstatic.com/mapfiles/closehand_8_8.cur"), move';
-    const earthRadius = 6378137.0;
     let overlay = new google.maps.OverlayView();
     overlay.draw = function () {
     };
@@ -1024,7 +1022,7 @@ window.initMap = function () {
       strokeWeight: 2,
       fillColor: '#F77100',
       fillOpacity: 0.35,
-      editable: true,
+      //editable: true,
       draggable: true,
       geodesic: false,
     });
@@ -1049,7 +1047,7 @@ window.initMap = function () {
       mousePressed = false;
       polygon.setPath(parcelleHeig);
 
-      polygon.douglasPeucker(360.0 / (2.0 * Math.PI * earthRadius));
+      //polygon.douglasPeucker(360.0 / (2.0 * Math.PI * earthRadius));
 
       parcelleHeig = [];
       polygon.setEditable(true);

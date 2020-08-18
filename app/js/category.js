@@ -431,7 +431,7 @@ window.initMap = function () {
       strokeWeight: 2,
       fillColor: '#F77100',
       fillOpacity: 0.35,
-      editable: true,
+      //editable: true,
       draggable: true,
       geodesic: false,
     });
@@ -456,7 +456,7 @@ window.initMap = function () {
       mousePressed = false;
       polygon.setPath(parcelleHeig);
 
-      polygon.douglasPeucker(360.0 / (2.0 * Math.PI * earthRadius));
+      //polygon.douglasPeucker(360.0 / (2.0 * Math.PI * earthRadius));
 
       parcelleHeig = [];
       polygon.setEditable(true);
