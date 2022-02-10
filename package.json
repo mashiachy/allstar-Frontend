@@ -36,7 +36,7 @@
     "gulp-webp": "^4.0.1",
     "gulp-webpcss": "^1.1.1",
     "modernizr": "^3.11.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "rollup": "^2.11.2",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
